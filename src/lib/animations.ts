@@ -1,4 +1,3 @@
-
 import { useEffect, useState } from 'react';
 
 // Animation delay utility
@@ -9,12 +8,7 @@ export const staggeredChildren = (index: number, baseDelay = 100) => {
 };
 
 // Animation with Intersection Observer hook
-export const useIntersectionAnimation = (
-  options = {
-    threshold: 0.1,
-    delay: 0,
-  }
-) => {
+export function useIntersectionAnimation({ threshold = 0.2, delay = 0 }: { threshold: number; delay?: number }) {
   const [ref, setRef] = useState<HTMLElement | null>(null);
   const [isVisible, setIsVisible] = useState(false);
 
@@ -26,13 +20,10 @@ export const useIntersectionAnimation = (
         if (entry.isIntersecting) {
           setTimeout(() => {
             setIsVisible(true);
-          }, options.delay);
-          observer.unobserve(entry.target);
+          }, delay);
         }
       },
-      {
-        threshold: options.threshold,
-      }
+      { threshold }
     );
 
     observer.observe(ref);
@@ -40,7 +31,7 @@ export const useIntersectionAnimation = (
     return () => {
       observer.disconnect();
     };
-  }, [ref, options.delay, options.threshold]);
+  }, [ref, threshold, delay]);
 
   return [setRef, isVisible] as const;
 };
