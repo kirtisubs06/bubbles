@@ -1,10 +1,10 @@
 
 import React, { useRef, useState, useEffect } from 'react';
 import { Canvas, useFrame, useThree } from '@react-three/fiber';
-import { OrbitControls, useGLTF, Environment, ContactShadows, Float } from '@react-three/drei';
-import { Mesh, Group, Vector3, MeshStandardMaterial } from 'three';
-import { motion } from 'framer-motion-3d';
+import { OrbitControls, Environment, ContactShadows, Float } from '@react-three/drei';
+import { motion } from 'framer-motion';
 import { useInView } from 'framer-motion';
+import * as THREE from 'three';
 
 // Helper component for the 3D teddy bear model
 const TeddyModel = ({ 
@@ -14,7 +14,7 @@ const TeddyModel = ({
   setIsListening: React.Dispatch<React.SetStateAction<boolean>>,
   isListening: boolean
 }) => {
-  const group = useRef<Group>(null);
+  const group = useRef<THREE.Group>(null);
   const { camera } = useThree();
   const [hovered, setHovered] = useState(false);
   
@@ -39,7 +39,7 @@ const TeddyModel = ({
     setIsListening(!isListening);
   };
 
-  // We're creating a simple teddy bear shape with primitives since we don't have an actual model
+  // We're creating a simple teddy bear shape with primitives
   return (
     <group 
       ref={group} 
@@ -48,15 +48,9 @@ const TeddyModel = ({
       onPointerOut={() => setHovered(false)}
     >
       <Float speed={1.5} rotationIntensity={0.05} floatIntensity={0.3}>
-        <motion.group
-          animate={isListening ? {
-            y: [0, 0.1, 0],
-            scale: [1, 1.02, 1],
-            transition: { 
-              repeat: Infinity,
-              duration: 0.8
-            }
-          } : {}}
+        <group
+          position={[0, 0, 0]}
+          scale={isListening ? 1.02 : 1}
         >
           {/* Body */}
           <mesh position={[0, -0.2, 0]}>
@@ -149,15 +143,9 @@ const TeddyModel = ({
           </mesh>
           
           {/* Button/speaker */}
-          <motion.mesh 
+          <mesh 
             position={[0, -0.2, 1.2]} 
-            animate={{
-              scale: isListening ? [1, 1.2, 1] : 1,
-              transition: { 
-                repeat: isListening ? Infinity : 0,
-                duration: 0.8
-              }
-            }}
+            scale={isListening ? 1.2 : hovered ? 1.1 : 1}
           >
             <sphereGeometry args={[0.15, 32, 32]} />
             <meshStandardMaterial 
@@ -167,8 +155,8 @@ const TeddyModel = ({
               emissive={isListening ? "#A0D2EB" : hovered ? "#A2E1DB" : "#000000"}
               emissiveIntensity={isListening ? 0.5 : hovered ? 0.2 : 0}
             />
-          </motion.mesh>
-        </motion.group>
+          </mesh>
+        </group>
       </Float>
     </group>
   );

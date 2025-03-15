@@ -10,7 +10,6 @@ import { useIntersectionAnimation } from '@/lib/animations';
 const TeddyDemo: React.FC = () => {
   const [isListening, setIsListening] = useState(false);
   const [activeView, setActiveView] = useState<'3d' | 'features'>('3d');
-  // Fix the arguments to match the expected types
   const [setRef, isVisible] = useIntersectionAnimation({ threshold: 0.1, delay: 0 });
 
   return (
@@ -65,8 +64,7 @@ const TeddyDemo: React.FC = () => {
           
           <TabsContent value="features" className="mt-6">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {/* Fix the type error by using a callback ref pattern */}
-              <div ref={ref => {
+              <div ref={(ref) => {
                 if (typeof setRef === 'function' && ref) {
                   setRef(ref);
                 }
