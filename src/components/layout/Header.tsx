@@ -33,8 +33,11 @@ const Header: React.FC = () => {
     <header className={headerClasses}>
       <div className="container mx-auto px-4 flex items-center justify-between">
         <Link to="/" className="flex items-center gap-2 z-50">
+          <div className="w-10 h-10 bg-teddy-coral rounded-full flex items-center justify-center text-white">
+            <span className="text-xl">🧸</span>
+          </div>
           <span className="text-teddy-charcoal dark:text-white text-xl sm:text-2xl font-heading font-bold tracking-tight">
-            TeddyTech <span className="text-teddy-coral">Tales</span>
+            Teddy<span className="text-teddy-coral">AI</span>
           </span>
         </Link>
         

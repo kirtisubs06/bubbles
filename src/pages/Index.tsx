@@ -14,7 +14,7 @@ const Index: React.FC = () => {
   
   const testimonials = [
     {
-      content: "TeddyTech Tales has transformed my daughter's learning experience. She's always excited to chat with her teddy and I love seeing the insights about her interests.",
+      content: "TeddyAI has transformed my daughter's learning experience. She's always excited to chat with her teddy and I love seeing the insights about her interests.",
       author: "Sarah M.",
       role: "Parent of a 6-year-old"
     },
@@ -24,7 +24,7 @@ const Index: React.FC = () => {
       role: "Teacher and parent"
     },
     {
-      content: "My twins have different interests but their TeddyTech bears keep up with both of them. The parent dashboard has been eye-opening to see their different learning journeys.",
+      content: "My twins have different interests but their TeddyAI bears keep up with both of them. The parent dashboard has been eye-opening to see their different learning journeys.",
       author: "Aisha K.",
       role: "Mother of twins"
     }
@@ -84,7 +84,7 @@ const Index: React.FC = () => {
                 Simple Setup, Endless Learning
               </h2>
               <p className="text-lg text-gray-600 dark:text-gray-300">
-                Get started with TeddyTech Tales in just a few easy steps and watch your child's curiosity and knowledge grow.
+                Get started with TeddyAI in just a few easy steps and watch your child's curiosity and knowledge grow.
               </p>
             </div>
             
@@ -93,7 +93,7 @@ const Index: React.FC = () => {
                 {
                   icon: <MessageCircle className="h-8 w-8 text-teddy-blue" />,
                   title: "Interactive Conversations",
-                  description: "Your child asks questions or shares thoughts, and TeddyTech responds with age-appropriate, educational content."
+                  description: "Your child asks questions or shares thoughts, and TeddyAI responds with age-appropriate, educational content."
                 },
                 {
                   icon: <BookOpen className="h-8 w-8 text-teddy-pink" />,
@@ -130,7 +130,7 @@ const Index: React.FC = () => {
                 What Parents Say
               </h2>
               <p className="text-lg text-gray-600 dark:text-gray-300">
-                Hear from families who've made TeddyTech Tales a part of their children's learning journey.
+                Hear from families who've made TeddyAI a part of their children's learning journey.
               </p>
             </div>
             
@@ -229,13 +229,13 @@ const Index: React.FC = () => {
                   Ready to Transform Your Child's Learning Journey?
                 </h2>
                 <p className="text-lg mb-8 max-w-2xl mx-auto">
-                  Join thousands of families using TeddyTech Tales to spark curiosity, foster emotional intelligence, and create magical learning moments.
+                  Join thousands of families using TeddyAI to spark curiosity, foster emotional intelligence, and create magical learning moments.
                 </p>
                 <div className="flex flex-wrap justify-center gap-4">
-                  <button onClick={() => navigate('/signup')} className="btn-primary py-3 px-8 text-base">
+                  <button onClick={() => navigate('/login')} className="btn-primary py-3 px-8 text-base">
                     Get Started Today
                   </button>
-                  <button onClick={() => navigate('/contact')} className="btn-ghost text-base">
+                  <button onClick={() => navigate('/login')} className="btn-ghost text-base">
                     Contact Sales
                   </button>
                 </div>

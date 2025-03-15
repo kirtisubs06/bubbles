@@ -57,12 +57,12 @@ const Hero: React.FC = () => {
             </p>
             
             <div className="flex flex-wrap gap-4">
-              <button onClick={() => navigate('/signup')} className="btn-primary py-3 px-6 text-base">
+              <button onClick={() => navigate('/login')} className="btn-primary py-3 px-6 text-base">
                 Get Started
                 <ArrowRight className="ml-2 h-5 w-5" />
               </button>
-              <button onClick={() => navigate('/about')} className="btn-ghost text-base">
-                Learn More
+              <button onClick={() => navigate('/dashboard')} className="btn-ghost text-base">
+                Dashboard Demo
               </button>
             </div>
             
@@ -85,13 +85,41 @@ const Hero: React.FC = () => {
             <div className="relative bg-white dark:bg-teddy-charcoal/80 rounded-3xl shadow-medium overflow-hidden p-6 animate-float">
               <div className="aspect-square rounded-2xl bg-teddy-cream dark:bg-gray-800 flex items-center justify-center">
                 <div className="w-3/4 h-3/4 relative">
-                  {/* This would be a teddy bear image */}
+                  {/* Cute Teddy Bear Illustration */}
                   <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="w-full h-full bg-teddy-peach rounded-full flex items-center justify-center">
-                      <div className="relative w-4/5 h-4/5 bg-teddy-coral rounded-full">
-                        <div className="absolute top-1/4 left-1/4 w-1/5 h-1/5 bg-white rounded-full"></div>
-                        <div className="absolute top-1/4 right-1/4 w-1/5 h-1/5 bg-white rounded-full"></div>
-                        <div className="absolute bottom-1/3 left-1/2 transform -translate-x-1/2 w-1/4 h-1/6 bg-white rounded-full"></div>
+                    <div className="w-full h-full flex items-center justify-center">
+                      <div className="relative w-4/5 h-4/5">
+                        {/* Teddy Body */}
+                        <div className="absolute inset-0 bg-teddy-coral rounded-[40%] transform rotate-3"></div>
+                        
+                        {/* Teddy Ears */}
+                        <div className="absolute top-0 left-1/6 w-1/4 h-1/4 bg-teddy-coral rounded-full transform -translate-y-1/3"></div>
+                        <div className="absolute top-0 right-1/6 w-1/4 h-1/4 bg-teddy-coral rounded-full transform -translate-y-1/3"></div>
+                        
+                        {/* Teddy Inner Ears */}
+                        <div className="absolute top-0 left-1/5 w-1/5 h-1/5 bg-teddy-peach rounded-full transform -translate-y-1/4"></div>
+                        <div className="absolute top-0 right-1/5 w-1/5 h-1/5 bg-teddy-peach rounded-full transform -translate-y-1/4"></div>
+                        
+                        {/* Teddy Eyes */}
+                        <div className="absolute top-1/4 left-1/4 w-1/6 h-1/6 bg-white rounded-full border-2 border-teddy-charcoal"></div>
+                        <div className="absolute top-1/4 right-1/4 w-1/6 h-1/6 bg-white rounded-full border-2 border-teddy-charcoal"></div>
+                        
+                        {/* Teddy Pupils */}
+                        <div className="absolute top-[28%] left-[28%] w-[8%] h-[8%] bg-teddy-charcoal rounded-full"></div>
+                        <div className="absolute top-[28%] right-[28%] w-[8%] h-[8%] bg-teddy-charcoal rounded-full"></div>
+                        
+                        {/* Teddy Muzzle */}
+                        <div className="absolute top-[40%] left-1/2 transform -translate-x-1/2 w-2/5 h-1/4 bg-teddy-peach rounded-full"></div>
+                        
+                        {/* Teddy Nose */}
+                        <div className="absolute top-[45%] left-1/2 transform -translate-x-1/2 w-[15%] h-[10%] bg-teddy-charcoal rounded-full"></div>
+                        
+                        {/* Teddy Mouth */}
+                        <div className="absolute top-[55%] left-1/2 transform -translate-x-1/2 w-[12%] h-[5%] bg-teddy-charcoal rounded-full"></div>
+                        
+                        {/* Teddy Arms */}
+                        <div className="absolute bottom-1/4 left-0 w-1/4 h-1/4 bg-teddy-coral rounded-full transform -translate-x-1/3 rotate-12"></div>
+                        <div className="absolute bottom-1/4 right-0 w-1/4 h-1/4 bg-teddy-coral rounded-full transform translate-x-1/3 -rotate-12"></div>
                       </div>
                     </div>
                   </div>
