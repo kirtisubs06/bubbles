@@ -2,7 +2,8 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { cn } from '@/lib/utils';
-import { Menu, X, LogIn } from 'lucide-react';
+import { Menu, X, LogIn, Sparkles } from 'lucide-react';
+import { motion } from 'framer-motion';
 
 const Header: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -33,32 +34,73 @@ const Header: React.FC = () => {
     <header className={headerClasses}>
       <div className="container mx-auto px-4 flex items-center justify-between">
         <Link to="/" className="flex items-center gap-2 z-50">
-          <div className="w-10 h-10 bg-teddy-coral rounded-full flex items-center justify-center text-white">
+          <motion.div 
+            className="w-10 h-10 bg-teddy-coral rounded-full flex items-center justify-center text-white"
+            whileHover={{ rotate: [0, -10, 10, -10, 0], transition: { duration: 0.5 } }}
+          >
             <span className="text-xl">🧸</span>
-          </div>
-          <span className="text-teddy-charcoal dark:text-white text-xl sm:text-2xl font-heading font-bold tracking-tight">
+          </motion.div>
+          <motion.span 
+            className="text-teddy-charcoal dark:text-white text-xl sm:text-2xl font-heading font-bold tracking-tight"
+            whileHover={{ scale: 1.05 }}
+            transition={{ type: "spring", stiffness: 400, damping: 10 }}
+          >
             Teddy<span className="text-teddy-coral">AI</span>
-          </span>
+          </motion.span>
         </Link>
         
         {/* Desktop Navigation */}
         <nav className="hidden md:flex items-center space-x-1">
-          <Link to="/" className={cn("nav-link", isActive('/') && "active")}>
-            Home
+          <Link to="/" className={cn("nav-link group", isActive('/') && "active")}>
+            <span>Home</span>
+            <motion.span 
+              className="absolute -bottom-1 left-0 w-0 h-0.5 bg-teddy-coral group-hover:w-full transition-all duration-300"
+              initial={false}
+              animate={isActive('/') ? { width: "100%" } : { width: "0%" }}
+            />
           </Link>
-          <Link to="/about" className={cn("nav-link", isActive('/about') && "active")}>
-            About
+          <Link to="/teddy-demo" className={cn("nav-link group", isActive('/teddy-demo') && "active")}>
+            <span>Teddy Demo</span>
+            <Sparkles className="ml-1 h-3 w-3 text-teddy-pink inline-block" />
+            <motion.span 
+              className="absolute -bottom-1 left-0 w-0 h-0.5 bg-teddy-coral group-hover:w-full transition-all duration-300"
+              initial={false}
+              animate={isActive('/teddy-demo') ? { width: "100%" } : { width: "0%" }}
+            />
           </Link>
-          <Link to="/features" className={cn("nav-link", isActive('/features') && "active")}>
-            Features
+          <Link to="/about" className={cn("nav-link group", isActive('/about') && "active")}>
+            <span>About</span>
+            <motion.span 
+              className="absolute -bottom-1 left-0 w-0 h-0.5 bg-teddy-coral group-hover:w-full transition-all duration-300"
+              initial={false}
+              animate={isActive('/about') ? { width: "100%" } : { width: "0%" }}
+            />
           </Link>
-          <Link to="/dashboard" className={cn("nav-link", isActive('/dashboard') && "active")}>
-            Dashboard
+          <Link to="/features" className={cn("nav-link group", isActive('/features') && "active")}>
+            <span>Features</span>
+            <motion.span 
+              className="absolute -bottom-1 left-0 w-0 h-0.5 bg-teddy-coral group-hover:w-full transition-all duration-300"
+              initial={false}
+              animate={isActive('/features') ? { width: "100%" } : { width: "0%" }}
+            />
           </Link>
-          <Link to="/login" className="ml-4 btn-primary">
-            <LogIn className="mr-1 h-4 w-4" />
-            Sign In
+          <Link to="/dashboard" className={cn("nav-link group", isActive('/dashboard') && "active")}>
+            <span>Dashboard</span>
+            <motion.span 
+              className="absolute -bottom-1 left-0 w-0 h-0.5 bg-teddy-coral group-hover:w-full transition-all duration-300"
+              initial={false}
+              animate={isActive('/dashboard') ? { width: "100%" } : { width: "0%" }}
+            />
           </Link>
+          <motion.div
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+          >
+            <Link to="/login" className="ml-4 btn-primary">
+              <LogIn className="mr-1 h-4 w-4" />
+              Sign In
+            </Link>
+          </motion.div>
         </nav>
         
         {/* Mobile Menu Toggle */}
@@ -71,13 +113,24 @@ const Header: React.FC = () => {
         </button>
         
         {/* Mobile Navigation */}
-        <div className={cn(
-          "fixed inset-0 bg-white dark:bg-teddy-charcoal z-40 flex flex-col items-center justify-center md:hidden transition-all duration-300 ease-in-out",
-          isMobileMenuOpen ? "opacity-100 visible" : "opacity-0 invisible"
-        )}>
+        <motion.div 
+          className={cn(
+            "fixed inset-0 bg-white dark:bg-teddy-charcoal z-40 flex flex-col items-center justify-center md:hidden",
+          )}
+          initial={{ opacity: 0, y: "-100%" }}
+          animate={{ 
+            opacity: isMobileMenuOpen ? 1 : 0,
+            y: isMobileMenuOpen ? 0 : "-100%"
+          }}
+          transition={{ duration: 0.3, ease: "easeInOut" }}
+        >
           <nav className="flex flex-col items-center space-y-6 text-lg">
             <Link to="/" className={cn("nav-link", isActive('/') && "active")}>
               Home
+            </Link>
+            <Link to="/teddy-demo" className={cn("nav-link flex items-center", isActive('/teddy-demo') && "active")}>
+              Teddy Demo
+              <Sparkles className="ml-1 h-4 w-4 text-teddy-pink" />
             </Link>
             <Link to="/about" className={cn("nav-link", isActive('/about') && "active")}>
               About
@@ -93,7 +146,7 @@ const Header: React.FC = () => {
               Sign In
             </Link>
           </nav>
-        </div>
+        </motion.div>
       </div>
     </header>
   );
