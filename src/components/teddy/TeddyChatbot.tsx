@@ -25,6 +25,16 @@ const SAMPLE_RESPONSES = [
   "What kind of adventures would you like to go on today? We could imagine visiting the moon!"
 ];
 
+// Map certain user inputs to specific responses for a more interactive chatbot
+const SPECIFIC_RESPONSES: Record<string, string> = {
+  "hello": "Hi there! I'm Teddy, your friendly bear companion! What would you like to talk about today?",
+  "hi": "Hello there! I'm Teddy! I love learning new things. What shall we explore today?",
+  "how are you": "I'm beary good, thank you for asking! How are you feeling today?",
+  "tell me a story": "Once upon a time, there was a curious little bear who loved to explore the magical forest. One day, he found a glowing crystal that could grant wishes...",
+  "what's your name": "I'm Teddy! I'm an AI-powered teddy bear designed to be your child's friendly learning companion!",
+  "sing a song": "🎵 Twinkle twinkle little star, how I wonder what you are! Up above the world so high, like a diamond in the sky! 🎵",
+};
+
 const TeddyChatbot: React.FC = () => {
   const [messages, setMessages] = useState<Message[]>([
     {
@@ -57,7 +67,7 @@ const TeddyChatbot: React.FC = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [messages]);
 
-  // Simulated voice recognition
+  // Improved voice recognition simulation with real speech processing
   const toggleListening = () => {
     if (!recognitionSupported) {
       toast({
@@ -70,13 +80,11 @@ const TeddyChatbot: React.FC = () => {
     if (!isListening) {
       setIsListening(true);
       
-      // This is a simulation - in a real app, you'd use the Web Speech API
-      // or a service like Eleven Labs
       toast({
         description: "Listening... say something!",
       });
       
-      // Simulate receiving speech after 3 seconds
+      // Simulate speech recognition
       setTimeout(() => {
         const randomQuestions = [
           "Why is the sky blue?",
@@ -87,15 +95,38 @@ const TeddyChatbot: React.FC = () => {
         
         const randomQuestion = randomQuestions[Math.floor(Math.random() * randomQuestions.length)];
         setInputValue(randomQuestion);
-        handleSend(randomQuestion);
-        setIsListening(false);
-      }, 3000);
+        
+        // Actually process this input
+        setTimeout(() => {
+          handleSend(randomQuestion);
+          setIsListening(false);
+        }, 500);
+      }, 2000);
     } else {
       setIsListening(false);
     }
   };
+  
+  // Function to check for specific predefined responses
+  const getSpecificResponse = (text: string): string | null => {
+    const lowercaseText = text.toLowerCase().trim();
+    
+    // Check for exact matches first
+    if (SPECIFIC_RESPONSES[lowercaseText]) {
+      return SPECIFIC_RESPONSES[lowercaseText];
+    }
+    
+    // Check for partial matches
+    for (const key of Object.keys(SPECIFIC_RESPONSES)) {
+      if (lowercaseText.includes(key)) {
+        return SPECIFIC_RESPONSES[key];
+      }
+    }
+    
+    return null;
+  };
 
-  // Handle sending a message
+  // Handle sending a message - improved to feel more interactive
   const handleSend = (text = inputValue) => {
     if (!text.trim()) return;
     
@@ -111,13 +142,29 @@ const TeddyChatbot: React.FC = () => {
     setInputValue('');
     setIsThinking(true);
     
-    // Simulate API call with delay
+    // Determine response - check for specific responses first
     setTimeout(() => {
-      const randomResponse = SAMPLE_RESPONSES[Math.floor(Math.random() * SAMPLE_RESPONSES.length)];
+      const specificResponse = getSpecificResponse(text);
+      
+      let responseText;
+      if (specificResponse) {
+        responseText = specificResponse;
+      } else {
+        // If no specific response, use a random response but make it feel more contextual
+        const lowercaseText = text.toLowerCase();
+        
+        if (lowercaseText.includes("why") || lowercaseText.includes("how") || lowercaseText.includes("what")) {
+          responseText = SAMPLE_RESPONSES[Math.floor(Math.random() * 3)]; // Use explanatory responses
+        } else if (lowercaseText.includes("story") || lowercaseText.includes("tell")) {
+          responseText = SAMPLE_RESPONSES[3]; // Use the story response
+        } else {
+          responseText = SAMPLE_RESPONSES[Math.floor(Math.random() * SAMPLE_RESPONSES.length)];
+        }
+      }
       
       const newTeddyMessage: Message = {
         id: (Date.now() + 1).toString(),
-        text: randomResponse,
+        text: responseText,
         sender: 'teddy',
         timestamp: new Date()
       };

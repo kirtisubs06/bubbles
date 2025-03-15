@@ -15,6 +15,8 @@ import ParentalControls from "./components/dashboard/ParentalControls";
 import Notifications from "./components/dashboard/Notifications";
 import NotFound from "./pages/NotFound";
 import TeddyDemo from "./pages/TeddyDemo";
+import About from "./pages/About";
+import Features from "./pages/Features";
 
 const queryClient = new QueryClient();
 
@@ -28,6 +30,8 @@ const App = () => (
           <Route path="/" element={<Index />} />
           <Route path="/login" element={<Login />} />
           <Route path="/teddy-demo" element={<TeddyDemo />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/features" element={<Features />} />
           
           <Route path="/dashboard" element={<DashboardLayout />}>
             <Route index element={<Dashboard />} />

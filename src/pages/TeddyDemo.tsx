@@ -1,19 +1,31 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import TeddyBear3D from '@/components/teddy/TeddyBear3D';
 import TeddyChatbot from '@/components/teddy/TeddyChatbot';
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
 import Header from '@/components/layout/Header';
 import { useIntersectionAnimation } from '@/lib/animations';
+import { toast } from '@/components/ui/use-toast';
 
 const TeddyDemo: React.FC = () => {
   const [isListening, setIsListening] = useState(false);
   const [activeView, setActiveView] = useState<'3d' | 'features'>('3d');
   const [setRef, isVisible] = useIntersectionAnimation({ threshold: 0.1, delay: 0 });
 
+  // Show a toast when the teddy is clicked for the first time
+  useEffect(() => {
+    if (isListening) {
+      toast({
+        title: "Teddy is listening!",
+        description: "In the full version, the teddy would use your microphone to hear your questions.",
+        duration: 5000,
+      });
+    }
+  }, [isListening]);
+
   return (
-    <div className="min-h-screen bg-gradient-to-b from-teddy-cream to-teddy-purple/10">
+    <div className="min-h-screen bg-gradient-to-b from-white to-teddy-cream/20 dark:from-teddy-charcoal dark:to-teddy-charcoal/80">
       <Header />
       <div className="pt-32 container mx-auto px-4">
         <motion.div 

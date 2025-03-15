@@ -84,14 +84,6 @@ const Header: React.FC = () => {
               animate={isActive('/features') ? { width: "100%" } : { width: "0%" }}
             />
           </Link>
-          <Link to="/dashboard" className={cn("nav-link group", isActive('/dashboard') && "active")}>
-            <span>Dashboard</span>
-            <motion.span 
-              className="absolute -bottom-1 left-0 w-0 h-0.5 bg-teddy-coral group-hover:w-full transition-all duration-300"
-              initial={false}
-              animate={isActive('/dashboard') ? { width: "100%" } : { width: "0%" }}
-            />
-          </Link>
           <motion.div
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
@@ -137,9 +129,6 @@ const Header: React.FC = () => {
             </Link>
             <Link to="/features" className={cn("nav-link", isActive('/features') && "active")}>
               Features
-            </Link>
-            <Link to="/dashboard" className={cn("nav-link", isActive('/dashboard') && "active")}>
-              Dashboard
             </Link>
             <Link to="/login" className="mt-4 btn-primary">
               <LogIn className="mr-1 h-4 w-4" />
