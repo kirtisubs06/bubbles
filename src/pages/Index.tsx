@@ -7,6 +7,7 @@ import Features from '@/components/home/Features';
 import AnimatedCard from '@/components/ui/AnimatedCard';
 import { MessageCircle, ChevronRight, BookOpen, Check } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
+import { cn } from '@/lib/utils';
 
 const Index: React.FC = () => {
   const navigate = useNavigate();
