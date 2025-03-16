@@ -11,7 +11,7 @@ const Footer: React.FC = () => {
           <div className="md:col-span-1">
             <Link to="/" className="flex items-center gap-2 mb-4">
               <span className="text-teddy-charcoal dark:text-white text-xl font-heading font-bold tracking-tight">
-                TeddyTech <span className="text-teddy-coral">Tales</span>
+                Teddy<span className="text-teddy-coral">AI</span>
               </span>
             </Link>
             <p className="text-sm text-gray-600 dark:text-gray-300 mb-4">
@@ -58,7 +58,7 @@ const Footer: React.FC = () => {
         
         <div className="mt-12 pt-8 border-t border-gray-200 dark:border-gray-700">
           <p className="text-center text-gray-600 dark:text-gray-300 text-sm">
-            &copy; {new Date().getFullYear()} TeddyTech Tales. All rights reserved. Made with <Heart className="inline-block h-4 w-4 text-teddy-coral" /> for curious little minds.
+            &copy; {new Date().getFullYear()} TeddyAI. All rights reserved. Made with <Heart className="inline-block h-4 w-4 text-teddy-coral" /> for curious little minds.
           </p>
         </div>
       </div>

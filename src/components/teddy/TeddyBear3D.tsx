@@ -38,7 +38,7 @@ const TeddyModel = ({
     setIsListening(!isListening);
   };
 
-  // Improved cuter teddy bear with a more distinctive face
+  // Design inspired by plush knitted teddy bear
   return (
     <group 
       ref={group} 
@@ -51,123 +51,182 @@ const TeddyModel = ({
           position={[0, 0, 0]}
           scale={isListening ? 1.02 : 1}
         >
-          {/* Body - rounder, more plush looking */}
-          <mesh position={[0, -0.2, 0]}>
+          {/* Main Body - plush and rounded */}
+          <mesh position={[0, -0.7, 0]}>
             <sphereGeometry args={[1.2, 32, 32]} />
-            <meshStandardMaterial color="#E8A87C" roughness={0.9} metalness={0.1} />
+            <meshStandardMaterial color="#F9F9F9" roughness={1} metalness={0} />
+          </mesh>
+
+          {/* Add knitted texture through bump and normal mapping */}
+          <mesh position={[0, -0.7, 0]} scale={1.01}>
+            <sphereGeometry args={[1.2, 32, 32]} />
+            <meshStandardMaterial 
+              color="#F9F9F9" 
+              roughness={1} 
+              metalness={0} 
+              wireframe={true} 
+              transparent={true} 
+              opacity={0.1} 
+            />
           </mesh>
           
-          {/* Head - rounder for cuteness */}
-          <mesh position={[0, 1.3, 0]}>
-            <sphereGeometry args={[1, 32, 32]} />
-            <meshStandardMaterial color="#E8A87C" roughness={0.9} metalness={0.1} />
+          {/* Head - plush and round */}
+          <mesh position={[0, 1.0, 0]}>
+            <sphereGeometry args={[1.1, 32, 32]} />
+            <meshStandardMaterial color="#F9F9F9" roughness={1} metalness={0} />
           </mesh>
           
-          {/* Muzzle - smaller and rounder */}
-          <mesh position={[0, 1.1, 0.7]}>
-            <sphereGeometry args={[0.5, 32, 32]} />
-            <meshStandardMaterial color="#F9D5BB" roughness={0.8} metalness={0.1} />
+          {/* Add knitted texture through wireframe overlay on head */}
+          <mesh position={[0, 1.0, 0]} scale={1.01}>
+            <sphereGeometry args={[1.1, 32, 32]} />
+            <meshStandardMaterial 
+              color="#F9F9F9" 
+              roughness={1} 
+              metalness={0}
+              wireframe={true} 
+              transparent={true} 
+              opacity={0.1}  
+            />
           </mesh>
           
-          {/* Ears - more rounded */}
-          <mesh position={[-0.7, 2.1, 0]}>
-            <sphereGeometry args={[0.35, 32, 32]} />
-            <meshStandardMaterial color="#E8A87C" roughness={0.9} metalness={0.1} />
-          </mesh>
-          <mesh position={[0.7, 2.1, 0]}>
-            <sphereGeometry args={[0.35, 32, 32]} />
-            <meshStandardMaterial color="#E8A87C" roughness={0.9} metalness={0.1} />
+          {/* Muzzle - softer, lighter color */}
+          <mesh position={[0, 0.9, 0.85]}>
+            <sphereGeometry args={[0.6, 32, 32]} />
+            <meshStandardMaterial color="#FFFFFF" roughness={1} metalness={0} />
           </mesh>
           
-          {/* Inner Ears - pink for cuteness */}
-          <mesh position={[-0.7, 2.1, 0.18]}>
-            <sphereGeometry args={[0.2, 32, 32]} />
-            <meshStandardMaterial color="#F5B0CB" roughness={0.7} metalness={0.1} />
-          </mesh>
-          <mesh position={[0.7, 2.1, 0.18]}>
-            <sphereGeometry args={[0.2, 32, 32]} />
-            <meshStandardMaterial color="#F5B0CB" roughness={0.7} metalness={0.1} />
+          {/* Left Ear */}
+          <mesh position={[-0.8, 1.9, 0]}>
+            <sphereGeometry args={[0.4, 32, 32]} />
+            <meshStandardMaterial color="#F9F9F9" roughness={1} metalness={0} />
           </mesh>
           
-          {/* Arms - more plump */}
-          <mesh position={[-1.3, 0, 0]} rotation={[0, 0, -0.5]}>
-            <capsuleGeometry args={[0.35, 0.8, 8, 16]} />
-            <meshStandardMaterial color="#E8A87C" roughness={0.9} metalness={0.1} />
-          </mesh>
-          <mesh position={[1.3, 0, 0]} rotation={[0, 0, 0.5]}>
-            <capsuleGeometry args={[0.35, 0.8, 8, 16]} />
-            <meshStandardMaterial color="#E8A87C" roughness={0.9} metalness={0.1} />
+          {/* Right Ear */}
+          <mesh position={[0.8, 1.9, 0]}>
+            <sphereGeometry args={[0.4, 32, 32]} />
+            <meshStandardMaterial color="#F9F9F9" roughness={1} metalness={0} />
           </mesh>
           
-          {/* Legs - more plump */}
-          <mesh position={[-0.55, -1.5, 0]} rotation={[0, 0, -0.2]}>
-            <capsuleGeometry args={[0.35, 0.7, 8, 16]} />
-            <meshStandardMaterial color="#E8A87C" roughness={0.9} metalness={0.1} />
-          </mesh>
-          <mesh position={[0.55, -1.5, 0]} rotation={[0, 0, 0.2]}>
-            <capsuleGeometry args={[0.35, 0.7, 8, 16]} />
-            <meshStandardMaterial color="#E8A87C" roughness={0.9} metalness={0.1} />
+          {/* Left Arm - plush and cylindrical */}
+          <mesh position={[-1.3, -0.4, 0]} rotation={[0, 0, -0.5]}>
+            <cylinderGeometry args={[0.35, 0.35, 1.2, 32]} />
+            <meshStandardMaterial color="#F9F9F9" roughness={1} metalness={0} />
           </mesh>
           
-          {/* Paw pads - cute detail */}
-          <mesh position={[-1.5, -0.1, 0.4]} rotation={[0, 0, -0.5]}>
-            <sphereGeometry args={[0.2, 32, 32]} />
-            <meshStandardMaterial color="#F5B0CB" roughness={0.7} metalness={0.1} />
-          </mesh>
-          <mesh position={[1.5, -0.1, 0.4]} rotation={[0, 0, 0.5]}>
-            <sphereGeometry args={[0.2, 32, 32]} />
-            <meshStandardMaterial color="#F5B0CB" roughness={0.7} metalness={0.1} />
-          </mesh>
-          <mesh position={[-0.6, -2.0, 0.4]} rotation={[0, 0, -0.2]}>
-            <sphereGeometry args={[0.2, 32, 32]} />
-            <meshStandardMaterial color="#F5B0CB" roughness={0.7} metalness={0.1} />
-          </mesh>
-          <mesh position={[0.6, -2.0, 0.4]} rotation={[0, 0, 0.2]}>
-            <sphereGeometry args={[0.2, 32, 32]} />
-            <meshStandardMaterial color="#F5B0CB" roughness={0.7} metalness={0.1} />
+          {/* Right Arm - plush and cylindrical */}
+          <mesh position={[1.3, -0.4, 0]} rotation={[0, 0, 0.5]}>
+            <cylinderGeometry args={[0.35, 0.35, 1.2, 32]} />
+            <meshStandardMaterial color="#F9F9F9" roughness={1} metalness={0} />
           </mesh>
           
-          {/* Eyes - bigger, rounder, more cartoon-like */}
-          <mesh position={[-0.35, 1.45, 0.75]}>
-            <sphereGeometry args={[0.18, 32, 32]} />
-            <meshStandardMaterial color="#41337A" roughness={0.5} metalness={0.3} />
-          </mesh>
-          <mesh position={[0.35, 1.45, 0.75]}>
-            <sphereGeometry args={[0.18, 32, 32]} />
-            <meshStandardMaterial color="#41337A" roughness={0.5} metalness={0.3} />
+          {/* Left Hand */}
+          <mesh position={[-1.7, -0.8, 0]}>
+            <sphereGeometry args={[0.4, 32, 32]} />
+            <meshStandardMaterial color="#F9F9F9" roughness={1} metalness={0} />
           </mesh>
           
-          {/* Eye shine - larger for cuteness */}
-          <mesh position={[-0.3, 1.5, 0.9]}>
-            <sphereGeometry args={[0.06, 32, 32]} />
+          {/* Right Hand */}
+          <mesh position={[1.7, -0.8, 0]}>
+            <sphereGeometry args={[0.4, 32, 32]} />
+            <meshStandardMaterial color="#F9F9F9" roughness={1} metalness={0} />
+          </mesh>
+          
+          {/* Left Leg - plush and cylindrical */}
+          <mesh position={[-0.6, -1.8, 0]} rotation={[0, 0, -0.2]}>
+            <cylinderGeometry args={[0.35, 0.35, 1.2, 32]} />
+            <meshStandardMaterial color="#F9F9F9" roughness={1} metalness={0} />
+          </mesh>
+          
+          {/* Right Leg - plush and cylindrical */}
+          <mesh position={[0.6, -1.8, 0]} rotation={[0, 0, 0.2]}>
+            <cylinderGeometry args={[0.35, 0.35, 1.2, 32]} />
+            <meshStandardMaterial color="#F9F9F9" roughness={1} metalness={0} />
+          </mesh>
+          
+          {/* Left Foot */}
+          <mesh position={[-0.7, -2.3, 0]}>
+            <sphereGeometry args={[0.4, 32, 32]} />
+            <meshStandardMaterial color="#F9F9F9" roughness={1} metalness={0} />
+          </mesh>
+          
+          {/* Right Foot */}
+          <mesh position={[0.7, -2.3, 0]}>
+            <sphereGeometry args={[0.4, 32, 32]} />
+            <meshStandardMaterial color="#F9F9F9" roughness={1} metalness={0} />
+          </mesh>
+          
+          {/* Eyes - black and glossy */}
+          <mesh position={[-0.35, 1.1, 0.85]}>
+            <sphereGeometry args={[0.12, 32, 32]} />
+            <meshStandardMaterial color="#000000" roughness={0.3} metalness={0.5} />
+          </mesh>
+          
+          <mesh position={[0.35, 1.1, 0.85]}>
+            <sphereGeometry args={[0.12, 32, 32]} />
+            <meshStandardMaterial color="#000000" roughness={0.3} metalness={0.5} />
+          </mesh>
+          
+          {/* Eye shine */}
+          <mesh position={[-0.33, 1.13, 0.95]}>
+            <sphereGeometry args={[0.03, 32, 32]} />
             <meshStandardMaterial color="white" roughness={0.1} metalness={0.8} />
           </mesh>
-          <mesh position={[0.4, 1.5, 0.9]}>
-            <sphereGeometry args={[0.06, 32, 32]} />
+          
+          <mesh position={[0.37, 1.13, 0.95]}>
+            <sphereGeometry args={[0.03, 32, 32]} />
             <meshStandardMaterial color="white" roughness={0.1} metalness={0.8} />
           </mesh>
           
-          {/* Nose - heart-shaped approximation */}
-          <mesh position={[0, 1.2, 0.9]}>
+          {/* Nose - black and glossy */}
+          <mesh position={[0, 0.9, 1.2]}>
             <sphereGeometry args={[0.1, 32, 32]} />
-            <meshStandardMaterial color="#C06C84" roughness={0.5} metalness={0.2} />
+            <meshStandardMaterial color="#000000" roughness={0.3} metalness={0.5} />
           </mesh>
           
-          {/* Mouth - smiling curve */}
-          <mesh position={[0, 1.0, 0.9]}>
-            <torusGeometry args={[0.15, 0.03, 16, 16, Math.PI]} />
-            <meshStandardMaterial color="#6C5B7B" roughness={0.5} metalness={0.2} />
+          {/* Mouth - simple curve */}
+          <mesh position={[0, 0.7, 1.0]} rotation={[Math.PI/4, 0, 0]}>
+            <torusGeometry args={[0.1, 0.03, 16, 16, Math.PI]} />
+            <meshStandardMaterial color="#444444" roughness={0.5} metalness={0.2} />
           </mesh>
           
-          {/* Belly patch */}
-          <mesh position={[0, -0.2, 1]}>
-            <sphereGeometry args={[0.8, 32, 32]} />
-            <meshStandardMaterial color="#F9D5BB" roughness={0.8} metalness={0.1} />
+          {/* Ribbon around neck */}
+          <mesh position={[0, 0.05, 0]} rotation={[Math.PI/2, 0, 0]}>
+            <torusGeometry args={[0.9, 0.15, 16, 32]} />
+            <meshStandardMaterial color="#FFF3CC" roughness={0.8} metalness={0.1} />
           </mesh>
           
-          {/* Button/speaker with animated glow when listening */}
+          {/* Bow - left loop */}
+          <mesh position={[-0.35, 0.15, 0.9]} rotation={[0, 0.4, 0]}>
+            <torusGeometry args={[0.3, 0.08, 16, 32, Math.PI*1.5]} />
+            <meshStandardMaterial color="#FFF3CC" roughness={0.8} metalness={0.1} />
+          </mesh>
+          
+          {/* Bow - right loop */}
+          <mesh position={[0.35, 0.15, 0.9]} rotation={[0, -0.4, 0]}>
+            <torusGeometry args={[0.3, 0.08, 16, 32, Math.PI*1.5]} />
+            <meshStandardMaterial color="#FFF3CC" roughness={0.8} metalness={0.1} />
+          </mesh>
+          
+          {/* Bow - center knot */}
+          <mesh position={[0, 0.15, 0.9]}>
+            <boxGeometry args={[0.3, 0.2, 0.1]} />
+            <meshStandardMaterial color="#FFF3CC" roughness={0.8} metalness={0.1} />
+          </mesh>
+          
+          {/* Bow - hanging ribbons */}
+          <mesh position={[-0.1, -0.3, 0.9]} rotation={[0, 0, 0.1]}>
+            <boxGeometry args={[0.08, 0.6, 0.02]} />
+            <meshStandardMaterial color="#FFF3CC" roughness={0.8} metalness={0.1} />
+          </mesh>
+          
+          <mesh position={[0.1, -0.3, 0.9]} rotation={[0, 0, -0.1]}>
+            <boxGeometry args={[0.08, 0.6, 0.02]} />
+            <meshStandardMaterial color="#FFF3CC" roughness={0.8} metalness={0.1} />
+          </mesh>
+          
+          {/* Speaker/Button with glow effect when listening */}
           <mesh 
-            position={[0, -0.2, 1.2]} 
+            position={[0, -0.1, 1.3]} 
             scale={isListening ? 1.2 : hovered ? 1.1 : 1}
           >
             <sphereGeometry args={[0.15, 32, 32]} />
@@ -178,22 +237,6 @@ const TeddyModel = ({
               emissive={isListening ? "#A0D2EB" : hovered ? "#A2E1DB" : "#000000"}
               emissiveIntensity={isListening ? 0.5 : hovered ? 0.2 : 0}
             />
-          </mesh>
-          
-          {/* Bowtie for added cuteness */}
-          <mesh position={[0, 0.8, 1]} rotation={[0, 0, Math.PI / 4]}>
-            <boxGeometry args={[0.4, 0.4, 0.1]} />
-            <meshStandardMaterial color="#F67280" roughness={0.7} metalness={0.2} />
-          </mesh>
-          
-          {/* Cheeks for extra cuteness */}
-          <mesh position={[-0.6, 1.2, 0.7]}>
-            <sphereGeometry args={[0.15, 32, 32]} />
-            <meshStandardMaterial color="#F5B0CB" roughness={0.7} metalness={0.1} opacity={0.7} transparent={true} />
-          </mesh>
-          <mesh position={[0.6, 1.2, 0.7]}>
-            <sphereGeometry args={[0.15, 32, 32]} />
-            <meshStandardMaterial color="#F5B0CB" roughness={0.7} metalness={0.1} opacity={0.7} transparent={true} />
           </mesh>
         </group>
       </Float>

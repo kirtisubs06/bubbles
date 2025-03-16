@@ -17,6 +17,7 @@ import NotFound from "./pages/NotFound";
 import TeddyDemo from "./pages/TeddyDemo";
 import About from "./pages/About";
 import Features from "./pages/Features";
+import Pricing from "./pages/Pricing";
 
 const queryClient = new QueryClient();
 
@@ -32,6 +33,7 @@ const App = () => (
           <Route path="/teddy-demo" element={<TeddyDemo />} />
           <Route path="/about" element={<About />} />
           <Route path="/features" element={<Features />} />
+          <Route path="/pricing" element={<Pricing />} />
           
           <Route path="/dashboard" element={<DashboardLayout />}>
             <Route index element={<Dashboard />} />

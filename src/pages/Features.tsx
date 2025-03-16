@@ -108,7 +108,7 @@ const Features: React.FC = () => {
             <div className="absolute inset-0 flex items-center justify-center overflow-hidden">
               <div className="absolute w-full h-full bg-gradient-to-r from-teddy-purple/20 to-teddy-blue/20"></div>
               <img 
-                src="https://images.unsplash.com/photo-1566140967404-b8b3932483f5?q=80&w=2000&auto=format&fit=crop"
+                src="https://images.unsplash.com/photo-1596461404969-9ae70f2830c1?q=80&w=2000&auto=format&fit=crop"
                 alt="Children playing with teddy bears" 
                 className="w-full h-full object-cover"
               />
@@ -193,7 +193,7 @@ const Features: React.FC = () => {
                   <div className="absolute inset-0 bg-gradient-to-br from-teddy-coral/30 to-teddy-purple/30 transform scale-[1.03] rounded-3xl"></div>
                   <div className="relative rounded-3xl overflow-hidden aspect-square">
                     <img 
-                      src="https://images.unsplash.com/photo-1596461404969-9ae70f2830c1?q=80&w=600&auto=format&fit=crop" 
+                      src="https://images.unsplash.com/photo-1606092195730-5d7b9af1efc5?q=80&w=600&auto=format&fit=crop" 
                       alt="Child with teddy bear" 
                       className="w-full h-full object-cover"
                     />
@@ -204,8 +204,65 @@ const Features: React.FC = () => {
           </div>
         </section>
         
-        {/* Comparison Table */}
+        {/* Image Gallery */}
         <section className="py-20 bg-teddy-purple/5 dark:bg-teddy-purple/10">
+          <div className="container mx-auto px-4">
+            <div className="max-w-5xl mx-auto">
+              <div className="text-center mb-12">
+                <h2 className="text-3xl md:text-4xl font-bold text-teddy-charcoal dark:text-white mb-6">
+                  Magical Moments with TeddyAI
+                </h2>
+                <p className="text-lg text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
+                  See how TeddyAI becomes part of your child's daily adventures, sparking joy and learning
+                </p>
+              </div>
+              
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <motion.div
+                  initial={{ opacity: 0, y: 30 }}
+                  animate={isFeaturesVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+                  transition={{ duration: 0.5, delay: 0.1 }}
+                  className="h-64 md:h-80 relative rounded-xl overflow-hidden"
+                >
+                  <img 
+                    src="https://images.unsplash.com/photo-1544146093-f1a113fd1108?q=80&w=600&auto=format&fit=crop" 
+                    alt="Teddy bear reading" 
+                    className="w-full h-full object-cover"
+                  />
+                </motion.div>
+                
+                <motion.div
+                  initial={{ opacity: 0, y: 30 }}
+                  animate={isFeaturesVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+                  transition={{ duration: 0.5, delay: 0.2 }}
+                  className="h-64 md:h-80 relative rounded-xl overflow-hidden"
+                >
+                  <img 
+                    src="https://images.unsplash.com/photo-1519223424049-aeautoformat&fit=1104c2debb50f0?q=80&w=600&" 
+                    alt="Children playing" 
+                    className="w-full h-full object-cover"
+                  />
+                </motion.div>
+                
+                <motion.div
+                  initial={{ opacity: 0, y: 30 }}
+                  animate={isFeaturesVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+                  transition={{ duration: 0.5, delay: 0.3 }}
+                  className="h-64 md:h-80 relative rounded-xl overflow-hidden"
+                >
+                  <img 
+                    src="https://images.unsplash.com/photo-1581091224003-1c25ee834942?q=80&w=600&auto=format&fit=crop" 
+                    alt="Child with tablet" 
+                    className="w-full h-full object-cover"
+                  />
+                </motion.div>
+              </div>
+            </div>
+          </div>
+        </section>
+        
+        {/* Comparison Table */}
+        <section className="py-20">
           <div 
             ref={(el) => setComparisonRef(el)}
             className="container mx-auto px-4"
@@ -303,8 +360,8 @@ const Features: React.FC = () => {
                   <a href="/teddy-demo" className="btn-primary py-3 px-8 text-base">
                     Try the Demo
                   </a>
-                  <a href="/login" className="btn-secondary py-3 px-8 text-base">
-                    Pre-Order Now
+                  <a href="/pricing" className="btn-secondary py-3 px-8 text-base">
+                    View Pricing
                   </a>
                 </div>
               </motion.div>
