@@ -39,11 +39,10 @@ export const GeminiAIProvider: React.FC<{ children: ReactNode }> = ({ children }
         
         // Try to get from Supabase
         try {
-          const { data, error } = await supabase.functions.invoke('gemini-key', {
+          // Correctly invoke the function without using the 'path' property
+          const { data, error } = await supabase.functions.invoke('gemini-key/get', {
             method: 'GET',
-            body: {},
-            // Remove the responseType property as it's not in the FunctionInvokeOptions type
-            path: 'get',
+            body: {}
           });
           
           if (!error && data && data.key) {
@@ -106,11 +105,10 @@ export const GeminiAIProvider: React.FC<{ children: ReactNode }> = ({ children }
         
         // Save to Supabase if we're in admin mode
         try {
-          await supabase.functions.invoke('gemini-key', {
+          // Correctly invoke the function without using the 'path' property
+          await supabase.functions.invoke('gemini-key/set', {
             method: 'POST',
-            body: { apiKey: trimmedKey },
-            // Remove the responseType property as it's not in the FunctionInvokeOptions type
-            path: 'set',
+            body: { apiKey: trimmedKey }
           });
           
           setIsAdminConfigured(true);

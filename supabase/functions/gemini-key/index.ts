@@ -21,12 +21,13 @@ serve(async (req) => {
     );
     
     const { method, url } = req;
-    const path = new URL(url).pathname.split('/').pop();
+    const pathSegments = new URL(url).pathname.split('/');
+    const functionType = pathSegments[pathSegments.length - 1]; // 'get' or 'set'
 
-    console.log(`Processing ${method} request to ${path}`);
+    console.log(`Processing ${method} request to ${functionType}`);
 
     // GET request to fetch the API key
-    if (method === 'GET' && path === 'get') {
+    if (method === 'GET' && functionType === 'get') {
       const { data, error } = await supabaseClient
         .from('app_settings')
         .select('value')
@@ -49,7 +50,7 @@ serve(async (req) => {
     }
     
     // POST request to update the API key
-    if (method === 'POST' && path === 'set') {
+    if (method === 'POST' && functionType === 'set') {
       const { apiKey } = await req.json();
       
       if (!apiKey) {
