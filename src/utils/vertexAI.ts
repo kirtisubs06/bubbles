@@ -159,7 +159,8 @@ export const textToSpeech = async (text: string): Promise<void> => {
       
       // Fallback resolution in case onend doesn't fire
       setTimeout(() => {
-        if (utterance.pending) {
+        // Check if speech synthesis is still speaking this utterance
+        if (speechSynthesis.speaking) {
           resolve();
         }
       }, text.length * 100); // Rough estimate based on text length

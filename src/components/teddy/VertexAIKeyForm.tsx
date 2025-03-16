@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
@@ -22,10 +21,8 @@ const VertexAIKeyForm: React.FC = () => {
       
       if (isValid) {
         // If valid, save it
-        const success = await setApiKey(inputKey.trim());
-        if (success) {
-          setIsEditing(false);
-        }
+        await setApiKey(inputKey.trim());
+        setIsEditing(false);
       } else {
         toast({
           title: "Invalid API Key",

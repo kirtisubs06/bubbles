@@ -1,10 +1,10 @@
 
-import React, { createContext, useContext, useState, ReactNode, useEffect } from 'react';
+import React, { createContext, useContext, useState, ReactNode } from 'react';
 import { toast } from '@/components/ui/use-toast';
 
 interface VertexAIContextType {
   apiKey: string;
-  setApiKey: (key: string) => void;
+  setApiKey: (key: string) => Promise<boolean>;
   isConfigured: boolean;
   validateApiKey: (key: string) => Promise<boolean>;
 }
@@ -65,7 +65,7 @@ export const VertexAIProvider: React.FC<{ children: ReactNode }> = ({ children }
     }
   };
 
-  const saveApiKey = async (key: string) => {
+  const saveApiKey = async (key: string): Promise<boolean> => {
     try {
       // Validate the key before saving
       const isValid = await validateApiKey(key);
