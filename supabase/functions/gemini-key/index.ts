@@ -23,6 +23,8 @@ serve(async (req) => {
     const { method, url } = req;
     const path = new URL(url).pathname.split('/').pop();
 
+    console.log(`Processing ${method} request to ${path}`);
+
     // GET request to fetch the API key
     if (method === 'GET' && path === 'get') {
       const { data, error } = await supabaseClient
@@ -39,6 +41,7 @@ serve(async (req) => {
         );
       }
       
+      console.log('Successfully retrieved API key');
       return new Response(
         JSON.stringify({ key: data.value }),
         { headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
@@ -69,6 +72,7 @@ serve(async (req) => {
         );
       }
       
+      console.log('Successfully updated API key');
       return new Response(
         JSON.stringify({ success: true }),
         { headers: { ...corsHeaders, 'Content-Type': 'application/json' } }

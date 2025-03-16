@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { useGeminiAI } from '@/hooks/useGeminiAI';
@@ -15,6 +15,11 @@ const GeminiKeyForm: React.FC<GeminiKeyFormProps> = ({ adminMode = false }) => {
   const [inputKey, setInputKey] = useState(apiKey);
   const [isEditing, setIsEditing] = useState(!isConfigured && adminMode);
   const [isValidating, setIsValidating] = useState(false);
+
+  // Update inputKey when apiKey changes
+  useEffect(() => {
+    setInputKey(apiKey);
+  }, [apiKey]);
 
   // Don't show the form if the API key is already configured by admin and we're not in admin mode
   if (isAdminConfigured && !adminMode) {
@@ -101,7 +106,7 @@ const GeminiKeyForm: React.FC<GeminiKeyFormProps> = ({ adminMode = false }) => {
             <Button 
               type="submit" 
               className="bg-teddy-coral hover:bg-teddy-coral/80 text-white"
-              disabled={isValidating || !inputKey.trim()}
+              disabled={isValidating || !inputKey?.trim()}
             >
               {isValidating ? (
                 <>
@@ -127,11 +132,10 @@ const GeminiKeyForm: React.FC<GeminiKeyFormProps> = ({ adminMode = false }) => {
       ) : (
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">
-            {isAdminConfigured && (
-              isAdminConfigured ? 
-                <ServerIcon className="h-4 w-4 text-green-500" /> : 
-                <LockIcon className="h-4 w-4 text-green-500" />
-            )}
+            {isAdminConfigured ? 
+              <ServerIcon className="h-4 w-4 text-green-500" /> : 
+              <LockIcon className="h-4 w-4 text-green-500" />
+            }
             <div>
               <h3 className="text-sm font-medium text-teddy-charcoal dark:text-white">
                 {isAdminConfigured ? "Google Gemini AI (Configured in Database)" : "Google Gemini AI"}

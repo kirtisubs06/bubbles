@@ -42,7 +42,7 @@ export const GeminiAIProvider: React.FC<{ children: ReactNode }> = ({ children }
           const { data, error } = await supabase.functions.invoke('gemini-key', {
             method: 'GET',
             body: {},
-            responseType: 'json',
+            // Remove the responseType property as it's not in the FunctionInvokeOptions type
             path: 'get',
           });
           
@@ -109,7 +109,7 @@ export const GeminiAIProvider: React.FC<{ children: ReactNode }> = ({ children }
           await supabase.functions.invoke('gemini-key', {
             method: 'POST',
             body: { apiKey: trimmedKey },
-            responseType: 'json',
+            // Remove the responseType property as it's not in the FunctionInvokeOptions type
             path: 'set',
           });
           
