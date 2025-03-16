@@ -12,7 +12,8 @@ export interface VertexMessage {
 // Function to send a message to Google Vertex AI and get a response
 export const chatWithVertexAI = async (messages: VertexMessage[], apiKey: string): Promise<string> => {
   try {
-    const endpoint = "https://us-central1-aiplatform.googleapis.com/v1/projects/your-project-id/locations/us-central1/publishers/google/models/gemini-pro:generateContent";
+    // Correct endpoint for Gemini API
+    const endpoint = "https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent";
     
     const requestBody = {
       contents: messages.map(msg => ({
@@ -45,11 +46,10 @@ export const chatWithVertexAI = async (messages: VertexMessage[], apiKey: string
       ]
     };
 
-    const response = await fetch(endpoint, {
+    const response = await fetch(`${endpoint}?key=${apiKey}`, {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${apiKey}`
+        'Content-Type': 'application/json'
       },
       body: JSON.stringify(requestBody)
     });
@@ -61,97 +61,104 @@ export const chatWithVertexAI = async (messages: VertexMessage[], apiKey: string
     }
 
     const data = await response.json();
+    // Extract the response text from the correct path in the response object
     const responseText = data.candidates[0].content.parts[0].text;
     return responseText;
   } catch (error) {
     console.error('Error interacting with Vertex AI:', error);
-    return "I'm sorry, I'm having trouble connecting to my brain right now. Can you try again in a moment?";
+    throw error;
   }
 };
 
-// Function to convert speech to text using Vertex AI
+// Function to convert speech to text using the Web Speech API
 export const speechToText = async (audioBlob: Blob, apiKey: string): Promise<string> => {
-  try {
-    // Convert the blob to base64
-    const audioBuffer = await audioBlob.arrayBuffer();
-    const audioBase64 = btoa(
-      new Uint8Array(audioBuffer).reduce((data, byte) => data + String.fromCharCode(byte), '')
-    );
-
-    const endpoint = "https://us-central1-aiplatform.googleapis.com/v1/projects/your-project-id/locations/us-central1/publishers/google/models/speech-1:transcribe";
-    
-    const requestBody = {
-      audioContent: audioBase64,
-      recognitionConfig: {
-        languageCode: "en-US",
-        model: "latest_long"
+  return new Promise((resolve, reject) => {
+    try {
+      // Use browser's built-in SpeechRecognition API instead of Vertex AI
+      const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+      if (!SpeechRecognition) {
+        reject(new Error("Speech recognition not supported in this browser"));
+        return;
       }
-    };
-
-    const response = await fetch(endpoint, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${apiKey}`
-      },
-      body: JSON.stringify(requestBody)
-    });
-
-    if (!response.ok) {
-      throw new Error(`Speech to text API error: ${response.status}`);
+      
+      const recognition = new SpeechRecognition();
+      recognition.lang = 'en-US';
+      recognition.continuous = false;
+      recognition.interimResults = false;
+      
+      recognition.onresult = (event) => {
+        const transcript = event.results[0][0].transcript;
+        resolve(transcript);
+      };
+      
+      recognition.onerror = (event) => {
+        console.error('Speech recognition error:', event.error);
+        reject(new Error(`Speech recognition error: ${event.error}`));
+      };
+      
+      recognition.start();
+      
+      // Set a timeout to stop recognition after 10 seconds if no result
+      setTimeout(() => {
+        recognition.stop();
+        if (!recognition.onresult) {
+          reject(new Error("Speech recognition timeout"));
+        }
+      }, 10000);
+    } catch (error) {
+      console.error('Error with speech to text:', error);
+      reject(error);
     }
-
-    const data = await response.json();
-    return data.results[0].alternatives[0].transcript;
-  } catch (error) {
-    console.error('Error with speech to text:', error);
-    return "";
-  }
+  });
 };
 
-// Function to convert text to speech using Vertex AI
+// Simplified text to speech using browser's native API
 export const textToSpeech = async (text: string, apiKey: string): Promise<Blob> => {
-  try {
-    const endpoint = "https://us-central1-aiplatform.googleapis.com/v1/projects/your-project-id/locations/us-central1/publishers/google/models/text-to-speech:synthesize";
-    
-    const requestBody = {
-      text: text,
-      voiceConfig: {
-        name: "en-US-Standard-D",
-        languageCode: "en-US"
-      },
-      audioConfig: {
-        audioEncoding: "LINEAR16",
-        sampleRateHertz: 24000
-      }
-    };
-
-    const response = await fetch(endpoint, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${apiKey}`
-      },
-      body: JSON.stringify(requestBody)
-    });
-
-    if (!response.ok) {
-      throw new Error(`Text to speech API error: ${response.status}`);
+  return new Promise((resolve, reject) => {
+    try {
+      // Use browser's built-in speech synthesis
+      const utterance = new SpeechSynthesisUtterance(text);
+      utterance.lang = 'en-US';
+      utterance.voice = speechSynthesis.getVoices().find(voice => 
+        voice.name.includes('Female') || voice.name.includes('Google') || voice.lang === 'en-US'
+      ) || null;
+      
+      // Create an audio context to capture the speech
+      const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+      const dest = audioContext.createMediaStreamDestination();
+      const mediaRecorder = new MediaRecorder(dest.stream);
+      const chunks: BlobEvent[] = [];
+      
+      mediaRecorder.ondataavailable = (e) => {
+        chunks.push(e);
+      };
+      
+      mediaRecorder.onstop = () => {
+        const blob = new Blob(chunks.map(chunk => chunk.data), { type: 'audio/wav' });
+        resolve(blob);
+      };
+      
+      mediaRecorder.start();
+      
+      utterance.onend = () => {
+        mediaRecorder.stop();
+        audioContext.close();
+      };
+      
+      speechSynthesis.speak(utterance);
+      
+      // Fallback if speech synthesis doesn't work properly
+      setTimeout(() => {
+        if (chunks.length === 0) {
+          // Create a minimal audio blob as fallback
+          const fallbackBlob = new Blob([new ArrayBuffer(1000)], { type: 'audio/wav' });
+          resolve(fallbackBlob);
+        }
+      }, 5000);
+    } catch (error) {
+      console.error('Error with text to speech:', error);
+      // Return an empty blob in case of error to prevent further errors
+      resolve(new Blob([], { type: 'audio/wav' }));
     }
-
-    const data = await response.json();
-    const audioBase64 = data.audioContent;
-    
-    // Convert base64 to blob
-    const byteCharacters = atob(audioBase64);
-    const byteNumbers = new Array(byteCharacters.length);
-    for (let i = 0; i < byteCharacters.length; i++) {
-      byteNumbers[i] = byteCharacters.charCodeAt(i);
-    }
-    const byteArray = new Uint8Array(byteNumbers);
-    return new Blob([byteArray], { type: 'audio/wav' });
-  } catch (error) {
-    console.error('Error with text to speech:', error);
-    return new Blob();
-  }
+  });
 };

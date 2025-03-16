@@ -1,11 +1,10 @@
-
 import React, { useState, useRef, useEffect } from 'react';
 import { Mic, MicOff, Send, Sparkles, AlertCircle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { motion, AnimatePresence } from 'framer-motion';
 import { toast } from '@/components/ui/use-toast';
 import { useVertexAI } from '@/hooks/useVertexAI';
-import { chatWithVertexAI, VertexMessage, speechToText } from '@/utils/vertexAI';
+import { chatWithVertexAI, VertexMessage } from '@/utils/vertexAI';
 import VertexAIKeyForm from './VertexAIKeyForm';
 
 // Type for chat messages
@@ -46,17 +45,6 @@ const TeddyChatbot: React.FC = () => {
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const [recognitionSupported, setRecognitionSupported] = useState(true);
   const { apiKey, isConfigured } = useVertexAI();
-  const audioRef = useRef<HTMLAudioElement | null>(null);
-  
-  // Create audio element for playback
-  useEffect(() => {
-    audioRef.current = new Audio();
-    return () => {
-      if (audioRef.current) {
-        audioRef.current.pause();
-      }
-    };
-  }, []);
   
   // Check if speech recognition is supported
   useEffect(() => {
@@ -127,7 +115,7 @@ const TeddyChatbot: React.FC = () => {
           setIsListening(false);
           toast({
             title: "Speech Recognition Error",
-            description: "There was a problem with speech recognition.",
+            description: `There was a problem with speech recognition: ${event.error}`,
             variant: "destructive"
           });
         };
@@ -159,27 +147,27 @@ const TeddyChatbot: React.FC = () => {
     setInputValue('');
     setIsThinking(true);
     
-    // Update Vertex messages history
-    const updatedMessages: VertexMessage[] = [
-      ...vertexMessages,
-      { role: 'user', content: text }
-    ];
-    setVertexMessages(updatedMessages);
-    
     try {
       let responseText;
       
       if (isConfigured) {
+        // Update Vertex messages history
+        const updatedMessages: VertexMessage[] = [
+          ...vertexMessages,
+          { role: 'user', content: text }
+        ];
+        setVertexMessages(updatedMessages);
+        
         // Use Vertex AI
         responseText = await chatWithVertexAI(updatedMessages, apiKey);
+        
+        // Add assistant message to Vertex history
+        setVertexMessages(prev => [...prev, { role: 'assistant', content: responseText }]);
       } else {
         // Use fallback responses
         const randomIndex = Math.floor(Math.random() * SAMPLE_RESPONSES.length);
         responseText = SAMPLE_RESPONSES[randomIndex];
       }
-      
-      // Add assistant message to Vertex history
-      setVertexMessages(prev => [...prev, { role: 'assistant', content: responseText }]);
       
       // Add teddy message
       const newTeddyMessage: Message = {
@@ -194,7 +182,7 @@ const TeddyChatbot: React.FC = () => {
       console.error('Error with AI response:', error);
       toast({
         title: "AI Response Error",
-        description: "There was a problem getting a response from the AI.",
+        description: "There was a problem getting a response from the AI. Please check your API key.",
         variant: "destructive"
       });
       

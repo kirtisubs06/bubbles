@@ -1,4 +1,3 @@
-
 import React, { useRef, useState, useEffect, Suspense } from 'react';
 import { Canvas, useFrame, useThree, useLoader } from '@react-three/fiber';
 import { OrbitControls, Environment, ContactShadows, Preload } from '@react-three/drei';
@@ -7,7 +6,7 @@ import * as THREE from 'three';
 import { TextureLoader } from 'three';
 import { toast } from '@/components/ui/use-toast';
 import { useVertexAI } from '@/hooks/useVertexAI';
-import { chatWithVertexAI, VertexMessage, textToSpeech, speechToText } from '@/utils/vertexAI';
+import { chatWithVertexAI, VertexMessage, textToSpeech } from '@/utils/vertexAI';
 
 // Helper component for the 3D teddy bear model
 const TeddyModel = ({ 
@@ -26,8 +25,6 @@ const TeddyModel = ({
     { role: 'assistant', content: "Hello! I'm Teddy, your friendly bear companion. I love talking about science, nature, space, and telling stories. What would you like to talk about today?" }
   ]);
   const audioRef = useRef<HTMLAudioElement | null>(null);
-  const mediaRecorderRef = useRef<MediaRecorder | null>(null);
-  const audioChunksRef = useRef<Blob[]>([]);
   const { apiKey, isConfigured } = useVertexAI();
   
   // Create audio element for playback
@@ -85,64 +82,62 @@ const TeddyModel = ({
     }
     
     try {
-      const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-      const mediaRecorder = new MediaRecorder(stream);
-      mediaRecorderRef.current = mediaRecorder;
-      audioChunksRef.current = [];
-      
-      mediaRecorder.ondataavailable = (event) => {
-        if (event.data.size > 0) {
-          audioChunksRef.current.push(event.data);
-        }
-      };
-      
-      mediaRecorder.onstop = async () => {
-        const audioBlob = new Blob(audioChunksRef.current, { type: 'audio/wav' });
-        
-        // Convert speech to text
-        const transcript = await speechToText(audioBlob, apiKey);
-        if (transcript) {
-          // Process with Vertex AI
-          await processMessage(transcript);
-        } else {
-          toast({
-            title: "Speech Recognition Failed",
-            description: "Sorry, I couldn't understand what you said.",
-            variant: "destructive"
-          });
-          setIsListening(false);
-        }
-        
-        // Stop all tracks on the stream
-        stream.getTracks().forEach(track => track.stop());
-      };
-      
-      mediaRecorder.start();
       setIsRecording(true);
       setIsListening(true);
       
-      // Record for 5 seconds maximum
-      setTimeout(() => {
-        if (mediaRecorderRef.current && mediaRecorderRef.current.state === 'recording') {
-          mediaRecorderRef.current.stop();
-          setIsRecording(false);
+      // Use browser's built-in SpeechRecognition API
+      const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+      
+      if (!SpeechRecognition) {
+        throw new Error("Speech recognition not supported in this browser");
+      }
+      
+      const recognition = new SpeechRecognition();
+      recognition.lang = 'en-US';
+      recognition.continuous = false;
+      recognition.interimResults = false;
+      
+      recognition.onresult = async (event) => {
+        const transcript = event.results[0][0].transcript;
+        if (transcript) {
+          await processMessage(transcript);
+        } else {
+          throw new Error("No speech detected");
         }
-      }, 5000);
+      };
+      
+      recognition.onerror = (event) => {
+        console.error('Speech recognition error:', event.error);
+        toast({
+          title: "Speech Recognition Failed",
+          description: `Error: ${event.error}. Try speaking more clearly or using Chrome/Edge.`,
+          variant: "destructive"
+        });
+        setIsListening(false);
+        setIsRecording(false);
+      };
+      
+      recognition.onend = () => {
+        setIsRecording(false);
+      };
+      
+      recognition.start();
+      
+      // Set a timeout to stop recognition after 7 seconds if no result
+      setTimeout(() => {
+        if (isRecording) {
+          recognition.stop();
+        }
+      }, 7000);
       
     } catch (error) {
-      console.error('Error accessing microphone:', error);
+      console.error('Error accessing speech recognition:', error);
       toast({
-        title: "Microphone Access Failed",
-        description: "Please allow access to your microphone to talk with Teddy.",
+        title: "Speech Recognition Failed",
+        description: "Please try using Chrome or Edge browsers for best results.",
         variant: "destructive"
       });
-    }
-  };
-  
-  // Stop recording if currently recording
-  const stopVoiceRecording = () => {
-    if (mediaRecorderRef.current && mediaRecorderRef.current.state === 'recording') {
-      mediaRecorderRef.current.stop();
+      setIsListening(false);
       setIsRecording(false);
     }
   };
@@ -150,6 +145,11 @@ const TeddyModel = ({
   // Process message with Vertex AI and speak response
   const processMessage = async (message: string) => {
     try {
+      toast({
+        description: `You said: "${message}"`,
+        duration: 3000,
+      });
+      
       // Add user message to conversation history
       const updatedMessages: VertexMessage[] = [
         ...vertexMessages,
@@ -163,27 +163,37 @@ const TeddyModel = ({
       // Update conversation history with assistant response
       setVertexMessages(prev => [...prev, { role: 'assistant', content: response }]);
       
-      // Convert text to speech and play
-      const audioBlob = await textToSpeech(response, apiKey);
+      // Use the browser's speech synthesis API
+      const utterance = new SpeechSynthesisUtterance(response);
+      utterance.lang = 'en-US';
+      utterance.rate = 1.0;
+      utterance.pitch = 1.1; // Slightly higher pitch for a child-friendly voice
       
-      if (audioRef.current) {
-        const audioUrl = URL.createObjectURL(audioBlob);
-        audioRef.current.src = audioUrl;
-        audioRef.current.onended = () => {
-          setIsListening(false);
-          URL.revokeObjectURL(audioUrl);
-        };
-        audioRef.current.play().catch(error => {
-          console.error('Error playing audio:', error);
-          setIsListening(false);
-        });
+      // Try to find a suitable voice
+      const voices = speechSynthesis.getVoices();
+      const preferredVoice = voices.find(
+        voice => voice.name.includes('Female') || voice.name.includes('Google') || voice.lang === 'en-US'
+      );
+      
+      if (preferredVoice) {
+        utterance.voice = preferredVoice;
       }
+      
+      utterance.onend = () => {
+        setIsListening(false);
+      };
+      
+      utterance.onerror = () => {
+        setIsListening(false);
+      };
+      
+      speechSynthesis.speak(utterance);
       
     } catch (error) {
       console.error('Error processing message:', error);
       toast({
         title: "AI Processing Error",
-        description: "There was a problem communicating with the AI.",
+        description: "There was a problem communicating with the AI. Please check your API key.",
         variant: "destructive"
       });
       setIsListening(false);
@@ -193,11 +203,11 @@ const TeddyModel = ({
   const handleClick = () => {
     if (isListening) {
       // If already listening, stop
-      stopVoiceRecording();
       if (audioRef.current) {
         audioRef.current.pause();
       }
       setIsListening(false);
+      speechSynthesis.cancel(); // Stop any ongoing speech
     } else {
       // Start listening
       startVoiceRecording();
