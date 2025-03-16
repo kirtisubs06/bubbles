@@ -1,11 +1,10 @@
-
 import React, { useState, useRef, useEffect } from 'react';
 import { Mic, MicOff, Send, Sparkles, AlertCircle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { motion, AnimatePresence } from 'framer-motion';
 import { toast } from '@/components/ui/use-toast';
 import { useGeminiAI } from '@/hooks/useGeminiAI';
-import { chatWithGemini, GeminiMessage, speechToText } from '@/utils/geminiAI';
+import { chatWithGeminiAI, GeminiMessage, speechToText } from '@/utils/geminiAI';
 import GeminiKeyForm from './GeminiKeyForm';
 
 // Type for chat messages
@@ -136,7 +135,7 @@ const TeddyChatbot: React.FC = () => {
         ];
         
         // Use Gemini API
-        responseText = await chatWithGemini(updatedMessages, apiKey);
+        responseText = await chatWithGeminiAI(updatedMessages, apiKey);
         
         // Add assistant message to Gemini history
         setGeminiMessages([...updatedMessages, { role: 'assistant', content: responseText }]);

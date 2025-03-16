@@ -1,6 +1,7 @@
 
 import React, { createContext, useContext, useState, ReactNode } from 'react';
 import { toast } from '@/components/ui/use-toast';
+import geminiService from '@/utils/geminiService';
 
 interface GeminiAIContextType {
   apiKey: string;
@@ -13,9 +14,8 @@ const GeminiAIContext = createContext<GeminiAIContextType | undefined>(undefined
 
 export const GeminiAIProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [apiKey, setApiKey] = useState<string>(() => {
-    // Try to get API key from localStorage
-    const savedKey = localStorage.getItem('geminiApiKey');
-    return savedKey || '';
+    // Try to get API key from geminiService
+    return geminiService.getApiKey() || '';
   });
 
   const [isValidatingKey, setIsValidatingKey] = useState(false);
@@ -28,36 +28,19 @@ export const GeminiAIProvider: React.FC<{ children: ReactNode }> = ({ children }
 
     setIsValidatingKey(true);
     try {
-      // Use the Gemini API to test the key with a simple request
-      const endpoint = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent";
+      // Store the current API key
+      const originalKey = geminiService.getApiKey();
       
-      const testBody = {
-        contents: [
-          {
-            parts: [{ text: "Hello" }]
-          }
-        ],
-        generationConfig: {
-          maxOutputTokens: 10
-        }
-      };
-
-      const response = await fetch(`${endpoint}?key=${key}`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(testBody)
-      });
-
-      if (!response.ok) {
-        console.error('API key validation failed:', await response.json());
-        return false;
-      }
-
+      // Temporarily set the key we want to test
+      geminiService.setApiKey(key.trim());
+      
+      // Try to make a simple request
+      await geminiService.generateResponse("Test");
+      
+      // If no errors, key is valid
       return true;
     } catch (error) {
-      console.error('Error validating API key:', error);
+      console.error('API key validation failed:', error);
       return false;
     } finally {
       setIsValidatingKey(false);
@@ -70,8 +53,8 @@ export const GeminiAIProvider: React.FC<{ children: ReactNode }> = ({ children }
       const isValid = await validateApiKey(key);
       
       if (isValid) {
-        localStorage.setItem('geminiApiKey', key);
-        setApiKey(key);
+        geminiService.setApiKey(key.trim());
+        setApiKey(key.trim());
         toast({
           title: "API Key Saved",
           description: "Your Google Gemini API key has been validated and saved.",

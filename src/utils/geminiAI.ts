@@ -1,5 +1,7 @@
 
 import { toast } from '@/components/ui/use-toast';
+import geminiService from './geminiService';
+import voiceAssistant from './voiceAssistant';
 
 export interface GeminiMessage {
   role: 'user' | 'assistant';
@@ -13,50 +15,20 @@ export const chatWithGeminiAI = async (messages: GeminiMessage[], apiKey: string
   if (!apiKey) {
     throw new Error('API key is required');
   }
-
+  
   try {
-    const endpoint = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent";
-    
-    // Format messages for Gemini API
-    const formattedMessages = messages.map(msg => ({
-      role: msg.role,
-      parts: [{ text: msg.content }]
-    }));
-
-    const requestBody = {
-      contents: formattedMessages,
-      generationConfig: {
-        maxOutputTokens: 250,
-        temperature: 0.7,
-        topP: 0.9
-      }
-    };
-
-    const response = await fetch(`${endpoint}?key=${apiKey}`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(requestBody)
-    });
-
-    if (!response.ok) {
-      const errorData = await response.json();
-      console.error('Gemini API error:', errorData);
-      throw new Error(`API error: ${response.status}`);
+    // Set the API key if it's different from the current one
+    if (geminiService.getApiKey() !== apiKey) {
+      geminiService.setApiKey(apiKey);
     }
-
-    const data = await response.json();
     
-    // Extract response text from Gemini API format
-    if (data.candidates && data.candidates.length > 0 && 
-        data.candidates[0].content && data.candidates[0].content.parts && 
-        data.candidates[0].content.parts.length > 0) {
-      return data.candidates[0].content.parts[0].text;
-    } else {
-      throw new Error('No valid response from Gemini API');
+    // Format the last message content as the prompt
+    const lastUserMessage = messages.filter(msg => msg.role === 'user').pop();
+    if (!lastUserMessage) {
+      throw new Error('No user message found');
     }
-
+    
+    return await geminiService.generateResponse(lastUserMessage.content);
   } catch (error) {
     console.error('Error in chatWithGeminiAI:', error);
     throw error;
@@ -64,7 +36,7 @@ export const chatWithGeminiAI = async (messages: GeminiMessage[], apiKey: string
 };
 
 /**
- * Text-to-speech utility using browser's SpeechSynthesis API
+ * Text-to-speech utility using voiceAssistant
  */
 export const textToSpeech = (text: string): Promise<void> => {
   return new Promise((resolve, reject) => {
@@ -73,37 +45,69 @@ export const textToSpeech = (text: string): Promise<void> => {
       return;
     }
 
-    // Create utterance with the input text
-    const utterance = new SpeechSynthesisUtterance(text);
-    utterance.lang = 'en-US';
-    utterance.rate = 1.0;
-    utterance.pitch = 1.1; // Slightly higher pitch for child-friendly voice
-    
-    // Try to find a suitable voice
-    const voices = speechSynthesis.getVoices();
-    const preferredVoice = voices.find(
-      voice => voice.name.includes('Female') || voice.name.includes('Google') || voice.lang === 'en-US'
-    );
-    
-    if (preferredVoice) {
-      utterance.voice = preferredVoice;
+    try {
+      voiceAssistant.textToSpeech(text);
+      
+      // Create a listener to detect when speech has ended
+      const checkSpeaking = setInterval(() => {
+        if (!window.speechSynthesis.speaking) {
+          clearInterval(checkSpeaking);
+          resolve();
+        }
+      }, 100);
+      
+      // Set a safety timeout
+      setTimeout(() => {
+        clearInterval(checkSpeaking);
+        resolve();
+      }, 30000); // 30 second safety timeout
+    } catch (error) {
+      reject(error);
+    }
+  });
+};
+
+/**
+ * Speech-to-text utility using browser's SpeechRecognition API
+ */
+export const speechToText = (): Promise<string> => {
+  return new Promise((resolve, reject) => {
+    // Check if speech recognition is supported
+    if (!('webkitSpeechRecognition' in window) && !('SpeechRecognition' in window)) {
+      reject(new Error('Speech recognition not supported'));
+      return;
     }
     
-    // Set event handlers
-    utterance.onend = () => {
-      resolve();
+    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+    const recognition = new SpeechRecognition();
+    
+    recognition.lang = 'en-US';
+    recognition.interimResults = false;
+    recognition.maxAlternatives = 1;
+    
+    recognition.onresult = (event) => {
+      const transcript = event.results[0][0].transcript;
+      resolve(transcript);
     };
     
-    utterance.onerror = (event) => {
-      reject(new Error(`Speech synthesis error: ${event.error}`));
+    recognition.onerror = (event) => {
+      reject(new Error(`Speech recognition error: ${event.error}`));
     };
     
-    // Check if speaking is in progress and cancel it
-    if (speechSynthesis.speaking) {
-      speechSynthesis.cancel();
-    }
+    recognition.onend = () => {
+      // If no result was received, resolve with empty string
+      resolve('');
+    };
     
-    // Start speaking
-    speechSynthesis.speak(utterance);
+    recognition.start();
+    
+    // Set a timeout to stop recognition if it doesn't end on its own
+    setTimeout(() => {
+      try {
+        recognition.stop();
+      } catch (e) {
+        console.error('Error stopping recognition:', e);
+      }
+    }, 10000);
   });
 };
