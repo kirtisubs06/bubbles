@@ -44,6 +44,22 @@ const TeddyModel = ({
   mainFurTexture.wrapT = THREE.RepeatWrapping;
   mainFurTexture.repeat.set(5, 5);
 
+  // Create heart shape for the teddy's chest
+  const heartShape = new THREE.Shape();
+  heartShape.moveTo(0, 0);
+  heartShape.bezierCurveTo(0, 0.5, 0.5, 0.5, 0.5, 0);
+  heartShape.bezierCurveTo(0.5, -0.5, 0, -0.5, 0, 0);
+  
+  const extrudeSettings = {
+    steps: 2,
+    depth: 0.1,
+    bevelEnabled: true,
+    bevelThickness: 0.1,
+    bevelSize: 0.1,
+    bevelOffset: 0,
+    bevelSegments: 3
+  };
+
   // More realistic teddy bear model with improved textures and details
   return (
     <group 
@@ -236,41 +252,13 @@ const TeddyModel = ({
         />
       </mesh>
 
-      {/* Small heart patch on chest - using a properly defined geometry */}
+      {/* Small heart patch on chest - using proper React Three Fiber syntax */}
       <mesh position={[0, 0.8, 1.15]} rotation={[0.3, 0, 0]} scale={0.9}>
-        <mesh>
-          {/* Use ExtrudeGeometry directly with the shape */}
-          <bufferGeometry attach="geometry">
-            {createHeartShape()}
-          </bufferGeometry>
-          <meshStandardMaterial color="#FF8882" roughness={0.7} metalness={0.2} />
-        </mesh>
+        <extrudeGeometry args={[heartShape, extrudeSettings]} />
+        <meshStandardMaterial color="#FF8882" roughness={0.7} metalness={0.2} />
       </mesh>
     </group>
   );
-};
-
-// Create a heart shape properly using Three.js methods
-const createHeartShape = () => {
-  const heartShape = new THREE.Shape();
-  
-  heartShape.moveTo(0, 0);
-  heartShape.bezierCurveTo(0, 0.5, 0.5, 0.5, 0.5, 0);
-  heartShape.bezierCurveTo(0.5, -0.5, 0, -0.5, 0, 0);
-  
-  const extrudeSettings = {
-    steps: 2,
-    depth: 0.1,
-    bevelEnabled: true,
-    bevelThickness: 0.1,
-    bevelSize: 0.1,
-    bevelOffset: 0,
-    bevelSegments: 3
-  };
-  
-  // Create the actual geometry
-  const geometry = new THREE.ExtrudeGeometry(heartShape, extrudeSettings);
-  return geometry;
 };
 
 interface TeddyBear3DProps {
