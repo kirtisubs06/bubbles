@@ -62,13 +62,13 @@ const TeddyDemo: React.FC = () => {
           <TabsList className="w-full max-w-md mx-auto grid grid-cols-2 mb-8 rounded-full overflow-hidden shadow-md border border-teddy-cream dark:border-teddy-charcoal/30">
             <TabsTrigger 
               value="3d" 
-              className="text-base md:text-lg py-3.5 px-6 rounded-l-full data-[state=active]:bg-teddy-coral data-[state=active]:text-white dark:data-[state=active]:text-white data-[state=active]:shadow-sm transition-all duration-200 relative z-10 font-medium outline-none focus:outline-none data-[state=inactive]:bg-white dark:data-[state=inactive]:bg-teddy-charcoal/50"
+              className="text-base md:text-lg py-4 px-6 rounded-l-full data-[state=active]:bg-teddy-coral data-[state=active]:text-white dark:data-[state=active]:text-white data-[state=active]:shadow-sm transition-all duration-200 relative z-10 font-medium outline-none focus:outline-none data-[state=inactive]:bg-white dark:data-[state=inactive]:bg-teddy-charcoal/50"
             >
               3D Teddy Demo
             </TabsTrigger>
             <TabsTrigger 
               value="features" 
-              className="text-base md:text-lg py-3.5 px-6 rounded-r-full data-[state=active]:bg-teddy-coral data-[state=active]:text-white dark:data-[state=active]:text-white data-[state=active]:shadow-sm transition-all duration-200 relative z-10 font-medium outline-none focus:outline-none data-[state=inactive]:bg-white dark:data-[state=inactive]:bg-teddy-charcoal/50"
+              className="text-base md:text-lg py-4 px-6 rounded-r-full data-[state=active]:bg-teddy-coral data-[state=active]:text-white dark:data-[state=active]:text-white data-[state=active]:shadow-sm transition-all duration-200 relative z-10 font-medium outline-none focus:outline-none data-[state=inactive]:bg-white dark:data-[state=inactive]:bg-teddy-charcoal/50"
             >
               Features & Interaction
             </TabsTrigger>

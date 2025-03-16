@@ -192,8 +192,18 @@ const Pricing: React.FC = () => {
           >
             <Tabs defaultValue="hardware" className="w-full max-w-6xl mx-auto">
               <TabsList className="grid w-full grid-cols-2 mb-8 max-w-md mx-auto">
-                <TabsTrigger value="hardware" className="text-lg py-3">Hardware</TabsTrigger>
-                <TabsTrigger value="subscription" className="text-lg py-3">Subscription</TabsTrigger>
+                <TabsTrigger 
+                  value="hardware" 
+                  className="text-lg py-4 px-8 data-[state=active]:bg-teddy-coral data-[state=active]:text-white"
+                >
+                  Hardware
+                </TabsTrigger>
+                <TabsTrigger 
+                  value="subscription" 
+                  className="text-lg py-4 px-8 data-[state=active]:bg-teddy-coral data-[state=active]:text-white"
+                >
+                  Subscription
+                </TabsTrigger>
               </TabsList>
               
               <TabsContent value="hardware">

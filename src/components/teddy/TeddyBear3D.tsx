@@ -121,8 +121,8 @@ const TeddyModel = ({
         <meshStandardMaterial color={noseColor} roughness={0.3} metalness={0.3} />
       </mesh>
       
-      {/* Mouth - simple curved line */}
-      <mesh position={[0, 0.85, 0.95]} rotation={[0.2, 0, 0]}>
+      {/* Mouth - smiling curve (flipped from previous to make it happy) */}
+      <mesh position={[0, 0.85, 0.95]} rotation={[-0.2, 0, 0]}>
         <torusGeometry args={[0.1, 0.02, 16, 16, Math.PI]} />
         <meshStandardMaterial color={noseColor} roughness={0.7} metalness={0.1} />
       </mesh>
@@ -163,27 +163,27 @@ const TeddyModel = ({
         <meshStandardMaterial color={noseColor} roughness={0.1} metalness={0.8} />
       </mesh>
       
-      {/* Left Arm - shaped like the reference */}
-      <mesh position={[-1.0, 0.3, 0]} rotation={[0, 0, -0.3]} scale={[0.38, 0.9, 0.38]}>
-        <capsuleGeometry args={[0.5, 1, 8, 16]} />
+      {/* Left Arm - positioned lower and made more rounded */}
+      <mesh position={[-1.0, 0.0, 0]} rotation={[0, 0, -0.3]} scale={[0.5, 0.9, 0.5]}>
+        <capsuleGeometry args={[0.5, 1, 16, 16]} />
         <primitive object={teddyMaterial} />
       </mesh>
       
-      {/* Right Arm - shaped like the reference */}
-      <mesh position={[1.0, 0.3, 0]} rotation={[0, 0, 0.3]} scale={[0.38, 0.9, 0.38]}>
-        <capsuleGeometry args={[0.5, 1, 8, 16]} />
+      {/* Right Arm - positioned lower and made more rounded */}
+      <mesh position={[1.0, 0.0, 0]} rotation={[0, 0, 0.3]} scale={[0.5, 0.9, 0.5]}>
+        <capsuleGeometry args={[0.5, 1, 16, 16]} />
         <primitive object={teddyMaterial} />
       </mesh>
       
-      {/* Left Leg */}
-      <mesh position={[-0.5, -1.35, 0]} rotation={[0, 0, -0.1]} scale={[0.4, 0.8, 0.4]}>
-        <capsuleGeometry args={[0.5, 0.8, 8, 16]} />
+      {/* Left Leg - made more rounded */}
+      <mesh position={[-0.5, -1.35, 0]} rotation={[0, 0, -0.1]} scale={[0.5, 0.8, 0.5]}>
+        <capsuleGeometry args={[0.5, 0.8, 16, 16]} />
         <primitive object={teddyMaterial} />
       </mesh>
       
-      {/* Right Leg */}
-      <mesh position={[0.5, -1.35, 0]} rotation={[0, 0, 0.1]} scale={[0.4, 0.8, 0.4]}>
-        <capsuleGeometry args={[0.5, 0.8, 8, 16]} />
+      {/* Right Leg - made more rounded */}
+      <mesh position={[0.5, -1.35, 0]} rotation={[0, 0, 0.1]} scale={[0.5, 0.8, 0.5]}>
+        <capsuleGeometry args={[0.5, 0.8, 16, 16]} />
         <primitive object={teddyMaterial} />
       </mesh>
       
@@ -201,13 +201,13 @@ const TeddyModel = ({
       
       {/* Left Hand */}
       <mesh position={[-1.3, -0.2, 0.3]} rotation={[0.3, 0, 0]} scale={[0.35, 0.25, 0.5]}>
-        <sphereGeometry args={[0.5, 32, 32]} />
+        <sphereGeometry args={[0.7, 32, 32]} />
         <primitive object={accentMaterial} />
       </mesh>
       
       {/* Right Hand */}
       <mesh position={[1.3, -0.2, 0.3]} rotation={[0.3, 0, 0]} scale={[0.35, 0.25, 0.5]}>
-        <sphereGeometry args={[0.5, 32, 32]} />
+        <sphereGeometry args={[0.7, 32, 32]} />
         <primitive object={accentMaterial} />
       </mesh>
       
