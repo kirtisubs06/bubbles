@@ -1,9 +1,12 @@
 
 import React, { useState, useRef, useEffect } from 'react';
-import { Mic, MicOff, Send, Sparkles } from 'lucide-react';
+import { Mic, MicOff, Send, Sparkles, AlertCircle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { motion, AnimatePresence } from 'framer-motion';
 import { toast } from '@/components/ui/use-toast';
+import { useVertexAI } from '@/hooks/useVertexAI';
+import { chatWithVertexAI, VertexMessage, speechToText } from '@/utils/vertexAI';
+import VertexAIKeyForm from './VertexAIKeyForm';
 
 // Type for chat messages
 interface Message {
@@ -13,7 +16,7 @@ interface Message {
   timestamp: Date;
 }
 
-// Sample responses from the teddy
+// Sample responses as fallback
 const SAMPLE_RESPONSES = [
   "I love learning about space! Did you know that stars twinkle because their light gets bent as it travels through our atmosphere?",
   "That's a great question! Rainbows appear when sunlight passes through raindrops, which act like tiny prisms!",
@@ -24,16 +27,6 @@ const SAMPLE_RESPONSES = [
   "You're so creative! I love hearing your ideas about magical creatures.",
   "What kind of adventures would you like to go on today? We could imagine visiting the moon!"
 ];
-
-// Map certain user inputs to specific responses for a more interactive chatbot
-const SPECIFIC_RESPONSES: Record<string, string> = {
-  "hello": "Hi there! I'm Teddy, your friendly bear companion! What would you like to talk about today?",
-  "hi": "Hello there! I'm Teddy! I love learning new things. What shall we explore today?",
-  "how are you": "I'm beary good, thank you for asking! How are you feeling today?",
-  "tell me a story": "Once upon a time, there was a curious little bear who loved to explore the magical forest. One day, he found a glowing crystal that could grant wishes...",
-  "what's your name": "I'm Teddy! I'm an AI-powered teddy bear designed to be your child's friendly learning companion!",
-  "sing a song": "🎵 Twinkle twinkle little star, how I wonder what you are! Up above the world so high, like a diamond in the sky! 🎵",
-};
 
 const TeddyChatbot: React.FC = () => {
   const [messages, setMessages] = useState<Message[]>([
@@ -47,8 +40,23 @@ const TeddyChatbot: React.FC = () => {
   const [inputValue, setInputValue] = useState('');
   const [isListening, setIsListening] = useState(false);
   const [isThinking, setIsThinking] = useState(false);
+  const [vertexMessages, setVertexMessages] = useState<VertexMessage[]>([
+    { role: 'assistant', content: "Hi there! I'm Teddy, your friendly bear companion. I love talking about science, nature, space, and telling stories. What would you like to talk about today?" }
+  ]);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const [recognitionSupported, setRecognitionSupported] = useState(true);
+  const { apiKey, isConfigured } = useVertexAI();
+  const audioRef = useRef<HTMLAudioElement | null>(null);
+  
+  // Create audio element for playback
+  useEffect(() => {
+    audioRef.current = new Audio();
+    return () => {
+      if (audioRef.current) {
+        audioRef.current.pause();
+      }
+    };
+  }, []);
   
   // Check if speech recognition is supported
   useEffect(() => {
@@ -67,11 +75,20 @@ const TeddyChatbot: React.FC = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [messages]);
 
-  // Improved voice recognition simulation with real speech processing
+  // Record audio for speech recognition
   const toggleListening = () => {
     if (!recognitionSupported) {
       toast({
         description: "Speech recognition is not supported in your browser",
+        variant: "destructive"
+      });
+      return;
+    }
+    
+    if (!isConfigured) {
+      toast({
+        title: "API Key Required",
+        description: "Please add your Google Vertex AI API key to use voice chat.",
         variant: "destructive"
       });
       return;
@@ -84,50 +101,50 @@ const TeddyChatbot: React.FC = () => {
         description: "Listening... say something!",
       });
       
-      // Simulate speech recognition
-      setTimeout(() => {
-        const randomQuestions = [
-          "Why is the sky blue?",
-          "Can you tell me about dinosaurs?",
-          "How do butterflies fly?",
-          "Tell me a story about space!"
-        ];
+      // Initialize speech recognition
+      let recognition: any;
+      
+      if ('webkitSpeechRecognition' in window) {
+        recognition = new (window as any).webkitSpeechRecognition();
+      } else if ('SpeechRecognition' in window) {
+        recognition = new (window as any).SpeechRecognition();
+      }
+      
+      if (recognition) {
+        recognition.continuous = false;
+        recognition.interimResults = false;
+        recognition.lang = 'en-US';
         
-        const randomQuestion = randomQuestions[Math.floor(Math.random() * randomQuestions.length)];
-        setInputValue(randomQuestion);
-        
-        // Actually process this input
-        setTimeout(() => {
-          handleSend(randomQuestion);
+        recognition.onresult = (event: any) => {
+          const transcript = event.results[0][0].transcript;
+          setInputValue(transcript);
+          handleSend(transcript);
           setIsListening(false);
-        }, 500);
-      }, 2000);
+        };
+        
+        recognition.onerror = (event: any) => {
+          console.error('Speech recognition error:', event.error);
+          setIsListening(false);
+          toast({
+            title: "Speech Recognition Error",
+            description: "There was a problem with speech recognition.",
+            variant: "destructive"
+          });
+        };
+        
+        recognition.onend = () => {
+          setIsListening(false);
+        };
+        
+        recognition.start();
+      }
     } else {
       setIsListening(false);
     }
   };
-  
-  // Function to check for specific predefined responses
-  const getSpecificResponse = (text: string): string | null => {
-    const lowercaseText = text.toLowerCase().trim();
-    
-    // Check for exact matches first
-    if (SPECIFIC_RESPONSES[lowercaseText]) {
-      return SPECIFIC_RESPONSES[lowercaseText];
-    }
-    
-    // Check for partial matches
-    for (const key of Object.keys(SPECIFIC_RESPONSES)) {
-      if (lowercaseText.includes(key)) {
-        return SPECIFIC_RESPONSES[key];
-      }
-    }
-    
-    return null;
-  };
 
-  // Handle sending a message - improved to feel more interactive
-  const handleSend = (text = inputValue) => {
+  // Handle sending a message with Vertex AI integration
+  const handleSend = async (text = inputValue) => {
     if (!text.trim()) return;
     
     // Add user message
@@ -142,26 +159,29 @@ const TeddyChatbot: React.FC = () => {
     setInputValue('');
     setIsThinking(true);
     
-    // Determine response - check for specific responses first
-    setTimeout(() => {
-      const specificResponse = getSpecificResponse(text);
-      
+    // Update Vertex messages history
+    const updatedMessages = [
+      ...vertexMessages,
+      { role: 'user', content: text }
+    ];
+    setVertexMessages(updatedMessages);
+    
+    try {
       let responseText;
-      if (specificResponse) {
-        responseText = specificResponse;
+      
+      if (isConfigured) {
+        // Use Vertex AI
+        responseText = await chatWithVertexAI(updatedMessages, apiKey);
       } else {
-        // If no specific response, use a random response but make it feel more contextual
-        const lowercaseText = text.toLowerCase();
-        
-        if (lowercaseText.includes("why") || lowercaseText.includes("how") || lowercaseText.includes("what")) {
-          responseText = SAMPLE_RESPONSES[Math.floor(Math.random() * 3)]; // Use explanatory responses
-        } else if (lowercaseText.includes("story") || lowercaseText.includes("tell")) {
-          responseText = SAMPLE_RESPONSES[3]; // Use the story response
-        } else {
-          responseText = SAMPLE_RESPONSES[Math.floor(Math.random() * SAMPLE_RESPONSES.length)];
-        }
+        // Use fallback responses
+        const randomIndex = Math.floor(Math.random() * SAMPLE_RESPONSES.length);
+        responseText = SAMPLE_RESPONSES[randomIndex];
       }
       
+      // Add assistant message to Vertex history
+      setVertexMessages(prev => [...prev, { role: 'assistant', content: responseText }]);
+      
+      // Add teddy message
       const newTeddyMessage: Message = {
         id: (Date.now() + 1).toString(),
         text: responseText,
@@ -170,8 +190,27 @@ const TeddyChatbot: React.FC = () => {
       };
       
       setMessages(prev => [...prev, newTeddyMessage]);
+    } catch (error) {
+      console.error('Error with AI response:', error);
+      toast({
+        title: "AI Response Error",
+        description: "There was a problem getting a response from the AI.",
+        variant: "destructive"
+      });
+      
+      // Use fallback
+      const fallbackResponse = "I'm sorry, I had trouble thinking of a response. Let's try again!";
+      const fallbackMessage: Message = {
+        id: (Date.now() + 1).toString(),
+        text: fallbackResponse,
+        sender: 'teddy',
+        timestamp: new Date()
+      };
+      
+      setMessages(prev => [...prev, fallbackMessage]);
+    } finally {
       setIsThinking(false);
-    }, 1500);
+    }
   };
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
@@ -183,6 +222,12 @@ const TeddyChatbot: React.FC = () => {
 
   return (
     <div className="flex flex-col h-[400px] border border-teddy-purple/20 rounded-xl overflow-hidden bg-white/50 dark:bg-gray-800/50 backdrop-blur-sm">
+      {!isConfigured && (
+        <div className="p-3 bg-teddy-cream/50 dark:bg-teddy-purple/20 border-b border-teddy-purple/10">
+          <VertexAIKeyForm />
+        </div>
+      )}
+      
       <div className="flex-1 overflow-y-auto p-4">
         <div className="space-y-4">
           {messages.map((message) => (
@@ -243,6 +288,7 @@ const TeddyChatbot: React.FC = () => {
             size="icon" 
             onClick={toggleListening}
             className={`rounded-full ${isListening ? 'bg-teddy-coral text-white animate-pulse' : ''}`}
+            disabled={!isConfigured}
           >
             {isListening ? <MicOff className="h-5 w-5" /> : <Mic className="h-5 w-5" />}
           </Button>

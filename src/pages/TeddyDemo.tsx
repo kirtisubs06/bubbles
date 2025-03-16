@@ -6,6 +6,7 @@ import Header from '@/components/layout/Header';
 import { useIntersectionAnimation } from '@/lib/animations';
 import { toast } from '@/components/ui/use-toast';
 import { Loader2 } from 'lucide-react';
+import VertexAIKeyForm from '@/components/teddy/VertexAIKeyForm';
 
 // Lazy load the 3D components to improve initial page load
 const TeddyBear3D = React.lazy(() => import('@/components/teddy/TeddyBear3D'));
@@ -22,7 +23,7 @@ const TeddyDemo: React.FC = () => {
     if (isListening) {
       toast({
         title: "Teddy is listening!",
-        description: "In the full version, the teddy would use your microphone to hear your questions.",
+        description: "Speak to interact with Teddy using Google Vertex AI.",
         duration: 5000,
       });
     }
@@ -54,12 +55,16 @@ const TeddyDemo: React.FC = () => {
           </p>
         </motion.div>
 
+        <div className="max-w-4xl mx-auto mb-6">
+          <VertexAIKeyForm />
+        </div>
+
         <Tabs 
           defaultValue="3d" 
           className="w-full max-w-4xl mx-auto"
           onValueChange={(value) => setActiveView(value as '3d' | 'features')}
         >
-          <TabsList className="w-full max-w-md mx-auto grid grid-cols-2 mb-8 h-16 rounded-full overflow-hidden shadow-md border border-teddy-cream dark:border-teddy-charcoal/30">
+          <TabsList className="w-full max-w-md mx-auto grid grid-cols-2 mb-8 h-auto rounded-full overflow-hidden shadow-md border border-teddy-cream dark:border-teddy-charcoal/30">
             <TabsTrigger 
               value="3d" 
               className="text-base md:text-lg py-5 px-6 h-full rounded-l-full data-[state=active]:bg-teddy-coral data-[state=active]:text-white dark:data-[state=active]:text-white data-[state=active]:shadow-sm transition-all duration-200 relative z-10 font-medium outline-none focus:outline-none data-[state=inactive]:bg-white dark:data-[state=inactive]:bg-teddy-charcoal/50"
@@ -94,7 +99,7 @@ const TeddyDemo: React.FC = () => {
               
               <div className="mt-6 text-center">
                 <p className="text-lg font-medium text-teddy-charcoal dark:text-white mb-4">
-                  {isListening ? "I'm listening! Ask me anything..." : "Click on Teddy to start talking!"}
+                  {isListening ? "I'm listening! Talk to me..." : "Click on Teddy to start talking!"}
                 </p>
                 <p className="text-sm text-gray-600 dark:text-gray-400">
                   Try rotating the teddy bear by dragging, or zoom in/out using the scroll wheel
@@ -174,8 +179,8 @@ const TeddyDemo: React.FC = () => {
                   animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
                   transition={{ duration: 0.6, delay: 0.4 }}
                 >
-                  <h3 className="text-2xl font-bold text-teddy-charcoal dark:text-white mb-4">Try the Chatbot</h3>
-                  <p className="mb-4 text-teddy-charcoal dark:text-gray-200">Test our child-friendly AI chatbot that powers the teddy bear:</p>
+                  <h3 className="text-2xl font-bold text-teddy-charcoal dark:text-white mb-4">AI Powered Chatbot</h3>
+                  <p className="mb-4 text-teddy-charcoal dark:text-gray-200">Test our child-friendly AI chatbot powered by Google Vertex AI:</p>
                   <Suspense fallback={
                     <div className="flex h-40 items-center justify-center">
                       <Loader2 className="h-8 w-8 animate-spin text-teddy-coral" />
