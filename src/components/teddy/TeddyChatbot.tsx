@@ -4,7 +4,7 @@ import { Button } from '@/components/ui/button';
 import { motion, AnimatePresence } from 'framer-motion';
 import { toast } from '@/components/ui/use-toast';
 import { useVertexAI } from '@/hooks/useVertexAI';
-import { chatWithVertexAI, VertexMessage } from '@/utils/vertexAI';
+import { chatWithVertexAI, VertexMessage, speechToText } from '@/utils/vertexAI';
 import VertexAIKeyForm from './VertexAIKeyForm';
 
 // Type for chat messages
@@ -64,7 +64,7 @@ const TeddyChatbot: React.FC = () => {
   }, [messages]);
 
   // Record audio for speech recognition
-  const toggleListening = () => {
+  const toggleListening = async () => {
     if (!recognitionSupported) {
       toast({
         description: "Speech recognition is not supported in your browser",
@@ -89,42 +89,19 @@ const TeddyChatbot: React.FC = () => {
         description: "Listening... say something!",
       });
       
-      // Initialize speech recognition
-      let recognition: any;
-      
-      if ('webkitSpeechRecognition' in window) {
-        recognition = new (window as any).webkitSpeechRecognition();
-      } else if ('SpeechRecognition' in window) {
-        recognition = new (window as any).SpeechRecognition();
-      }
-      
-      if (recognition) {
-        recognition.continuous = false;
-        recognition.interimResults = false;
-        recognition.lang = 'en-US';
-        
-        recognition.onresult = (event: any) => {
-          const transcript = event.results[0][0].transcript;
-          setInputValue(transcript);
-          handleSend(transcript);
-          setIsListening(false);
-        };
-        
-        recognition.onerror = (event: any) => {
-          console.error('Speech recognition error:', event.error);
-          setIsListening(false);
-          toast({
-            title: "Speech Recognition Error",
-            description: `There was a problem with speech recognition: ${event.error}`,
-            variant: "destructive"
-          });
-        };
-        
-        recognition.onend = () => {
-          setIsListening(false);
-        };
-        
-        recognition.start();
+      try {
+        const transcript = await speechToText();
+        setInputValue(transcript);
+        handleSend(transcript);
+      } catch (error) {
+        console.error('Speech recognition error:', error);
+        toast({
+          title: "Speech Recognition Error",
+          description: `There was a problem with speech recognition. Please try again.`,
+          variant: "destructive"
+        });
+      } finally {
+        setIsListening(false);
       }
     } else {
       setIsListening(false);
@@ -150,19 +127,18 @@ const TeddyChatbot: React.FC = () => {
     try {
       let responseText;
       
-      if (isConfigured) {
+      if (isConfigured && apiKey) {
         // Update Vertex messages history
         const updatedMessages: VertexMessage[] = [
           ...vertexMessages,
           { role: 'user', content: text }
         ];
-        setVertexMessages(updatedMessages);
         
         // Use Vertex AI
         responseText = await chatWithVertexAI(updatedMessages, apiKey);
         
         // Add assistant message to Vertex history
-        setVertexMessages(prev => [...prev, { role: 'assistant', content: responseText }]);
+        setVertexMessages([...updatedMessages, { role: 'assistant', content: responseText }]);
       } else {
         // Use fallback responses
         const randomIndex = Math.floor(Math.random() * SAMPLE_RESPONSES.length);
@@ -182,7 +158,7 @@ const TeddyChatbot: React.FC = () => {
       console.error('Error with AI response:', error);
       toast({
         title: "AI Response Error",
-        description: "There was a problem getting a response from the AI. Please check your API key.",
+        description: "There was a problem getting a response from the AI. Please check your API key and try again.",
         variant: "destructive"
       });
       

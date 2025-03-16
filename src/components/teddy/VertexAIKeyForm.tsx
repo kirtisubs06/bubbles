@@ -3,17 +3,46 @@ import React, { useState } from 'react';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { useVertexAI } from '@/hooks/useVertexAI';
-import { KeyRound } from 'lucide-react';
+import { KeyRound, Loader2 } from 'lucide-react';
+import { toast } from '@/components/ui/use-toast';
 
 const VertexAIKeyForm: React.FC = () => {
-  const { apiKey, setApiKey, isConfigured } = useVertexAI();
+  const { apiKey, setApiKey, isConfigured, validateApiKey } = useVertexAI();
   const [inputKey, setInputKey] = useState(apiKey);
   const [isEditing, setIsEditing] = useState(!isConfigured);
+  const [isValidating, setIsValidating] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setApiKey(inputKey.trim());
-    setIsEditing(false);
+    setIsValidating(true);
+    
+    try {
+      // First validate the key
+      const isValid = await validateApiKey(inputKey.trim());
+      
+      if (isValid) {
+        // If valid, save it
+        const success = await setApiKey(inputKey.trim());
+        if (success) {
+          setIsEditing(false);
+        }
+      } else {
+        toast({
+          title: "Invalid API Key",
+          description: "The Google Vertex AI API key could not be validated. Please check the key and try again.",
+          variant: "destructive"
+        });
+      }
+    } catch (error) {
+      console.error("Error validating or saving API key:", error);
+      toast({
+        title: "Error",
+        description: "An error occurred while trying to validate your API key.",
+        variant: "destructive"
+      });
+    } finally {
+      setIsValidating(false);
+    }
   };
 
   return (
@@ -35,17 +64,30 @@ const VertexAIKeyForm: React.FC = () => {
             />
             <p className="text-xs text-gray-500 mt-1">
               Your API key is stored locally and never sent to our servers.
+              Make sure it's a valid <a href="https://ai.google.dev/tutorials/setup" className="text-teddy-coral hover:underline" target="_blank" rel="noopener noreferrer">Google AI API key</a>.
             </p>
           </div>
           <div className="flex space-x-2">
-            <Button type="submit" className="bg-teddy-coral hover:bg-teddy-coral/80 text-white">
-              Save API Key
+            <Button 
+              type="submit" 
+              className="bg-teddy-coral hover:bg-teddy-coral/80 text-white"
+              disabled={isValidating || !inputKey.trim()}
+            >
+              {isValidating ? (
+                <>
+                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                  Validating...
+                </>
+              ) : (
+                "Save API Key"
+              )}
             </Button>
             {isConfigured && (
               <Button 
                 type="button" 
                 variant="outline" 
                 onClick={() => setIsEditing(false)}
+                disabled={isValidating}
               >
                 Cancel
               </Button>

@@ -15,11 +15,14 @@ export const chatWithVertexAI = async (messages: VertexMessage[], apiKey: string
     // Correct endpoint for Gemini API
     const endpoint = "https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent";
     
+    // Format messages according to Gemini API expectations
+    const formattedMessages = messages.map(msg => ({
+      role: msg.role,
+      parts: [{ text: msg.content }]
+    }));
+    
     const requestBody = {
-      contents: messages.map(msg => ({
-        role: msg.role,
-        parts: [{ text: msg.content }]
-      })),
+      contents: formattedMessages,
       generationConfig: {
         temperature: 0.4,
         topK: 32,
@@ -46,6 +49,9 @@ export const chatWithVertexAI = async (messages: VertexMessage[], apiKey: string
       ]
     };
 
+    console.log("Sending request to Vertex AI with API key:", apiKey.substring(0, 5) + "...");
+    console.log("Request body:", JSON.stringify(requestBody, null, 2));
+
     const response = await fetch(`${endpoint}?key=${apiKey}`, {
       method: 'POST',
       headers: {
@@ -57,13 +63,19 @@ export const chatWithVertexAI = async (messages: VertexMessage[], apiKey: string
     if (!response.ok) {
       const errorData = await response.json();
       console.error('Vertex AI API error:', errorData);
-      throw new Error(`Vertex AI API error: ${response.status}`);
+      throw new Error(`Vertex AI API error: ${response.status} - ${JSON.stringify(errorData)}`);
     }
 
     const data = await response.json();
+    console.log("Vertex AI response:", JSON.stringify(data, null, 2));
+    
     // Extract the response text from the correct path in the response object
-    const responseText = data.candidates[0].content.parts[0].text;
-    return responseText;
+    if (data.candidates && data.candidates[0] && data.candidates[0].content && data.candidates[0].content.parts && data.candidates[0].content.parts[0]) {
+      return data.candidates[0].content.parts[0].text;
+    } else {
+      console.error('Unexpected response structure:', data);
+      throw new Error('Unexpected response structure from Vertex AI');
+    }
   } catch (error) {
     console.error('Error interacting with Vertex AI:', error);
     throw error;
@@ -71,10 +83,10 @@ export const chatWithVertexAI = async (messages: VertexMessage[], apiKey: string
 };
 
 // Function to convert speech to text using the Web Speech API
-export const speechToText = async (audioBlob: Blob, apiKey: string): Promise<string> => {
+export const speechToText = async (): Promise<string> => {
   return new Promise((resolve, reject) => {
     try {
-      // Use browser's built-in SpeechRecognition API instead of Vertex AI
+      // Use browser's built-in SpeechRecognition API
       const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
       if (!SpeechRecognition) {
         reject(new Error("Speech recognition not supported in this browser"));
@@ -96,13 +108,16 @@ export const speechToText = async (audioBlob: Blob, apiKey: string): Promise<str
         reject(new Error(`Speech recognition error: ${event.error}`));
       };
       
+      recognition.onend = () => {
+        console.log("Speech recognition ended");
+      };
+      
       recognition.start();
       
       // Set a timeout to stop recognition after 10 seconds if no result
       setTimeout(() => {
-        recognition.stop();
-        if (!recognition.onresult) {
-          reject(new Error("Speech recognition timeout"));
+        if (recognition) {
+          recognition.stop();
         }
       }, 10000);
     } catch (error) {
@@ -113,52 +128,45 @@ export const speechToText = async (audioBlob: Blob, apiKey: string): Promise<str
 };
 
 // Simplified text to speech using browser's native API
-export const textToSpeech = async (text: string, apiKey: string): Promise<Blob> => {
+export const textToSpeech = async (text: string): Promise<void> => {
   return new Promise((resolve, reject) => {
     try {
       // Use browser's built-in speech synthesis
       const utterance = new SpeechSynthesisUtterance(text);
       utterance.lang = 'en-US';
-      utterance.voice = speechSynthesis.getVoices().find(voice => 
+      
+      // Try to find a female or Google voice
+      const voices = speechSynthesis.getVoices();
+      const preferredVoice = voices.find(voice => 
         voice.name.includes('Female') || voice.name.includes('Google') || voice.lang === 'en-US'
-      ) || null;
+      );
       
-      // Create an audio context to capture the speech
-      const audioContext = new (window.AudioContext || window.webkitAudioContext)();
-      const dest = audioContext.createMediaStreamDestination();
-      const mediaRecorder = new MediaRecorder(dest.stream);
-      const chunks: BlobEvent[] = [];
-      
-      mediaRecorder.ondataavailable = (e) => {
-        chunks.push(e);
-      };
-      
-      mediaRecorder.onstop = () => {
-        const blob = new Blob(chunks.map(chunk => chunk.data), { type: 'audio/wav' });
-        resolve(blob);
-      };
-      
-      mediaRecorder.start();
+      if (preferredVoice) {
+        utterance.voice = preferredVoice;
+      }
       
       utterance.onend = () => {
-        mediaRecorder.stop();
-        audioContext.close();
+        console.log("Speech synthesis completed");
+        resolve();
+      };
+      
+      utterance.onerror = (event) => {
+        console.error('Speech synthesis error:', event.error);
+        reject(new Error(`Speech synthesis error: ${event.error}`));
       };
       
       speechSynthesis.speak(utterance);
       
-      // Fallback if speech synthesis doesn't work properly
+      // Fallback resolution in case onend doesn't fire
       setTimeout(() => {
-        if (chunks.length === 0) {
-          // Create a minimal audio blob as fallback
-          const fallbackBlob = new Blob([new ArrayBuffer(1000)], { type: 'audio/wav' });
-          resolve(fallbackBlob);
+        if (utterance.pending) {
+          resolve();
         }
-      }, 5000);
+      }, text.length * 100); // Rough estimate based on text length
     } catch (error) {
       console.error('Error with text to speech:', error);
-      // Return an empty blob in case of error to prevent further errors
-      resolve(new Blob([], { type: 'audio/wav' }));
+      // Don't reject to prevent further errors, just resolve
+      resolve();
     }
   });
 };
