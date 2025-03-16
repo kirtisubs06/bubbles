@@ -5,7 +5,7 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Button } from '@/components/ui/button';
 import { useGeminiAI } from '@/hooks/useGeminiAI';
 import GeminiKeyForm from '@/components/teddy/GeminiKeyForm';
-import { Shield, LockOpen, CheckIcon } from 'lucide-react';
+import { Shield, LockOpen, CheckIcon, ServerIcon } from 'lucide-react';
 import { toast } from '@/components/ui/use-toast';
 
 const AdminSetup: React.FC = () => {
@@ -54,7 +54,7 @@ const AdminSetup: React.FC = () => {
                 </Button>
               </div>
               <CardDescription>
-                Configure the API key that will be used for all users of the application.
+                Configure the API key that will be used for all users of the application. The key will be stored securely in the database.
               </CardDescription>
             </CardHeader>
             
@@ -86,16 +86,19 @@ const AdminSetup: React.FC = () => {
                       {isAdminConfigured && <CheckIcon className="h-5 w-5 text-green-500" />}
                     </h3>
                     <p className="text-gray-600 dark:text-gray-300 mb-4">
-                      The API key you set here will be used for all users of the application, eliminating the need for individual users to enter their own keys.
+                      The API key you set here will be stored in the database and used for all users of the application, eliminating the need for individual users to enter their own keys.
                     </p>
 
                     <GeminiKeyForm adminMode={true} />
                   </div>
                   
                   <div className="bg-amber-50 dark:bg-amber-900/20 p-4 rounded-md">
-                    <h4 className="font-medium text-amber-800 dark:text-amber-300 mb-1">Deployment Instructions</h4>
+                    <h4 className="font-medium text-amber-800 dark:text-amber-300 mb-1 flex items-center gap-2">
+                      <ServerIcon className="h-4 w-4" />
+                      Database Storage
+                    </h4>
                     <p className="text-sm text-amber-700 dark:text-amber-400">
-                      For production deployment, set the <code className="bg-amber-100 dark:bg-amber-800/30 px-1 rounded">VITE_GEMINI_API_KEY</code> environment variable with your API key. This is more secure than using localStorage.
+                      The API key is now stored securely in your Supabase database. Once set, all instances of the application will use this key without prompting users.
                     </p>
                   </div>
                 </>

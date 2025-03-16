@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { useGeminiAI } from '@/hooks/useGeminiAI';
-import { KeyRound, Loader2, LockIcon } from 'lucide-react';
+import { KeyRound, Loader2, LockIcon, ServerIcon } from 'lucide-react';
 import { toast } from '@/components/ui/use-toast';
 
 interface GeminiKeyFormProps {
@@ -11,7 +11,7 @@ interface GeminiKeyFormProps {
 }
 
 const GeminiKeyForm: React.FC<GeminiKeyFormProps> = ({ adminMode = false }) => {
-  const { apiKey, setApiKey, isConfigured, validateApiKey, isAdminConfigured } = useGeminiAI();
+  const { apiKey, setApiKey, isConfigured, validateApiKey, isAdminConfigured, isLoading } = useGeminiAI();
   const [inputKey, setInputKey] = useState(apiKey);
   const [isEditing, setIsEditing] = useState(!isConfigured && adminMode);
   const [isValidating, setIsValidating] = useState(false);
@@ -19,6 +19,18 @@ const GeminiKeyForm: React.FC<GeminiKeyFormProps> = ({ adminMode = false }) => {
   // Don't show the form if the API key is already configured by admin and we're not in admin mode
   if (isAdminConfigured && !adminMode) {
     return null;
+  }
+  
+  // Show loading state while checking for API key
+  if (isLoading) {
+    return (
+      <div className="bg-gradient-to-br from-teddy-cream/50 to-white/50 dark:from-teddy-blue/20 dark:to-teddy-purple/20 p-4 rounded-xl shadow-sm">
+        <div className="flex items-center gap-2 text-teddy-charcoal dark:text-white">
+          <Loader2 className="h-4 w-4 animate-spin" />
+          <span>Checking for API key configuration...</span>
+        </div>
+      </div>
+    );
   }
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -38,7 +50,7 @@ const GeminiKeyForm: React.FC<GeminiKeyFormProps> = ({ adminMode = false }) => {
           if (adminMode) {
             toast({
               title: "Admin API Key Configured",
-              description: "The API key has been saved and will be used for all users.",
+              description: "The API key has been saved to the database and will be used for all users.",
             });
           }
         }
@@ -80,8 +92,8 @@ const GeminiKeyForm: React.FC<GeminiKeyFormProps> = ({ adminMode = false }) => {
             />
             <p className="text-xs text-gray-500 mt-1">
               {adminMode 
-                ? "This key will be used for all users of the application. It will be stored in the environment variables."
-                : "Your API key is stored locally and never sent to our servers."}
+                ? "This key will be saved to the database and used for all users of the application."
+                : "Your API key will be saved securely for future use."}
               Make sure it's a valid <a href="https://ai.google.dev/tutorials/setup" className="text-teddy-coral hover:underline" target="_blank" rel="noopener noreferrer">Google AI API key</a>.
             </p>
           </div>
@@ -97,7 +109,7 @@ const GeminiKeyForm: React.FC<GeminiKeyFormProps> = ({ adminMode = false }) => {
                   Validating...
                 </>
               ) : (
-                adminMode ? "Save Admin API Key" : "Save API Key"
+                adminMode ? "Save API Key to Database" : "Save API Key"
               )}
             </Button>
             {isConfigured && (
@@ -115,15 +127,19 @@ const GeminiKeyForm: React.FC<GeminiKeyFormProps> = ({ adminMode = false }) => {
       ) : (
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">
-            {isAdminConfigured && <LockIcon className="h-4 w-4 text-green-500" />}
+            {isAdminConfigured && (
+              isAdminConfigured ? 
+                <ServerIcon className="h-4 w-4 text-green-500" /> : 
+                <LockIcon className="h-4 w-4 text-green-500" />
+            )}
             <div>
               <h3 className="text-sm font-medium text-teddy-charcoal dark:text-white">
-                {isAdminConfigured ? "Google Gemini AI (Admin Configured)" : "Google Gemini AI"}
+                {isAdminConfigured ? "Google Gemini AI (Configured in Database)" : "Google Gemini AI"}
               </h3>
               <p className="text-xs text-gray-500">
                 {isConfigured 
                   ? isAdminConfigured 
-                    ? "API key configured by admin" 
+                    ? "API key configured and stored in the database" 
                     : "API key configured" 
                   : "API key needed for chat functionality"}
               </p>

@@ -35,13 +35,11 @@ class GeminiService {
   
   setApiKey(key: string) {
     this.apiKey = key;
+    // Still store in localStorage as fallback
     localStorage.setItem('gemini_api_key', key);
   }
   
   getApiKey(): string | null {
-    if (!this.apiKey) {
-      this.apiKey = this.defaultApiKey || localStorage.getItem('gemini_api_key');
-    }
     return this.apiKey;
   }
   
