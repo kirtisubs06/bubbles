@@ -31,6 +31,7 @@ class GeminiService {
   constructor() {
     // Try to initialize with default key or stored key
     this.apiKey = this.defaultApiKey || localStorage.getItem('gemini_api_key');
+    console.log("GeminiService initialized", { hasKey: Boolean(this.apiKey) });
   }
   
   setApiKey(key: string) {
@@ -39,6 +40,7 @@ class GeminiService {
     this.apiKey = key;
     // Still store in localStorage as fallback
     localStorage.setItem('gemini_api_key', key);
+    console.log("API key set in GeminiService");
   }
   
   getApiKey(): string | null {
@@ -49,6 +51,7 @@ class GeminiService {
     // Only clear localStorage key, not the default key
     localStorage.removeItem('gemini_api_key');
     this.apiKey = this.defaultApiKey;
+    console.log("API key cleared from localStorage");
   }
   
   hasConfiguredKey(): boolean {

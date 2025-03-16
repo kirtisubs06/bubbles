@@ -19,10 +19,24 @@ const GeminiKeyForm: React.FC<GeminiKeyFormProps> = ({ adminMode = false }) => {
   // Update inputKey when apiKey changes
   useEffect(() => {
     setInputKey(apiKey);
-  }, [apiKey]);
+    // Set editing mode based on whether key is configured
+    if (!adminMode) {
+      setIsEditing(!isConfigured);
+    }
+  }, [apiKey, isConfigured, adminMode]);
 
+  console.log("GeminiKeyForm render:", { 
+    isConfigured, 
+    isAdminConfigured, 
+    isLoading, 
+    adminMode,
+    isEditing, 
+    hasApiKey: Boolean(apiKey) 
+  });
+  
   // Don't show the form if the API key is already configured by admin and we're not in admin mode
   if (isAdminConfigured && !adminMode) {
+    console.log("Not showing GeminiKeyForm because API key is admin-configured");
     return null;
   }
   

@@ -39,16 +39,22 @@ export const GeminiAIProvider: React.FC<{ children: ReactNode }> = ({ children }
         
         // Try to get from Supabase
         try {
-          // Correctly invoke the function without using the 'path' property
+          console.log("Fetching API key from Supabase...");
           const { data, error } = await supabase.functions.invoke('gemini-key/get', {
-            method: 'GET',
-            body: {}
+            method: 'GET'
           });
           
+          console.log("Supabase response:", { data, error });
+          
           if (!error && data && data.key) {
+            console.log("API key retrieved from Supabase successfully");
             setApiKeyState(data.key);
             geminiService.setApiKey(data.key);
             setIsAdminConfigured(true);
+          } else if (error) {
+            console.error("Error fetching from Supabase:", error);
+          } else {
+            console.log("No API key found in Supabase");
           }
         } catch (error) {
           console.error('Error fetching API key from Supabase:', error);
@@ -56,6 +62,7 @@ export const GeminiAIProvider: React.FC<{ children: ReactNode }> = ({ children }
           // Fall back to localStorage if needed
           const localKey = localStorage.getItem('gemini_api_key');
           if (localKey) {
+            console.log("Using API key from localStorage");
             setApiKeyState(localKey);
             geminiService.setApiKey(localKey);
           }
@@ -105,13 +112,21 @@ export const GeminiAIProvider: React.FC<{ children: ReactNode }> = ({ children }
         
         // Save to Supabase if we're in admin mode
         try {
-          // Correctly invoke the function without using the 'path' property
-          await supabase.functions.invoke('gemini-key/set', {
+          console.log("Saving API key to Supabase...");
+          const result = await supabase.functions.invoke('gemini-key/set', {
             method: 'POST',
             body: { apiKey: trimmedKey }
           });
           
-          setIsAdminConfigured(true);
+          console.log("Save to Supabase result:", result);
+          
+          if (!result.error) {
+            console.log("API key saved to Supabase successfully");
+            setIsAdminConfigured(true);
+          } else {
+            console.error("Error saving to Supabase:", result.error);
+            throw new Error("Failed to save to Supabase");
+          }
         } catch (error) {
           console.error('Error saving to Supabase:', error);
           // Fall back to localStorage
