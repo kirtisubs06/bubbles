@@ -1,5 +1,5 @@
 
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useRef, useState, useEffect, Suspense } from 'react';
 import { Canvas, useFrame, useThree, useLoader } from '@react-three/fiber';
 import { OrbitControls, Environment, ContactShadows, Preload } from '@react-three/drei';
 import { useInView } from 'framer-motion';
@@ -17,11 +17,21 @@ const TeddyModel = ({
   const group = useRef<THREE.Group>(null);
   const { camera } = useThree();
   const [hovered, setHovered] = useState(false);
+  const [furTextureLoaded, setFurTextureLoaded] = useState(false);
   
-  // Load fur texture
-  const furTexture = useLoader(TextureLoader, '/fur-texture.png');
-  furTexture.wrapS = furTexture.wrapT = THREE.RepeatWrapping;
-  furTexture.repeat.set(4, 4);
+  // Load fur texture with error handling
+  let furTexture: THREE.Texture;
+  try {
+    furTexture = useLoader(TextureLoader, '/fur-texture.png');
+    furTexture.wrapS = furTexture.wrapT = THREE.RepeatWrapping;
+    furTexture.repeat.set(4, 4);
+    if (!furTextureLoaded) setFurTextureLoaded(true);
+  } catch (error) {
+    console.log("Fur texture loading error:", error);
+    // Create a basic texture as fallback
+    furTexture = new THREE.Texture();
+    furTexture.needsUpdate = true;
+  }
   
   // Animation for subtle breathing effect
   useFrame((state) => {
@@ -57,7 +67,7 @@ const TeddyModel = ({
     color: mainColor,
     roughness: 0.8,
     metalness: 0.1,
-    bumpMap: furTexture,
+    bumpMap: furTextureLoaded ? furTexture : null,
     bumpScale: 0.02
   });
   
@@ -66,7 +76,7 @@ const TeddyModel = ({
     color: muzzleColor,
     roughness: 0.7,
     metalness: 0.1,
-    bumpMap: furTexture,
+    bumpMap: furTextureLoaded ? furTexture : null,
     bumpScale: 0.01
   });
   
@@ -216,6 +226,16 @@ const TeddyModel = ({
   );
 };
 
+// Create a fallback component for loading state
+const LoadingFallback = () => {
+  return (
+    <mesh position={[0, 0, 0]}>
+      <sphereGeometry args={[1, 16, 16]} />
+      <meshStandardMaterial color="#C2B3A0" />
+    </mesh>
+  );
+};
+
 interface TeddyBear3DProps {
   setIsListening: React.Dispatch<React.SetStateAction<boolean>>;
   isListening: boolean;
@@ -234,7 +254,9 @@ const TeddyBear3D: React.FC<TeddyBear3DProps> = ({ setIsListening, isListening }
           <spotLight position={[0, 5, 5]} intensity={0.6} />
           <directionalLight position={[5, 5, 5]} intensity={0.5} />
           
-          <TeddyModel setIsListening={setIsListening} isListening={isListening} />
+          <Suspense fallback={<LoadingFallback />}>
+            <TeddyModel setIsListening={setIsListening} isListening={isListening} />
+          </Suspense>
           
           <ContactShadows
             position={[0, -2.3, 0]}

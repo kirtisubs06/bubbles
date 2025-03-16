@@ -1,17 +1,21 @@
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Suspense } from 'react';
 import { motion } from 'framer-motion';
-import TeddyBear3D from '@/components/teddy/TeddyBear3D';
-import TeddyChatbot from '@/components/teddy/TeddyChatbot';
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
 import Header from '@/components/layout/Header';
 import { useIntersectionAnimation } from '@/lib/animations';
 import { toast } from '@/components/ui/use-toast';
+import { Loader2 } from 'lucide-react';
+
+// Lazy load the 3D components to improve initial page load
+const TeddyBear3D = React.lazy(() => import('@/components/teddy/TeddyBear3D'));
+const TeddyChatbot = React.lazy(() => import('@/components/teddy/TeddyChatbot'));
 
 const TeddyDemo: React.FC = () => {
   const [isListening, setIsListening] = useState(false);
   const [activeView, setActiveView] = useState<'3d' | 'features'>('3d');
   const [setRef, isVisible] = useIntersectionAnimation({ threshold: 0.1, delay: 0 });
+  const [isLoading, setIsLoading] = useState(true);
 
   // Show a toast when the teddy is clicked for the first time
   useEffect(() => {
@@ -23,6 +27,14 @@ const TeddyDemo: React.FC = () => {
       });
     }
   }, [isListening]);
+
+  // Simulate loading completion
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 1000);
+    return () => clearTimeout(timer);
+  }, []);
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-white to-teddy-cream/20 dark:from-teddy-charcoal dark:to-teddy-charcoal/80">
@@ -67,10 +79,17 @@ const TeddyDemo: React.FC = () => {
               <div 
                 className="h-[500px] md:h-[600px] w-full relative rounded-2xl overflow-hidden bg-gradient-to-b from-teddy-blue/10 to-teddy-pink/10"
               >
-                <TeddyBear3D 
-                  setIsListening={setIsListening} 
-                  isListening={isListening} 
-                />
+                <Suspense fallback={
+                  <div className="flex h-full w-full items-center justify-center">
+                    <Loader2 className="h-12 w-12 animate-spin text-teddy-coral" />
+                    <span className="ml-2 text-lg font-medium">Loading Teddy...</span>
+                  </div>
+                }>
+                  <TeddyBear3D 
+                    setIsListening={setIsListening} 
+                    isListening={isListening} 
+                  />
+                </Suspense>
               </div>
               
               <div className="mt-6 text-center">
@@ -157,7 +176,14 @@ const TeddyDemo: React.FC = () => {
                 >
                   <h3 className="text-2xl font-bold text-teddy-charcoal dark:text-white mb-4">Try the Chatbot</h3>
                   <p className="mb-4">Test our child-friendly AI chatbot that powers the teddy bear:</p>
-                  <TeddyChatbot />
+                  <Suspense fallback={
+                    <div className="flex h-40 items-center justify-center">
+                      <Loader2 className="h-8 w-8 animate-spin text-teddy-coral" />
+                      <span className="ml-2">Loading chatbot...</span>
+                    </div>
+                  }>
+                    <TeddyChatbot />
+                  </Suspense>
                 </motion.div>
               </div>
             </div>
