@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { cn } from '@/lib/utils';
-import { Menu, X, LogIn, Sparkles } from 'lucide-react';
+import { Menu, X, LogIn, Sparkles, Package } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 const Header: React.FC = () => {
@@ -68,12 +68,13 @@ const Header: React.FC = () => {
               animate={isActive('/teddy-demo') ? { width: "100%" } : { width: "0%" }}
             />
           </Link>
-          <Link to="/about" className={cn("nav-link group", isActive('/about') && "active")}>
-            <span>About</span>
+          <Link to="/pre-order" className={cn("nav-link group", isActive('/pre-order') && "active")}>
+            <span>Pre-order</span>
+            <Package className="ml-1 h-3 w-3 text-teddy-mint inline-block" />
             <motion.span 
               className="absolute -bottom-1 left-0 w-0 h-0.5 bg-teddy-coral group-hover:w-full transition-all duration-300"
               initial={false}
-              animate={isActive('/about') ? { width: "100%" } : { width: "0%" }}
+              animate={isActive('/pre-order') ? { width: "100%" } : { width: "0%" }}
             />
           </Link>
           <Link to="/features" className={cn("nav-link group", isActive('/features') && "active")}>
@@ -132,8 +133,9 @@ const Header: React.FC = () => {
               Teddy Demo
               <Sparkles className="ml-1 h-4 w-4 text-teddy-pink" />
             </Link>
-            <Link to="/about" className={cn("nav-link", isActive('/about') && "active")}>
-              About
+            <Link to="/pre-order" className={cn("nav-link flex items-center", isActive('/pre-order') && "active")}>
+              Pre-order
+              <Package className="ml-1 h-4 w-4 text-teddy-mint" />
             </Link>
             <Link to="/features" className={cn("nav-link", isActive('/features') && "active")}>
               Features
