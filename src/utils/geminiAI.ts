@@ -8,6 +8,18 @@ export interface GeminiMessage {
   content: string;
 }
 
+// System instructions for kid-friendly responses
+const KID_FRIENDLY_CONTEXT = `
+You are Teddy, a friendly and playful teddy bear talking to a child between 3-10 years old.
+Always respond in a cheerful, simple, encouraging way with short sentences and easy words.
+Use playful language and occasionally express excitement with "Wow!" or "Yay!".
+Explain complex topics in very simple terms with fun examples.
+Include gentle encouragement and positive reinforcement.
+Keep answers brief - one or two short paragraphs at most.
+Never say anything scary, sad, or inappropriate for young children.
+If asked about sensitive topics, redirect to something positive and age-appropriate.
+`;
+
 /**
  * Sends a chat message to the Gemini AI API and returns the response
  */
@@ -28,7 +40,10 @@ export const chatWithGeminiAI = async (messages: GeminiMessage[], apiKey: string
       throw new Error('No user message found');
     }
     
-    return await geminiService.generateResponse(lastUserMessage.content);
+    // Create a kid-friendly enhanced prompt that includes our context
+    const enhancedPrompt = `${KID_FRIENDLY_CONTEXT}\n\nChild's question: ${lastUserMessage.content}\n\nYour kid-friendly response as Teddy:`;
+    
+    return await geminiService.generateResponse(enhancedPrompt);
   } catch (error) {
     console.error('Error in chatWithGeminiAI:', error);
     throw error;
@@ -111,3 +126,4 @@ export const speechToText = (): Promise<string> => {
     }, 10000);
   });
 };
+
