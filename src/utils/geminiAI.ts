@@ -1,18 +1,18 @@
 
 /**
- * Google Vertex AI integration utilities for the TeddyAI application
+ * Google Gemini AI integration utilities for the TeddyAI application
  */
 
 // Interface for chat message structure
-export interface VertexMessage {
+export interface GeminiMessage {
   role: 'user' | 'assistant';
   content: string;
 }
 
-// Function to send a message to Google Vertex AI and get a response
-export const chatWithVertexAI = async (messages: VertexMessage[], apiKey: string): Promise<string> => {
+// Function to send a message to Google Gemini API and get a response
+export const chatWithGemini = async (messages: GeminiMessage[], apiKey: string): Promise<string> => {
   try {
-    // Correct endpoint for Gemini API
+    // Endpoint for Gemini API
     const endpoint = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent";
     
     // Format messages according to correct Gemini API format

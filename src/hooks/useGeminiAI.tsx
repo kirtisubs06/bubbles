@@ -2,19 +2,19 @@
 import React, { createContext, useContext, useState, ReactNode } from 'react';
 import { toast } from '@/components/ui/use-toast';
 
-interface VertexAIContextType {
+interface GeminiAIContextType {
   apiKey: string;
   setApiKey: (key: string) => Promise<boolean>;
   isConfigured: boolean;
   validateApiKey: (key: string) => Promise<boolean>;
 }
 
-const VertexAIContext = createContext<VertexAIContextType | undefined>(undefined);
+const GeminiAIContext = createContext<GeminiAIContextType | undefined>(undefined);
 
-export const VertexAIProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
+export const GeminiAIProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [apiKey, setApiKey] = useState<string>(() => {
     // Try to get API key from localStorage
-    const savedKey = localStorage.getItem('vertexAIApiKey');
+    const savedKey = localStorage.getItem('geminiApiKey');
     return savedKey || '';
   });
 
@@ -70,11 +70,11 @@ export const VertexAIProvider: React.FC<{ children: ReactNode }> = ({ children }
       const isValid = await validateApiKey(key);
       
       if (isValid) {
-        localStorage.setItem('vertexAIApiKey', key);
+        localStorage.setItem('geminiApiKey', key);
         setApiKey(key);
         toast({
           title: "API Key Saved",
-          description: "Your Google Vertex AI API key has been validated and saved.",
+          description: "Your Google Gemini API key has been validated and saved.",
         });
         return true;
       } else {
@@ -97,21 +97,21 @@ export const VertexAIProvider: React.FC<{ children: ReactNode }> = ({ children }
   };
 
   return (
-    <VertexAIContext.Provider value={{ 
+    <GeminiAIContext.Provider value={{ 
       apiKey, 
       setApiKey: saveApiKey, 
       isConfigured: Boolean(apiKey),
       validateApiKey
     }}>
       {children}
-    </VertexAIContext.Provider>
+    </GeminiAIContext.Provider>
   );
 };
 
-export const useVertexAI = (): VertexAIContextType => {
-  const context = useContext(VertexAIContext);
+export const useGeminiAI = (): GeminiAIContextType => {
+  const context = useContext(GeminiAIContext);
   if (context === undefined) {
-    throw new Error('useVertexAI must be used within a VertexAIProvider');
+    throw new Error('useGeminiAI must be used within a GeminiAIProvider');
   }
   return context;
 };

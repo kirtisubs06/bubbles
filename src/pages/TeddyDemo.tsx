@@ -6,7 +6,7 @@ import Header from '@/components/layout/Header';
 import { useIntersectionAnimation } from '@/lib/animations';
 import { toast } from '@/components/ui/use-toast';
 import { Loader2 } from 'lucide-react';
-import VertexAIKeyForm from '@/components/teddy/VertexAIKeyForm';
+import GeminiKeyForm from '@/components/teddy/GeminiKeyForm';
 
 // Lazy load the 3D components to improve initial page load
 const TeddyBear3D = React.lazy(() => import('@/components/teddy/TeddyBear3D'));
@@ -56,7 +56,7 @@ const TeddyDemo: React.FC = () => {
         </motion.div>
 
         <div className="max-w-4xl mx-auto mb-6">
-          <VertexAIKeyForm />
+          <GeminiKeyForm />
         </div>
 
         <Tabs 

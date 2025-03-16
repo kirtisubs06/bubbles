@@ -2,12 +2,12 @@
 import React, { useState } from 'react';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
-import { useVertexAI } from '@/hooks/useVertexAI';
+import { useGeminiAI } from '@/hooks/useGeminiAI';
 import { KeyRound, Loader2 } from 'lucide-react';
 import { toast } from '@/components/ui/use-toast';
 
-const VertexAIKeyForm: React.FC = () => {
-  const { apiKey, setApiKey, isConfigured, validateApiKey } = useVertexAI();
+const GeminiKeyForm: React.FC = () => {
+  const { apiKey, setApiKey, isConfigured, validateApiKey } = useGeminiAI();
   const [inputKey, setInputKey] = useState(apiKey);
   const [isEditing, setIsEditing] = useState(!isConfigured);
   const [isValidating, setIsValidating] = useState(false);
@@ -29,7 +29,7 @@ const VertexAIKeyForm: React.FC = () => {
       } else {
         toast({
           title: "Invalid API Key",
-          description: "The Google Vertex AI API key could not be validated. Please check the key and try again.",
+          description: "The Google Gemini API key could not be validated. Please check the key and try again.",
           variant: "destructive"
         });
       }
@@ -51,14 +51,14 @@ const VertexAIKeyForm: React.FC = () => {
         <form onSubmit={handleSubmit} className="space-y-3">
           <div>
             <label htmlFor="apiKey" className="block text-sm font-medium text-teddy-charcoal dark:text-white mb-1">
-              Google Vertex AI API Key
+              Google Gemini API Key
             </label>
             <Input
               id="apiKey"
               type="password"
               value={inputKey}
               onChange={(e) => setInputKey(e.target.value)}
-              placeholder="Enter your Google Vertex AI API key"
+              placeholder="Enter your Google Gemini API key"
               className="w-full"
               autoFocus
             />
@@ -97,7 +97,7 @@ const VertexAIKeyForm: React.FC = () => {
       ) : (
         <div className="flex items-center justify-between">
           <div>
-            <h3 className="text-sm font-medium text-teddy-charcoal dark:text-white">Google Vertex AI</h3>
+            <h3 className="text-sm font-medium text-teddy-charcoal dark:text-white">Google Gemini AI</h3>
             <p className="text-xs text-gray-500">
               {isConfigured ? "API key configured" : "API key needed for chat functionality"}
             </p>
@@ -117,4 +117,4 @@ const VertexAIKeyForm: React.FC = () => {
   );
 };
 
-export default VertexAIKeyForm;
+export default GeminiKeyForm;

@@ -1,11 +1,12 @@
+
 import React, { useState, useRef, useEffect } from 'react';
 import { Mic, MicOff, Send, Sparkles, AlertCircle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { motion, AnimatePresence } from 'framer-motion';
 import { toast } from '@/components/ui/use-toast';
-import { useVertexAI } from '@/hooks/useVertexAI';
-import { chatWithVertexAI, VertexMessage, speechToText } from '@/utils/vertexAI';
-import VertexAIKeyForm from './VertexAIKeyForm';
+import { useGeminiAI } from '@/hooks/useGeminiAI';
+import { chatWithGemini, GeminiMessage, speechToText } from '@/utils/geminiAI';
+import GeminiKeyForm from './GeminiKeyForm';
 
 // Type for chat messages
 interface Message {
@@ -39,12 +40,12 @@ const TeddyChatbot: React.FC = () => {
   const [inputValue, setInputValue] = useState('');
   const [isListening, setIsListening] = useState(false);
   const [isThinking, setIsThinking] = useState(false);
-  const [vertexMessages, setVertexMessages] = useState<VertexMessage[]>([
+  const [geminiMessages, setGeminiMessages] = useState<GeminiMessage[]>([
     { role: 'assistant', content: "Hi there! I'm Teddy, your friendly bear companion. I love talking about science, nature, space, and telling stories. What would you like to talk about today?" }
   ]);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const [recognitionSupported, setRecognitionSupported] = useState(true);
-  const { apiKey, isConfigured } = useVertexAI();
+  const { apiKey, isConfigured } = useGeminiAI();
   
   // Check if speech recognition is supported
   useEffect(() => {
@@ -76,7 +77,7 @@ const TeddyChatbot: React.FC = () => {
     if (!isConfigured) {
       toast({
         title: "API Key Required",
-        description: "Please add your Google Vertex AI API key to use voice chat.",
+        description: "Please add your Google Gemini API key to use voice chat.",
         variant: "destructive"
       });
       return;
@@ -108,7 +109,7 @@ const TeddyChatbot: React.FC = () => {
     }
   };
 
-  // Handle sending a message with Vertex AI integration
+  // Handle sending a message with Gemini AI integration
   const handleSend = async (text = inputValue) => {
     if (!text.trim()) return;
     
@@ -128,17 +129,17 @@ const TeddyChatbot: React.FC = () => {
       let responseText;
       
       if (isConfigured && apiKey) {
-        // Update Vertex messages history
-        const updatedMessages: VertexMessage[] = [
-          ...vertexMessages,
+        // Update Gemini messages history
+        const updatedMessages: GeminiMessage[] = [
+          ...geminiMessages,
           { role: 'user', content: text }
         ];
         
-        // Use Vertex AI
-        responseText = await chatWithVertexAI(updatedMessages, apiKey);
+        // Use Gemini API
+        responseText = await chatWithGemini(updatedMessages, apiKey);
         
-        // Add assistant message to Vertex history
-        setVertexMessages([...updatedMessages, { role: 'assistant', content: responseText }]);
+        // Add assistant message to Gemini history
+        setGeminiMessages([...updatedMessages, { role: 'assistant', content: responseText }]);
       } else {
         // Use fallback responses
         const randomIndex = Math.floor(Math.random() * SAMPLE_RESPONSES.length);
@@ -188,7 +189,7 @@ const TeddyChatbot: React.FC = () => {
     <div className="flex flex-col h-[400px] border border-teddy-purple/20 rounded-xl overflow-hidden bg-white/50 dark:bg-gray-800/50 backdrop-blur-sm">
       {!isConfigured && (
         <div className="p-3 bg-teddy-cream/50 dark:bg-teddy-purple/20 border-b border-teddy-purple/10">
-          <VertexAIKeyForm />
+          <GeminiKeyForm />
         </div>
       )}
       
