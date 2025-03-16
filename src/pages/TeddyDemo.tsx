@@ -59,16 +59,16 @@ const TeddyDemo: React.FC = () => {
           className="w-full max-w-4xl mx-auto"
           onValueChange={(value) => setActiveView(value as '3d' | 'features')}
         >
-          <TabsList className="w-full max-w-md mx-auto grid grid-cols-2 mb-8 rounded-full overflow-hidden shadow-md border border-teddy-cream dark:border-teddy-charcoal/30">
+          <TabsList className="w-full max-w-md mx-auto grid grid-cols-2 mb-8 h-16 rounded-full overflow-hidden shadow-md border border-teddy-cream dark:border-teddy-charcoal/30">
             <TabsTrigger 
               value="3d" 
-              className="text-base md:text-lg py-4 px-6 rounded-l-full data-[state=active]:bg-teddy-coral data-[state=active]:text-white dark:data-[state=active]:text-white data-[state=active]:shadow-sm transition-all duration-200 relative z-10 font-medium outline-none focus:outline-none data-[state=inactive]:bg-white dark:data-[state=inactive]:bg-teddy-charcoal/50"
+              className="text-base md:text-lg py-5 px-6 h-full rounded-l-full data-[state=active]:bg-teddy-coral data-[state=active]:text-white dark:data-[state=active]:text-white data-[state=active]:shadow-sm transition-all duration-200 relative z-10 font-medium outline-none focus:outline-none data-[state=inactive]:bg-white dark:data-[state=inactive]:bg-teddy-charcoal/50"
             >
               3D Teddy Demo
             </TabsTrigger>
             <TabsTrigger 
               value="features" 
-              className="text-base md:text-lg py-4 px-6 rounded-r-full data-[state=active]:bg-teddy-coral data-[state=active]:text-white dark:data-[state=active]:text-white data-[state=active]:shadow-sm transition-all duration-200 relative z-10 font-medium outline-none focus:outline-none data-[state=inactive]:bg-white dark:data-[state=inactive]:bg-teddy-charcoal/50"
+              className="text-base md:text-lg py-5 px-6 h-full rounded-r-full data-[state=active]:bg-teddy-coral data-[state=active]:text-white dark:data-[state=active]:text-white data-[state=active]:shadow-sm transition-all duration-200 relative z-10 font-medium outline-none focus:outline-none data-[state=inactive]:bg-white dark:data-[state=inactive]:bg-teddy-charcoal/50"
             >
               Features & Interaction
             </TabsTrigger>
@@ -120,19 +120,19 @@ const TeddyDemo: React.FC = () => {
                   <ul className="space-y-3">
                     <li className="flex items-start">
                       <span className="text-teddy-coral mr-2">✨</span>
-                      <span>Natural conversations with voice recognition</span>
+                      <span className="text-teddy-charcoal dark:text-gray-200">Natural conversations with voice recognition</span>
                     </li>
                     <li className="flex items-start">
                       <span className="text-teddy-coral mr-2">✨</span>
-                      <span>Age-appropriate content and answers</span>
+                      <span className="text-teddy-charcoal dark:text-gray-200">Age-appropriate content and answers</span>
                     </li>
                     <li className="flex items-start">
                       <span className="text-teddy-coral mr-2">✨</span>
-                      <span>Stories, songs, and educational content</span>
+                      <span className="text-teddy-charcoal dark:text-gray-200">Stories, songs, and educational content</span>
                     </li>
                     <li className="flex items-start">
                       <span className="text-teddy-coral mr-2">✨</span>
-                      <span>Remembers past conversations</span>
+                      <span className="text-teddy-charcoal dark:text-gray-200">Remembers past conversations</span>
                     </li>
                   </ul>
                 </motion.div>
@@ -149,19 +149,19 @@ const TeddyDemo: React.FC = () => {
                   <ul className="space-y-3">
                     <li className="flex items-start">
                       <span className="text-teddy-mint mr-2">🌟</span>
-                      <span>Adapts to your child's interests</span>
+                      <span className="text-teddy-charcoal dark:text-gray-200">Adapts to your child's interests</span>
                     </li>
                     <li className="flex items-start">
                       <span className="text-teddy-mint mr-2">🌟</span>
-                      <span>Grows with your child's development</span>
+                      <span className="text-teddy-charcoal dark:text-gray-200">Grows with your child's development</span>
                     </li>
                     <li className="flex items-start">
                       <span className="text-teddy-mint mr-2">🌟</span>
-                      <span>Encourages curiosity and critical thinking</span>
+                      <span className="text-teddy-charcoal dark:text-gray-200">Encourages curiosity and critical thinking</span>
                     </li>
                     <li className="flex items-start">
                       <span className="text-teddy-mint mr-2">🌟</span>
-                      <span>Parent dashboard for monitoring</span>
+                      <span className="text-teddy-charcoal dark:text-gray-200">Parent dashboard for monitoring</span>
                     </li>
                   </ul>
                 </motion.div>
@@ -175,11 +175,11 @@ const TeddyDemo: React.FC = () => {
                   transition={{ duration: 0.6, delay: 0.4 }}
                 >
                   <h3 className="text-2xl font-bold text-teddy-charcoal dark:text-white mb-4">Try the Chatbot</h3>
-                  <p className="mb-4">Test our child-friendly AI chatbot that powers the teddy bear:</p>
+                  <p className="mb-4 text-teddy-charcoal dark:text-gray-200">Test our child-friendly AI chatbot that powers the teddy bear:</p>
                   <Suspense fallback={
                     <div className="flex h-40 items-center justify-center">
                       <Loader2 className="h-8 w-8 animate-spin text-teddy-coral" />
-                      <span className="ml-2">Loading chatbot...</span>
+                      <span className="ml-2 text-teddy-charcoal dark:text-gray-200">Loading chatbot...</span>
                     </div>
                   }>
                     <TeddyChatbot />
