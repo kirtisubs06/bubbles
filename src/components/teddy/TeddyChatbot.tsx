@@ -160,7 +160,7 @@ const TeddyChatbot: React.FC = () => {
     setIsThinking(true);
     
     // Update Vertex messages history
-    const updatedMessages = [
+    const updatedMessages: VertexMessage[] = [
       ...vertexMessages,
       { role: 'user', content: text }
     ];

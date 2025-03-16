@@ -151,7 +151,7 @@ const TeddyModel = ({
   const processMessage = async (message: string) => {
     try {
       // Add user message to conversation history
-      const updatedMessages = [
+      const updatedMessages: VertexMessage[] = [
         ...vertexMessages,
         { role: 'user', content: message }
       ];
