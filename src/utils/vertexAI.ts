@@ -13,43 +13,24 @@ export interface VertexMessage {
 export const chatWithVertexAI = async (messages: VertexMessage[], apiKey: string): Promise<string> => {
   try {
     // Correct endpoint for Gemini API
-    const endpoint = "https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent";
+    const endpoint = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent";
     
-    // Format messages according to Gemini API expectations
-    const formattedMessages = messages.map(msg => ({
-      role: msg.role,
+    // Format messages according to correct Gemini API format
+    const formattedContents = messages.map(msg => ({
       parts: [{ text: msg.content }]
     }));
     
     const requestBody = {
-      contents: formattedMessages,
+      contents: formattedContents,
       generationConfig: {
         temperature: 0.4,
         topK: 32,
         topP: 0.95,
         maxOutputTokens: 1024,
-      },
-      safetySettings: [
-        {
-          category: "HARM_CATEGORY_HARASSMENT",
-          threshold: "BLOCK_MEDIUM_AND_ABOVE"
-        },
-        {
-          category: "HARM_CATEGORY_HATE_SPEECH",
-          threshold: "BLOCK_MEDIUM_AND_ABOVE"
-        },
-        {
-          category: "HARM_CATEGORY_SEXUALLY_EXPLICIT",
-          threshold: "BLOCK_MEDIUM_AND_ABOVE"
-        },
-        {
-          category: "HARM_CATEGORY_DANGEROUS_CONTENT",
-          threshold: "BLOCK_MEDIUM_AND_ABOVE"
-        }
-      ]
+      }
     };
 
-    console.log("Sending request to Vertex AI with API key:", apiKey.substring(0, 5) + "...");
+    console.log("Sending request to Gemini API with API key:", apiKey.substring(0, 5) + "...");
     console.log("Request body:", JSON.stringify(requestBody, null, 2));
 
     const response = await fetch(`${endpoint}?key=${apiKey}`, {
@@ -62,22 +43,22 @@ export const chatWithVertexAI = async (messages: VertexMessage[], apiKey: string
 
     if (!response.ok) {
       const errorData = await response.json();
-      console.error('Vertex AI API error:', errorData);
-      throw new Error(`Vertex AI API error: ${response.status} - ${JSON.stringify(errorData)}`);
+      console.error('Gemini API error:', errorData);
+      throw new Error(`Gemini API error: ${response.status} - ${JSON.stringify(errorData)}`);
     }
 
     const data = await response.json();
-    console.log("Vertex AI response:", JSON.stringify(data, null, 2));
+    console.log("Gemini API response:", JSON.stringify(data, null, 2));
     
     // Extract the response text from the correct path in the response object
     if (data.candidates && data.candidates[0] && data.candidates[0].content && data.candidates[0].content.parts && data.candidates[0].content.parts[0]) {
-      return data.candidates[0].content.parts[0].text;
+      return data.candidates[0].content.parts[0].text || "";
     } else {
       console.error('Unexpected response structure:', data);
-      throw new Error('Unexpected response structure from Vertex AI');
+      throw new Error('Unexpected response structure from Gemini API');
     }
   } catch (error) {
-    console.error('Error interacting with Vertex AI:', error);
+    console.error('Error interacting with Gemini API:', error);
     throw error;
   }
 };
@@ -159,7 +140,7 @@ export const textToSpeech = async (text: string): Promise<void> => {
       
       // Fallback resolution in case onend doesn't fire
       setTimeout(() => {
-        // Check if speech synthesis is still speaking this utterance
+        // Check if speech synthesis is still speaking
         if (speechSynthesis.speaking) {
           resolve();
         }

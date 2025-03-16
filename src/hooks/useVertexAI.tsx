@@ -29,12 +29,11 @@ export const VertexAIProvider: React.FC<{ children: ReactNode }> = ({ children }
     setIsValidatingKey(true);
     try {
       // Use the Gemini API to test the key with a simple request
-      const endpoint = "https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent";
+      const endpoint = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent";
       
       const testBody = {
         contents: [
           {
-            role: "user",
             parts: [{ text: "Hello" }]
           }
         ],
