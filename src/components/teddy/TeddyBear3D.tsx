@@ -1,9 +1,10 @@
 
 import React, { useRef, useState, useEffect } from 'react';
-import { Canvas, useFrame, useThree } from '@react-three/fiber';
+import { Canvas, useFrame, useThree, useLoader } from '@react-three/fiber';
 import { OrbitControls, Environment, ContactShadows, Preload } from '@react-three/drei';
 import { useInView } from 'framer-motion';
 import * as THREE from 'three';
+import { TextureLoader } from 'three';
 
 // Helper component for the 3D teddy bear model
 const TeddyModel = ({ 
@@ -17,11 +18,18 @@ const TeddyModel = ({
   const { camera } = useThree();
   const [hovered, setHovered] = useState(false);
   
+  // Load fur texture
+  const furTexture = useLoader(TextureLoader, '/fur-texture.png');
+  furTexture.wrapS = furTexture.wrapT = THREE.RepeatWrapping;
+  furTexture.repeat.set(4, 4);
+  
   // Animation for subtle breathing effect
   useFrame((state) => {
     if (group.current) {
       // Subtle breathing animation
       group.current.scale.y = 1 + Math.sin(state.clock.getElapsedTime() * 0.5) * 0.01;
+      // Gentle rocking motion
+      group.current.rotation.y = Math.sin(state.clock.getElapsedTime() * 0.3) * 0.05;
     }
   });
 
@@ -38,29 +46,34 @@ const TeddyModel = ({
     setIsListening(!isListening);
   };
 
-  // Create textures and materials
-  const mainColor = "#D2B48C"; // Beige color matching the reference
-  const muzzleColor = "#F5DEB3"; // Lighter beige for muzzle/tummy/paws
+  // Create textures and materials based on the reference image
+  const mainColor = "#C2B3A0"; // Beige/tan color matching the reference
+  const muzzleColor = "#E6D9BC"; // Lighter beige for muzzle/tummy/paws
   const earColor = "#FFB6C1"; // Pink for inner ears
+  const noseColor = "#222222"; // Dark for nose
   
   // Main teddy material
   const teddyMaterial = new THREE.MeshStandardMaterial({ 
     color: mainColor,
     roughness: 0.8,
-    metalness: 0.1
+    metalness: 0.1,
+    bumpMap: furTexture,
+    bumpScale: 0.02
   });
   
   // Muzzle/tummy/paws material
   const accentMaterial = new THREE.MeshStandardMaterial({ 
     color: muzzleColor,
-    roughness: 0.8,
-    metalness: 0.1
+    roughness: 0.7,
+    metalness: 0.1,
+    bumpMap: furTexture,
+    bumpScale: 0.01
   });
   
   // Pink ear material
   const earInnerMaterial = new THREE.MeshStandardMaterial({ 
     color: earColor,
-    roughness: 0.8,
+    roughness: 0.7,
     metalness: 0.1
   });
 
@@ -75,123 +88,123 @@ const TeddyModel = ({
       rotation={[0.1, 0, 0]}
     >
       {/* Body - main torso */}
-      <mesh position={[0, -0.2, 0]}>
-        <sphereGeometry args={[1.2, 32, 32]} />
-        <meshStandardMaterial {...teddyMaterial} />
+      <mesh position={[0, -0.2, 0]} scale={[1, 1.2, 0.8]}>
+        <sphereGeometry args={[1, 32, 32]} />
+        <primitive object={teddyMaterial} />
       </mesh>
 
-      {/* Head - slightly larger than torso */}
-      <mesh position={[0, 1.6, 0]}>
+      {/* Head - slightly larger than in previous version to match reference */}
+      <mesh position={[0, 1.3, 0]} scale={[1, 0.9, 0.85]}>
         <sphereGeometry args={[1.0, 32, 32]} />
-        <meshStandardMaterial {...teddyMaterial} />
+        <primitive object={teddyMaterial} />
       </mesh>
       
-      {/* Muzzle */}
-      <mesh position={[0, 1.3, 0.7]}>
-        <sphereGeometry args={[0.45, 32, 32]} />
-        <meshStandardMaterial {...accentMaterial} />
+      {/* Muzzle - shaped and positioned to match reference */}
+      <mesh position={[0, 1.0, 0.65]} scale={[0.65, 0.5, 0.5]}>
+        <sphereGeometry args={[0.6, 32, 32]} />
+        <primitive object={accentMaterial} />
       </mesh>
       
       {/* Nose */}
-      <mesh position={[0, 1.35, 1.05]}>
-        <sphereGeometry args={[0.15, 32, 32]} />
-        <meshStandardMaterial color="#000000" roughness={0.3} metalness={0.3} />
+      <mesh position={[0, 1.05, 1]} scale={[0.22, 0.15, 0.15]}>
+        <sphereGeometry args={[0.6, 32, 32]} />
+        <meshStandardMaterial color={noseColor} roughness={0.3} metalness={0.3} />
       </mesh>
       
       {/* Mouth - simple curved line */}
-      <mesh position={[0, 1.15, 1]} rotation={[0.2, 0, 0]}>
+      <mesh position={[0, 0.85, 0.95]} rotation={[0.2, 0, 0]}>
         <torusGeometry args={[0.1, 0.02, 16, 16, Math.PI]} />
-        <meshStandardMaterial color="#000000" roughness={0.7} metalness={0.1} />
+        <meshStandardMaterial color={noseColor} roughness={0.7} metalness={0.1} />
       </mesh>
       
-      {/* Left Ear - outer */}
-      <mesh position={[-0.8, 2.3, 0]}>
-        <sphereGeometry args={[0.35, 32, 32]} />
-        <meshStandardMaterial {...teddyMaterial} />
+      {/* Left Ear - positioned to match reference */}
+      <mesh position={[-0.85, 2.1, 0]} scale={[0.4, 0.5, 0.2]}>
+        <sphereGeometry args={[0.7, 32, 32]} />
+        <primitive object={teddyMaterial} />
       </mesh>
       
-      {/* Right Ear - outer */}
-      <mesh position={[0.8, 2.3, 0]}>
-        <sphereGeometry args={[0.35, 32, 32]} />
-        <meshStandardMaterial {...teddyMaterial} />
+      {/* Right Ear - positioned to match reference */}
+      <mesh position={[0.85, 2.1, 0]} scale={[0.4, 0.5, 0.2]}>
+        <sphereGeometry args={[0.7, 32, 32]} />
+        <primitive object={teddyMaterial} />
       </mesh>
       
       {/* Left Ear - inner pink part */}
-      <mesh position={[-0.8, 2.3, 0.1]} scale={[0.8, 0.8, 0.2]}>
-        <sphereGeometry args={[0.35, 32, 32]} />
-        <meshStandardMaterial {...earInnerMaterial} />
+      <mesh position={[-0.85, 2.1, 0.08]} scale={[0.3, 0.4, 0.05]}>
+        <sphereGeometry args={[0.7, 32, 32]} />
+        <primitive object={earInnerMaterial} />
       </mesh>
       
       {/* Right Ear - inner pink part */}
-      <mesh position={[0.8, 2.3, 0.1]} scale={[0.8, 0.8, 0.2]}>
-        <sphereGeometry args={[0.35, 32, 32]} />
-        <meshStandardMaterial {...earInnerMaterial} />
+      <mesh position={[0.85, 2.1, 0.08]} scale={[0.3, 0.4, 0.05]}>
+        <sphereGeometry args={[0.7, 32, 32]} />
+        <primitive object={earInnerMaterial} />
       </mesh>
 
       {/* Left Eye */}
-      <mesh position={[-0.35, 1.6, 0.85]}>
-        <sphereGeometry args={[0.1, 32, 32]} />
-        <meshStandardMaterial color="#000000" roughness={0.1} metalness={0.8} />
+      <mesh position={[-0.28, 1.25, 0.85]} scale={[0.08, 0.12, 0.08]}>
+        <sphereGeometry args={[1, 32, 32]} />
+        <meshStandardMaterial color={noseColor} roughness={0.1} metalness={0.8} />
       </mesh>
       
       {/* Right Eye */}
-      <mesh position={[0.35, 1.6, 0.85]}>
-        <sphereGeometry args={[0.1, 32, 32]} />
-        <meshStandardMaterial color="#000000" roughness={0.1} metalness={0.8} />
+      <mesh position={[0.28, 1.25, 0.85]} scale={[0.08, 0.12, 0.08]}>
+        <sphereGeometry args={[1, 32, 32]} />
+        <meshStandardMaterial color={noseColor} roughness={0.1} metalness={0.8} />
       </mesh>
       
-      {/* Left Arm */}
-      <mesh position={[-1.35, 0.4, 0.3]} rotation={[0.2, -0.4, -0.7]}>
-        <capsuleGeometry args={[0.3, 0.8, 8, 16]} />
-        <meshStandardMaterial {...teddyMaterial} />
+      {/* Left Arm - shaped like the reference */}
+      <mesh position={[-1.0, 0.3, 0]} rotation={[0, 0, -0.3]} scale={[0.38, 0.9, 0.38]}>
+        <capsuleGeometry args={[0.5, 1, 8, 16]} />
+        <primitive object={teddyMaterial} />
       </mesh>
       
-      {/* Right Arm */}
-      <mesh position={[1.35, 0.4, 0.3]} rotation={[0.2, 0.4, 0.7]}>
-        <capsuleGeometry args={[0.3, 0.8, 8, 16]} />
-        <meshStandardMaterial {...teddyMaterial} />
+      {/* Right Arm - shaped like the reference */}
+      <mesh position={[1.0, 0.3, 0]} rotation={[0, 0, 0.3]} scale={[0.38, 0.9, 0.38]}>
+        <capsuleGeometry args={[0.5, 1, 8, 16]} />
+        <primitive object={teddyMaterial} />
       </mesh>
       
       {/* Left Leg */}
-      <mesh position={[-0.6, -1.4, 0.3]} rotation={[0.4, 0, -0.2]}>
-        <capsuleGeometry args={[0.35, 0.7, 8, 16]} />
-        <meshStandardMaterial {...teddyMaterial} />
+      <mesh position={[-0.5, -1.35, 0]} rotation={[0, 0, -0.1]} scale={[0.4, 0.8, 0.4]}>
+        <capsuleGeometry args={[0.5, 0.8, 8, 16]} />
+        <primitive object={teddyMaterial} />
       </mesh>
       
       {/* Right Leg */}
-      <mesh position={[0.6, -1.4, 0.3]} rotation={[0.4, 0, 0.2]}>
-        <capsuleGeometry args={[0.35, 0.7, 8, 16]} />
-        <meshStandardMaterial {...teddyMaterial} />
+      <mesh position={[0.5, -1.35, 0]} rotation={[0, 0, 0.1]} scale={[0.4, 0.8, 0.4]}>
+        <capsuleGeometry args={[0.5, 0.8, 8, 16]} />
+        <primitive object={teddyMaterial} />
       </mesh>
       
       {/* Left Foot */}
-      <mesh position={[-0.7, -1.9, 0.5]} rotation={[0.3, 0, 0]}>
-        <sphereGeometry args={[0.4, 32, 32]} />
-        <meshStandardMaterial {...accentMaterial} />
+      <mesh position={[-0.5, -1.85, 0.3]} rotation={[0.5, 0, 0]} scale={[0.35, 0.25, 0.5]}>
+        <sphereGeometry args={[0.7, 32, 32]} />
+        <primitive object={accentMaterial} />
       </mesh>
       
       {/* Right Foot */}
-      <mesh position={[0.7, -1.9, 0.5]} rotation={[0.3, 0, 0]}>
-        <sphereGeometry args={[0.4, 32, 32]} />
-        <meshStandardMaterial {...accentMaterial} />
+      <mesh position={[0.5, -1.85, 0.3]} rotation={[0.5, 0, 0]} scale={[0.35, 0.25, 0.5]}>
+        <sphereGeometry args={[0.7, 32, 32]} />
+        <primitive object={accentMaterial} />
       </mesh>
       
       {/* Left Hand */}
-      <mesh position={[-1.7, 0.1, 0.5]}>
-        <sphereGeometry args={[0.3, 32, 32]} />
-        <meshStandardMaterial {...accentMaterial} />
+      <mesh position={[-1.3, -0.2, 0.3]} rotation={[0.3, 0, 0]} scale={[0.35, 0.25, 0.5]}>
+        <sphereGeometry args={[0.5, 32, 32]} />
+        <primitive object={accentMaterial} />
       </mesh>
       
       {/* Right Hand */}
-      <mesh position={[1.7, 0.1, 0.5]}>
-        <sphereGeometry args={[0.3, 32, 32]} />
-        <meshStandardMaterial {...accentMaterial} />
+      <mesh position={[1.3, -0.2, 0.3]} rotation={[0.3, 0, 0]} scale={[0.35, 0.25, 0.5]}>
+        <sphereGeometry args={[0.5, 32, 32]} />
+        <primitive object={accentMaterial} />
       </mesh>
       
-      {/* Tummy patch */}
-      <mesh position={[0, 0.1, 0.8]} scale={[0.8, 1.2, 0.5]}>
-        <sphereGeometry args={[0.9, 32, 32]} />
-        <meshStandardMaterial {...accentMaterial} />
+      {/* Tummy patch - oval shaped to match reference */}
+      <mesh position={[0, 0.1, 0.6]} scale={[0.8, 1.1, 0.4]}>
+        <sphereGeometry args={[0.8, 32, 32]} />
+        <primitive object={accentMaterial} />
       </mesh>
       
       {/* Interaction button (hidden visually but provides interactivity) */}
