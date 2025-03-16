@@ -5,8 +5,8 @@ import { useInView } from 'framer-motion';
 import * as THREE from 'three';
 import { TextureLoader } from 'three';
 import { toast } from '@/components/ui/use-toast';
-import { useVertexAI } from '@/hooks/useVertexAI';
-import { chatWithVertexAI, VertexMessage, textToSpeech } from '@/utils/vertexAI';
+import { useGeminiAI } from '@/hooks/useGeminiAI';
+import { chatWithGeminiAI, GeminiMessage, textToSpeech } from '@/utils/geminiAI';
 
 // Helper component for the 3D teddy bear model
 const TeddyModel = ({ 
@@ -21,11 +21,11 @@ const TeddyModel = ({
   const [hovered, setHovered] = useState(false);
   const [furTextureLoaded, setFurTextureLoaded] = useState(false);
   const [isRecording, setIsRecording] = useState(false);
-  const [vertexMessages, setVertexMessages] = useState<VertexMessage[]>([
+  const [geminiMessages, setGeminiMessages] = useState<GeminiMessage[]>([
     { role: 'assistant', content: "Hello! I'm Teddy, your friendly bear companion. I love talking about science, nature, space, and telling stories. What would you like to talk about today?" }
   ]);
   const audioRef = useRef<HTMLAudioElement | null>(null);
-  const { apiKey, isConfigured } = useVertexAI();
+  const { apiKey, isConfigured } = useGeminiAI();
   
   // Create audio element for playback
   useEffect(() => {
@@ -75,7 +75,7 @@ const TeddyModel = ({
     if (!isConfigured) {
       toast({
         title: "API Key Required",
-        description: "Please add your Google Vertex AI API key to chat with Teddy.",
+        description: "Please add your Google Gemini API key to chat with Teddy.",
         variant: "destructive"
       });
       return;
@@ -142,7 +142,7 @@ const TeddyModel = ({
     }
   };
   
-  // Process message with Vertex AI and speak response
+  // Process message with Gemini AI and speak response
   const processMessage = async (message: string) => {
     try {
       toast({
@@ -151,17 +151,17 @@ const TeddyModel = ({
       });
       
       // Add user message to conversation history
-      const updatedMessages: VertexMessage[] = [
-        ...vertexMessages,
+      const updatedMessages: GeminiMessage[] = [
+        ...geminiMessages,
         { role: 'user', content: message }
       ];
-      setVertexMessages(updatedMessages);
+      setGeminiMessages(updatedMessages);
       
-      // Get response from Vertex AI
-      const response = await chatWithVertexAI(updatedMessages, apiKey);
+      // Get response from Gemini AI
+      const response = await chatWithGeminiAI(updatedMessages, apiKey);
       
       // Update conversation history with assistant response
-      setVertexMessages(prev => [...prev, { role: 'assistant', content: response }]);
+      setGeminiMessages(prev => [...prev, { role: 'assistant', content: response }]);
       
       // Use the browser's speech synthesis API
       const utterance = new SpeechSynthesisUtterance(response);
