@@ -47,9 +47,19 @@ const TeddyDemo: React.FC = () => {
           className="w-full max-w-4xl mx-auto"
           onValueChange={(value) => setActiveView(value as '3d' | 'features')}
         >
-          <TabsList className="grid w-full grid-cols-2 mb-8">
-            <TabsTrigger value="3d" className="text-lg py-3">3D Teddy Demo</TabsTrigger>
-            <TabsTrigger value="features" className="text-lg py-3">Features & Interaction</TabsTrigger>
+          <TabsList className="grid w-full grid-cols-2 mb-8 bg-teddy-cream/50 dark:bg-teddy-charcoal/50 p-1 rounded-full">
+            <TabsTrigger 
+              value="3d" 
+              className="text-base md:text-lg py-3 rounded-full data-[state=active]:bg-white dark:data-[state=active]:bg-teddy-charcoal data-[state=active]:text-teddy-coral data-[state=active]:shadow-sm transition-all duration-200"
+            >
+              3D Teddy Demo
+            </TabsTrigger>
+            <TabsTrigger 
+              value="features" 
+              className="text-base md:text-lg py-3 rounded-full data-[state=active]:bg-white dark:data-[state=active]:bg-teddy-charcoal data-[state=active]:text-teddy-coral data-[state=active]:shadow-sm transition-all duration-200"
+            >
+              Features & Interaction
+            </TabsTrigger>
           </TabsList>
           
           <TabsContent value="3d" className="mt-6">

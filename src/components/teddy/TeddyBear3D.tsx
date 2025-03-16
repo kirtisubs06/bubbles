@@ -1,7 +1,7 @@
 
 import React, { useRef, useState, useEffect } from 'react';
 import { Canvas, useFrame, useThree } from '@react-three/fiber';
-import { OrbitControls, Environment, ContactShadows, useGLTF, Preload, useTexture } from '@react-three/drei';
+import { OrbitControls, Environment, ContactShadows, Preload } from '@react-three/drei';
 import { useInView } from 'framer-motion';
 import * as THREE from 'three';
 
@@ -17,7 +17,7 @@ const TeddyModel = ({
   const { camera } = useThree();
   const [hovered, setHovered] = useState(false);
   
-  // Animation for breathing effect
+  // Animation for subtle breathing effect
   useFrame((state) => {
     if (group.current) {
       // Subtle breathing animation
@@ -38,31 +38,31 @@ const TeddyModel = ({
     setIsListening(!isListening);
   };
 
-  // Create textures
-  const mainColor = "#D2B48C"; // Tan/beige color for teddy bear
-  const accentColor = "#C19A6B"; // Slightly darker tone for accents
+  // Create textures and materials
+  const mainColor = "#D2B48C"; // Beige color matching the reference
+  const muzzleColor = "#F5DEB3"; // Lighter beige for muzzle/tummy/paws
+  const earColor = "#FFB6C1"; // Pink for inner ears
   
-  // Main fur texture
-  const furTexture = new THREE.TextureLoader().load('/fur-texture.png');
-  furTexture.wrapS = THREE.RepeatWrapping;
-  furTexture.wrapT = THREE.RepeatWrapping;
-  furTexture.repeat.set(3, 3);
-
-  // Create heart shape for the teddy's chest
-  const heartShape = new THREE.Shape();
-  heartShape.moveTo(0, 0);
-  heartShape.bezierCurveTo(0, 0.5, 0.5, 0.5, 0.5, 0);
-  heartShape.bezierCurveTo(0.5, -0.5, 0, -0.5, 0, 0);
+  // Main teddy material
+  const teddyMaterial = new THREE.MeshStandardMaterial({ 
+    color: mainColor,
+    roughness: 0.8,
+    metalness: 0.1
+  });
   
-  const extrudeSettings = {
-    steps: 2,
-    depth: 0.1,
-    bevelEnabled: true,
-    bevelThickness: 0.1,
-    bevelSize: 0.1,
-    bevelOffset: 0,
-    bevelSegments: 3
-  };
+  // Muzzle/tummy/paws material
+  const accentMaterial = new THREE.MeshStandardMaterial({ 
+    color: muzzleColor,
+    roughness: 0.8,
+    metalness: 0.1
+  });
+  
+  // Pink ear material
+  const earInnerMaterial = new THREE.MeshStandardMaterial({ 
+    color: earColor,
+    roughness: 0.8,
+    metalness: 0.1
+  });
 
   return (
     <group 
@@ -70,195 +70,134 @@ const TeddyModel = ({
       onClick={handleClick}
       onPointerOver={() => setHovered(true)}
       onPointerOut={() => setHovered(false)}
-      position={[0, -1, 0]}
+      position={[0, 0, 0]}
       scale={isListening ? 1.02 : 1}
+      rotation={[0.1, 0, 0]}
     >
-      {/* Body - more rounded for classic teddy shape */}
-      <mesh position={[0, 0, 0]}>
-        <sphereGeometry args={[1.5, 32, 32]} />
-        <meshStandardMaterial 
-          color={mainColor} 
-          roughness={0.9} 
-          metalness={0.1}
-          map={furTexture}
-        />
+      {/* Body - main torso */}
+      <mesh position={[0, -0.2, 0]}>
+        <sphereGeometry args={[1.2, 32, 32]} />
+        <meshStandardMaterial {...teddyMaterial} />
       </mesh>
 
-      {/* Head - classic teddy bear head shape */}
-      <mesh position={[0, 1.8, 0]}>
-        <sphereGeometry args={[1.1, 32, 32]} />
-        <meshStandardMaterial 
-          color={mainColor} 
-          roughness={0.9} 
-          metalness={0.1}
-          map={furTexture}
-        />
+      {/* Head - slightly larger than torso */}
+      <mesh position={[0, 1.6, 0]}>
+        <sphereGeometry args={[1.0, 32, 32]} />
+        <meshStandardMaterial {...teddyMaterial} />
       </mesh>
       
-      {/* Muzzle - shorter and wider for cute teddy look */}
-      <mesh position={[0, 1.5, 0.7]}>
-        <sphereGeometry args={[0.5, 32, 32]} />
-        <meshStandardMaterial color="#E8D0B0" roughness={0.8} metalness={0.1} />
-      </mesh>
-      
-      {/* Left Ear - more rounded teddy ears */}
-      <mesh position={[-0.8, 2.5, 0]} rotation={[0, 0, -0.3]}>
-        <sphereGeometry args={[0.4, 32, 32]} />
-        <meshStandardMaterial 
-          color={mainColor} 
-          roughness={0.9} 
-          metalness={0.1}
-          map={furTexture}
-        />
-      </mesh>
-      
-      {/* Right Ear */}
-      <mesh position={[0.8, 2.5, 0]} rotation={[0, 0, 0.3]}>
-        <sphereGeometry args={[0.4, 32, 32]} />
-        <meshStandardMaterial 
-          color={mainColor} 
-          roughness={0.9} 
-          metalness={0.1}
-          map={furTexture}
-        />
-      </mesh>
-      
-      {/* Inner Left Ear */}
-      <mesh position={[-0.75, 2.5, 0.1]} rotation={[0.3, 0, -0.3]} scale={[0.8, 0.8, 0.1]}>
-        <sphereGeometry args={[0.3, 32, 32]} />
-        <meshStandardMaterial color="#E8D0B0" roughness={0.8} metalness={0.1} />
-      </mesh>
-      
-      {/* Inner Right Ear */}
-      <mesh position={[0.75, 2.5, 0.1]} rotation={[0.3, 0, 0.3]} scale={[0.8, 0.8, 0.1]}>
-        <sphereGeometry args={[0.3, 32, 32]} />
-        <meshStandardMaterial color="#E8D0B0" roughness={0.8} metalness={0.1} />
-      </mesh>
-
-      {/* Left Arm - stubby teddy arms */}
-      <mesh position={[-1.4, 0.3, 0.4]} rotation={[0.5, -0.3, -0.4]}>
-        <cylinderGeometry args={[0.35, 0.35, 1.0, 32]} />
-        <meshStandardMaterial 
-          color={mainColor} 
-          roughness={0.9} 
-          metalness={0.1}
-          map={furTexture}
-        />
-      </mesh>
-      
-      {/* Right Arm */}
-      <mesh position={[1.4, 0.3, 0.4]} rotation={[0.5, 0.3, 0.4]}>
-        <cylinderGeometry args={[0.35, 0.35, 1.0, 32]} />
-        <meshStandardMaterial 
-          color={mainColor} 
-          roughness={0.9} 
-          metalness={0.1}
-          map={furTexture}
-        />
-      </mesh>
-      
-      {/* Left Paw */}
-      <mesh position={[-1.7, -0.1, 0.8]}>
-        <sphereGeometry args={[0.4, 32, 32]} />
-        <meshStandardMaterial color="#E8D0B0" roughness={0.8} metalness={0.1} />
-      </mesh>
-      
-      {/* Right Paw */}
-      <mesh position={[1.7, -0.1, 0.8]}>
-        <sphereGeometry args={[0.4, 32, 32]} />
-        <meshStandardMaterial color="#E8D0B0" roughness={0.8} metalness={0.1} />
-      </mesh>
-      
-      {/* Left Leg */}
-      <mesh position={[-0.7, -1.5, 0]} rotation={[0.3, 0, -0.1]}>
-        <cylinderGeometry args={[0.4, 0.4, 1.2, 32]} />
-        <meshStandardMaterial 
-          color={mainColor} 
-          roughness={0.9} 
-          metalness={0.1}
-          map={furTexture}
-        />
-      </mesh>
-      
-      {/* Right Leg */}
-      <mesh position={[0.7, -1.5, 0]} rotation={[0.3, 0, 0.1]}>
-        <cylinderGeometry args={[0.4, 0.4, 1.2, 32]} />
-        <meshStandardMaterial 
-          color={mainColor} 
-          roughness={0.9} 
-          metalness={0.1}
-          map={furTexture}
-        />
-      </mesh>
-      
-      {/* Left Foot */}
-      <mesh position={[-0.7, -2.2, 0.3]}>
+      {/* Muzzle */}
+      <mesh position={[0, 1.3, 0.7]}>
         <sphereGeometry args={[0.45, 32, 32]} />
-        <meshStandardMaterial color="#E8D0B0" roughness={0.8} metalness={0.1} />
+        <meshStandardMaterial {...accentMaterial} />
       </mesh>
       
-      {/* Right Foot */}
-      <mesh position={[0.7, -2.2, 0.3]}>
-        <sphereGeometry args={[0.45, 32, 32]} />
-        <meshStandardMaterial color="#E8D0B0" roughness={0.8} metalness={0.1} />
-      </mesh>
-      
-      {/* Tummy patch */}
-      <mesh position={[0, 0.1, 1.0]} rotation={[0.3, 0, 0]}>
-        <sphereGeometry args={[0.8, 32, 32]} />
-        <meshStandardMaterial color="#E8D0B0" roughness={0.8} metalness={0.1} />
-      </mesh>
-      
-      {/* Eyes - classic black button eyes */}
-      <mesh position={[-0.35, 1.7, 0.85]} scale={[1, 1.1, 1]}>
-        <sphereGeometry args={[0.12, 32, 32]} />
-        <meshStandardMaterial color="#000000" roughness={0.1} metalness={0.8} />
-      </mesh>
-      
-      <mesh position={[0.35, 1.7, 0.85]} scale={[1, 1.1, 1]}>
-        <sphereGeometry args={[0.12, 32, 32]} />
-        <meshStandardMaterial color="#000000" roughness={0.1} metalness={0.8} />
-      </mesh>
-      
-      {/* Eye shine - to give a cute look */}
-      <mesh position={[-0.32, 1.75, 0.95]}>
-        <sphereGeometry args={[0.04, 32, 32]} />
-        <meshStandardMaterial color="white" roughness={0.1} metalness={0.8} />
-      </mesh>
-      
-      <mesh position={[0.38, 1.75, 0.95]}>
-        <sphereGeometry args={[0.04, 32, 32]} />
-        <meshStandardMaterial color="white" roughness={0.1} metalness={0.8} />
-      </mesh>
-      
-      {/* Nose - classic teddy nose */}
-      <mesh position={[0, 1.45, 1.1]}>
+      {/* Nose */}
+      <mesh position={[0, 1.35, 1.05]}>
         <sphereGeometry args={[0.15, 32, 32]} />
         <meshStandardMaterial color="#000000" roughness={0.3} metalness={0.3} />
       </mesh>
       
-      {/* Mouth - subtle stitched mouth */}
-      <mesh position={[0, 1.2, 1.05]} rotation={[0.2, 0, 0]}>
-        <torusGeometry args={[0.15, 0.03, 16, 16, Math.PI]} />
-        <meshStandardMaterial color="#7D5A4A" roughness={0.7} metalness={0.1} />
+      {/* Mouth - simple curved line */}
+      <mesh position={[0, 1.15, 1]} rotation={[0.2, 0, 0]}>
+        <torusGeometry args={[0.1, 0.02, 16, 16, Math.PI]} />
+        <meshStandardMaterial color="#000000" roughness={0.7} metalness={0.1} />
       </mesh>
       
-      {/* Interactive button - glows when activated */}
-      <mesh position={[0, 0.5, 1.4]} scale={isListening ? 1.2 : hovered ? 1.1 : 1}>
-        <sphereGeometry args={[0.2, 32, 32]} />
-        <meshStandardMaterial 
-          color={isListening ? "#FF6B6B" : hovered ? "#FFA5A5" : "#FFC3C3"} 
-          roughness={0.3} 
-          metalness={0.7} 
-          emissive={isListening ? "#FF6B6B" : hovered ? "#FFA5A5" : "#000000"}
-          emissiveIntensity={isListening ? 0.5 : hovered ? 0.2 : 0}
-        />
+      {/* Left Ear - outer */}
+      <mesh position={[-0.8, 2.3, 0]}>
+        <sphereGeometry args={[0.35, 32, 32]} />
+        <meshStandardMaterial {...teddyMaterial} />
+      </mesh>
+      
+      {/* Right Ear - outer */}
+      <mesh position={[0.8, 2.3, 0]}>
+        <sphereGeometry args={[0.35, 32, 32]} />
+        <meshStandardMaterial {...teddyMaterial} />
+      </mesh>
+      
+      {/* Left Ear - inner pink part */}
+      <mesh position={[-0.8, 2.3, 0.1]} scale={[0.8, 0.8, 0.2]}>
+        <sphereGeometry args={[0.35, 32, 32]} />
+        <meshStandardMaterial {...earInnerMaterial} />
+      </mesh>
+      
+      {/* Right Ear - inner pink part */}
+      <mesh position={[0.8, 2.3, 0.1]} scale={[0.8, 0.8, 0.2]}>
+        <sphereGeometry args={[0.35, 32, 32]} />
+        <meshStandardMaterial {...earInnerMaterial} />
       </mesh>
 
-      {/* Small heart patch on chest */}
-      <mesh position={[0, 0.7, 1.25]} rotation={[0.3, 0, 0]} scale={0.9}>
-        <extrudeGeometry args={[heartShape, extrudeSettings]} />
-        <meshStandardMaterial color="#FF8882" roughness={0.7} metalness={0.2} />
+      {/* Left Eye */}
+      <mesh position={[-0.35, 1.6, 0.85]}>
+        <sphereGeometry args={[0.1, 32, 32]} />
+        <meshStandardMaterial color="#000000" roughness={0.1} metalness={0.8} />
+      </mesh>
+      
+      {/* Right Eye */}
+      <mesh position={[0.35, 1.6, 0.85]}>
+        <sphereGeometry args={[0.1, 32, 32]} />
+        <meshStandardMaterial color="#000000" roughness={0.1} metalness={0.8} />
+      </mesh>
+      
+      {/* Left Arm */}
+      <mesh position={[-1.35, 0.4, 0.3]} rotation={[0.2, -0.4, -0.7]}>
+        <capsuleGeometry args={[0.3, 0.8, 8, 16]} />
+        <meshStandardMaterial {...teddyMaterial} />
+      </mesh>
+      
+      {/* Right Arm */}
+      <mesh position={[1.35, 0.4, 0.3]} rotation={[0.2, 0.4, 0.7]}>
+        <capsuleGeometry args={[0.3, 0.8, 8, 16]} />
+        <meshStandardMaterial {...teddyMaterial} />
+      </mesh>
+      
+      {/* Left Leg */}
+      <mesh position={[-0.6, -1.4, 0.3]} rotation={[0.4, 0, -0.2]}>
+        <capsuleGeometry args={[0.35, 0.7, 8, 16]} />
+        <meshStandardMaterial {...teddyMaterial} />
+      </mesh>
+      
+      {/* Right Leg */}
+      <mesh position={[0.6, -1.4, 0.3]} rotation={[0.4, 0, 0.2]}>
+        <capsuleGeometry args={[0.35, 0.7, 8, 16]} />
+        <meshStandardMaterial {...teddyMaterial} />
+      </mesh>
+      
+      {/* Left Foot */}
+      <mesh position={[-0.7, -1.9, 0.5]} rotation={[0.3, 0, 0]}>
+        <sphereGeometry args={[0.4, 32, 32]} />
+        <meshStandardMaterial {...accentMaterial} />
+      </mesh>
+      
+      {/* Right Foot */}
+      <mesh position={[0.7, -1.9, 0.5]} rotation={[0.3, 0, 0]}>
+        <sphereGeometry args={[0.4, 32, 32]} />
+        <meshStandardMaterial {...accentMaterial} />
+      </mesh>
+      
+      {/* Left Hand */}
+      <mesh position={[-1.7, 0.1, 0.5]}>
+        <sphereGeometry args={[0.3, 32, 32]} />
+        <meshStandardMaterial {...accentMaterial} />
+      </mesh>
+      
+      {/* Right Hand */}
+      <mesh position={[1.7, 0.1, 0.5]}>
+        <sphereGeometry args={[0.3, 32, 32]} />
+        <meshStandardMaterial {...accentMaterial} />
+      </mesh>
+      
+      {/* Tummy patch */}
+      <mesh position={[0, 0.1, 0.8]} scale={[0.8, 1.2, 0.5]}>
+        <sphereGeometry args={[0.9, 32, 32]} />
+        <meshStandardMaterial {...accentMaterial} />
+      </mesh>
+      
+      {/* Interaction button (hidden visually but provides interactivity) */}
+      <mesh position={[0, 0, 2]} visible={false} scale={3}>
+        <planeGeometry args={[1, 1]} />
+        <meshBasicMaterial transparent opacity={0} />
       </mesh>
     </group>
   );
@@ -276,7 +215,7 @@ const TeddyBear3D: React.FC<TeddyBear3DProps> = ({ setIsListening, isListening }
   return (
     <div ref={ref} className="w-full h-full">
       {isInView && (
-        <Canvas camera={{ position: [0, 0, 6], fov: 40 }}>
+        <Canvas camera={{ position: [0, 0, 6], fov: 45 }}>
           <ambientLight intensity={0.7} />
           <pointLight position={[10, 10, 10]} intensity={0.8} />
           <spotLight position={[0, 5, 5]} intensity={0.6} />
@@ -285,8 +224,8 @@ const TeddyBear3D: React.FC<TeddyBear3DProps> = ({ setIsListening, isListening }
           <TeddyModel setIsListening={setIsListening} isListening={isListening} />
           
           <ContactShadows
-            position={[0, -2, 0]}
-            opacity={0.4}
+            position={[0, -2.3, 0]}
+            opacity={0.5}
             scale={10}
             blur={1.5}
             far={4}
@@ -298,6 +237,7 @@ const TeddyBear3D: React.FC<TeddyBear3DProps> = ({ setIsListening, isListening }
             maxDistance={10}
             minPolarAngle={Math.PI/6}
             maxPolarAngle={Math.PI/1.5}
+            rotateSpeed={0.5}
           />
           <Preload all />
         </Canvas>
