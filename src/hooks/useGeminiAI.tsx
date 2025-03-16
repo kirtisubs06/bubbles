@@ -1,5 +1,5 @@
 
-import React, { createContext, useContext, useState, ReactNode } from 'react';
+import React, { createContext, useContext, useState, ReactNode, useEffect } from 'react';
 import { toast } from '@/components/ui/use-toast';
 import geminiService from '@/utils/geminiService';
 
@@ -8,6 +8,7 @@ interface GeminiAIContextType {
   setApiKey: (key: string) => Promise<boolean>;
   isConfigured: boolean;
   validateApiKey: (key: string) => Promise<boolean>;
+  isAdminConfigured: boolean;
 }
 
 const GeminiAIContext = createContext<GeminiAIContextType | undefined>(undefined);
@@ -17,8 +18,21 @@ export const GeminiAIProvider: React.FC<{ children: ReactNode }> = ({ children }
     // Try to get API key from geminiService
     return geminiService.getApiKey() || '';
   });
-
+  
+  const [isAdminConfigured, setIsAdminConfigured] = useState<boolean>(false);
   const [isValidatingKey, setIsValidatingKey] = useState(false);
+
+  // Check if we have an environment variable API key
+  useEffect(() => {
+    const envApiKey = import.meta.env.VITE_GEMINI_API_KEY;
+    if (envApiKey) {
+      setIsAdminConfigured(true);
+      // If we have an env key and no current key, use the env key
+      if (!apiKey) {
+        setApiKey(envApiKey);
+      }
+    }
+  }, [apiKey]);
 
   // Validates if the API key is usable by testing a simple request
   const validateApiKey = async (key: string): Promise<boolean> => {
@@ -84,7 +98,8 @@ export const GeminiAIProvider: React.FC<{ children: ReactNode }> = ({ children }
       apiKey, 
       setApiKey: saveApiKey, 
       isConfigured: Boolean(apiKey),
-      validateApiKey
+      validateApiKey,
+      isAdminConfigured
     }}>
       {children}
     </GeminiAIContext.Provider>

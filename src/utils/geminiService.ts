@@ -25,6 +25,13 @@ interface GeminiRequest {
 
 class GeminiService {
   private apiKey: string | null = null;
+  // Default admin-configured API key (set during deployment)
+  private readonly defaultApiKey = import.meta.env.VITE_GEMINI_API_KEY || null;
+  
+  constructor() {
+    // Try to initialize with default key or stored key
+    this.apiKey = this.defaultApiKey || localStorage.getItem('gemini_api_key');
+  }
   
   setApiKey(key: string) {
     this.apiKey = key;
@@ -33,14 +40,19 @@ class GeminiService {
   
   getApiKey(): string | null {
     if (!this.apiKey) {
-      this.apiKey = localStorage.getItem('gemini_api_key');
+      this.apiKey = this.defaultApiKey || localStorage.getItem('gemini_api_key');
     }
     return this.apiKey;
   }
   
   clearApiKey() {
-    this.apiKey = null;
+    // Only clear localStorage key, not the default key
     localStorage.removeItem('gemini_api_key');
+    this.apiKey = this.defaultApiKey;
+  }
+  
+  hasConfiguredKey(): boolean {
+    return Boolean(this.getApiKey());
   }
   
   async generateResponse(prompt: string): Promise<string> {
