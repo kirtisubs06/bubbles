@@ -236,17 +236,22 @@ const TeddyModel = ({
         />
       </mesh>
 
-      {/* Small heart patch on chest */}
+      {/* Small heart patch on chest - using a properly defined geometry */}
       <mesh position={[0, 0.8, 1.15]} rotation={[0.3, 0, 0]} scale={0.9}>
-        <heartGeometry />
-        <meshStandardMaterial color="#FF8882" roughness={0.7} metalness={0.2} />
+        <mesh>
+          {/* Use ExtrudeGeometry directly with the shape */}
+          <bufferGeometry attach="geometry">
+            {createHeartShape()}
+          </bufferGeometry>
+          <meshStandardMaterial color="#FF8882" roughness={0.7} metalness={0.2} />
+        </mesh>
       </mesh>
     </group>
   );
 };
 
-// Custom heart geometry for the teddy bear
-const heartGeometry = () => {
+// Create a heart shape properly using Three.js methods
+const createHeartShape = () => {
   const heartShape = new THREE.Shape();
   
   heartShape.moveTo(0, 0);
@@ -263,7 +268,9 @@ const heartGeometry = () => {
     bevelSegments: 3
   };
   
-  return <extrudeGeometry args={[heartShape, extrudeSettings]} />;
+  // Create the actual geometry
+  const geometry = new THREE.ExtrudeGeometry(heartShape, extrudeSettings);
+  return geometry;
 };
 
 interface TeddyBear3DProps {
