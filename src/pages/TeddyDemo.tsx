@@ -53,9 +53,9 @@ const TeddyDemo: React.FC = () => {
           </TabsList>
           
           <TabsContent value="3d" className="mt-6">
-            <div className="glass-panel p-6 md:p-10 rounded-3xl">
+            <div className="bg-gradient-to-br from-teddy-cream to-white dark:from-teddy-blue/10 dark:to-teddy-purple/20 p-6 md:p-10 rounded-3xl shadow-medium">
               <div 
-                className="h-[500px] md:h-[600px] w-full relative rounded-2xl overflow-hidden bg-gradient-to-b from-teddy-blue/10 to-teddy-purple/20"
+                className="h-[500px] md:h-[600px] w-full relative rounded-2xl overflow-hidden bg-gradient-to-b from-teddy-blue/10 to-teddy-pink/10"
               >
                 <TeddyBear3D 
                   setIsListening={setIsListening} 
@@ -82,7 +82,7 @@ const TeddyDemo: React.FC = () => {
                 }
               }}> 
                 <motion.div 
-                  className="glass-panel p-6 h-full"
+                  className="bg-gradient-to-br from-teddy-cream to-white dark:from-teddy-blue/20 dark:to-teddy-purple/10 p-6 h-full rounded-2xl shadow-medium"
                   initial={{ opacity: 0, x: -20 }}
                   animate={isVisible ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
                   transition={{ duration: 0.6 }}
@@ -111,7 +111,7 @@ const TeddyDemo: React.FC = () => {
               
               <div>
                 <motion.div 
-                  className="glass-panel p-6 h-full"
+                  className="bg-gradient-to-br from-teddy-cream to-white dark:from-teddy-blue/20 dark:to-teddy-purple/10 p-6 h-full rounded-2xl shadow-medium"
                   initial={{ opacity: 0, x: 20 }}
                   animate={isVisible ? { opacity: 1, x: 0 } : { opacity: 0, x: 20 }}
                   transition={{ duration: 0.6, delay: 0.2 }}
@@ -140,7 +140,7 @@ const TeddyDemo: React.FC = () => {
               
               <div className="md:col-span-2">
                 <motion.div 
-                  className="glass-panel p-6"
+                  className="bg-gradient-to-br from-teddy-cream to-white dark:from-teddy-blue/20 dark:to-teddy-purple/10 p-6 rounded-2xl shadow-medium"
                   initial={{ opacity: 0, y: 20 }}
                   animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
                   transition={{ duration: 0.6, delay: 0.4 }}
