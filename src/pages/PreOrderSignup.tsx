@@ -3,45 +3,26 @@ import React, { useEffect, useState } from 'react';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
 import { motion } from 'framer-motion';
+import { Skeleton } from '@/components/ui/skeleton';
 import { Loader2 } from 'lucide-react';
 
 const PreOrderSignup: React.FC = () => {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    // Create a container for the JotForm
-    const container = document.getElementById('jotform-container');
-    if (!container) return;
+    // Set a timeout to hide the loading state after a reasonable time
+    // in case the iframe load event doesn't trigger properly
+    const loadingTimeout = setTimeout(() => {
+      setIsLoading(false);
+    }, 3000);
 
-    // Clear any previous content
-    container.innerHTML = '';
-    
-    // Load the JotForm script
-    const script = document.createElement('script');
-    script.type = 'text/javascript';
-    script.src = 'https://form.jotform.com/jsform/250751107337048';
-    script.async = true;
-    
-    // Add event listeners for script loading
-    script.onload = () => {
-      setIsLoading(false);
-    };
-    
-    script.onerror = () => {
-      console.error('Failed to load JotForm script');
-      setIsLoading(false);
-    };
-    
-    // Append the script to the container
-    container.appendChild(script);
-    
-    return () => {
-      // Clean up
-      if (container.contains(script)) {
-        container.removeChild(script);
-      }
-    };
+    return () => clearTimeout(loadingTimeout);
   }, []);
+
+  // Handle iframe load event
+  const handleIframeLoad = () => {
+    setIsLoading(false);
+  };
 
   return (
     <div className="min-h-screen flex flex-col bg-gradient-to-b from-white to-teddy-cream/20 dark:from-teddy-charcoal dark:to-teddy-charcoal/80">
@@ -63,17 +44,29 @@ const PreOrderSignup: React.FC = () => {
         </motion.div>
         
         <div className="max-w-4xl mx-auto bg-white dark:bg-teddy-charcoal/30 shadow-medium rounded-2xl p-6 md:p-8 mb-16">
-          {/* JotForm Container with Loading State */}
-          <div 
-            id="jotform-container" 
-            className="min-h-[800px] md:min-h-[900px] relative"
-          >
+          {/* JotForm iframe container with Loading State */}
+          <div className="relative min-h-[800px] md:min-h-[900px]">
             {isLoading && (
               <div className="absolute inset-0 flex flex-col items-center justify-center bg-white dark:bg-teddy-charcoal/30 z-10">
                 <Loader2 className="h-12 w-12 animate-spin text-teddy-coral mb-4" />
                 <p className="text-teddy-charcoal dark:text-white text-lg">Loading pre-order form...</p>
               </div>
             )}
+            
+            <iframe 
+              id="JotFormIFrame-250751107337048"
+              title="Pre-order TeddyAI Form"
+              onLoad={handleIframeLoad}
+              allowTransparency={true} 
+              allowFullScreen={true}
+              allow="geolocation; microphone; camera"
+              src="https://form.jotform.com/250751107337048"
+              frameBorder="0"
+              className="w-full h-full min-h-[800px] md:min-h-[900px] absolute inset-0"
+              style={{
+                background: 'transparent'
+              }}
+            />
           </div>
         </div>
       </main>
