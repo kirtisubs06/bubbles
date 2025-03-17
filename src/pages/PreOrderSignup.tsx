@@ -6,15 +6,17 @@ import { motion } from 'framer-motion';
 
 const PreOrderSignup: React.FC = () => {
   useEffect(() => {
-    // Load the Typeform embed script
+    // Load the JotForm script
     const script = document.createElement('script');
-    script.src = '//embed.typeform.com/next/embed.js';
+    script.src = 'https://form.jotform.com/jsform/250751107337048';
     script.async = true;
     document.body.appendChild(script);
 
     return () => {
       // Clean up the script when component unmounts
-      document.body.removeChild(script);
+      if (document.body.contains(script)) {
+        document.body.removeChild(script);
+      }
     };
   }, []);
 
@@ -38,12 +40,17 @@ const PreOrderSignup: React.FC = () => {
         </motion.div>
         
         <div className="max-w-4xl mx-auto bg-white dark:bg-teddy-charcoal/30 shadow-medium rounded-2xl p-6 md:p-8 mb-16">
-          {/* Typeform Embed */}
-          <div data-tf-live="01JPE64ESPDVE5AQF1DNDMV25J" className="h-[600px] md:h-[700px]"></div>
+          {/* JotForm Embed */}
+          <div id="jotform-embed" className="h-[800px] md:h-[900px]">
+            <form id="250751107337048" style={{ marginBottom: 0 }} />
+          </div>
         </div>
       </main>
       
       <Footer />
+
+      {/* Root element for the support chatbot */}
+      <div id="JotformAgent-0195a2c1184f722d8a7b63d968f9fd1371d4"></div>
     </div>
   );
 };

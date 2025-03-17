@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -7,6 +8,34 @@
     <meta name="description" content="Lovable Generated Project" />
     <meta name="author" content="Lovable" />
     <meta property="og:image" content="/og-image.png" />
+    
+    <!-- Jotform Support Chat Script -->
+    <script src='https://cdn.jotfor.ms/s/umd/latest/for-embedded-agent.js'></script>
+    <script>
+      window.addEventListener("DOMContentLoaded", function() {
+        window.AgentInitializer.init({
+          agentRenderURL: "https://agent.jotform.com/0195a2c1184f722d8a7b63d968f9fd1371d4",
+          rootId: "JotformAgent-0195a2c1184f722d8a7b63d968f9fd1371d4",
+          formID: "0195a2c1184f722d8a7b63d968f9fd1371d4",
+          queryParams: ["skipWelcome=1", "maximizable=1"],
+          domain: "https://www.jotform.com",
+          isDraggable: false,
+          background: "linear-gradient(180deg, #6C73A8 0%, #6C73A8 100%)",
+          buttonBackgroundColor: "#0066C3",
+          buttonIconColor: "#FFFFFF",
+          variant: false,
+          customizations: {
+            "greeting": "Yes",
+            "greetingMessage": "Hi! How can I assist you?",
+            "openByDefault": "No",
+            "pulse": "Yes",
+            "position": "right",
+            "autoOpenChatIn": "0"
+          },
+          isVoice: undefined
+        });
+      });
+    </script>
   </head>
 
   <body>
