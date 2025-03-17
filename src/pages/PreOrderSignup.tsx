@@ -1,22 +1,45 @@
 
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
 import { motion } from 'framer-motion';
+import { Loader2 } from 'lucide-react';
 
 const PreOrderSignup: React.FC = () => {
-  useEffect(() => {
-    // Load the JotForm script
-    const script = document.createElement('script');
-    script.src = 'https://form.jotform.com/jsform/250751107337048';
-    script.async = true;
-    document.body.appendChild(script);
+  const [isLoading, setIsLoading] = useState(true);
 
+  useEffect(() => {
+    // Create a container for the iframe
+    const container = document.getElementById('jotform-container');
+    if (!container) return;
+
+    // Create an iframe element to properly contain the JotForm
+    const iframe = document.createElement('iframe');
+    iframe.setAttribute('id', 'JotFormIFrame-250751107337048');
+    iframe.setAttribute('title', 'TeddyAI Pre-Order Form');
+    iframe.setAttribute('onload', 'window.parent.scrollTo(0,0)');
+    iframe.setAttribute('allowtransparency', 'true');
+    iframe.setAttribute('allowfullscreen', 'true');
+    iframe.setAttribute('allow', 'geolocation; microphone; camera');
+    iframe.setAttribute('src', 'https://form.jotform.com/250751107337048');
+    iframe.style.width = '100%';
+    iframe.style.height = '100%';
+    iframe.style.border = 'none';
+    iframe.style.backgroundColor = 'transparent';
+    
+    // Clear the container and add the iframe
+    container.innerHTML = '';
+    container.appendChild(iframe);
+
+    // Set loading state
+    const handleIframeLoad = () => {
+      setIsLoading(false);
+    };
+    
+    iframe.addEventListener('load', handleIframeLoad);
+    
     return () => {
-      // Clean up the script when component unmounts
-      if (document.body.contains(script)) {
-        document.body.removeChild(script);
-      }
+      iframe.removeEventListener('load', handleIframeLoad);
     };
   }, []);
 
@@ -40,9 +63,17 @@ const PreOrderSignup: React.FC = () => {
         </motion.div>
         
         <div className="max-w-4xl mx-auto bg-white dark:bg-teddy-charcoal/30 shadow-medium rounded-2xl p-6 md:p-8 mb-16">
-          {/* JotForm Embed */}
-          <div id="jotform-embed" className="h-[800px] md:h-[900px]">
-            <form id="250751107337048" style={{ marginBottom: 0 }} />
+          {/* JotForm Container with Loading State */}
+          <div 
+            id="jotform-container" 
+            className="h-[800px] md:h-[900px] relative"
+          >
+            {isLoading && (
+              <div className="absolute inset-0 flex flex-col items-center justify-center bg-white dark:bg-teddy-charcoal/30">
+                <Loader2 className="h-12 w-12 animate-spin text-teddy-coral mb-4" />
+                <p className="text-teddy-charcoal dark:text-white text-lg">Loading pre-order form...</p>
+              </div>
+            )}
           </div>
         </div>
       </main>
