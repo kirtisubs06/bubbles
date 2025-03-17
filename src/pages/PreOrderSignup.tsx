@@ -9,37 +9,37 @@ const PreOrderSignup: React.FC = () => {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    // Create a container for the iframe
+    // Create a container for the JotForm
     const container = document.getElementById('jotform-container');
     if (!container) return;
 
-    // Create an iframe element to properly contain the JotForm
-    const iframe = document.createElement('iframe');
-    iframe.setAttribute('id', 'JotFormIFrame-250751107337048');
-    iframe.setAttribute('title', 'TeddyAI Pre-Order Form');
-    iframe.setAttribute('onload', 'window.parent.scrollTo(0,0)');
-    iframe.setAttribute('allowtransparency', 'true');
-    iframe.setAttribute('allowfullscreen', 'true');
-    iframe.setAttribute('allow', 'geolocation; microphone; camera');
-    iframe.setAttribute('src', 'https://form.jotform.com/250751107337048');
-    iframe.style.width = '100%';
-    iframe.style.height = '100%';
-    iframe.style.border = 'none';
-    iframe.style.backgroundColor = 'transparent';
-    
-    // Clear the container and add the iframe
+    // Clear any previous content
     container.innerHTML = '';
-    container.appendChild(iframe);
-
-    // Set loading state
-    const handleIframeLoad = () => {
+    
+    // Load the JotForm script
+    const script = document.createElement('script');
+    script.type = 'text/javascript';
+    script.src = 'https://form.jotform.com/jsform/250751107337048';
+    script.async = true;
+    
+    // Add event listeners for script loading
+    script.onload = () => {
       setIsLoading(false);
     };
     
-    iframe.addEventListener('load', handleIframeLoad);
+    script.onerror = () => {
+      console.error('Failed to load JotForm script');
+      setIsLoading(false);
+    };
+    
+    // Append the script to the container
+    container.appendChild(script);
     
     return () => {
-      iframe.removeEventListener('load', handleIframeLoad);
+      // Clean up
+      if (container.contains(script)) {
+        container.removeChild(script);
+      }
     };
   }, []);
 
@@ -66,10 +66,10 @@ const PreOrderSignup: React.FC = () => {
           {/* JotForm Container with Loading State */}
           <div 
             id="jotform-container" 
-            className="h-[800px] md:h-[900px] relative"
+            className="min-h-[800px] md:min-h-[900px] relative"
           >
             {isLoading && (
-              <div className="absolute inset-0 flex flex-col items-center justify-center bg-white dark:bg-teddy-charcoal/30">
+              <div className="absolute inset-0 flex flex-col items-center justify-center bg-white dark:bg-teddy-charcoal/30 z-10">
                 <Loader2 className="h-12 w-12 animate-spin text-teddy-coral mb-4" />
                 <p className="text-teddy-charcoal dark:text-white text-lg">Loading pre-order form...</p>
               </div>
