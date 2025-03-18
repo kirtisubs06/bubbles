@@ -16,17 +16,17 @@ const Index: React.FC = () => {
   
   const testimonials = [
     {
-      content: "TeddyPal has transformed my daughter's learning experience. She's always excited to chat with her teddy and I love seeing the insights about her interests.",
+      content: "I can't wait to pre-order TeddyPal! The analytics dashboard looks incredible - being able to track my daughter's learning interests in real-time will completely transform how I support her education journey.",
       author: "Sarah M.",
       role: "Parent of a 6-year-old"
     },
     {
-      content: "As an educator, I'm impressed by how the AI adapts to each child's learning style. My son asks questions I never would have thought to answer!",
+      content: "As an educator, I'm beyond excited about TeddyPal's potential. The analytics platform will revolutionize how we understand children's learning patterns. This isn't just a toy; it's the future of personalized education!",
       author: "Michael T.",
       role: "Teacher and parent"
     },
     {
-      content: "My twins have different interests but their TeddyPal bears keep up with both of them. The parent dashboard has been eye-opening to see their different learning journeys.",
+      content: "My twins have such different learning styles. I'm pre-ordering two TeddyPals immediately! The idea of getting personalized analytics for each child is exactly what modern parenting needs. This will be game-changing.",
       author: "Aisha K.",
       role: "Mother of twins"
     }
@@ -143,13 +143,13 @@ const Index: React.FC = () => {
             <div className="text-center max-w-3xl mx-auto mb-16 animate-fade-in">
               <div className="inline-flex items-center rounded-full px-3 py-1 text-sm font-medium bg-teddy-coral/10 text-teddy-coral mb-4">
                 <span className="mr-2">💬</span>
-                <span>Testimonials</span>
+                <span>Early Excitement</span>
               </div>
               <h2 className="text-3xl md:text-4xl font-bold mb-6">
-                What Parents Say
+                What Future Parents Say
               </h2>
               <p className="text-lg text-gray-600 dark:text-gray-300">
-                Hear from families who've made TeddyPal a part of their children's learning journey.
+                Hear from families who are eagerly waiting to make TeddyPal a part of their children's learning journey.
               </p>
             </div>
             
