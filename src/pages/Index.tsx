@@ -1,11 +1,10 @@
-
 import React from 'react';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
 import Hero from '@/components/home/Hero';
 import Features from '@/components/home/Features';
 import AnimatedCard from '@/components/ui/AnimatedCard';
-import { MessageCircle, ChevronRight, BookOpen, Check, CreditCard, Shield, Info } from 'lucide-react';
+import { MessageCircle, ChevronRight, BookOpen, Check, CreditCard, Shield, Info, X } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { cn } from '@/lib/utils';
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
@@ -31,7 +30,6 @@ const Index: React.FC = () => {
     }
   ];
   
-  // Updated pricing plans to match pricing tab
   const oneTimePlans = [
     {
       name: "Starter",
@@ -146,7 +144,6 @@ const Index: React.FC = () => {
         
         <Features />
         
-        {/* How It Works */}
         <section className="py-20 relative overflow-hidden">
           <div className="absolute bottom-0 left-0 w-full h-1/2 bg-teddy-blue/5"></div>
           <div className="container mx-auto px-4 relative z-10">
@@ -193,7 +190,6 @@ const Index: React.FC = () => {
           </div>
         </section>
         
-        {/* Testimonials */}
         <section className="py-20 bg-teddy-blue/5 dark:bg-teddy-blue/10">
           <div className="container mx-auto px-4">
             <div className="text-center max-w-3xl mx-auto mb-16 animate-fade-in">
@@ -226,7 +222,6 @@ const Index: React.FC = () => {
           </div>
         </section>
         
-        {/* Pricing */}
         <section className="py-20">
           <div className="container mx-auto px-4">
             <div className="text-center max-w-3xl mx-auto mb-16 animate-fade-in">
@@ -423,7 +418,6 @@ const Index: React.FC = () => {
           </div>
         </section>
         
-        {/* CTA */}
         <section className="py-20 bg-teddy-cream dark:bg-teddy-charcoal/50">
           <div className="container mx-auto px-4">
             <div className="max-w-4xl mx-auto text-center">
