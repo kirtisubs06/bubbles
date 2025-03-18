@@ -6,6 +6,7 @@ import { motion } from 'framer-motion';
 import { Check, X, ChevronRight, CreditCard, Shield, Info } from 'lucide-react';
 import { useIntersectionAnimation } from '@/lib/animations';
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
+import { Button } from '@/components/ui/button';
 import { 
   Card,
   CardContent,
@@ -169,14 +170,14 @@ const Pricing: React.FC = () => {
               </h1>
               
               <p className="text-lg text-gray-600 dark:text-gray-300 mb-8 max-w-2xl mx-auto">
-                Choose the perfect TeddyAI companion that grows with your child and sparks their imagination.
+                Choose the perfect TeddyPal companion that grows with your child and sparks their imagination.
               </p>
               
               <div className="bg-teddy-cream/50 dark:bg-teddy-blue/10 p-4 rounded-xl max-w-2xl mx-auto mb-8">
                 <div className="flex items-start">
                   <Info className="h-5 w-5 text-teddy-coral mr-2 flex-shrink-0 mt-1" />
                   <p className="text-sm text-gray-700 dark:text-gray-300 text-left">
-                    TeddyAI requires both a one-time hardware purchase and an ongoing subscription for API access and content updates. Select your preferred options below.
+                    TeddyPal requires both a one-time hardware purchase and an ongoing subscription for API access and content updates. Select your preferred options below.
                   </p>
                 </div>
               </div>
@@ -249,15 +250,13 @@ const Pricing: React.FC = () => {
                         </CardContent>
                         
                         <CardFooter>
-                          <button 
-                            className={`w-full py-2 px-4 rounded-lg text-white font-medium transition-colors ${
-                              plan.popular 
-                                ? 'bg-teddy-coral hover:bg-teddy-coral/90' 
-                                : 'bg-teddy-blue hover:bg-teddy-blue/90'
-                            }`}
+                          <Button 
+                            variant={plan.popular ? "coral" : "blue"}
+                            size="full"
+                            className="py-2"
                           >
                             {plan.ctaText}
-                          </button>
+                          </Button>
                         </CardFooter>
                       </Card>
                     </motion.div>
@@ -312,15 +311,13 @@ const Pricing: React.FC = () => {
                         </CardContent>
                         
                         <CardFooter>
-                          <button 
-                            className={`w-full py-2 px-4 rounded-lg text-white font-medium transition-colors ${
-                              plan.popular 
-                                ? 'bg-teddy-coral hover:bg-teddy-coral/90' 
-                                : 'bg-teddy-blue hover:bg-teddy-blue/90'
-                            }`}
+                          <Button 
+                            variant={plan.popular ? "coral" : "blue"}
+                            size="full"
+                            className="py-2"
                           >
                             {plan.ctaText}
-                          </button>
+                          </Button>
                         </CardFooter>
                       </Card>
                     </motion.div>
@@ -369,7 +366,7 @@ const Pricing: React.FC = () => {
                   Frequently Asked Questions
                 </h2>
                 <p className="text-gray-600 dark:text-gray-300">
-                  Everything you need to know about TeddyAI
+                  Everything you need to know about TeddyPal
                 </p>
               </div>
               
@@ -409,16 +406,25 @@ const Pricing: React.FC = () => {
                   Ready to Start the Learning Journey?
                 </h2>
                 <p className="text-lg mb-8 text-gray-600 dark:text-gray-300">
-                  Give your child the gift of interactive, engaging education with TeddyAI.
+                  Give your child the gift of interactive, engaging education with TeddyPal.
                 </p>
                 <div className="flex flex-wrap justify-center gap-4">
-                  <a href="/teddy-demo" className="btn-primary py-3 px-8 text-base">
+                  <Button 
+                    variant="coral" 
+                    size="xl" 
+                    onClick={() => window.location.href = '/teddy-demo'}
+                  >
                     Try the Demo
-                  </a>
-                  <a href="/login" className="btn-secondary py-3 px-8 text-base flex items-center">
+                  </Button>
+                  <Button 
+                    variant="blue" 
+                    size="xl" 
+                    onClick={() => window.location.href = '/login'}
+                    className="flex items-center"
+                  >
                     Purchase Now
                     <ChevronRight className="ml-2 h-4 w-4" />
-                  </a>
+                  </Button>
                 </div>
               </motion.div>
             </div>
