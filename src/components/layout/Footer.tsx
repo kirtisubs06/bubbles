@@ -38,7 +38,7 @@ const Footer: React.FC = () => {
               Company
             </h3>
             <ul className="space-y-2">
-              <li><Link to="/features" className="text-gray-600 dark:text-gray-300 hover:text-teddy-coral dark:hover:text-teddy-coral transition-colors">About</Link></li>
+              <li><Link to="/about" className="text-gray-600 dark:text-gray-300 hover:text-teddy-coral dark:hover:text-teddy-coral transition-colors">About</Link></li>
               <li><Link to="/pre-order" className="text-gray-600 dark:text-gray-300 hover:text-teddy-coral dark:hover:text-teddy-coral transition-colors">Pre-order</Link></li>
               <li><Link to="/teddy-demo" className="text-gray-600 dark:text-gray-300 hover:text-teddy-coral dark:hover:text-teddy-coral transition-colors">Try Demo</Link></li>
             </ul>
@@ -49,9 +49,9 @@ const Footer: React.FC = () => {
               Legal
             </h3>
             <ul className="space-y-2">
-              <li><Link to="/pricing" className="text-gray-600 dark:text-gray-300 hover:text-teddy-coral dark:hover:text-teddy-coral transition-colors">Privacy Policy</Link></li>
-              <li><Link to="/pricing" className="text-gray-600 dark:text-gray-300 hover:text-teddy-coral dark:hover:text-teddy-coral transition-colors">Terms of Service</Link></li>
-              <li><Link to="/pricing" className="text-gray-600 dark:text-gray-300 hover:text-teddy-coral dark:hover:text-teddy-coral transition-colors">Child Safety</Link></li>
+              <li><Link to="/privacy" className="text-gray-600 dark:text-gray-300 hover:text-teddy-coral dark:hover:text-teddy-coral transition-colors">Privacy Policy</Link></li>
+              <li><Link to="/terms" className="text-gray-600 dark:text-gray-300 hover:text-teddy-coral dark:hover:text-teddy-coral transition-colors">Terms of Service</Link></li>
+              <li><Link to="/child-safety" className="text-gray-600 dark:text-gray-300 hover:text-teddy-coral dark:hover:text-teddy-coral transition-colors">Child Safety</Link></li>
             </ul>
           </div>
         </div>

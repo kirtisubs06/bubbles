@@ -45,7 +45,7 @@ const Header: React.FC = () => {
             whileHover={{ scale: 1.05 }}
             transition={{ type: "spring", stiffness: 400, damping: 10 }}
           >
-            Teddy<span className="text-teddy-coral">AI</span>
+            Teddy<span className="text-teddy-coral">Pal</span>
           </motion.span>
         </Link>
         

@@ -1,3 +1,4 @@
+
 import React from 'react';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
@@ -8,6 +9,7 @@ import { MessageCircle, ChevronRight, BookOpen, Check, CreditCard, Shield, Info,
 import { useNavigate } from 'react-router-dom';
 import { cn } from '@/lib/utils';
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
+import { Button } from '@/components/ui/button';
 
 const Index: React.FC = () => {
   const navigate = useNavigate();
@@ -30,107 +32,53 @@ const Index: React.FC = () => {
     }
   ];
   
-  const oneTimePlans = [
-    {
-      name: "Starter",
-      price: 129,
-      description: "Perfect for young children just beginning their learning journey.",
-      features: [
-        { included: true, text: "Basic teddy bear hardware" },
-        { included: true, text: "Limited conversations" },
-        { included: true, text: "100+ educational stories" },
-        { included: true, text: "Basic parent dashboard" },
-        { included: false, text: "Advanced learning algorithms" },
-        { included: false, text: "Personalized learning path" },
-        { included: false, text: "Premium content library" }
-      ],
-      popular: false,
-      ctaText: "Get Started"
-    },
-    {
-      name: "Premium",
-      price: 179,
-      description: "Our most popular option with enhanced learning capabilities.",
-      features: [
-        { included: true, text: "Enhanced teddy bear hardware" },
-        { included: true, text: "Advanced conversation abilities" },
-        { included: true, text: "500+ educational stories" },
-        { included: true, text: "Advanced parent dashboard" },
-        { included: true, text: "Basic personalization" },
-        { included: true, text: "Regular content updates" },
-        { included: false, text: "Premium content library" }
-      ],
-      popular: true,
-      ctaText: "Choose Premium"
-    },
-    {
-      name: "Ultimate",
-      price: 229,
-      description: "The complete hardware package for maximum educational benefit.",
-      features: [
-        { included: true, text: "Premium teddy bear hardware" },
-        { included: true, text: "Premium conversation AI" },
-        { included: true, text: "1000+ educational stories" },
-        { included: true, text: "Advanced analytics dashboard" },
-        { included: true, text: "Enhanced personalization" },
-        { included: true, text: "Priority content updates" },
-        { included: true, text: "Basic content library access" }
-      ],
-      popular: false,
-      ctaText: "Choose Ultimate"
-    }
-  ];
+  const oneTimePlan = {
+    name: "TeddyPal Hardware",
+    price: 129,
+    description: "The perfect teddy companion for your child's learning journey.",
+    features: [
+      { included: true, text: "Premium teddy bear hardware" },
+      { included: true, text: "Basic conversation capabilities" },
+      { included: true, text: "100+ educational stories" },
+      { included: true, text: "Parent dashboard" },
+      { included: true, text: "1-year hardware warranty" },
+      { included: true, text: "30-day money back guarantee" }
+    ],
+    popular: true,
+    ctaText: "Purchase Now"
+  };
   
   const subscriptionPlans = [
     {
       name: "Basic",
       price: 4.99,
       period: "monthly",
-      description: "Essential API access for continued service.",
+      description: "Essential access for continued learning.",
       features: [
         { included: true, text: "Basic AI conversation quota (200/month)" },
         { included: true, text: "Standard response time" },
         { included: true, text: "Monthly content updates" },
         { included: true, text: "Basic cloud storage" },
         { included: false, text: "Premium educational content" },
-        { included: false, text: "Advanced personalization" },
         { included: false, text: "Priority support" }
       ],
       popular: false,
       ctaText: "Choose Basic"
     },
     {
-      name: "Plus",
+      name: "Premium",
       price: 9.99,
       period: "monthly",
-      description: "Enhanced features and more API calls for active users.",
-      features: [
-        { included: true, text: "Enhanced AI conversation quota (500/month)" },
-        { included: true, text: "Faster response time" },
-        { included: true, text: "Bi-weekly content updates" },
-        { included: true, text: "Advanced cloud storage" },
-        { included: true, text: "Basic premium content access" },
-        { included: true, text: "Basic personalization" },
-        { included: false, text: "Priority support" }
-      ],
-      popular: true,
-      ctaText: "Choose Plus"
-    },
-    {
-      name: "Premium",
-      price: 14.99,
-      period: "monthly",
-      description: "Unlimited access to all premium features and content.",
+      description: "Enhanced features for active learners.",
       features: [
         { included: true, text: "Unlimited AI conversations" },
-        { included: true, text: "Fastest response time" },
+        { included: true, text: "Faster response time" },
         { included: true, text: "Weekly content updates" },
-        { included: true, text: "Premium cloud storage" },
+        { included: true, text: "Advanced cloud storage" },
         { included: true, text: "Full premium content access" },
-        { included: true, text: "Advanced personalization" },
         { included: true, text: "24/7 priority support" }
       ],
-      popular: false,
+      popular: true,
       ctaText: "Choose Premium"
     }
   ];
@@ -233,14 +181,14 @@ const Index: React.FC = () => {
                 Simple, Transparent Pricing
               </h2>
               <p className="text-lg text-gray-600 dark:text-gray-300 mb-8">
-                TeddyPal requires both a one-time hardware purchase and an ongoing subscription for API access and content updates.
+                TeddyPal requires both a one-time hardware purchase and an ongoing subscription for AI access and content updates.
               </p>
               
               <div className="bg-teddy-cream/50 dark:bg-teddy-blue/10 p-4 rounded-xl max-w-2xl mx-auto mb-8">
                 <div className="flex items-start">
                   <Info className="h-5 w-5 text-teddy-coral mr-2 flex-shrink-0 mt-1" />
                   <p className="text-sm text-gray-700 dark:text-gray-300 text-left">
-                    TeddyPal requires both a one-time hardware purchase and an ongoing subscription for API access and content updates. Select your preferred options below.
+                    TeddyPal requires both a one-time hardware purchase and an ongoing subscription for AI access and content updates. Select your preferred options below.
                   </p>
                 </div>
               </div>
@@ -263,76 +211,63 @@ const Index: React.FC = () => {
               </TabsList>
               
               <TabsContent value="hardware">
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-                  {oneTimePlans.map((plan, index) => (
-                    <AnimatedCard 
-                      key={index}
-                      delay={index * 100}
-                      className={cn(
-                        "relative overflow-hidden border h-full",
-                        plan.popular 
-                          ? "border-2 border-teddy-coral shadow-medium" 
-                          : "border-gray-100 dark:border-gray-800"
-                      )}
-                    >
-                      {plan.popular && (
-                        <div className="absolute top-0 right-0 bg-teddy-coral text-white px-4 py-1 rounded-bl-lg text-sm font-medium">
-                          Most Popular
-                        </div>
-                      )}
-                      
-                      <div className="p-6">
-                        <div className="text-center pb-2">
-                          <h3 className="text-xl font-bold">{plan.name}</h3>
-                          <p className="text-gray-600 dark:text-gray-300 mb-2">{plan.description}</p>
-                          <div className="flex items-center justify-center">
-                            <span className="text-3xl font-bold text-teddy-charcoal dark:text-white">${plan.price}</span>
-                            <span className="text-gray-500 dark:text-gray-400 ml-1">one-time</span>
-                          </div>
-                        </div>
-                        
-                        <div className="pt-4">
-                          <ul className="space-y-3 mb-6">
-                            {plan.features.map((feature, featureIndex) => (
-                              <li key={featureIndex} className="flex items-start">
-                                {feature.included ? (
-                                  <Check className="h-5 w-5 text-teddy-mint mr-2 flex-shrink-0" />
-                                ) : (
-                                  <X className="h-5 w-5 text-gray-400 mr-2 flex-shrink-0" />
-                                )}
-                                <span className={feature.included ? "text-gray-700 dark:text-gray-300" : "text-gray-400 dark:text-gray-500"}>
-                                  {feature.text}
-                                </span>
-                              </li>
-                            ))}
-                          </ul>
-                        </div>
-                        
-                        <div className="mt-auto">
-                          <button 
-                            onClick={() => navigate('/pre-order')}
-                            className={cn(
-                              "w-full py-2 px-4 rounded-lg text-white font-medium transition-colors",
-                              plan.popular 
-                                ? 'bg-teddy-coral hover:bg-teddy-coral/90' 
-                                : 'bg-teddy-blue hover:bg-teddy-blue/90'
-                            )}
-                          >
-                            {plan.ctaText}
-                          </button>
+                <div className="max-w-md mx-auto">
+                  <AnimatedCard 
+                    delay={100}
+                    className="border-2 border-teddy-coral shadow-lg relative overflow-hidden"
+                  >
+                    <div className="absolute top-0 right-0 bg-teddy-coral text-white px-4 py-1 rounded-bl-lg text-sm font-medium">
+                      Most Popular
+                    </div>
+                    
+                    <div className="p-6">
+                      <div className="text-center pb-2">
+                        <h3 className="text-2xl font-bold">{oneTimePlan.name}</h3>
+                        <p className="text-gray-600 dark:text-gray-300 mb-2">{oneTimePlan.description}</p>
+                        <div className="flex items-center justify-center">
+                          <span className="text-4xl font-bold text-teddy-charcoal dark:text-white">${oneTimePlan.price}</span>
+                          <span className="text-gray-500 dark:text-gray-400 ml-1">one-time</span>
                         </div>
                       </div>
-                    </AnimatedCard>
-                  ))}
-                </div>
-                
-                <div className="text-center mt-6 text-sm text-gray-500 dark:text-gray-400">
-                  All hardware purchases include a 1-year warranty and 30-day money-back guarantee.
+                      
+                      <div className="pt-4">
+                        <ul className="space-y-3 mb-6">
+                          {oneTimePlan.features.map((feature, featureIndex) => (
+                            <li key={featureIndex} className="flex items-start">
+                              {feature.included ? (
+                                <Check className="h-5 w-5 text-teddy-mint mr-2 flex-shrink-0" />
+                              ) : (
+                                <X className="h-5 w-5 text-gray-400 mr-2 flex-shrink-0" />
+                              )}
+                              <span className={feature.included ? "text-gray-700 dark:text-gray-300" : "text-gray-400 dark:text-gray-500"}>
+                                {feature.text}
+                              </span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                      
+                      <div className="mt-auto">
+                        <Button 
+                          variant="purple"
+                          size="full"
+                          onClick={() => navigate('/pre-order')}
+                          className="rounded-lg py-6"
+                        >
+                          {oneTimePlan.ctaText}
+                        </Button>
+                      </div>
+                    </div>
+                  </AnimatedCard>
+                  
+                  <div className="text-center mt-6 text-sm text-gray-500 dark:text-gray-400">
+                    All hardware purchases include a 1-year warranty and 30-day money-back guarantee.
+                  </div>
                 </div>
               </TabsContent>
               
               <TabsContent value="subscription">
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
                   {subscriptionPlans.map((plan, index) => (
                     <AnimatedCard 
                       key={index}
@@ -340,7 +275,7 @@ const Index: React.FC = () => {
                       className={cn(
                         "relative overflow-hidden border h-full",
                         plan.popular 
-                          ? "border-2 border-teddy-coral shadow-medium" 
+                          ? "border-2 border-teddy-coral shadow-lg" 
                           : "border-gray-100 dark:border-gray-800"
                       )}
                     >
@@ -352,10 +287,10 @@ const Index: React.FC = () => {
                       
                       <div className="p-6">
                         <div className="text-center pb-2">
-                          <h3 className="text-xl font-bold">{plan.name}</h3>
+                          <h3 className="text-2xl font-bold">{plan.name}</h3>
                           <p className="text-gray-600 dark:text-gray-300 mb-2">{plan.description}</p>
                           <div className="flex items-center justify-center">
-                            <span className="text-3xl font-bold text-teddy-charcoal dark:text-white">${plan.price}</span>
+                            <span className="text-4xl font-bold text-teddy-charcoal dark:text-white">${plan.price}</span>
                             <span className="text-gray-500 dark:text-gray-400 ml-1">/{plan.period}</span>
                           </div>
                         </div>
@@ -378,17 +313,14 @@ const Index: React.FC = () => {
                         </div>
                         
                         <div className="mt-auto">
-                          <button 
+                          <Button 
+                            variant={plan.popular ? "purple" : "coral"}
+                            size="full"
                             onClick={() => navigate('/pre-order')}
-                            className={cn(
-                              "w-full py-2 px-4 rounded-lg text-white font-medium transition-colors",
-                              plan.popular 
-                                ? 'bg-teddy-coral hover:bg-teddy-coral/90' 
-                                : 'bg-teddy-blue hover:bg-teddy-blue/90'
-                            )}
+                            className="rounded-lg py-6"
                           >
                             {plan.ctaText}
-                          </button>
+                          </Button>
                         </div>
                       </div>
                     </AnimatedCard>
@@ -429,12 +361,22 @@ const Index: React.FC = () => {
                   Join thousands of families using TeddyPal to spark curiosity, foster emotional intelligence, and create magical learning moments.
                 </p>
                 <div className="flex flex-wrap justify-center gap-4">
-                  <button onClick={() => navigate('/pre-order')} className="btn-primary py-3 px-8 text-base">
+                  <Button 
+                    variant="purple" 
+                    size="xl"
+                    onClick={() => navigate('/pre-order')}
+                    className="rounded-lg"
+                  >
                     Get Started Today
-                  </button>
-                  <button onClick={() => navigate('/teddy-demo')} className="btn-ghost text-base">
+                  </Button>
+                  <Button 
+                    variant="outline"
+                    size="xl"
+                    onClick={() => navigate('/teddy-demo')}
+                    className="rounded-lg"
+                  >
                     Try Demo
-                  </button>
+                  </Button>
                 </div>
               </AnimatedCard>
             </div>
