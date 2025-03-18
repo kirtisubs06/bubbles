@@ -36,7 +36,7 @@ const PreOrderSignup: React.FC = () => {
           className="text-center mb-12"
         >
           <h1 className="text-4xl md:text-5xl font-bold tracking-tight text-teddy-charcoal dark:text-white mb-4">
-            Pre-order Your <span className="text-teddy-coral">TeddyAI</span> Companion
+            Pre-order Your <span className="text-teddy-coral">TeddyPal</span> Companion
           </h1>
           <p className="text-lg md:text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
             Be among the first to bring home this interactive learning companion for your child.
@@ -55,7 +55,7 @@ const PreOrderSignup: React.FC = () => {
             
             <iframe 
               id="JotFormIFrame-250751107337048"
-              title="Pre-order TeddyAI Form"
+              title="Pre-order TeddyPal Form"
               onLoad={handleIframeLoad}
               allowTransparency={true} 
               allowFullScreen={true}

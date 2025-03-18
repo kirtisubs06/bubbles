@@ -11,7 +11,7 @@ const Footer: React.FC = () => {
           <div className="md:col-span-1">
             <Link to="/" className="flex items-center gap-2 mb-4">
               <span className="text-teddy-charcoal dark:text-white text-xl font-heading font-bold tracking-tight">
-                Teddy<span className="text-teddy-coral">AI</span>
+                Teddy<span className="text-teddy-coral">Pal</span>
               </span>
             </Link>
             <p className="text-sm text-gray-600 dark:text-gray-300 mb-4">
@@ -29,7 +29,7 @@ const Footer: React.FC = () => {
             <ul className="space-y-2">
               <li><Link to="/features" className="text-gray-600 dark:text-gray-300 hover:text-teddy-coral dark:hover:text-teddy-coral transition-colors">Features</Link></li>
               <li><Link to="/pricing" className="text-gray-600 dark:text-gray-300 hover:text-teddy-coral dark:hover:text-teddy-coral transition-colors">Pricing</Link></li>
-              <li><Link to="/faq" className="text-gray-600 dark:text-gray-300 hover:text-teddy-coral dark:hover:text-teddy-coral transition-colors">FAQ</Link></li>
+              <li><Link to="/teddy-demo" className="text-gray-600 dark:text-gray-300 hover:text-teddy-coral dark:hover:text-teddy-coral transition-colors">Demo</Link></li>
             </ul>
           </div>
           
@@ -38,9 +38,9 @@ const Footer: React.FC = () => {
               Company
             </h3>
             <ul className="space-y-2">
-              <li><Link to="/about" className="text-gray-600 dark:text-gray-300 hover:text-teddy-coral dark:hover:text-teddy-coral transition-colors">About</Link></li>
-              <li><Link to="/contact" className="text-gray-600 dark:text-gray-300 hover:text-teddy-coral dark:hover:text-teddy-coral transition-colors">Contact</Link></li>
-              <li><Link to="/careers" className="text-gray-600 dark:text-gray-300 hover:text-teddy-coral dark:hover:text-teddy-coral transition-colors">Careers</Link></li>
+              <li><Link to="/features" className="text-gray-600 dark:text-gray-300 hover:text-teddy-coral dark:hover:text-teddy-coral transition-colors">About</Link></li>
+              <li><Link to="/pre-order" className="text-gray-600 dark:text-gray-300 hover:text-teddy-coral dark:hover:text-teddy-coral transition-colors">Pre-order</Link></li>
+              <li><Link to="/teddy-demo" className="text-gray-600 dark:text-gray-300 hover:text-teddy-coral dark:hover:text-teddy-coral transition-colors">Try Demo</Link></li>
             </ul>
           </div>
           
@@ -49,16 +49,16 @@ const Footer: React.FC = () => {
               Legal
             </h3>
             <ul className="space-y-2">
-              <li><Link to="/privacy" className="text-gray-600 dark:text-gray-300 hover:text-teddy-coral dark:hover:text-teddy-coral transition-colors">Privacy Policy</Link></li>
-              <li><Link to="/terms" className="text-gray-600 dark:text-gray-300 hover:text-teddy-coral dark:hover:text-teddy-coral transition-colors">Terms of Service</Link></li>
-              <li><Link to="/safety" className="text-gray-600 dark:text-gray-300 hover:text-teddy-coral dark:hover:text-teddy-coral transition-colors">Child Safety</Link></li>
+              <li><Link to="/pricing" className="text-gray-600 dark:text-gray-300 hover:text-teddy-coral dark:hover:text-teddy-coral transition-colors">Privacy Policy</Link></li>
+              <li><Link to="/pricing" className="text-gray-600 dark:text-gray-300 hover:text-teddy-coral dark:hover:text-teddy-coral transition-colors">Terms of Service</Link></li>
+              <li><Link to="/pricing" className="text-gray-600 dark:text-gray-300 hover:text-teddy-coral dark:hover:text-teddy-coral transition-colors">Child Safety</Link></li>
             </ul>
           </div>
         </div>
         
         <div className="mt-12 pt-8 border-t border-gray-200 dark:border-gray-700">
           <p className="text-center text-gray-600 dark:text-gray-300 text-sm">
-            &copy; {new Date().getFullYear()} TeddyAI. All rights reserved. Made with <Heart className="inline-block h-4 w-4 text-teddy-coral" /> for curious little minds.
+            &copy; {new Date().getFullYear()} TeddyPal. All rights reserved. Made with <Heart className="inline-block h-4 w-4 text-teddy-coral" /> for curious little minds.
           </p>
         </div>
       </div>

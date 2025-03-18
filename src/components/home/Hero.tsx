@@ -57,12 +57,12 @@ const Hero: React.FC = () => {
             </p>
             
             <div className="flex flex-wrap gap-4">
-              <button onClick={() => navigate('/login')} className="btn-primary py-3 px-6 text-base">
+              <button onClick={() => navigate('/pre-order')} className="btn-primary py-3 px-6 text-base">
                 Get Started
                 <ArrowRight className="ml-2 h-5 w-5" />
               </button>
-              <button onClick={() => navigate('/dashboard')} className="btn-ghost text-base">
-                Dashboard Demo
+              <button onClick={() => navigate('/teddy-demo')} className="btn-ghost text-base">
+                Try Demo
               </button>
             </div>
             
