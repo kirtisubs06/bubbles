@@ -2,9 +2,8 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { cn } from '@/lib/utils';
-import { Menu, X, LogIn, Sparkles, Package, Waves, Activity, Heart } from 'lucide-react';
+import { Menu, X, Sparkles, Package, Waves, Activity } from 'lucide-react';
 import { motion } from 'framer-motion';
-import { Button } from '@/components/ui/button';
 
 const Header: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -104,17 +103,6 @@ const Header: React.FC = () => {
               animate={isActive('/pricing') ? { width: "100%" } : { width: "0%" }}
             />
           </Link>
-          <motion.div
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-          >
-            <Button variant="fun" asChild className="ml-4">
-              <Link to="/login">
-                <LogIn className="mr-1 h-4 w-4" />
-                Sign In
-              </Link>
-            </Button>
-          </motion.div>
         </nav>
         
         {/* Mobile Menu Toggle */}
@@ -164,12 +152,6 @@ const Header: React.FC = () => {
             <Link to="/pricing" className={cn("nav-link", isActive('/pricing') && "active")}>
               Pricing
             </Link>
-            <Button variant="fun" asChild className="mt-4">
-              <Link to="/login">
-                <LogIn className="mr-1 h-4 w-4" />
-                Sign In
-              </Link>
-            </Button>
           </nav>
           
           {/* Decorative elements */}
