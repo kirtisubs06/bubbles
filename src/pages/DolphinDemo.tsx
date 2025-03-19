@@ -48,7 +48,10 @@ const DolphinDemo: React.FC = () => {
           className="text-center mb-12"
         >
           <h1 className="text-4xl md:text-5xl font-bold tracking-tight text-bubbles-deep dark:text-white mb-4">
-            Meet Your Child's <span className="text-bubbles-blue">Dolphin</span> Companion
+            Meet Your Child's <span className="relative">
+              <span className="relative z-10 text-bubbles-blue">Dolphin</span>
+              <span className="absolute bottom-1 left-0 w-full h-3 bg-bubbles-yellow rounded-lg -z-10"></span>
+            </span> Companion
           </h1>
           <p className="text-lg md:text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
             Interact with our 3D demo and experience how Bubbles creates magical learning moments for your child.
@@ -73,7 +76,7 @@ const DolphinDemo: React.FC = () => {
             </TabsTrigger>
             <TabsTrigger 
               value="features" 
-              className="text-base md:text-lg py-5 px-6 h-full rounded-r-full data-[state=active]:bg-gradient-to-r data-[state=active]:from-bubbles-yellow data-[state=active]:to-bubbles-coral data-[state=active]:text-white dark:data-[state=active]:text-white data-[state=active]:shadow-sm transition-all duration-200 relative z-10 font-medium outline-none focus:outline-none data-[state=inactive]:bg-white dark:data-[state=inactive]:bg-bubbles-deep/50"
+              className="text-base md:text-lg py-5 px-6 h-full rounded-r-full data-[state=active]:bg-gradient-to-r data-[state=active]:from-bubbles-yellow data-[state=active]:to-bubbles-lime data-[state=active]:text-bubbles-deep dark:data-[state=active]:text-white data-[state=active]:shadow-sm transition-all duration-200 relative z-10 font-medium outline-none focus:outline-none data-[state=inactive]:bg-white dark:data-[state=inactive]:bg-bubbles-deep/50"
             >
               Features & Interaction
             </TabsTrigger>
@@ -153,7 +156,7 @@ const DolphinDemo: React.FC = () => {
                   <h3 className="text-2xl font-bold text-bubbles-deep dark:text-white mb-4">Dolphin Intelligence</h3>
                   <ul className="space-y-3">
                     <li className="flex items-start">
-                      <span className="text-bubbles-coral mr-2">🌟</span>
+                      <span className="text-bubbles-yellow mr-2">🌟</span>
                       <span className="text-bubbles-deep dark:text-gray-200">Adapts to your child's interests</span>
                     </li>
                     <li className="flex items-start">
