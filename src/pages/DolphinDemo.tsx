@@ -5,7 +5,8 @@ import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
 import Header from '@/components/layout/Header';
 import { useIntersectionAnimation } from '@/lib/animations';
 import { toast } from '@/components/ui/use-toast';
-import { Loader2 } from 'lucide-react';
+import { Loader2, AlertTriangle } from 'lucide-react';
+import { Alert, AlertTitle, AlertDescription } from '@/components/ui/alert';
 
 // Lazy load the 3D components to improve initial page load
 const DolphinModel3D = React.lazy(() => import('@/components/dolphin/DolphinModel3D'));
@@ -79,6 +80,15 @@ const DolphinDemo: React.FC = () => {
           
           <TabsContent value="3d" className="mt-6">
             <div className="bg-gradient-to-br from-bubbles-cream to-white dark:from-bubbles-blue/10 dark:to-bubbles-teal/20 p-6 md:p-10 rounded-3xl shadow-medium">
+              <Alert className="mb-6 bg-bubbles-blue/10 border-bubbles-blue/20">
+                <AlertTriangle className="h-4 w-4 text-bubbles-blue" />
+                <AlertTitle>Important Note</AlertTitle>
+                <AlertDescription>
+                  The actual product will be a plush dolphin stuffed animal, not the 3D model shown here. 
+                  This 3D dolphin is for demonstration purposes only to showcase the interactive features.
+                </AlertDescription>
+              </Alert>
+              
               <div 
                 className="h-[500px] md:h-[600px] w-full relative rounded-2xl overflow-hidden bg-gradient-to-b from-bubbles-skyblue/20 to-bubbles-aqua/20"
               >

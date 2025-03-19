@@ -1,3 +1,4 @@
+
 import React, { useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ArrowRight, Sparkles, Waves, Heart } from 'lucide-react';
@@ -129,49 +130,40 @@ const Hero: React.FC = () => {
             <div className="relative bg-white dark:bg-bubbles-deep/80 rounded-3xl shadow-bubbly overflow-hidden p-6 animate-float">
               <div className="aspect-square rounded-2xl bg-blue-100 dark:bg-blue-200 flex items-center justify-center">
                 <div className="w-4/5 h-4/5 relative">
-                  <svg viewBox="0 0 600 400" className="w-full h-full">
-                    <path d="M150,200 C150,160 220,125 320,135 C420,145 480,170 500,260 C520,340 460,370 360,360 C260,350 150,320 150,200 Z" 
-                      fill="#667e99" stroke="#424b54" strokeWidth="3" />
+                  {/* Simple Fish SVG */}
+                  <svg viewBox="0 0 400 300" className="w-full h-full">
+                    {/* Fish Body */}
+                    <path d="M300,150 C300,100 240,60 150,80 C70,100 30,130 30,150 C30,180 70,200 150,220 C240,240 300,200 300,150 Z" 
+                      fill="#5e7082" stroke="#424b54" strokeWidth="3" />
                     
-                    <path d="M150,220 C150,250 200,280 320,290 C420,295 460,280 480,270 C460,330 420,350 320,350 C200,350 160,310 150,220 Z" 
-                      fill="#e8e8e8" />
-                    
-                    <path d="M320,135 C320,80 380,90 345,140 Z" 
+                    {/* Fish Tail */}
+                    <path d="M30,150 C10,120 5,90 20,80 C30,100 40,120 30,150 C40,180 30,200 20,220 C5,210 10,180 30,150 Z" 
                       fill="#5e7082" stroke="#424b54" strokeWidth="2" />
                     
-                    <path d="M320,135 C330,130 340,130 345,140 C330,150 315,150 320,135 Z" 
+                    {/* Fish Eye */}
+                    <circle cx="260" cy="140" r="15" fill="#000000" />
+                    <circle cx="258" cy="138" r="5" fill="#ffffff" />
+                    
+                    {/* Fish Fins */}
+                    <path d="M150,80 C140,40 120,30 100,40 C120,60 140,70 150,80 Z" 
+                      fill="#5e7082" stroke="#424b54" strokeWidth="2" />
+                    <path d="M150,220 C140,260 120,270 100,260 C120,240 140,230 150,220 Z" 
+                      fill="#5e7082" stroke="#424b54" strokeWidth="2" />
+                    <path d="M200,100 C220,80 250,70 260,80 C240,90 220,100 200,100 Z" 
                       fill="#5e7082" stroke="#424b54" strokeWidth="2" />
                     
-                    <path d="M490,260 C530,230 570,270 520,310 C470,340 450,280 490,260 Z" 
-                      fill="#5e7082" stroke="#424b54" strokeWidth="2" />
+                    {/* Fish Pattern */}
+                    <path d="M220,150 C230,140 240,135 250,140 C240,150 230,155 220,150 Z" 
+                      fill="#424b54" stroke="none" />
+                    <path d="M180,170 C190,160 200,155 210,160 C200,170 190,175 180,170 Z" 
+                      fill="#424b54" stroke="none" />
+                    <path d="M180,130 C190,120 200,115 210,120 C200,130 190,135 180,130 Z" 
+                      fill="#424b54" stroke="none" />
                     
-                    <path d="M480,260 C490,250 500,250 490,260 C480,270 470,270 480,260 Z"
-                      fill="#5e7082" stroke="#424b54" strokeWidth="2" />
-                    
-                    <path d="M250,260 C210,290 180,260 215,230 C250,215 270,230 250,260 Z" 
-                      fill="#5e7082" stroke="#424b54" strokeWidth="2" />
-                    
-                    <path d="M250,240 C255,235 260,235 265,240 C260,245 250,245 250,240 Z"
-                      fill="#5e7082" stroke="#424b54" strokeWidth="2" />
-                    
-                    <path d="M280,260 C320,290 350,260 315,230 C280,215 260,230 280,260 Z" 
-                      fill="#5e7082" stroke="#424b54" strokeWidth="2" />
-                    
-                    <path d="M280,240 C275,235 270,235 265,240 C270,245 280,245 280,240 Z"
-                      fill="#5e7082" stroke="#424b54" strokeWidth="2" />
-                    
-                    <path d="M150,200 C120,190 90,190 110,210 C130,230 150,210 150,200 Z" 
-                      fill="#667e99" stroke="#424b54" strokeWidth="2" />
-                    <path d="M110,205 C120,205 140,205 150,200" 
-                      fill="none" stroke="#424b54" strokeWidth="1" />
-                    
-                    <path d="M520,280 C550,240 580,250 560,290 C540,320 500,300 520,280 Z" 
-                      fill="#5e7082" stroke="#424b54" strokeWidth="2" />
-                    
-                    <circle cx="155" cy="190" r="10" fill="#000000" />
-                    <circle cx="153" cy="188" r="2" fill="#ffffff" />
-                    
-                    <ellipse cx="195" cy="145" rx="8" ry="3" fill="#424b54" />
+                    {/* Bubbles */}
+                    <circle cx="320" cy="120" r="10" fill="none" stroke="#424b54" strokeWidth="1" opacity="0.6" />
+                    <circle cx="350" cy="140" r="5" fill="none" stroke="#424b54" strokeWidth="1" opacity="0.6" />
+                    <circle cx="340" cy="100" r="8" fill="none" stroke="#424b54" strokeWidth="1" opacity="0.6" />
                   </svg>
                 </div>
               </div>
@@ -182,13 +174,13 @@ const Hero: React.FC = () => {
                     <span className="text-white text-xs">👦</span>
                   </div>
                   <div className="flex-1 bg-gray-100 dark:bg-gray-700 rounded-2xl rounded-tl-none p-3">
-                    <p className="text-sm">Why do dolphins swim in pods?</p>
+                    <p className="text-sm">Why do fish swim in schools?</p>
                   </div>
                 </div>
                 
                 <div className="flex items-start space-x-3">
                   <div className="flex-1 bg-gradient-to-br from-bubbles-aqua/20 to-bubbles-skyblue/20 rounded-2xl rounded-tr-none p-3">
-                    <p className="text-sm">Dolphins swim in pods because they're highly social animals! Pods help them hunt together, protect each other from predators, and they even develop special whistles to call their friends and family!</p>
+                    <p className="text-sm">Fish swim in schools to stay safe from predators! When they're all together, it's harder for bigger fish to catch them. Plus, they can find food more easily and swim more efficiently in groups!</p>
                   </div>
                   <div className="w-10 h-10 flex-shrink-0 rounded-full bg-gradient-to-br from-bubbles-blue to-bubbles-teal flex items-center justify-center">
                     <span className="text-white text-xs">🐬</span>
