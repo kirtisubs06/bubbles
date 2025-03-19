@@ -7,7 +7,7 @@ const Footer: React.FC = () => {
   return (
     <footer className="bg-bubbles-cream dark:bg-bubbles-deep py-12 border-t border-gray-100 dark:border-gray-800">
       <div className="container mx-auto px-4">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           <div className="md:col-span-1">
             <Link to="/" className="flex items-center gap-2 mb-4">
               <span className="text-bubbles-deep dark:text-white text-xl font-heading font-bold tracking-tight">
@@ -38,20 +38,8 @@ const Footer: React.FC = () => {
               Company
             </h3>
             <ul className="space-y-2">
-              <li><Link to="/about" className="text-gray-600 dark:text-gray-300 hover:text-bubbles-blue dark:hover:text-bubbles-blue transition-colors">About</Link></li>
               <li><Link to="/pre-order" className="text-gray-600 dark:text-gray-300 hover:text-bubbles-blue dark:hover:text-bubbles-blue transition-colors">Pre-order</Link></li>
               <li><Link to="/dolphin-demo" className="text-gray-600 dark:text-gray-300 hover:text-bubbles-blue dark:hover:text-bubbles-blue transition-colors">Try Demo</Link></li>
-            </ul>
-          </div>
-          
-          <div className="md:col-span-1">
-            <h3 className="text-sm font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400 mb-4">
-              Legal
-            </h3>
-            <ul className="space-y-2">
-              <li><Link to="/privacy" className="text-gray-600 dark:text-gray-300 hover:text-bubbles-blue dark:hover:text-bubbles-blue transition-colors">Privacy Policy</Link></li>
-              <li><Link to="/terms" className="text-gray-600 dark:text-gray-300 hover:text-bubbles-blue dark:hover:text-bubbles-blue transition-colors">Terms of Service</Link></li>
-              <li><Link to="/child-safety" className="text-gray-600 dark:text-gray-300 hover:text-bubbles-blue dark:hover:text-bubbles-blue transition-colors">Child Safety</Link></li>
             </ul>
           </div>
         </div>

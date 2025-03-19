@@ -1,3 +1,4 @@
+
 import React, { useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ArrowRight, Sparkles, Waves, Heart } from 'lucide-react';
@@ -127,30 +128,49 @@ const Hero: React.FC = () => {
           <div ref={imageRef} className="relative transition-transform duration-200 ease-out">
             <div className="absolute inset-0 bg-gradient-to-br from-bubbles-blue/20 to-[#9b87f5]/20 rounded-3xl transform rotate-3 scale-105"></div>
             <div className="relative bg-white dark:bg-bubbles-deep/80 rounded-3xl shadow-bubbly overflow-hidden p-6 animate-float">
-              <div className="aspect-square rounded-2xl bg-pink-100 dark:bg-pink-200 flex items-center justify-center">
-                <div className="w-3/4 h-3/4 relative">
-                  <svg viewBox="0 0 400 400" className="w-full h-full">
-                    <path d="M140,200 C140,140 200,80 260,100 C320,120 340,200 330,240 C320,280 270,320 200,300 C150,280 140,260 140,200 Z" 
-                      fill="#A8D0E6" stroke="#2E5984" strokeWidth="8" />
+              <div className="aspect-square rounded-2xl bg-blue-100 dark:bg-blue-200 flex items-center justify-center">
+                <div className="w-4/5 h-4/5 relative">
+                  <svg viewBox="0 0 600 400" className="w-full h-full">
+                    {/* Realistic dolphin body - gray with white belly */}
+                    <path d="M150,200 C150,150 220,120 320,130 C420,140 480,180 500,260 C520,340 460,380 360,370 C260,360 150,330 150,200 Z" 
+                      fill="#667e99" stroke="#424b54" strokeWidth="3" />
                     
-                    <path d="M170,220 C170,200 200,170 240,180 C280,190 280,230 270,250 C260,270 210,280 180,270 C160,260 170,240 170,220 Z" 
-                      fill="#FFFFFF" />
+                    {/* White belly */}
+                    <path d="M150,200 C150,200 200,250 320,260 C420,265 460,240 480,210 C460,280 420,320 320,320 C220,320 165,290 150,200 Z" 
+                      fill="#e8e8e8" />
                     
-                    <path d="M240,100 C260,60 290,70 280,110 C270,150 220,140 240,100 Z" 
-                      fill="#7EB6D9" stroke="#2E5984" strokeWidth="8" />
+                    {/* Dorsal fin */}
+                    <path d="M320,130 C340,80 380,120 350,150 C320,180 300,150 320,130 Z" 
+                      fill="#5e7082" stroke="#424b54" strokeWidth="2" />
                     
-                    <path d="M330,240 C350,230 370,250 340,270 C310,290 310,250 330,240 Z" 
-                      fill="#7EB6D9" stroke="#2E5984" strokeWidth="8" />
+                    {/* Tail */}
+                    <path d="M490,260 C530,240 570,280 520,310 C470,340 445,290 490,260 Z" 
+                      fill="#5e7082" stroke="#424b54" strokeWidth="2" />
                     
-                    <path d="M170,230 C150,250 120,260 140,220 C160,180 190,210 170,230 Z" 
-                      fill="#7EB6D9" stroke="#2E5984" strokeWidth="8" />
-                    <path d="M250,240 C280,280 300,250 270,220 C240,190 220,200 250,240 Z" 
-                      fill="#7EB6D9" stroke="#2E5984" strokeWidth="8" />
+                    {/* Left flipper */}
+                    <path d="M250,260 C200,290 170,260 210,230 C250,200 270,230 250,260 Z" 
+                      fill="#5e7082" stroke="#424b54" strokeWidth="2" />
                     
-                    <path d="M140,200 C120,190 90,200 110,220 C130,240 150,210 140,200 Z" 
-                      fill="#A8D0E6" stroke="#2E5984" strokeWidth="8" />
+                    {/* Right flipper */}
+                    <path d="M280,260 C330,290 360,260 320,230 C280,200 260,230 280,260 Z" 
+                      fill="#5e7082" stroke="#424b54" strokeWidth="2" />
                     
-                    <circle cx="150" cy="190" r="5" fill="#2E5984" />
+                    {/* Snout with mouth line */}
+                    <path d="M150,200 C120,190 90,190 110,210 C130,230 150,210 150,200 Z" 
+                      fill="#667e99" stroke="#424b54" strokeWidth="2" />
+                    <path d="M110,205 C120,205 140,205 150,200" 
+                      fill="none" stroke="#424b54" strokeWidth="1" />
+                    
+                    {/* Flukes */}
+                    <path d="M520,280 C550,250 580,260 560,290 C540,320 500,300 520,280 Z" 
+                      fill="#5e7082" stroke="#424b54" strokeWidth="2" />
+                    
+                    {/* Eye */}
+                    <circle cx="155" cy="190" r="6" fill="#000000" />
+                    <circle cx="153" cy="188" r="1" fill="#ffffff" />
+                    
+                    {/* Blowhole */}
+                    <ellipse cx="195" cy="145" rx="8" ry="3" fill="#424b54" />
                   </svg>
                 </div>
               </div>

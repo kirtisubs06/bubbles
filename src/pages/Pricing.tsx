@@ -79,7 +79,7 @@ const Pricing: React.FC = () => {
     },
     {
       question: "What happens if I don't subscribe after purchasing the dolphin?",
-      answer: "Your Bubbles will still function with basic features and pre-loaded content, but advanced AI conversations and new content updates will require an active subscription."
+      answer: "Your Bubbles will not have active AI conversation capabilities as these require API calls. Only pre-loaded basic content will be accessible without a subscription."
     },
     {
       question: "What age range is Bubbles suitable for?",
