@@ -1,4 +1,3 @@
-
 import React, { useRef, useState, useEffect, Suspense } from 'react';
 import { Canvas, useFrame, useThree, useLoader } from '@react-three/fiber';
 import { OrbitControls, Environment, ContactShadows, Preload } from '@react-three/drei';
@@ -242,41 +241,59 @@ const DolphinModel = ({
         <meshStandardMaterial color={detailColor} roughness={0.3} metalness={0.0} />
       </mesh>
       
-      {/* Eyes - matching size and shape on both sides */}
-      <mesh position={[-1.6, 0.3, 0.35]} scale={[0.08, 0.08, 0.08]}>
+      {/* Eyes - both bigger and with matching size */}
+      <mesh position={[-1.6, 0.3, 0.35]} scale={[0.12, 0.12, 0.12]}>
         <sphereGeometry args={[1, 32, 32]} />
         <meshStandardMaterial color="black" />
       </mesh>
-      <mesh position={[-1.6, 0.3, -0.35]} scale={[0.08, 0.08, 0.08]}>
+      <mesh position={[-1.6, 0.3, -0.35]} scale={[0.12, 0.12, 0.12]}>
         <sphereGeometry args={[1, 32, 32]} />
         <meshStandardMaterial color="black" />
       </mesh>
       
       {/* Eye glints - matching for both eyes */}
-      <mesh position={[-1.62, 0.32, 0.35]} scale={[0.02, 0.02, 0.02]}>
+      <mesh position={[-1.62, 0.32, 0.35]} scale={[0.03, 0.03, 0.03]}>
         <sphereGeometry args={[1, 16, 16]} />
         <meshStandardMaterial color="white" emissive="white" emissiveIntensity={0.5} />
       </mesh>
-      <mesh position={[-1.62, 0.32, -0.35]} scale={[0.02, 0.02, 0.02]}>
+      <mesh position={[-1.62, 0.32, -0.35]} scale={[0.03, 0.03, 0.03]}>
         <sphereGeometry args={[1, 16, 16]} />
         <meshStandardMaterial color="white" emissive="white" emissiveIntensity={0.5} />
       </mesh>
       
-      {/* Dorsal fin - taller and more triangular */}
-      <mesh position={[0.2, 0.7, 0]} rotation={[0, 0, 0.1]}>
+      {/* Dorsal fin - taller and more triangular, better attached to body */}
+      <mesh position={[0.2, 0.5, 0]} rotation={[0, 0, 0.1]}>
         <coneGeometry args={[0.35, 1.1, 16]} />
         <meshStandardMaterial color={finColor} roughness={0.3} metalness={0.1} />
       </mesh>
       
-      {/* Left pectoral fin - more defined and triangular */}
-      <mesh position={[-0.7, -0.2, 0.65]} rotation={[0.3, 0.4, -Math.PI / 6]} scale={[0.6, 0.15, 0.05]}>
+      {/* Connecting piece for dorsal fin */}
+      <mesh position={[0.2, 0.25, 0]} scale={[0.3, 0.3, 0.2]}>
+        <sphereGeometry args={[1, 16, 16]} />
+        <meshStandardMaterial color={finColor} roughness={0.3} metalness={0.1} />
+      </mesh>
+      
+      {/* Left pectoral fin - more defined, triangular and connected */}
+      <mesh position={[-0.7, -0.1, 0.55]} rotation={[0.3, 0.4, -Math.PI / 6]} scale={[0.6, 0.15, 0.05]}>
         <sphereGeometry args={[1, 16, 8]} />
         <meshStandardMaterial color={finColor} roughness={0.3} metalness={0.1} />
       </mesh>
       
+      {/* Left fin connection */}
+      <mesh position={[-0.7, 0, 0.4]} scale={[0.2, 0.2, 0.2]}>
+        <sphereGeometry args={[1, 16, 16]} />
+        <meshStandardMaterial color={finColor} roughness={0.3} metalness={0.1} />
+      </mesh>
+      
       {/* Right pectoral fin */}
-      <mesh position={[-0.7, -0.2, -0.65]} rotation={[-0.3, -0.4, -Math.PI / 6]} scale={[0.6, 0.15, 0.05]}>
+      <mesh position={[-0.7, -0.1, -0.55]} rotation={[-0.3, -0.4, -Math.PI / 6]} scale={[0.6, 0.15, 0.05]}>
         <sphereGeometry args={[1, 16, 8]} />
+        <meshStandardMaterial color={finColor} roughness={0.3} metalness={0.1} />
+      </mesh>
+      
+      {/* Right fin connection */}
+      <mesh position={[-0.7, 0, -0.4]} scale={[0.2, 0.2, 0.2]}>
+        <sphereGeometry args={[1, 16, 16]} />
         <meshStandardMaterial color={finColor} roughness={0.3} metalness={0.1} />
       </mesh>
       
@@ -301,6 +318,12 @@ const DolphinModel = ({
             <meshStandardMaterial color={finColor} roughness={0.3} metalness={0.1} />
           </mesh>
         </group>
+      </mesh>
+      
+      {/* Tail connection */}
+      <mesh position={[2.2, 0, 0]} scale={[0.3, 0.3, 0.3]}>
+        <sphereGeometry args={[1, 16, 16]} />
+        <meshStandardMaterial color={finColor} roughness={0.3} metalness={0.1} />
       </mesh>
       
       {/* Interaction button (hidden visually but provides interactivity) */}

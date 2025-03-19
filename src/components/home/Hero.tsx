@@ -1,4 +1,3 @@
-
 import React, { useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ArrowRight, Sparkles, Waves, Heart } from 'lucide-react';
@@ -131,45 +130,47 @@ const Hero: React.FC = () => {
               <div className="aspect-square rounded-2xl bg-blue-100 dark:bg-blue-200 flex items-center justify-center">
                 <div className="w-4/5 h-4/5 relative">
                   <svg viewBox="0 0 600 400" className="w-full h-full">
-                    {/* More realistic dolphin body - sleeker, less round */}
                     <path d="M150,200 C150,160 220,125 320,135 C420,145 480,170 500,260 C520,340 460,370 360,360 C260,350 150,320 150,200 Z" 
                       fill="#667e99" stroke="#424b54" strokeWidth="3" />
                     
-                    {/* White belly - moved to the bottom */}
-                    <path d="M150,200 C150,230 200,250 320,260 C420,265 460,250 480,240 C460,300 420,320 320,320 C200,320 160,280 150,200 Z" 
+                    <path d="M150,220 C150,250 200,280 320,290 C420,295 460,280 480,270 C460,330 420,350 320,350 C200,350 160,310 150,220 Z" 
                       fill="#e8e8e8" />
                     
-                    {/* Dorsal fin - more triangular */}
-                    <path d="M320,135 C320,80 380,100 350,150 C340,160 305,145 320,135 Z" 
+                    <path d="M320,135 C320,80 380,90 345,140 Z" 
                       fill="#5e7082" stroke="#424b54" strokeWidth="2" />
                     
-                    {/* Tail - more defined and triangular */}
+                    <path d="M320,135 C330,130 340,130 345,140 C330,150 315,150 320,135 Z" 
+                      fill="#5e7082" stroke="#424b54" strokeWidth="2" />
+                    
                     <path d="M490,260 C530,230 570,270 520,310 C470,340 450,280 490,260 Z" 
                       fill="#5e7082" stroke="#424b54" strokeWidth="2" />
                     
-                    {/* Left flipper - more triangular */}
+                    <path d="M480,260 C490,250 500,250 490,260 C480,270 470,270 480,260 Z"
+                      fill="#5e7082" stroke="#424b54" strokeWidth="2" />
+                    
                     <path d="M250,260 C210,290 180,260 215,230 C250,215 270,230 250,260 Z" 
                       fill="#5e7082" stroke="#424b54" strokeWidth="2" />
                     
-                    {/* Right flipper - more triangular */}
+                    <path d="M250,240 C255,235 260,235 265,240 C260,245 250,245 250,240 Z"
+                      fill="#5e7082" stroke="#424b54" strokeWidth="2" />
+                    
                     <path d="M280,260 C320,290 350,260 315,230 C280,215 260,230 280,260 Z" 
                       fill="#5e7082" stroke="#424b54" strokeWidth="2" />
                     
-                    {/* Snout with mouth line - more triangular */}
+                    <path d="M280,240 C275,235 270,235 265,240 C270,245 280,245 280,240 Z"
+                      fill="#5e7082" stroke="#424b54" strokeWidth="2" />
+                    
                     <path d="M150,200 C120,190 90,190 110,210 C130,230 150,210 150,200 Z" 
                       fill="#667e99" stroke="#424b54" strokeWidth="2" />
                     <path d="M110,205 C120,205 140,205 150,200" 
                       fill="none" stroke="#424b54" strokeWidth="1" />
                     
-                    {/* Tail flukes - more triangular */}
                     <path d="M520,280 C550,240 580,250 560,290 C540,320 500,300 520,280 Z" 
                       fill="#5e7082" stroke="#424b54" strokeWidth="2" />
                     
-                    {/* Eye */}
-                    <circle cx="155" cy="190" r="6" fill="#000000" />
-                    <circle cx="153" cy="188" r="1" fill="#ffffff" />
+                    <circle cx="155" cy="190" r="10" fill="#000000" />
+                    <circle cx="153" cy="188" r="2" fill="#ffffff" />
                     
-                    {/* Blowhole */}
                     <ellipse cx="195" cy="145" rx="8" ry="3" fill="#424b54" />
                   </svg>
                 </div>
