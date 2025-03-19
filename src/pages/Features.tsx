@@ -97,30 +97,6 @@ const Features: React.FC = () => {
           </div>
         </section>
         
-        {/* Hero Image */}
-        <section className="container mx-auto px-4 pb-20 overflow-hidden">
-          <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            animate={isHeroVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="relative rounded-3xl overflow-hidden h-[400px] md:h-[500px]"
-          >
-            <div className="absolute inset-0 flex items-center justify-center overflow-hidden">
-              <div className="absolute w-full h-full bg-gradient-to-r from-teddy-purple/20 to-teddy-blue/20"></div>
-              <img 
-                src="https://images.unsplash.com/photo-1596461404969-9ae70f2830c1?q=80&w=2000&auto=format&fit=crop"
-                alt="Children playing with teddy bears" 
-                className="w-full h-full object-cover"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
-              <div className="absolute bottom-10 left-10 right-10 text-white">
-                <h2 className="text-3xl md:text-4xl font-bold mb-2">Where Learning Comes to Life</h2>
-                <p className="text-xl opacity-90">Creating meaningful connections through play and conversation</p>
-              </div>
-            </div>
-          </motion.div>
-        </section>
-        
         {/* Features Grid */}
         <section className="py-20 bg-teddy-blue/5 dark:bg-teddy-blue/10">
           <div 
@@ -162,99 +138,79 @@ const Features: React.FC = () => {
           </div>
         </section>
         
-        {/* Interactive Demo Callout */}
-        <section className="py-20">
-          <div className="container mx-auto px-4">
-            <div className="max-w-6xl mx-auto">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-                <motion.div
-                  initial={{ opacity: 0, x: -30 }}
-                  animate={isFeaturesVisible ? { opacity: 1, x: 0 } : { opacity: 0, x: -30 }}
-                  transition={{ duration: 0.6, delay: 0.2 }}
-                >
-                  <h2 className="text-3xl md:text-4xl font-bold text-teddy-charcoal dark:text-white mb-6">
-                    Try TeddyAI in Action
-                  </h2>
-                  <p className="text-lg text-gray-600 dark:text-gray-300 mb-6">
-                    Experience the magic of TeddyAI firsthand with our interactive demo. Ask questions, hear stories, and see how our conversational AI creates personalized learning moments.
-                  </p>
-                  <a href="/teddy-demo" className="btn-primary py-3 px-8 text-base inline-flex items-center">
-                    Experience the Demo
-                    <MessageSquare className="ml-2 h-4 w-4" />
-                  </a>
-                </motion.div>
-                
-                <motion.div
-                  initial={{ opacity: 0, scale: 0.9, rotate: 5 }}
-                  animate={isFeaturesVisible ? { opacity: 1, scale: 1, rotate: 0 } : { opacity: 0, scale: 0.9, rotate: 5 }}
-                  transition={{ duration: 0.7, delay: 0.3 }}
-                  className="relative overflow-hidden rounded-3xl shadow-xl"
-                >
-                  <div className="absolute inset-0 bg-gradient-to-br from-teddy-coral/30 to-teddy-purple/30 transform scale-[1.03] rounded-3xl"></div>
-                  <div className="relative rounded-3xl overflow-hidden aspect-square">
-                    <img 
-                      src="https://images.unsplash.com/photo-1606092195730-5d7b9af1efc5?q=80&w=600&auto=format&fit=crop" 
-                      alt="Child with teddy bear" 
-                      className="w-full h-full object-cover"
-                    />
-                  </div>
-                </motion.div>
-              </div>
-            </div>
-          </div>
-        </section>
-        
-        {/* Image Gallery */}
+        {/* Safety Section */}
         <section className="py-20 bg-teddy-purple/5 dark:bg-teddy-purple/10">
           <div className="container mx-auto px-4">
-            <div className="max-w-5xl mx-auto">
+            <div className="max-w-4xl mx-auto">
               <div className="text-center mb-12">
                 <h2 className="text-3xl md:text-4xl font-bold text-teddy-charcoal dark:text-white mb-6">
-                  Magical Moments with TeddyAI
+                  Designed with Child Safety in Mind
                 </h2>
                 <p className="text-lg text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
-                  See how TeddyAI becomes part of your child's daily adventures, sparking joy and learning
+                  Your child's privacy and safety are our top priorities
                 </p>
               </div>
               
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              <div className="space-y-8">
                 <motion.div
-                  initial={{ opacity: 0, y: 30 }}
-                  animate={isFeaturesVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={isFeaturesVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
                   transition={{ duration: 0.5, delay: 0.1 }}
-                  className="h-64 md:h-80 relative rounded-xl overflow-hidden"
+                  className="glass-panel p-6"
                 >
-                  <img 
-                    src="https://images.unsplash.com/photo-1544146093-f1a113fd1108?q=80&w=600&auto=format&fit=crop" 
-                    alt="Teddy bear reading" 
-                    className="w-full h-full object-cover"
-                  />
+                  <h3 className="text-xl font-bold mb-3 text-teddy-blue dark:text-teddy-blue">Press-to-Talk Privacy</h3>
+                  <p className="text-gray-700 dark:text-gray-300">
+                    Our companion toy features a physical button that must be pressed for it to listen. Unlike always-on smart devices that might 
+                    constantly monitor your home, Bubbles only activates when your child consciously decides to interact by pressing the button. 
+                    When the button is released, the microphone is physically disconnected from power, making it impossible for the device to listen 
+                    or record. This hardware-based approach ensures maximum privacy protection that software-only solutions simply cannot match.
+                  </p>
                 </motion.div>
                 
                 <motion.div
-                  initial={{ opacity: 0, y: 30 }}
-                  animate={isFeaturesVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={isFeaturesVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
                   transition={{ duration: 0.5, delay: 0.2 }}
-                  className="h-64 md:h-80 relative rounded-xl overflow-hidden"
+                  className="glass-panel p-6"
                 >
-                  <img 
-                    src="https://images.unsplash.com/photo-1519223424049-aeautoformat&fit=1104c2debb50f0?q=80&w=600&" 
-                    alt="Children playing" 
-                    className="w-full h-full object-cover"
-                  />
+                  <h3 className="text-xl font-bold mb-3 text-teddy-coral dark:text-teddy-coral">Parental Control & Oversight</h3>
+                  <p className="text-gray-700 dark:text-gray-300">
+                    Parents have complete visibility into their child's interactions through the intuitive dashboard. 
+                    You can review conversation history, set usage limits and time restrictions, and customize content filters
+                    to ensure all interactions remain age-appropriate and aligned with your family values. The companion can never 
+                    override parental settings, giving you peace of mind while your child learns and plays.
+                  </p>
                 </motion.div>
                 
                 <motion.div
-                  initial={{ opacity: 0, y: 30 }}
-                  animate={isFeaturesVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={isFeaturesVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
                   transition={{ duration: 0.5, delay: 0.3 }}
-                  className="h-64 md:h-80 relative rounded-xl overflow-hidden"
+                  className="glass-panel p-6"
                 >
-                  <img 
-                    src="https://images.unsplash.com/photo-1581091224003-1c25ee834942?q=80&w=600&auto=format&fit=crop" 
-                    alt="Child with tablet" 
-                    className="w-full h-full object-cover"
-                  />
+                  <h3 className="text-xl font-bold mb-3 text-teddy-mint dark:text-teddy-mint">Advanced Data Protection</h3>
+                  <p className="text-gray-700 dark:text-gray-300">
+                    All conversations are protected with end-to-end encryption, and your child's data is never sold or shared with third parties.
+                    We comply with COPPA (Children's Online Privacy Protection Act), GDPR, and other privacy regulations worldwide,
+                    making Bubbles one of the safest interactive toys on the market. Voice data is processed locally when possible, and all
+                    cloud processing is anonymized and deleted after use unless you specifically choose to save it.
+                  </p>
+                </motion.div>
+                
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={isFeaturesVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+                  transition={{ duration: 0.5, delay: 0.4 }}
+                  className="glass-panel p-6"
+                >
+                  <h3 className="text-xl font-bold mb-3 text-teddy-purple dark:text-teddy-purple">Thoughtful Content Moderation</h3>
+                  <p className="text-gray-700 dark:text-gray-300">
+                    Our AI is specifically trained to detect and avoid inappropriate topics, providing child-friendly responses
+                    while encouraging curiosity and learning. The system automatically redirects sensitive questions to appropriate,
+                    educational content without exposing children to unsuitable material. The AI maintains a friendly, educational tone
+                    while adapting complexity based on the child's questions—explaining simply when needed, but capable of providing
+                    detailed answers for more complex questions as appropriate for their development.
+                  </p>
                 </motion.div>
               </div>
             </div>

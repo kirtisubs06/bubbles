@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Heart, Waves } from 'lucide-react';
+import { Heart } from 'lucide-react';
 
 const Footer: React.FC = () => {
   return (

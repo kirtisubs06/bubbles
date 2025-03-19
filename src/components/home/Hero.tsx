@@ -1,4 +1,3 @@
-
 import React, { useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ArrowRight, Sparkles, Waves, Heart } from 'lucide-react';
@@ -29,7 +28,6 @@ const Hero: React.FC = () => {
     };
   }, []);
   
-  // Bubble decoration elements
   const bubbles = [
     { size: 60, top: '15%', left: '5%', delay: 0 },
     { size: 45, top: '25%', right: '10%', delay: 1 },
@@ -40,16 +38,13 @@ const Hero: React.FC = () => {
   
   return (
     <section className="pt-32 pb-20 md:pt-40 md:pb-32 overflow-hidden relative">
-      {/* Background decoration */}
       <div className="absolute top-0 left-0 w-full h-full overflow-hidden z-0">
         <div className="absolute top-0 right-0 w-1/3 h-1/3 bg-bubbles-teal/10 rounded-full blur-3xl transform translate-x-1/4 -translate-y-1/4"></div>
         <div className="absolute bottom-0 left-0 w-1/3 h-1/3 bg-[#9b87f5]/10 rounded-full blur-3xl transform -translate-x-1/4 translate-y-1/4"></div>
         <div className="absolute top-1/3 left-1/4 w-1/4 h-1/4 bg-bubbles-aqua/10 rounded-full blur-3xl"></div>
         
-        {/* Wave decoration */}
         <div className="absolute bottom-0 left-0 w-full h-60 wave-decoration opacity-20"></div>
         
-        {/* Floating bubbles */}
         {bubbles.map((bubble, index) => (
           <div 
             key={index}
@@ -134,38 +129,28 @@ const Hero: React.FC = () => {
             <div className="relative bg-white dark:bg-bubbles-deep/80 rounded-3xl shadow-bubbly overflow-hidden p-6 animate-float">
               <div className="aspect-square rounded-2xl bg-pink-100 dark:bg-pink-200 flex items-center justify-center">
                 <div className="w-3/4 h-3/4 relative">
-                  {/* Updated Cartoon Dolphin SVG to match the provided image */}
                   <svg viewBox="0 0 400 400" className="w-full h-full">
-                    {/* Main body - light blue */}
-                    <path d="M100,200 C100,140 150,100 200,100 C280,100 320,160 320,200 C320,240 280,300 200,300 C150,300 100,260 100,200 Z" 
+                    <path d="M140,200 C140,140 200,80 260,100 C320,120 340,200 330,240 C320,280 270,320 200,300 C150,280 140,260 140,200 Z" 
                       fill="#A8D0E6" stroke="#2E5984" strokeWidth="8" />
                     
-                    {/* White belly */}
-                    <path d="M140,220 C140,180 170,160 200,160 C250,160 270,200 270,220 C270,250 230,260 200,260 C170,260 140,250 140,220 Z" 
+                    <path d="M170,220 C170,200 200,170 240,180 C280,190 280,230 270,250 C260,270 210,280 180,270 C160,260 170,240 170,220 Z" 
                       fill="#FFFFFF" />
                     
-                    {/* Dorsal fin */}
-                    <path d="M200,100 C220,70 250,70 240,120 C230,160 190,130 200,100 Z" 
+                    <path d="M240,100 C260,60 290,70 280,110 C270,150 220,140 240,100 Z" 
                       fill="#7EB6D9" stroke="#2E5984" strokeWidth="8" />
                     
-                    {/* Tail */}
-                    <path d="M320,200 C340,180 360,200 340,220 C320,240 300,220 320,200 Z" 
+                    <path d="M330,240 C350,230 370,250 340,270 C310,290 310,250 330,240 Z" 
                       fill="#7EB6D9" stroke="#2E5984" strokeWidth="8" />
                     
-                    {/* Left flipper */}
-                    <path d="M150,220 C130,260 100,260 120,220 C140,180 170,200 150,220 Z" 
+                    <path d="M170,230 C150,250 120,260 140,220 C160,180 190,210 170,230 Z" 
+                      fill="#7EB6D9" stroke="#2E5984" strokeWidth="8" />
+                    <path d="M250,240 C280,280 300,250 270,220 C240,190 220,200 250,240 Z" 
                       fill="#7EB6D9" stroke="#2E5984" strokeWidth="8" />
                     
-                    {/* Head/snout extension */}
-                    <path d="M100,200 C80,180 70,190 80,200 C90,210 100,210 100,200 Z" 
+                    <path d="M140,200 C120,190 90,200 110,220 C130,240 150,210 140,200 Z" 
                       fill="#A8D0E6" stroke="#2E5984" strokeWidth="8" />
                     
-                    {/* Snout */}
-                    <path d="M80,200 C60,190 50,200 60,210 C70,220 90,210 80,200 Z" 
-                      fill="#FFFFFF" stroke="#2E5984" strokeWidth="8" />
-                    
-                    {/* Eye - small black circle */}
-                    <circle cx="110" cy="180" r="8" fill="#2E5984" />
+                    <circle cx="150" cy="190" r="5" fill="#2E5984" />
                   </svg>
                 </div>
               </div>
@@ -196,7 +181,6 @@ const Hero: React.FC = () => {
                 </div>
               </div>
               
-              {/* Fun floating elements */}
               <div className="absolute top-10 right-10 w-8 h-8 rounded-full bg-bubbles-teal/40 animate-float" style={{ animationDelay: '1s' }}></div>
               <div className="absolute bottom-16 left-8 w-6 h-6 rounded-full bg-[#9b87f5]/40 animate-float" style={{ animationDelay: '2s' }}></div>
             </div>
