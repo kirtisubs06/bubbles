@@ -1,21 +1,21 @@
 
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Heart } from 'lucide-react';
+import { Heart, Waves } from 'lucide-react';
 
 const Footer: React.FC = () => {
   return (
-    <footer className="bg-teddy-cream dark:bg-teddy-charcoal py-12 border-t border-gray-100 dark:border-gray-800">
+    <footer className="bg-bubbles-cream dark:bg-bubbles-deep py-12 border-t border-gray-100 dark:border-gray-800">
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div className="md:col-span-1">
             <Link to="/" className="flex items-center gap-2 mb-4">
-              <span className="text-teddy-charcoal dark:text-white text-xl font-heading font-bold tracking-tight">
-                Teddy<span className="text-teddy-coral">Pal</span>
+              <span className="text-bubbles-deep dark:text-white text-xl font-heading font-bold tracking-tight">
+                <span className="text-bubbles-blue">Bubbles</span>
               </span>
             </Link>
             <p className="text-sm text-gray-600 dark:text-gray-300 mb-4">
-              Your child's AI-powered teddy companion, fostering growth, curiosity, and imagination.
+              Your child's AI-powered dolphin companion, fostering growth, curiosity, and imagination.
             </p>
             <div className="flex items-center space-x-4">
               {/* Social media icons would go here */}
@@ -27,9 +27,9 @@ const Footer: React.FC = () => {
               Product
             </h3>
             <ul className="space-y-2">
-              <li><Link to="/features" className="text-gray-600 dark:text-gray-300 hover:text-teddy-coral dark:hover:text-teddy-coral transition-colors">Features</Link></li>
-              <li><Link to="/pricing" className="text-gray-600 dark:text-gray-300 hover:text-teddy-coral dark:hover:text-teddy-coral transition-colors">Pricing</Link></li>
-              <li><Link to="/teddy-demo" className="text-gray-600 dark:text-gray-300 hover:text-teddy-coral dark:hover:text-teddy-coral transition-colors">Demo</Link></li>
+              <li><Link to="/features" className="text-gray-600 dark:text-gray-300 hover:text-bubbles-blue dark:hover:text-bubbles-blue transition-colors">Features</Link></li>
+              <li><Link to="/pricing" className="text-gray-600 dark:text-gray-300 hover:text-bubbles-blue dark:hover:text-bubbles-blue transition-colors">Pricing</Link></li>
+              <li><Link to="/dolphin-demo" className="text-gray-600 dark:text-gray-300 hover:text-bubbles-blue dark:hover:text-bubbles-blue transition-colors">Demo</Link></li>
             </ul>
           </div>
           
@@ -38,9 +38,9 @@ const Footer: React.FC = () => {
               Company
             </h3>
             <ul className="space-y-2">
-              <li><Link to="/about" className="text-gray-600 dark:text-gray-300 hover:text-teddy-coral dark:hover:text-teddy-coral transition-colors">About</Link></li>
-              <li><Link to="/pre-order" className="text-gray-600 dark:text-gray-300 hover:text-teddy-coral dark:hover:text-teddy-coral transition-colors">Pre-order</Link></li>
-              <li><Link to="/teddy-demo" className="text-gray-600 dark:text-gray-300 hover:text-teddy-coral dark:hover:text-teddy-coral transition-colors">Try Demo</Link></li>
+              <li><Link to="/about" className="text-gray-600 dark:text-gray-300 hover:text-bubbles-blue dark:hover:text-bubbles-blue transition-colors">About</Link></li>
+              <li><Link to="/pre-order" className="text-gray-600 dark:text-gray-300 hover:text-bubbles-blue dark:hover:text-bubbles-blue transition-colors">Pre-order</Link></li>
+              <li><Link to="/dolphin-demo" className="text-gray-600 dark:text-gray-300 hover:text-bubbles-blue dark:hover:text-bubbles-blue transition-colors">Try Demo</Link></li>
             </ul>
           </div>
           
@@ -49,16 +49,16 @@ const Footer: React.FC = () => {
               Legal
             </h3>
             <ul className="space-y-2">
-              <li><Link to="/privacy" className="text-gray-600 dark:text-gray-300 hover:text-teddy-coral dark:hover:text-teddy-coral transition-colors">Privacy Policy</Link></li>
-              <li><Link to="/terms" className="text-gray-600 dark:text-gray-300 hover:text-teddy-coral dark:hover:text-teddy-coral transition-colors">Terms of Service</Link></li>
-              <li><Link to="/child-safety" className="text-gray-600 dark:text-gray-300 hover:text-teddy-coral dark:hover:text-teddy-coral transition-colors">Child Safety</Link></li>
+              <li><Link to="/privacy" className="text-gray-600 dark:text-gray-300 hover:text-bubbles-blue dark:hover:text-bubbles-blue transition-colors">Privacy Policy</Link></li>
+              <li><Link to="/terms" className="text-gray-600 dark:text-gray-300 hover:text-bubbles-blue dark:hover:text-bubbles-blue transition-colors">Terms of Service</Link></li>
+              <li><Link to="/child-safety" className="text-gray-600 dark:text-gray-300 hover:text-bubbles-blue dark:hover:text-bubbles-blue transition-colors">Child Safety</Link></li>
             </ul>
           </div>
         </div>
         
         <div className="mt-12 pt-8 border-t border-gray-200 dark:border-gray-700">
           <p className="text-center text-gray-600 dark:text-gray-300 text-sm">
-            &copy; {new Date().getFullYear()} TeddyPal. All rights reserved. Made with <Heart className="inline-block h-4 w-4 text-teddy-coral" /> for curious little minds.
+            &copy; {new Date().getFullYear()} Bubbles. All rights reserved. Made with <Heart className="inline-block h-4 w-4 text-bubbles-blue" /> for curious little minds.
           </p>
         </div>
       </div>

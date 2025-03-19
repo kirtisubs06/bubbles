@@ -22,11 +22,11 @@ const Pricing: React.FC = () => {
   const [setFaqRef, isFaqVisible] = useIntersectionAnimation({ threshold: 0.1 });
   
   const oneTimePlan = {
-    name: "TeddyPal Hardware",
-    price: 129,
-    description: "The perfect teddy companion for your child's learning journey.",
+    name: "Bubbles Hardware",
+    price: 69,
+    description: "The perfect dolphin companion for your child's learning journey.",
     features: [
-      { included: true, text: "Premium teddy bear hardware" },
+      { included: true, text: "Premium dolphin plush hardware" },
       { included: true, text: "Basic conversation capabilities" },
       { included: true, text: "100+ educational stories" },
       { included: true, text: "Parent dashboard" },
@@ -75,19 +75,19 @@ const Pricing: React.FC = () => {
   const faqs = [
     {
       question: "Why is there both a one-time purchase and a subscription?",
-      answer: "The one-time purchase covers the physical TeddyPal hardware. The subscription covers ongoing AI costs, new content, and advanced features that require cloud processing power."
+      answer: "The one-time purchase covers the physical Bubbles hardware. The subscription covers ongoing AI costs, new content, and advanced features that require cloud processing power."
     },
     {
-      question: "What happens if I don't subscribe after purchasing the teddy?",
-      answer: "Your TeddyPal will still function with basic features and pre-loaded content, but advanced AI conversations and new content updates will require an active subscription."
+      question: "What happens if I don't subscribe after purchasing the dolphin?",
+      answer: "Your Bubbles will still function with basic features and pre-loaded content, but advanced AI conversations and new content updates will require an active subscription."
     },
     {
-      question: "What age range is TeddyPal suitable for?",
-      answer: "TeddyPal is designed for children ages 3-10, with content that adapts to their age and development level. The AI grows with your child, providing age-appropriate interactions."
+      question: "What age range is Bubbles suitable for?",
+      answer: "Bubbles is designed for children ages 3-10, with content that adapts to their age and development level. The AI grows with your child, providing age-appropriate interactions."
     },
     {
       question: "How do I set up parental controls?",
-      answer: "TeddyPal includes a comprehensive parent dashboard accessible via our mobile app or website. You can set usage limits, review conversation history, and customize educational content."
+      answer: "Bubbles includes a comprehensive parent dashboard accessible via our mobile app or website. You can set usage limits, review conversation history, and customize educational content."
     },
     {
       question: "Is my child's data secure?",
@@ -96,7 +96,7 @@ const Pricing: React.FC = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-white to-teddy-cream/20 dark:from-teddy-charcoal dark:to-teddy-charcoal/80">
+    <div className="min-h-screen bg-gradient-to-b from-white to-bubbles-cream/20 dark:from-bubbles-deep dark:to-bubbles-deep/80">
       <Header />
       
       <main className="pt-32">
@@ -111,19 +111,19 @@ const Pricing: React.FC = () => {
               animate={isHeroVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
               transition={{ duration: 0.6 }}
             >
-              <h1 className="text-4xl md:text-5xl font-bold mb-6 text-teddy-charcoal dark:text-white">
-                Simple Pricing for Magical <span className="text-teddy-coral">Learning</span>
+              <h1 className="text-4xl md:text-5xl font-bold mb-6 text-bubbles-deep dark:text-white">
+                Simple Pricing for Magical <span className="text-bubbles-blue">Learning</span>
               </h1>
               
               <p className="text-lg text-gray-600 dark:text-gray-300 mb-8 max-w-2xl mx-auto">
-                Choose the perfect TeddyPal companion that grows with your child and sparks their imagination.
+                Choose the perfect Bubbles companion that grows with your child and sparks their imagination.
               </p>
               
-              <div className="bg-teddy-cream/50 dark:bg-teddy-blue/10 p-4 rounded-xl max-w-2xl mx-auto mb-8">
+              <div className="bg-bubbles-cream/50 dark:bg-bubbles-blue/10 p-4 rounded-xl max-w-2xl mx-auto mb-8">
                 <div className="flex items-start">
-                  <Info className="h-5 w-5 text-teddy-coral mr-2 flex-shrink-0 mt-1" />
+                  <Info className="h-5 w-5 text-bubbles-blue mr-2 flex-shrink-0 mt-1" />
                   <p className="text-sm text-gray-700 dark:text-gray-300 text-left">
-                    TeddyPal requires both a one-time hardware purchase and an ongoing subscription for AI access and content updates. Select your preferred options below.
+                    Bubbles requires both a one-time hardware purchase and an ongoing subscription for AI access and content updates. Select your preferred options below.
                   </p>
                 </div>
               </div>
@@ -141,13 +141,13 @@ const Pricing: React.FC = () => {
               <TabsList className="grid w-full grid-cols-2 mb-8 max-w-md mx-auto">
                 <TabsTrigger 
                   value="hardware" 
-                  className="text-lg py-4 px-8 data-[state=active]:bg-teddy-coral data-[state=active]:text-white"
+                  className="text-lg py-4 px-8 data-[state=active]:bg-bubbles-blue data-[state=active]:text-white"
                 >
                   Hardware
                 </TabsTrigger>
                 <TabsTrigger 
                   value="subscription" 
-                  className="text-lg py-4 px-8 data-[state=active]:bg-teddy-coral data-[state=active]:text-white"
+                  className="text-lg py-4 px-8 data-[state=active]:bg-bubbles-blue data-[state=active]:text-white"
                 >
                   Subscription
                 </TabsTrigger>
@@ -160,8 +160,8 @@ const Pricing: React.FC = () => {
                     animate={isPlansVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
                     transition={{ duration: 0.5 }}
                   >
-                    <Card className="relative overflow-hidden border-2 border-teddy-coral shadow-lg">
-                      <div className="absolute top-0 right-0 bg-teddy-coral text-white px-4 py-1 rounded-bl-lg text-sm font-medium">
+                    <Card className="relative overflow-hidden border-2 border-bubbles-blue shadow-lg">
+                      <div className="absolute top-0 right-0 bg-bubbles-blue text-white px-4 py-1 rounded-bl-lg text-sm font-medium">
                         Most Popular
                       </div>
                       
@@ -169,7 +169,7 @@ const Pricing: React.FC = () => {
                         <CardTitle className="text-2xl">{oneTimePlan.name}</CardTitle>
                         <CardDescription className="mb-2">{oneTimePlan.description}</CardDescription>
                         <div className="flex items-center justify-center">
-                          <span className="text-4xl font-bold text-teddy-charcoal dark:text-white">${oneTimePlan.price}</span>
+                          <span className="text-4xl font-bold text-bubbles-deep dark:text-white">${oneTimePlan.price}</span>
                           <span className="text-gray-500 dark:text-gray-400 ml-1">one-time</span>
                         </div>
                       </CardHeader>
@@ -179,7 +179,7 @@ const Pricing: React.FC = () => {
                           {oneTimePlan.features.map((feature, featureIndex) => (
                             <li key={featureIndex} className="flex items-start">
                               {feature.included ? (
-                                <Check className="h-5 w-5 text-teddy-mint mr-2 flex-shrink-0" />
+                                <Check className="h-5 w-5 text-bubbles-teal mr-2 flex-shrink-0" />
                               ) : (
                                 <X className="h-5 w-5 text-gray-400 mr-2 flex-shrink-0" />
                               )}
@@ -193,9 +193,7 @@ const Pricing: React.FC = () => {
                       
                       <CardFooter>
                         <Button 
-                          variant="purple"
-                          size="full"
-                          className="rounded-lg py-6"
+                          className="w-full py-6 text-white bg-bubbles-blue hover:bg-bubbles-blue/90 rounded-lg text-base font-medium"
                         >
                           {oneTimePlan.ctaText}
                         </Button>
@@ -218,9 +216,9 @@ const Pricing: React.FC = () => {
                       animate={isPlansVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
                       transition={{ duration: 0.5, delay: index * 0.1 }}
                     >
-                      <Card className={`h-full relative overflow-hidden ${plan.popular ? 'border-2 border-teddy-coral shadow-lg' : 'border border-gray-200 dark:border-gray-700'}`}>
+                      <Card className={`h-full relative overflow-hidden ${plan.popular ? 'border-2 border-bubbles-blue shadow-lg' : 'border border-gray-200 dark:border-gray-700'}`}>
                         {plan.popular && (
-                          <div className="absolute top-0 right-0 bg-teddy-coral text-white px-4 py-1 rounded-bl-lg text-sm font-medium">
+                          <div className="absolute top-0 right-0 bg-bubbles-blue text-white px-4 py-1 rounded-bl-lg text-sm font-medium">
                             Most Popular
                           </div>
                         )}
@@ -229,7 +227,7 @@ const Pricing: React.FC = () => {
                           <CardTitle className="text-2xl">{plan.name}</CardTitle>
                           <CardDescription className="mb-2">{plan.description}</CardDescription>
                           <div className="flex items-center justify-center">
-                            <span className="text-4xl font-bold text-teddy-charcoal dark:text-white">${plan.price}</span>
+                            <span className="text-4xl font-bold text-bubbles-deep dark:text-white">${plan.price}</span>
                             <span className="text-gray-500 dark:text-gray-400 ml-1">/{plan.period}</span>
                           </div>
                         </CardHeader>
@@ -239,7 +237,7 @@ const Pricing: React.FC = () => {
                             {plan.features.map((feature, featureIndex) => (
                               <li key={featureIndex} className="flex items-start">
                                 {feature.included ? (
-                                  <Check className="h-5 w-5 text-teddy-mint mr-2 flex-shrink-0" />
+                                  <Check className="h-5 w-5 text-bubbles-teal mr-2 flex-shrink-0" />
                                 ) : (
                                   <X className="h-5 w-5 text-gray-400 mr-2 flex-shrink-0" />
                                 )}
@@ -253,9 +251,11 @@ const Pricing: React.FC = () => {
                         
                         <CardFooter>
                           <Button 
-                            variant={plan.popular ? "purple" : "coral"}
-                            size="full"
-                            className="rounded-lg py-6"
+                            className={`w-full py-6 text-white rounded-lg text-base font-medium ${
+                              plan.popular 
+                                ? "bg-bubbles-blue hover:bg-bubbles-blue/90" 
+                                : "bg-bubbles-teal hover:bg-bubbles-teal/90"
+                            }`}
                           >
                             {plan.ctaText}
                           </Button>
@@ -274,20 +274,20 @@ const Pricing: React.FC = () => {
         </section>
         
         {/* Payment Security */}
-        <section className="py-10 bg-teddy-blue/5 dark:bg-teddy-blue/10">
+        <section className="py-10 bg-bubbles-blue/5 dark:bg-bubbles-blue/10">
           <div className="container mx-auto px-4">
             <div className="max-w-4xl mx-auto">
               <div className="flex flex-col md:flex-row items-center justify-center space-y-4 md:space-y-0 md:space-x-8">
                 <div className="flex items-center">
-                  <CreditCard className="h-6 w-6 text-teddy-blue mr-2" />
+                  <CreditCard className="h-6 w-6 text-bubbles-blue mr-2" />
                   <span className="text-gray-600 dark:text-gray-300">Secure payment processing</span>
                 </div>
                 <div className="flex items-center">
-                  <Shield className="h-6 w-6 text-teddy-mint mr-2" />
+                  <Shield className="h-6 w-6 text-bubbles-teal mr-2" />
                   <span className="text-gray-600 dark:text-gray-300">30-day money back guarantee</span>
                 </div>
                 <div className="flex items-center">
-                  <Check className="h-6 w-6 text-teddy-coral mr-2" />
+                  <Check className="h-6 w-6 text-bubbles-blue mr-2" />
                   <span className="text-gray-600 dark:text-gray-300">Free shipping on all orders</span>
                 </div>
               </div>
@@ -303,11 +303,11 @@ const Pricing: React.FC = () => {
           >
             <div className="max-w-4xl mx-auto">
               <div className="text-center mb-12">
-                <h2 className="text-3xl font-bold text-teddy-charcoal dark:text-white mb-4">
+                <h2 className="text-3xl font-bold text-bubbles-deep dark:text-white mb-4">
                   Frequently Asked Questions
                 </h2>
                 <p className="text-gray-600 dark:text-gray-300">
-                  Everything you need to know about TeddyPal
+                  Everything you need to know about Bubbles
                 </p>
               </div>
               
@@ -318,9 +318,9 @@ const Pricing: React.FC = () => {
                     initial={{ opacity: 0, y: 20 }}
                     animate={isFaqVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
                     transition={{ duration: 0.4, delay: index * 0.1 }}
-                    className="bg-gradient-to-br from-teddy-cream to-white dark:from-teddy-blue/20 dark:to-teddy-purple/10 p-6 rounded-xl shadow-sm"
+                    className="bg-gradient-to-br from-bubbles-cream to-white dark:from-bubbles-blue/20 dark:to-bubbles-teal/10 p-6 rounded-xl shadow-sm"
                   >
-                    <h3 className="text-lg font-semibold text-teddy-charcoal dark:text-white mb-2">
+                    <h3 className="text-lg font-semibold text-bubbles-deep dark:text-white mb-2">
                       {faq.question}
                     </h3>
                     <p className="text-gray-600 dark:text-gray-300">
@@ -341,28 +341,24 @@ const Pricing: React.FC = () => {
                 initial={{ opacity: 0, scale: 0.95 }}
                 animate={isFaqVisible ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.95 }}
                 transition={{ duration: 0.6, delay: 0.3 }}
-                className="bg-gradient-to-br from-teddy-cream to-white dark:from-teddy-blue/20 dark:to-teddy-purple/10 py-12 px-6 rounded-3xl shadow-lg"
+                className="bg-gradient-to-br from-bubbles-cream to-white dark:from-bubbles-blue/20 dark:to-bubbles-teal/10 py-12 px-6 rounded-3xl shadow-lg"
               >
-                <h2 className="text-3xl font-bold mb-6 text-teddy-charcoal dark:text-white">
+                <h2 className="text-3xl font-bold mb-6 text-bubbles-deep dark:text-white">
                   Ready to Start the Learning Journey?
                 </h2>
                 <p className="text-lg mb-8 text-gray-600 dark:text-gray-300">
-                  Give your child the gift of interactive, engaging education with TeddyPal.
+                  Give your child the gift of interactive, engaging education with Bubbles.
                 </p>
                 <div className="flex flex-wrap justify-center gap-4">
                   <Button 
-                    variant="coral" 
-                    size="xl" 
-                    onClick={() => window.location.href = '/teddy-demo'}
-                    className="rounded-lg"
+                    className="py-6 px-8 text-white bg-bubbles-teal hover:bg-bubbles-teal/90 rounded-lg text-base font-medium"
+                    onClick={() => window.location.href = '/dolphin-demo'}
                   >
                     Try the Demo
                   </Button>
                   <Button 
-                    variant="purple" 
-                    size="xl" 
+                    className="py-6 px-8 text-white bg-bubbles-blue hover:bg-bubbles-blue/90 rounded-lg text-base font-medium flex items-center"
                     onClick={() => window.location.href = '/login'}
-                    className="flex items-center rounded-lg"
                   >
                     Purchase Now
                     <ChevronRight className="ml-2 h-4 w-4" />

@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { cn } from '@/lib/utils';
-import { Menu, X, LogIn, Sparkles, Package } from 'lucide-react';
+import { Menu, X, LogIn, Sparkles, Package, Waves } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 const Header: React.FC = () => {
@@ -25,7 +25,7 @@ const Header: React.FC = () => {
   
   const headerClasses = cn(
     'fixed top-0 left-0 right-0 z-50 transition-all duration-300 ease-in-out',
-    isScrolled ? 'bg-white/80 dark:bg-teddy-charcoal/80 backdrop-blur-md py-3 shadow-sm' : 'bg-transparent py-6'
+    isScrolled ? 'bg-white/80 dark:bg-bubbles-deep/80 backdrop-blur-md py-3 shadow-sm' : 'bg-transparent py-6'
   );
   
   const isActive = (path: string) => location.pathname === path;
@@ -35,17 +35,17 @@ const Header: React.FC = () => {
       <div className="container mx-auto px-4 flex items-center justify-between">
         <Link to="/" className="flex items-center gap-2 z-50">
           <motion.div 
-            className="w-10 h-10 bg-teddy-coral rounded-full flex items-center justify-center text-white"
+            className="w-10 h-10 bg-bubbles-blue rounded-full flex items-center justify-center text-white"
             whileHover={{ rotate: [0, -10, 10, -10, 0], transition: { duration: 0.5 } }}
           >
-            <span className="text-xl">🧸</span>
+            <span className="text-xl">🐬</span>
           </motion.div>
           <motion.span 
-            className="text-teddy-charcoal dark:text-white text-xl sm:text-2xl font-heading font-bold tracking-tight"
+            className="text-bubbles-deep dark:text-white text-xl sm:text-2xl font-heading font-bold tracking-tight"
             whileHover={{ scale: 1.05 }}
             transition={{ type: "spring", stiffness: 400, damping: 10 }}
           >
-            Teddy<span className="text-teddy-coral">Pal</span>
+            <span className="text-bubbles-blue">Bubbles</span>
           </motion.span>
         </Link>
         
@@ -54,25 +54,25 @@ const Header: React.FC = () => {
           <Link to="/" className={cn("nav-link group", isActive('/') && "active")}>
             <span>Home</span>
             <motion.span 
-              className="absolute -bottom-1 left-0 w-0 h-0.5 bg-teddy-coral group-hover:w-full transition-all duration-300"
+              className="absolute -bottom-1 left-0 w-0 h-0.5 bg-bubbles-blue group-hover:w-full transition-all duration-300"
               initial={false}
               animate={isActive('/') ? { width: "100%" } : { width: "0%" }}
             />
           </Link>
-          <Link to="/teddy-demo" className={cn("nav-link group", isActive('/teddy-demo') && "active")}>
-            <span>Teddy Demo</span>
-            <Sparkles className="ml-1 h-3 w-3 text-teddy-pink inline-block" />
+          <Link to="/dolphin-demo" className={cn("nav-link group", isActive('/dolphin-demo') && "active")}>
+            <span>Dolphin Demo</span>
+            <Waves className="ml-1 h-3 w-3 text-bubbles-teal inline-block" />
             <motion.span 
-              className="absolute -bottom-1 left-0 w-0 h-0.5 bg-teddy-coral group-hover:w-full transition-all duration-300"
+              className="absolute -bottom-1 left-0 w-0 h-0.5 bg-bubbles-blue group-hover:w-full transition-all duration-300"
               initial={false}
-              animate={isActive('/teddy-demo') ? { width: "100%" } : { width: "0%" }}
+              animate={isActive('/dolphin-demo') ? { width: "100%" } : { width: "0%" }}
             />
           </Link>
           <Link to="/pre-order" className={cn("nav-link group", isActive('/pre-order') && "active")}>
             <span>Pre-order</span>
-            <Package className="ml-1 h-3 w-3 text-teddy-mint inline-block" />
+            <Package className="ml-1 h-3 w-3 text-bubbles-teal inline-block" />
             <motion.span 
-              className="absolute -bottom-1 left-0 w-0 h-0.5 bg-teddy-coral group-hover:w-full transition-all duration-300"
+              className="absolute -bottom-1 left-0 w-0 h-0.5 bg-bubbles-blue group-hover:w-full transition-all duration-300"
               initial={false}
               animate={isActive('/pre-order') ? { width: "100%" } : { width: "0%" }}
             />
@@ -80,7 +80,7 @@ const Header: React.FC = () => {
           <Link to="/features" className={cn("nav-link group", isActive('/features') && "active")}>
             <span>Features</span>
             <motion.span 
-              className="absolute -bottom-1 left-0 w-0 h-0.5 bg-teddy-coral group-hover:w-full transition-all duration-300"
+              className="absolute -bottom-1 left-0 w-0 h-0.5 bg-bubbles-blue group-hover:w-full transition-all duration-300"
               initial={false}
               animate={isActive('/features') ? { width: "100%" } : { width: "0%" }}
             />
@@ -88,7 +88,7 @@ const Header: React.FC = () => {
           <Link to="/pricing" className={cn("nav-link group", isActive('/pricing') && "active")}>
             <span>Pricing</span>
             <motion.span 
-              className="absolute -bottom-1 left-0 w-0 h-0.5 bg-teddy-coral group-hover:w-full transition-all duration-300"
+              className="absolute -bottom-1 left-0 w-0 h-0.5 bg-bubbles-blue group-hover:w-full transition-all duration-300"
               initial={false}
               animate={isActive('/pricing') ? { width: "100%" } : { width: "0%" }}
             />
@@ -106,7 +106,7 @@ const Header: React.FC = () => {
         
         {/* Mobile Menu Toggle */}
         <button 
-          className="md:hidden z-50 p-2 text-teddy-charcoal dark:text-white"
+          className="md:hidden z-50 p-2 text-bubbles-deep dark:text-white"
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           aria-label="Toggle menu"
         >
@@ -116,7 +116,7 @@ const Header: React.FC = () => {
         {/* Mobile Navigation */}
         <motion.div 
           className={cn(
-            "fixed inset-0 bg-white dark:bg-teddy-charcoal z-40 flex flex-col items-center justify-center md:hidden",
+            "fixed inset-0 bg-white dark:bg-bubbles-deep z-40 flex flex-col items-center justify-center md:hidden",
           )}
           initial={{ opacity: 0, y: "-100%" }}
           animate={{ 
@@ -129,13 +129,13 @@ const Header: React.FC = () => {
             <Link to="/" className={cn("nav-link", isActive('/') && "active")}>
               Home
             </Link>
-            <Link to="/teddy-demo" className={cn("nav-link flex items-center", isActive('/teddy-demo') && "active")}>
-              Teddy Demo
-              <Sparkles className="ml-1 h-4 w-4 text-teddy-pink" />
+            <Link to="/dolphin-demo" className={cn("nav-link flex items-center", isActive('/dolphin-demo') && "active")}>
+              Dolphin Demo
+              <Waves className="ml-1 h-4 w-4 text-bubbles-teal" />
             </Link>
             <Link to="/pre-order" className={cn("nav-link flex items-center", isActive('/pre-order') && "active")}>
               Pre-order
-              <Package className="ml-1 h-4 w-4 text-teddy-mint" />
+              <Package className="ml-1 h-4 w-4 text-bubbles-teal" />
             </Link>
             <Link to="/features" className={cn("nav-link", isActive('/features') && "active")}>
               Features

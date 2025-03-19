@@ -15,7 +15,7 @@ import Settings from "./components/dashboard/Settings";
 import ParentalControls from "./components/dashboard/ParentalControls";
 import Notifications from "./components/dashboard/Notifications";
 import NotFound from "./pages/NotFound";
-import TeddyDemo from "./pages/TeddyDemo";
+import DolphinDemo from "./pages/DolphinDemo";
 import Features from "./pages/Features";
 import Pricing from "./pages/Pricing";
 import PreOrderSignup from "./pages/PreOrderSignup";
@@ -33,7 +33,8 @@ const App = () => (
           <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/login" element={<Login />} />
-            <Route path="/teddy-demo" element={<TeddyDemo />} />
+            <Route path="/dolphin-demo" element={<DolphinDemo />} />
+            <Route path="/teddy-demo" element={<DolphinDemo />} /> {/* Redirect old URL */}
             <Route path="/pre-order" element={<PreOrderSignup />} />
             <Route path="/features" element={<Features />} />
             <Route path="/pricing" element={<Pricing />} />
