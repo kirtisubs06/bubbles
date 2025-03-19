@@ -130,94 +130,83 @@ const Hero: React.FC = () => {
             <div className="relative bg-white dark:bg-bubbles-deep/80 rounded-3xl shadow-bubbly overflow-hidden p-6 animate-float">
               <div className="aspect-square rounded-2xl bg-blue-100 dark:bg-blue-200 flex items-center justify-center">
                 <div className="w-4/5 h-4/5 relative">
-                  {/* Updated Dolphin SVG to match the reference image */}
+                  {/* Exact Dolphin SVG matching the provided image */}
                   <svg viewBox="0 0 600 350" className="w-full h-full">
-                    <g transform="translate(150, 70) scale(1.2)">
-                      {/* Body - main blue part */}
+                    <g transform="translate(130, 70) scale(1.4)">
+                      {/* Main body - blue part */}
                       <path 
                         d="M50,120 
-                           C60,80 90,60 140,50 
-                           C190,40 230,50 260,70 
-                           C290,90 310,120 290,160 
-                           C270,200 240,210 200,200 
-                           C150,190 130,170 110,150 
-                           C90,130 40,160 50,120 Z" 
+                           C70,90 100,70 130,70
+                           C170,70 200,80 230,100
+                           C260,120 280,150 260,180
+                           C240,210 210,220 180,220
+                           C140,220 110,200 80,170
+                           C60,150 40,140 50,120 Z" 
                         fill="#4AA9DB" 
-                        stroke="#4AA9DB" 
-                        strokeWidth="1" 
+                        stroke="none" 
                       />
                       
-                      {/* Cream belly */}
+                      {/* Cream/beige belly */}
                       <path 
-                        d="M90,130 
-                           C110,110 140,100 180,100 
-                           C220,100 250,110 270,130 
-                           C250,170 210,190 170,190 
-                           C130,190 90,170 90,130 Z" 
+                        d="M80,140 
+                           C100,120 130,110 160,110
+                           C190,110 220,120 240,140
+                           C230,180 200,190 170,190
+                           C140,190 110,180 80,140 Z" 
                         fill="#FFF2E2" 
-                        stroke="#FFF2E2" 
-                        strokeWidth="1" 
+                        stroke="none" 
                       />
                       
                       {/* Dorsal fin */}
                       <path 
-                        d="M170,50 
-                           C190,10 210,20 200,50 
-                           C190,70 170,50 170,50 Z" 
+                        d="M160,70 
+                           C180,40 200,50 190,70
+                           C180,90 160,70 160,70 Z" 
                         fill="#4AA9DB" 
-                        stroke="#4AA9DB" 
-                        strokeWidth="1" 
+                        stroke="none" 
                       />
                       
                       {/* Side fin */}
                       <path 
-                        d="M160,150 
-                           C140,170 120,180 110,170 
-                           C100,160 110,150 130,140 
-                           C150,130 170,140 160,150 Z" 
+                        d="M150,160 
+                           C130,180 110,180 100,170
+                           C90,160 100,150 110,140
+                           C130,130 160,140 150,160 Z" 
                         fill="#4AA9DB" 
-                        stroke="#4AA9DB" 
-                        strokeWidth="1" 
+                        stroke="none" 
                       />
                       
-                      {/* Tail */}
+                      {/* Tail fin */}
                       <path 
-                        d="M290,120 
-                           C310,100 330,110 330,130 
-                           C330,150 310,160 290,140 Z" 
+                        d="M260,150 
+                           C280,130 290,140 290,150
+                           C290,170 270,190 260,170 Z" 
                         fill="#4AA9DB" 
-                        stroke="#4AA9DB" 
-                        strokeWidth="1" 
+                        stroke="none" 
                       />
                       
                       {/* Snout/beak */}
                       <path 
                         d="M50,120 
-                           C40,110 30,110 20,120 
-                           C10,130 20,140 40,140 
-                           C50,140 50,130 50,120 Z" 
+                           C40,110 20,110 10,120
+                           C0,130 10,140 20,140
+                           C30,140 50,130 50,120 Z" 
                         fill="#4AA9DB" 
-                        stroke="#4AA9DB" 
-                        strokeWidth="1" 
+                        stroke="none" 
                       />
                       
-                      {/* Eye */}
-                      <circle cx="60" cy="115" r="5" fill="#000000" />
+                      {/* Eye - simple black dot */}
+                      <circle cx="60" cy="115" r="4" fill="#000000" />
                       
-                      {/* Smile */}
+                      {/* Smile - simple curved line */}
                       <path 
-                        d="M30,130 Q40,135 50,130" 
+                        d="M30,125 Q40,130 45,125" 
                         fill="none" 
                         stroke="#000000" 
-                        strokeWidth="1.5" 
+                        strokeWidth="1" 
                         strokeLinecap="round" 
                       />
                     </g>
-                    
-                    {/* Bubbles */}
-                    <circle cx="300" cy="110" r="8" fill="none" stroke="#4295C7" strokeWidth="1" opacity="0.6" />
-                    <circle cx="320" cy="130" r="5" fill="none" stroke="#4295C7" strokeWidth="1" opacity="0.6" />
-                    <circle cx="310" cy="90" r="6" fill="none" stroke="#4295C7" strokeWidth="1" opacity="0.6" />
                   </svg>
                 </div>
               </div>
