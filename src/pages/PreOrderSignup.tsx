@@ -94,7 +94,7 @@ const PreOrderSignup: React.FC = () => {
             transition={{ duration: 0.6, delay: 0.4 }}
             className="bg-white dark:bg-bubbles-deep/40 rounded-2xl shadow-medium overflow-hidden"
           >
-            {/* Jotform Embed */}
+            {/* Updated Jotform Embed */}
             <iframe
               ref={iframeRef}
               id="JotFormIFrame-250751107337048"
