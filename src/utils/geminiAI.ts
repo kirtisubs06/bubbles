@@ -19,14 +19,15 @@ If asked about sensitive topics, redirect to something positive and age-appropri
 Often include interesting facts about marine life, ocean habitats, and dolphin intelligence.
 `;
 
-// API key for demo purposes
-let apiKey = 'AIzaSyBS94pYTBoL9CXS8cEI2GB7HIsxHUIPn58';
+// Fixed API key for demo purposes
+const apiKey = 'AIzaSyBS94pYTBoL9CXS8cEI2GB7HIsxHUIPn58';
 
 /**
- * Sets the API key for Gemini AI
+ * Sets the API key for Gemini AI (now a no-op since we use a fixed key)
  */
 export const setApiKey = (key: string): void => {
-  apiKey = key;
+  // This is now a no-op since we're using a fixed API key
+  console.log('Using pre-configured API key');
 };
 
 /**
@@ -40,10 +41,6 @@ export const getApiKey = (): string => {
  * Sends a chat message to the Gemini AI API and returns the response
  */
 export const chatWithGeminiAI = async (messages: GeminiMessage[], key: string = apiKey): Promise<string> => {
-  if (!key) {
-    throw new Error('API key is required');
-  }
-  
   try {
     // Format the last message content as the prompt
     const lastUserMessage = messages.filter(msg => msg.role === 'user').pop();
@@ -54,7 +51,7 @@ export const chatWithGeminiAI = async (messages: GeminiMessage[], key: string = 
     // Create a kid-friendly enhanced prompt that includes our context
     const enhancedPrompt = `${KID_FRIENDLY_CONTEXT}\n\nChild's question: ${lastUserMessage.content}\n\nYour kid-friendly response as Bubbles:`;
     
-    return await generateResponse(enhancedPrompt, key);
+    return await generateResponse(enhancedPrompt);
   } catch (error) {
     console.error('Error in chatWithGeminiAI:', error);
     throw error;
@@ -64,9 +61,9 @@ export const chatWithGeminiAI = async (messages: GeminiMessage[], key: string = 
 /**
  * Generates a response from Gemini API
  */
-export const generateResponse = async (prompt: string, key: string = apiKey): Promise<string> => {
+export const generateResponse = async (prompt: string): Promise<string> => {
   try {
-    const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=${key}`, {
+    const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=${apiKey}`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

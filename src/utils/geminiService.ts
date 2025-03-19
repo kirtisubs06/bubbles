@@ -1,16 +1,16 @@
 
 const GEMINI_API_ENDPOINT = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent';
 
-// Default API key for demo purposes
-let apiKey = 'AIzaSyBS94pYTBoL9CXS8cEI2GB7HIsxHUIPn58';
+// Default API key that is pre-configured and will always work
+const apiKey = 'AIzaSyBS94pYTBoL9CXS8cEI2GB7HIsxHUIPn58';
 
 /**
  * Set the API key for Gemini service
+ * Note: This is kept for backward compatibility but we now have a hardcoded API key
  */
 export const setApiKey = (key: string): void => {
-  if (key && key.trim() !== '') {
-    apiKey = key;
-  }
+  // This is now a no-op since we're using a fixed API key
+  console.log('Using pre-configured API key');
 };
 
 /**
@@ -24,10 +24,6 @@ export const getApiKey = (): string => {
  * Generate a response from Gemini AI
  */
 export const generateResponse = async (prompt: string): Promise<string> => {
-  if (!apiKey) {
-    throw new Error('API key is required');
-  }
-
   try {
     const response = await fetch(`${GEMINI_API_ENDPOINT}?key=${apiKey}`, {
       method: 'POST',

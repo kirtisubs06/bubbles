@@ -73,7 +73,7 @@ const DolphinDemo: React.FC = () => {
             </TabsTrigger>
             <TabsTrigger 
               value="features" 
-              className="text-base md:text-lg py-5 px-6 h-full rounded-r-full data-[state=active]:bg-gradient-to-r data-[state=active]:from-bubbles-coral data-[state=active]:to-bubbles-coral data-[state=active]:text-white dark:data-[state=active]:text-white data-[state=active]:shadow-sm transition-all duration-200 relative z-10 font-medium outline-none focus:outline-none data-[state=inactive]:bg-white dark:data-[state=inactive]:bg-bubbles-deep/50"
+              className="text-base md:text-lg py-5 px-6 h-full rounded-r-full data-[state=active]:bg-gradient-to-r data-[state=active]:from-bubbles-yellow data-[state=active]:to-bubbles-coral data-[state=active]:text-white dark:data-[state=active]:text-white data-[state=active]:shadow-sm transition-all duration-200 relative z-10 font-medium outline-none focus:outline-none data-[state=inactive]:bg-white dark:data-[state=inactive]:bg-bubbles-deep/50"
             >
               Features & Interaction
             </TabsTrigger>
@@ -128,11 +128,11 @@ const DolphinDemo: React.FC = () => {
                       <span className="text-bubbles-deep dark:text-gray-200">Natural conversations with voice recognition</span>
                     </li>
                     <li className="flex items-start">
-                      <span className="text-bubbles-coral mr-2">✨</span>
+                      <span className="text-bubbles-yellow mr-2">✨</span>
                       <span className="text-bubbles-deep dark:text-gray-200">Age-appropriate content and answers</span>
                     </li>
                     <li className="flex items-start">
-                      <span className="text-bubbles-aqua mr-2">✨</span>
+                      <span className="text-bubbles-lime mr-2">✨</span>
                       <span className="text-bubbles-deep dark:text-gray-200">Stories, songs, and educational content</span>
                     </li>
                     <li className="flex items-start">
@@ -145,7 +145,7 @@ const DolphinDemo: React.FC = () => {
               
               <div>
                 <motion.div 
-                  className="bg-gradient-to-br from-bubbles-coral/20 to-bubbles-sand/20 p-6 h-full rounded-2xl shadow-medium"
+                  className="bg-gradient-to-br from-bubbles-yellow/20 to-bubbles-sand/20 p-6 h-full rounded-2xl shadow-medium"
                   initial={{ opacity: 0, x: 20 }}
                   animate={isVisible ? { opacity: 1, x: 0 } : { opacity: 0, x: 20 }}
                   transition={{ duration: 0.6, delay: 0.2 }}
@@ -165,7 +165,7 @@ const DolphinDemo: React.FC = () => {
                       <span className="text-bubbles-deep dark:text-gray-200">Encourages curiosity and critical thinking</span>
                     </li>
                     <li className="flex items-start">
-                      <span className="text-bubbles-aqua mr-2">🌟</span>
+                      <span className="text-bubbles-lime mr-2">🌟</span>
                       <span className="text-bubbles-deep dark:text-gray-200">Parent dashboard for monitoring</span>
                     </li>
                   </ul>
@@ -174,7 +174,7 @@ const DolphinDemo: React.FC = () => {
               
               <div className="md:col-span-2">
                 <motion.div 
-                  className="bg-gradient-to-br from-bubbles-aqua/20 to-bubbles-seafoam/20 p-6 rounded-2xl shadow-medium"
+                  className="bg-gradient-to-br from-bubbles-lime/20 to-bubbles-seafoam/20 p-6 rounded-2xl shadow-medium"
                   initial={{ opacity: 0, y: 20 }}
                   animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
                   transition={{ duration: 0.6, delay: 0.4 }}

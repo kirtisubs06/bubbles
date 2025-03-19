@@ -1,3 +1,4 @@
+
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   darkMode: ["class"],
@@ -14,15 +15,18 @@ module.exports = {
         foreground: "hsl(var(--foreground))",
         bubbles: {
           blue: "#5AA9E6",      // Main blue color for the dolphin
+          lightblue: "#7DB9E8", // Lighter blue (more like the reference image)
           teal: "#33C3F0",      // Secondary teal color
           skyblue: "#8DCBE6",   // Light blue for accents
           navy: "#0D5D79",      // Darker blue for contrast
           deep: "#0F172A",      // Very dark blue for backgrounds in dark mode
-          cream: "#D3E4FD",     // Light blue-tinted cream for backgrounds
+          cream: "#F9F7F0",     // Cream color (more beige than before)
+          sand: "#F3E9D2",      // Sandy beige color
+          yellow: "#FFD166",    // Warm yellow
+          lime: "#88D498",      // Light lime green
+          seafoam: "#93E5AB",   // Seafoam green for marine theme
           aqua: "#61E8E1",      // Aqua/turquoise for variety
           coral: "#FF7E67",     // Coral accent color for warmth
-          sand: "#F9F7E8",      // Sandy beach color
-          seafoam: "#93E5AB",   // Seafoam green for marine theme
           wave: "#BDE0FE",      // Light wave color
         },
         // Keep original teddy colors for backward compatibility
