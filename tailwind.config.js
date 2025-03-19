@@ -1,3 +1,4 @@
+
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   darkMode: ["class"],
@@ -10,6 +11,8 @@ module.exports = {
   theme: {
     extend: {
       colors: {
+        background: "hsl(var(--background))",
+        foreground: "hsl(var(--foreground))",
         bubbles: {
           blue: "#1EAEDB",      // Main blue color for primary elements
           teal: "#33C3F0",      // Secondary teal color

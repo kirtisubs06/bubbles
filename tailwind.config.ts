@@ -64,6 +64,15 @@ export default {
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
 				},
+				// Bubbles color palette
+				bubbles: {
+					blue: '#1EAEDB',
+					teal: '#33C3F0',
+					skyblue: '#0FA0CE',
+					navy: '#0D5D79',
+					deep: '#0F172A',
+					cream: '#D3E4FD',
+				},
 				// TeddyTech color palette
 				teddy: {
 					'blue': '#A0D2EB',
