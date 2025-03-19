@@ -1,4 +1,3 @@
-
 import React, { useRef, useState, useEffect, Suspense } from 'react';
 import { Canvas, useFrame, useThree, useLoader } from '@react-three/fiber';
 import { OrbitControls, Environment, ContactShadows, Preload } from '@react-three/drei';
@@ -215,25 +214,25 @@ const DolphinModel = ({
     >
       {/* Main body - streamlined torpedo shape */}
       <mesh position={[0, 0, 0]} scale={[1.8, 0.65, 0.65]}>
-        <ellipsoidGeometry args={[1, 1, 1.2]} />
+        <sphereGeometry args={[1, 32, 32]} />
         <meshStandardMaterial color={bodyColor} roughness={0.3} metalness={0.1} />
       </mesh>
 
       {/* Tapered rear body */}
       <mesh position={[1.5, 0, 0]} scale={[1, 0.45, 0.45]} rotation={[0, 0.2, 0]}>
-        <ellipsoidGeometry args={[1, 1, 1]} />
+        <sphereGeometry args={[1, 32, 32]} />
         <meshStandardMaterial color={bodyColor} roughness={0.3} metalness={0.1} />
       </mesh>
 
       {/* Head - more torpedo shaped */}
       <mesh position={[-1.2, 0, 0]} scale={[0.7, 0.6, 0.6]} rotation={[0, -0.2, 0]}>
-        <ellipsoidGeometry args={[1, 1, 1]} />
+        <sphereGeometry args={[1, 32, 32]} />
         <meshStandardMaterial color={bodyColor} roughness={0.3} metalness={0.1} />
       </mesh>
       
       {/* Snout - elongated with visible mouth line */}
       <mesh position={[-1.9, -0.05, 0]} rotation={[0, -0.1, 0]} scale={[0.6, 0.25, 0.25]}>
-        <ellipsoidGeometry args={[1, 1, 1]} />
+        <sphereGeometry args={[1, 32, 32]} />
         <meshStandardMaterial color={bodyColor} roughness={0.3} metalness={0.1} />
       </mesh>
       
@@ -271,13 +270,13 @@ const DolphinModel = ({
       
       {/* Left pectoral fin - curved and realistic */}
       <mesh position={[-0.7, -0.2, 0.65]} rotation={[0.3, 0.4, -Math.PI / 6]} scale={[0.5, 0.18, 0.08]}>
-        <ellipsoidGeometry args={[1, 1, 1]} />
+        <sphereGeometry args={[1, 16, 8]} />
         <meshStandardMaterial color={finColor} roughness={0.3} metalness={0.1} />
       </mesh>
       
       {/* Right pectoral fin */}
       <mesh position={[-0.7, -0.2, -0.65]} rotation={[-0.3, -0.4, -Math.PI / 6]} scale={[0.5, 0.18, 0.08]}>
-        <ellipsoidGeometry args={[1, 1, 1]} />
+        <sphereGeometry args={[1, 16, 8]} />
         <meshStandardMaterial color={finColor} roughness={0.3} metalness={0.1} />
       </mesh>
       
@@ -292,13 +291,13 @@ const DolphinModel = ({
         <group rotation={[0, 0, 0]}>
           {/* Left fluke */}
           <mesh position={[0, 0.5, 0]} rotation={[0, 0, -Math.PI / 8]} scale={[0.5, 0.8, 0.1]}>
-            <ellipsoidGeometry args={[1, 1, 0.5]} />
+            <sphereGeometry args={[1, 16, 8]} />
             <meshStandardMaterial color={finColor} roughness={0.3} metalness={0.1} />
           </mesh>
           
           {/* Right fluke */}
           <mesh position={[0, -0.5, 0]} rotation={[0, 0, Math.PI / 8]} scale={[0.5, 0.8, 0.1]}>
-            <ellipsoidGeometry args={[1, 1, 0.5]} />
+            <sphereGeometry args={[1, 16, 8]} />
             <meshStandardMaterial color={finColor} roughness={0.3} metalness={0.1} />
           </mesh>
         </group>
