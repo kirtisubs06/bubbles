@@ -1,3 +1,4 @@
+
 import React, { useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ArrowRight, Sparkles, Waves, Heart } from 'lucide-react';
@@ -130,23 +131,30 @@ const Hero: React.FC = () => {
               <div className="aspect-square rounded-2xl bg-blue-100 dark:bg-blue-200 flex items-center justify-center">
                 <div className="w-4/5 h-4/5 relative">
                   <svg viewBox="0 0 400 300" className="w-full h-full">
-                    <path d="M300,150 C300,100 240,60 150,80 C70,100 30,130 30,150 C30,180 70,200 150,220 C240,240 300,200 300,150 Z" 
+                    {/* Updated fish with slimmer body and triangle-shaped nose */}
+                    <path d="M300,150 C300,100 240,70 150,90 C80,110 30,130 30,150 C30,180 80,200 150,220 C240,240 300,200 300,150 Z" 
                       fill="#5e7082" stroke="#424b54" strokeWidth="3" />
                     
-                    <path d="M30,150 C5,110 0,80 15,70 C35,100 40,120 30,150 C40,180 35,200 15,230 C0,220 5,190 30,150 Z" 
+                    {/* Triangle-shaped nose that points toward the bubbles */}
+                    <path d="M30,150 C30,150 0,130 15,150 C0,170 30,150 30,150 Z" 
                       fill="#5e7082" stroke="#424b54" strokeWidth="2" />
                     
-                    <path d="M300,150 C320,140 335,145 340,150 C335,155 320,160 300,150 Z"
+                    {/* Bigger tail fins */}
+                    <path d="M300,150 C330,130 345,115 350,130 C345,155 330,170 300,150 Z"
                       fill="#5e7082" stroke="#424b54" strokeWidth="2" />
                     
                     <circle cx="260" cy="140" r="12" fill="#000000" />
                     <circle cx="258" cy="138" r="4" fill="#ffffff" />
                     
-                    <path d="M200,80 C220,50 240,40 260,50 C240,70 220,75 200,80 Z" 
-                      fill="#5e7082" stroke="#424b54" strokeWidth="2" />
-                    <path d="M200,220 C220,250 240,260 260,250 C240,230 220,225 200,220 Z" 
+                    {/* Updated top fin */}
+                    <path d="M200,90 C220,50 240,40 260,60 C240,80 220,85 200,90 Z" 
                       fill="#5e7082" stroke="#424b54" strokeWidth="2" />
                     
+                    {/* Updated bottom fin */}
+                    <path d="M200,210 C220,250 240,260 260,240 C240,220 220,215 200,210 Z" 
+                      fill="#5e7082" stroke="#424b54" strokeWidth="2" />
+                    
+                    {/* Bubbles */}
                     <circle cx="320" cy="120" r="8" fill="none" stroke="#424b54" strokeWidth="1" opacity="0.6" />
                     <circle cx="340" cy="140" r="5" fill="none" stroke="#424b54" strokeWidth="1" opacity="0.6" />
                     <circle cx="330" cy="100" r="6" fill="none" stroke="#424b54" strokeWidth="1" opacity="0.6" />
