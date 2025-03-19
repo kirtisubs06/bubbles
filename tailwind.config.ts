@@ -64,35 +64,37 @@ export default {
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
 				},
-				// Bubbles color palette - updated to focus on blue, yellow, green, white
+				// Bubbles color palette - updated to the coastal palette from the image
 				bubbles: {
-					blue: '#5AA9E6',        // Main blue color
-					teal: '#33C3F0',        // Secondary teal color
-					skyblue: '#8DCBE6',     // Light blue for accents
-					navy: '#0D5D79',        // Darker blue for contrast
-					deep: '#0F172A',        // Very dark blue for backgrounds in dark mode
-					cream: '#F9F7F0',       // Light cream color for backgrounds
-					aqua: '#61E8E1',        // Aqua/turquoise for variety
-					yellow: '#FFD166',      // Warm yellow (replacing coral)
-					sand: '#F3E9D2',        // Sandy beige color
-					seafoam: '#93E5AB',     // Seafoam green for marine theme
-					lime: '#88D498',        // Light lime green
-					wave: '#BDE0FE',        // Light wave color
+					blue: '#335571',       // Navy blue from the image
+					teal: '#5DB0C7',       // Teal that complements the palette
+					skyblue: '#C3D9E9',    // Light blue for accents
+					lightblue: '#A7C5E3',  // Medium-light blue from the image
+					navy: '#24405C',       // Darker blue for contrast
+					deep: '#1A2D3F',       // Very dark blue for backgrounds in dark mode
+					cream: '#F7F3ED',      // Cream color from the image
+					sand: '#EDE3D6',       // Sandy beige color from the image
+					seafoam: '#A0D5DB',    // Seafoam green for marine theme
+					lime: '#88C7D0',       // Teal-green that matches the palette
+					aqua: '#6FBAC7',       // Aqua/turquoise that matches the palette
+					wave: '#D8E6F1',       // Light wave color
+					purple: '#9b87f5',     // Keeping the purple accent
 				},
-				// TeddyTech color palette - updated to remove coral/orange
+				// Teddy colors updated to match our coastal palette
 				teddy: {
-					'blue': '#A0D2EB',
-					'purple': '#B8B5FF',
-					'pink': '#FFABE1',
-					'yellow': '#FFD166',    // Yellow instead of peach/coral
-					'mint': '#A2E1DB',
-					'cream': '#FFF8F0',
-					'charcoal': '#2A2D34',
+					'blue': '#A7C5E3',    // Updated to match lightblue
+					'purple': '#9b87f5',   // Keeping purple
+					'pink': '#FF8FAB',
+					'mint': '#A0D5DB',     // Updated to match seafoam
+					'cream': '#F7F3ED',    // Updated to match bubbles-cream
+					'charcoal': '#1A2D3F', // Updated to match bubbles-deep
+					'teal': '#5DB0C7',     // Added teal color
 				}
 			},
 			fontFamily: {
 				sans: ["var(--font-sans)", ...fontFamily.sans],
 				heading: ["var(--font-heading)", ...fontFamily.sans],
+				kidsfont: ["Comic Sans MS", "Comic Sans", "cursive"],
 			},
 			borderRadius: {
 				lg: 'var(--radius)',
@@ -150,6 +152,15 @@ export default {
 					'70%': { transform: 'scale(1.5)', opacity: '0.5' },
 					'100%': { transform: 'scale(2)', opacity: '0' },
 				},
+				'bounce': {
+					'0%, 100%': { transform: 'translateY(0)' },
+					'50%': { transform: 'translateY(-15px)' },
+				},
+				'wobble': {
+					'0%, 100%': { transform: 'rotate(0deg)' },
+					'25%': { transform: 'rotate(-5deg)' },
+					'75%': { transform: 'rotate(5deg)' },
+				},
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
@@ -164,6 +175,8 @@ export default {
 				'page-out': 'page-transition-out 0.5s ease-out',
 				'wave': 'wave 3s ease-in-out infinite',
 				'splash': 'splash 2s ease-out',
+				'bounce': 'bounce 2s ease-in-out infinite',
+				'wobble': 'wobble 3s ease-in-out infinite',
 			},
 			backdropFilter: {
 				'none': 'none',
@@ -173,6 +186,7 @@ export default {
 				'soft': '0 4px 20px rgba(0, 0, 0, 0.05)',
 				'medium': '0 6px 30px rgba(0, 0, 0, 0.08)',
 				'strong': '0 8px 40px rgba(0, 0, 0, 0.12)',
+				'bubbly': '0 8px 32px rgba(83, 170, 210, 0.2)',
 			},
 		}
 	},

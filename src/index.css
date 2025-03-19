@@ -7,57 +7,57 @@
   :root {
     --background: 0 0% 100%;
     --foreground: 222.2 47.4% 11.2%;
-    --bubbles-blue: 203 71% 63%;
-    --bubbles-lightblue: 206 65% 70%;
-    --bubbles-teal: 195 87% 57%;
-    --bubbles-skyblue: 201 65% 73%;
-    --bubbles-navy: 197 80% 26%;
-    --bubbles-deep: 222 53% 11%;
-    --bubbles-cream: 48 50% 97%;
-    --bubbles-sand: 45 50% 89%;
-    --bubbles-purple: 258 73% 75%;
-    --bubbles-lime: 140 50% 68%;
-    --bubbles-seafoam: 145 60% 74%;
-    --bubbles-aqua: 177 70% 65%;
-    --bubbles-wave: 209 95% 87%;
+    --bubbles-blue: 210 30% 30%;      /* Updated to navy blue from image */
+    --bubbles-lightblue: 206 40% 75%; /* Updated to light blue from image */
+    --bubbles-teal: 200 50% 60%;      /* Adjusted teal to match palette */
+    --bubbles-skyblue: 201 50% 80%;   /* Lighter sky blue */
+    --bubbles-navy: 210 40% 25%;      /* Deeper navy from image */
+    --bubbles-deep: 210 40% 15%;      /* Very dark navy for backgrounds */
+    --bubbles-cream: 40 30% 95%;      /* Cream color from image */
+    --bubbles-sand: 35 25% 90%;       /* Sandy beige from image */
+    --bubbles-purple: 258 73% 75%;    /* Kept purple */
+    --bubbles-lime: 180 40% 70%;      /* Adjusted to a more teal-green */
+    --bubbles-seafoam: 185 40% 80%;   /* Seafoam more in line with palette */
+    --bubbles-aqua: 190 50% 70%;      /* Aqua adjusted to match palette */
+    --bubbles-wave: 200 80% 90%;      /* Light wave color */
 
     /* Add these for shadcn/ui compatibility */
     --card: 0 0% 100%;
     --card-foreground: 222.2 47.4% 11.2%;
     --popover: 0 0% 100%;
     --popover-foreground: 222.2 47.4% 11.2%;
-    --primary: 222.2 47.4% 11.2%;
+    --primary: 210 30% 30%;           /* Updated to match bubbles-blue */
     --primary-foreground: 210 40% 98%;
-    --secondary: 210 40% 96.1%;
+    --secondary: 200 50% 60%;         /* Updated to match bubbles-teal */
     --secondary-foreground: 222.2 47.4% 11.2%;
     --muted: 210 40% 96.1%;
     --muted-foreground: 215.4 16.3% 46.9%;
-    --accent: 210 40% 96.1%;
+    --accent: 201 50% 80%;            /* Updated to match bubbles-skyblue */
     --accent-foreground: 222.2 47.4% 11.2%;
     --destructive: 0 100% 50%;
     --destructive-foreground: 210 40% 98%;
     --border: 214.3 31.8% 91.4%;
     --input: 214.3 31.8% 91.4%;
     --ring: 222.2 47.4% 11.2%;
-    --radius: 0.5rem;
+    --radius: 0.75rem;                /* Increased border radius for fun */
   }
 
   .dark {
-    --background: 222 47% 11%;
+    --background: 210 40% 15%;        /* Updated to match bubbles-deep */
     --foreground: 213 31% 91%;
     
     /* Add these for shadcn/ui compatibility */
-    --card: 222 47% 11%;
+    --card: 210 40% 15%;              /* Updated to match bubbles-deep */
     --card-foreground: 213 31% 91%;
-    --popover: 222 47% 11%;
+    --popover: 210 40% 15%;           /* Updated to match bubbles-deep */
     --popover-foreground: 213 31% 91%;
-    --primary: 210 40% 98%;
+    --primary: 206 40% 75%;           /* Updated to match bubbles-lightblue */
     --primary-foreground: 222.2 47.4% 1.2%;
-    --secondary: 217.2 32.6% 17.5%;
+    --secondary: 200 50% 60%;         /* Updated to match bubbles-teal */
     --secondary-foreground: 210 40% 98%;
     --muted: 217.2 32.6% 17.5%;
     --muted-foreground: 215 20.2% 65.1%;
-    --accent: 217.2 32.6% 17.5%;
+    --accent: 201 50% 80%;            /* Updated to match bubbles-skyblue */
     --accent-foreground: 210 40% 98%;
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 210 40% 98%;
@@ -78,7 +78,7 @@
   }
   
   .nav-link.active {
-    @apply text-bubbles-blue dark:text-bubbles-blue;
+    @apply text-bubbles-blue dark:text-bubbles-lightblue;
   }
   
   .btn-primary {
@@ -105,6 +105,7 @@
     @apply shadow-[0_8px_30px_rgba(0,0,0,0.08)];
   }
   
+  /* Updated gradient classes to match new palette */
   .card-gradient-blue {
     @apply bg-gradient-to-br from-bubbles-blue/20 to-bubbles-skyblue/20;
   }
@@ -121,8 +122,48 @@
     @apply bg-gradient-to-br from-bubbles-lime/20 to-bubbles-seafoam/20;
   }
   
-  /* Replace yellow with purple in this gradient */
   .card-gradient-warm {
-    @apply bg-gradient-to-br from-[#9b87f5]/20 to-bubbles-sand/20;
+    @apply bg-gradient-to-br from-bubbles-cream/30 to-bubbles-sand/30;
+  }
+  
+  /* Fun animations for kids' website */
+  .float-element {
+    animation: float 6s ease-in-out infinite;
+  }
+  
+  .bounce-element {
+    animation: bounce 2s ease-in-out infinite;
+  }
+  
+  .wave-element {
+    animation: wave 3s ease-in-out infinite;
+  }
+  
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-20px); }
+  }
+  
+  @keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-15px); }
+  }
+  
+  @keyframes wave {
+    0%, 100% { transform: translateX(0) rotate(0deg); }
+    25% { transform: translateX(-5px) rotate(-5deg); }
+    75% { transform: translateX(5px) rotate(5deg); }
+  }
+  
+  /* Fun decorative elements */
+  .bubble {
+    @apply absolute rounded-full bg-bubbles-teal/30 backdrop-blur-sm;
+    animation: float 8s ease-in-out infinite;
+  }
+  
+  .wave-decoration {
+    @apply absolute bg-bubbles-lightblue/20;
+    mask-image: url("data:image/svg+xml,%3Csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0,50 C150,150 350,-50 500,50 L500,150 L0,150 Z' fill='%23000000'/%3E%3C/svg%3E");
+    mask-size: 100% 100%;
   }
 }
