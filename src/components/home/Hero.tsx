@@ -139,19 +139,19 @@ const Hero: React.FC = () => {
                     
                     {/* Smiley Face */}
                     <div className="relative w-3/4 h-3/4 rounded-full bg-gradient-to-b from-[#33C3F0] to-[#0FA0CE] shadow-lg z-10 flex items-center justify-center">
-                      {/* Eyes - more realistic with highlights */}
-                      <div className="absolute top-[30%] left-[30%] transform -translate-y-1/2 w-[12%] h-[12%] rounded-full bg-white flex items-center justify-center">
+                      {/* Eyes - using light blue instead of white */}
+                      <div className="absolute top-[30%] left-[30%] transform -translate-y-1/2 w-[12%] h-[12%] rounded-full bg-[#D3E4FD] flex items-center justify-center">
                         <div className="w-1/2 h-1/2 rounded-full bg-black absolute"></div>
-                        <div className="w-1/4 h-1/4 rounded-full bg-white absolute top-1/4 left-1/4"></div>
+                        <div className="w-1/4 h-1/4 rounded-full bg-[#D3E4FD] absolute top-1/4 left-1/4"></div>
                       </div>
-                      <div className="absolute top-[30%] right-[30%] transform -translate-y-1/2 w-[12%] h-[12%] rounded-full bg-white flex items-center justify-center">
+                      <div className="absolute top-[30%] right-[30%] transform -translate-y-1/2 w-[12%] h-[12%] rounded-full bg-[#D3E4FD] flex items-center justify-center">
                         <div className="w-1/2 h-1/2 rounded-full bg-black absolute"></div>
-                        <div className="w-1/4 h-1/4 rounded-full bg-white absolute top-1/4 left-1/4"></div>
+                        <div className="w-1/4 h-1/4 rounded-full bg-[#D3E4FD] absolute top-1/4 left-1/4"></div>
                       </div>
                       
-                      {/* Warmer, more welcoming smile with softer curve */}
-                      <div className="absolute bottom-[32%] w-[55%] h-[20%] overflow-hidden">
-                        <div className="w-full h-full border-b-[14px] border-white rounded-b-[100px]"></div>
+                      {/* Modified smile: less wide, better proportions, light blue color */}
+                      <div className="absolute bottom-[32%] w-[45%] h-[20%] overflow-hidden">
+                        <div className="w-full h-full border-b-[14px] border-[#D3E4FD] rounded-b-[90px]"></div>
                       </div>
                       
                       {/* Cute rosy cheeks */}
