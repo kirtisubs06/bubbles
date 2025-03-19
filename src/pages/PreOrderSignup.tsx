@@ -1,47 +1,41 @@
 
-import React, { useState } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { CheckCircle2, PackageCheck } from 'lucide-react';
 import Header from '@/components/layout/Header';
-import { Input } from '@/components/ui/input';
-import { Button } from '@/components/ui/button';
-import { toast } from '@/components/ui/use-toast';
 
 const PreOrderSignup: React.FC = () => {
-  const [email, setEmail] = useState('');
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitted, setSubmitted] = useState(false);
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsSubmitting(true);
+  const iframeRef = useRef<HTMLIFrameElement>(null);
+  
+  useEffect(() => {
+    // Dynamically adjust iframe height when form loads
+    const handleMessage = (event: MessageEvent) => {
+      if (event.data.type === 'JotformResize') {
+        if (iframeRef.current) {
+          iframeRef.current.style.height = `${event.data.height + 100}px`;
+        }
+      }
+    };
     
-    // Simulate API call
-    setTimeout(() => {
-      setIsSubmitting(false);
-      setSubmitted(true);
-      toast({
-        title: "Pre-order confirmed!",
-        description: "Thank you for your interest in Bubbles. We'll notify you when it's available.",
-      });
-    }, 1500);
-  };
+    window.addEventListener('message', handleMessage);
+    return () => window.removeEventListener('message', handleMessage);
+  }, []);
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-white to-bubbles-cream/20 dark:from-bubbles-deep dark:to-bubbles-deep/80">
       <Header />
-      <div className="pt-32 container mx-auto px-4 pb-20">
+      <div className="pt-24 md:pt-32 container mx-auto px-4 pb-20">
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="text-center max-w-3xl mx-auto mb-16"
+          className="text-center max-w-3xl mx-auto mb-12"
         >
           <h1 className="text-4xl md:text-5xl font-bold tracking-tight text-bubbles-deep dark:text-white mb-6">
             Pre-order Your <span className="text-bubbles-blue">Bubbles</span> Companion
           </h1>
           <p className="text-lg text-gray-600 dark:text-gray-300 mb-8 max-w-2xl mx-auto">
-            Be among the first to receive the revolutionary AI dolphin companion that will transform how your child learns and plays. Reserve yours today with no obligation.
+            Be among the first to receive the revolutionary AI dolphin companion that will transform how your child learns and plays.
           </p>
         </motion.div>
 
@@ -115,108 +109,38 @@ const PreOrderSignup: React.FC = () => {
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6, delay: 0.4 }}
-            className="bg-white dark:bg-bubbles-deep/40 rounded-2xl shadow-medium p-8 flex flex-col"
+            className="bg-white dark:bg-bubbles-deep/40 rounded-2xl shadow-medium overflow-hidden"
           >
-            {!submitted ? (
-              <>
-                <h2 className="text-2xl font-bold text-bubbles-deep dark:text-white mb-4">Reserve Your Bubbles</h2>
-                <p className="text-gray-600 dark:text-gray-300 mb-6">
-                  Fill out the form below to pre-order your Bubbles companion. No credit card required now — we'll notify you when it's time to complete your purchase.
-                </p>
-                
-                <form onSubmit={handleSubmit} className="space-y-6 flex-1 flex flex-col">
-                  <div>
-                    <label htmlFor="name" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                      Full Name
-                    </label>
-                    <Input 
-                      id="name" 
-                      type="text" 
-                      placeholder="Your name" 
-                      required
-                      className="w-full"
-                    />
-                  </div>
-                  
-                  <div>
-                    <label htmlFor="email" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                      Email Address
-                    </label>
-                    <Input 
-                      id="email" 
-                      type="email" 
-                      placeholder="your@email.com" 
-                      required
-                      value={email}
-                      onChange={(e) => setEmail(e.target.value)}
-                      className="w-full"
-                    />
-                  </div>
-                  
-                  <div>
-                    <label htmlFor="phone" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                      Phone Number (Optional)
-                    </label>
-                    <Input 
-                      id="phone" 
-                      type="tel" 
-                      placeholder="Your phone number" 
-                      className="w-full"
-                    />
-                  </div>
-                  
-                  <div>
-                    <label className="flex items-center">
-                      <input 
-                        type="checkbox" 
-                        className="rounded border-gray-300 text-bubbles-blue shadow-sm focus:border-bubbles-blue focus:ring focus:ring-bubbles-blue focus:ring-opacity-50"
-                        required
-                      />
-                      <span className="ml-2 text-sm text-gray-600 dark:text-gray-400">
-                        I agree to be contacted about my pre-order and receive updates about Bubbles.
-                      </span>
-                    </label>
-                  </div>
-                  
-                  <div className="mt-auto pt-4">
-                    <Button 
-                      type="submit" 
-                      disabled={isSubmitting}
-                      className="w-full bg-bubbles-blue hover:bg-bubbles-blue/90 text-white py-3"
-                    >
-                      {isSubmitting ? "Processing..." : "Pre-order Now"}
-                    </Button>
-                    <p className="text-sm text-gray-500 dark:text-gray-400 mt-2 text-center">
-                      No payment required today. We'll notify you when Bubbles is ready for purchase.
-                    </p>
-                  </div>
-                </form>
-              </>
-            ) : (
-              <div className="flex-1 flex flex-col items-center justify-center text-center py-8">
-                <div className="w-16 h-16 rounded-full bg-green-100 flex items-center justify-center mb-4">
-                  <CheckCircle2 className="h-8 w-8 text-green-600" />
-                </div>
-                <h2 className="text-2xl font-bold text-bubbles-deep dark:text-white mb-2">Thank You!</h2>
-                <p className="text-lg text-gray-700 dark:text-gray-300 mb-4">
-                  Your pre-order has been reserved.
-                </p>
-                <p className="text-gray-600 dark:text-gray-400 mb-6">
-                  We've sent a confirmation email to <span className="font-medium">{email}</span>. 
-                  We'll notify you when Bubbles is ready for you to complete your purchase.
-                </p>
-                <Button 
-                  onClick={() => setSubmitted(false)}
-                  variant="outline"
-                  className="border-bubbles-blue text-bubbles-blue hover:bg-bubbles-blue/10"
-                >
-                  Reserve Another
-                </Button>
-              </div>
-            )}
+            {/* Jotform Embed */}
+            <iframe
+              ref={iframeRef}
+              id="JotFormIFrame-250751107337048"
+              title="Pre-order Bubbles AI Dolphin"
+              onLoad={() => {
+                if (iframeRef.current) {
+                  iframeRef.current.style.height = "600px";
+                }
+              }}
+              allowTransparency={true}
+              allowFullScreen={true}
+              allow="geolocation; microphone; camera"
+              src="https://form.jotform.com/250751107337048"
+              frameBorder="0"
+              style={{ 
+                width: "100%", 
+                minHeight: "600px", 
+                border: "none" 
+              }}
+            />
           </motion.div>
         </div>
       </div>
+      
+      {/* Decorative elements for fun, kid-friendly appearance */}
+      <div className="bubble w-12 h-12 left-[10%] top-[20%] opacity-50"></div>
+      <div className="bubble w-8 h-8 right-[15%] top-[25%] opacity-40"></div>
+      <div className="bubble w-20 h-20 left-[5%] bottom-[15%] opacity-40"></div>
+      <div className="bubble w-16 h-16 right-[10%] bottom-[20%] opacity-30"></div>
     </div>
   );
 };
