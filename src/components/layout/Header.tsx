@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { cn } from '@/lib/utils';
-import { Menu, X, LogIn, Sparkles, Package, Waves } from 'lucide-react';
+import { Menu, X, LogIn, Sparkles, Package, Waves, Activity } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 const Header: React.FC = () => {
@@ -66,6 +66,15 @@ const Header: React.FC = () => {
               className="absolute -bottom-1 left-0 w-0 h-0.5 bg-bubbles-blue group-hover:w-full transition-all duration-300"
               initial={false}
               animate={isActive('/dolphin-demo') ? { width: "100%" } : { width: "0%" }}
+            />
+          </Link>
+          <Link to="/parent-dashboard-demo" className={cn("nav-link group", isActive('/parent-dashboard-demo') && "active")}>
+            <span>Parent Dashboard</span>
+            <Activity className="ml-1 h-3 w-3 text-bubbles-teal inline-block" />
+            <motion.span 
+              className="absolute -bottom-1 left-0 w-0 h-0.5 bg-bubbles-blue group-hover:w-full transition-all duration-300"
+              initial={false}
+              animate={isActive('/parent-dashboard-demo') ? { width: "100%" } : { width: "0%" }}
             />
           </Link>
           <Link to="/pre-order" className={cn("nav-link group", isActive('/pre-order') && "active")}>
@@ -132,6 +141,10 @@ const Header: React.FC = () => {
             <Link to="/dolphin-demo" className={cn("nav-link flex items-center", isActive('/dolphin-demo') && "active")}>
               Dolphin Demo
               <Waves className="ml-1 h-4 w-4 text-bubbles-teal" />
+            </Link>
+            <Link to="/parent-dashboard-demo" className={cn("nav-link flex items-center", isActive('/parent-dashboard-demo') && "active")}>
+              Parent Dashboard
+              <Activity className="ml-1 h-4 w-4 text-bubbles-teal" />
             </Link>
             <Link to="/pre-order" className={cn("nav-link flex items-center", isActive('/pre-order') && "active")}>
               Pre-order

@@ -32,14 +32,14 @@ const Hero: React.FC = () => {
       {/* Background decoration */}
       <div className="absolute top-0 left-0 w-full h-full overflow-hidden z-0">
         <div className="absolute top-0 right-0 w-1/3 h-1/3 bg-bubbles-teal/10 rounded-full blur-3xl transform translate-x-1/4 -translate-y-1/4"></div>
-        <div className="absolute bottom-0 left-0 w-1/3 h-1/3 bg-bubbles-yellow/10 rounded-full blur-3xl transform -translate-x-1/4 translate-y-1/4"></div>
+        <div className="absolute bottom-0 left-0 w-1/3 h-1/3 bg-[#9b87f5]/10 rounded-full blur-3xl transform -translate-x-1/4 translate-y-1/4"></div>
         <div className="absolute top-1/3 left-1/4 w-1/4 h-1/4 bg-bubbles-aqua/10 rounded-full blur-3xl"></div>
       </div>
       
       <div className="container mx-auto px-4 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           <div className="space-y-8 animate-fade-in">
-            <div className="inline-flex items-center rounded-full px-3 py-1 text-sm font-medium bg-bubbles-yellow/20 text-bubbles-deep">
+            <div className="inline-flex items-center rounded-full px-3 py-1 text-sm font-medium bg-[#9b87f5]/20 text-bubbles-deep">
               <span className="animate-pulse-soft">✨</span>
               <span className="ml-2">Introducing AI-Powered Learning</span>
             </div>
@@ -48,7 +48,7 @@ const Hero: React.FC = () => {
               Your Child's Smart 
               <span className="relative">
                 <span className="relative z-10 bg-gradient-to-r from-bubbles-blue to-bubbles-lime bg-clip-text text-transparent"> Dolphin </span>
-                <span className="absolute bottom-2 left-0 w-full h-3 bg-bubbles-yellow rounded-lg -z-10"></span>
+                <span className="absolute bottom-2 left-0 w-full h-3 bg-[#9b87f5] rounded-lg -z-10"></span>
               </span>
               Companion
             </h1>
@@ -62,8 +62,11 @@ const Hero: React.FC = () => {
                 Get Started
                 <ArrowRight className="ml-2 h-5 w-5" />
               </button>
-              <button onClick={() => navigate('/dolphin-demo')} className="bg-bubbles-yellow hover:bg-bubbles-yellow/90 text-bubbles-deep font-medium py-3 px-6 rounded-lg shadow-md hover:shadow-lg flex items-center transition-all duration-300 text-base">
+              <button onClick={() => navigate('/dolphin-demo')} className="bg-[#9b87f5] hover:bg-[#9b87f5]/90 text-white font-medium py-3 px-6 rounded-lg shadow-md hover:shadow-lg flex items-center transition-all duration-300 text-base">
                 Try Demo
+              </button>
+              <button onClick={() => navigate('/parent-dashboard-demo')} className="bg-bubbles-lime hover:bg-bubbles-lime/90 text-white font-medium py-3 px-6 rounded-lg shadow-md hover:shadow-lg flex items-center transition-all duration-300 text-base">
+                Parent Dashboard
               </button>
             </div>
             
@@ -82,7 +85,7 @@ const Hero: React.FC = () => {
           </div>
           
           <div ref={imageRef} className="relative transition-transform duration-200 ease-out">
-            <div className="absolute inset-0 bg-gradient-to-br from-bubbles-blue/20 to-bubbles-yellow/20 rounded-3xl transform rotate-3 scale-105"></div>
+            <div className="absolute inset-0 bg-gradient-to-br from-bubbles-blue/20 to-[#9b87f5]/20 rounded-3xl transform rotate-3 scale-105"></div>
             <div className="relative bg-white dark:bg-bubbles-deep/80 rounded-3xl shadow-medium overflow-hidden p-6 animate-float">
               <div className="aspect-square rounded-2xl bg-bubbles-cream dark:bg-gray-800 flex items-center justify-center">
                 <div className="w-4/5 h-4/5 relative">
@@ -148,8 +151,8 @@ const Hero: React.FC = () => {
               
               <div className="mt-6 space-y-4">
                 <div className="flex items-start space-x-3">
-                  <div className="w-10 h-10 flex-shrink-0 rounded-full bg-gradient-to-br from-bubbles-yellow to-bubbles-sand flex items-center justify-center">
-                    <span className="text-bubbles-deep text-xs">👦</span>
+                  <div className="w-10 h-10 flex-shrink-0 rounded-full bg-gradient-to-br from-[#9b87f5] to-[#7E69AB] flex items-center justify-center">
+                    <span className="text-white text-xs">👦</span>
                   </div>
                   <div className="flex-1 bg-gray-100 dark:bg-gray-700 rounded-2xl rounded-tl-none p-3">
                     <p className="text-sm">Why do dolphins swim in pods?</p>
@@ -166,7 +169,7 @@ const Hero: React.FC = () => {
                 </div>
                 
                 <div className="flex items-center space-x-2">
-                  <div className="h-1 w-1 rounded-full bg-bubbles-yellow animate-pulse"></div>
+                  <div className="h-1 w-1 rounded-full bg-[#9b87f5] animate-pulse"></div>
                   <div className="h-1 w-1 rounded-full bg-bubbles-aqua animate-pulse" style={{ animationDelay: '300ms' }}></div>
                   <div className="h-1 w-1 rounded-full bg-bubbles-blue animate-pulse" style={{ animationDelay: '600ms' }}></div>
                 </div>

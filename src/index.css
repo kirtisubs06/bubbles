@@ -15,7 +15,7 @@
     --bubbles-deep: 222 53% 11%;
     --bubbles-cream: 48 50% 97%;
     --bubbles-sand: 45 50% 89%;
-    --bubbles-yellow: 42 100% 70%;
+    --bubbles-purple: 258 73% 75%;
     --bubbles-lime: 140 50% 68%;
     --bubbles-seafoam: 145 60% 74%;
     --bubbles-aqua: 177 70% 65%;
@@ -86,7 +86,7 @@
   }
   
   .btn-secondary {
-    @apply flex items-center justify-center px-4 py-2 bg-bubbles-yellow text-bubbles-deep rounded-lg hover:bg-bubbles-yellow/90 transition-colors;
+    @apply flex items-center justify-center px-4 py-2 bg-[#9b87f5] text-white rounded-lg hover:bg-[#9b87f5]/90 transition-colors;
   }
   
   .btn-accent {
@@ -113,16 +113,16 @@
     @apply bg-gradient-to-br from-bubbles-teal/20 to-bubbles-aqua/20;
   }
   
-  .card-gradient-yellow {
-    @apply bg-gradient-to-br from-bubbles-yellow/20 to-bubbles-sand/20;
+  .card-gradient-purple {
+    @apply bg-gradient-to-br from-[#9b87f5]/20 to-[#7E69AB]/20;
   }
   
   .card-gradient-lime {
     @apply bg-gradient-to-br from-bubbles-lime/20 to-bubbles-seafoam/20;
   }
   
-  /* Replace coral with yellow in this gradient */
+  /* Replace yellow with purple in this gradient */
   .card-gradient-warm {
-    @apply bg-gradient-to-br from-bubbles-yellow/20 to-bubbles-sand/20;
+    @apply bg-gradient-to-br from-[#9b87f5]/20 to-bubbles-sand/20;
   }
 }
