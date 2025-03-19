@@ -6,6 +6,7 @@ interface GeminiAIContextType {
   apiKey: string;
   setApiKey: (key: string) => Promise<boolean>;
   isConfigured: boolean;
+  isAdminConfigured?: boolean; // Add this optional property
   validateApiKey: (key: string) => Promise<boolean>;
   isLoading: boolean;
 }
@@ -39,6 +40,7 @@ export const GeminiAIProvider: React.FC<{ children: ReactNode }> = ({ children }
       apiKey, 
       setApiKey: saveApiKey, 
       isConfigured: true,
+      isAdminConfigured: true, // Add this property with value true
       validateApiKey,
       isLoading
     }}>

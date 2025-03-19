@@ -2,7 +2,12 @@
 import React from 'react';
 import { ServerIcon } from 'lucide-react';
 
-const GeminiKeyForm: React.FC = () => {
+// Add adminMode prop with default value false
+interface GeminiKeyFormProps {
+  adminMode?: boolean;
+}
+
+const GeminiKeyForm: React.FC<GeminiKeyFormProps> = ({ adminMode = false }) => {
   return (
     <div className="bg-gradient-to-br from-bubbles-sand/50 to-white/50 dark:from-bubbles-blue/20 dark:to-bubbles-teal/20 p-4 rounded-xl shadow-sm">
       <div className="flex items-center justify-between">
@@ -14,6 +19,7 @@ const GeminiKeyForm: React.FC = () => {
             </h3>
             <p className="text-xs text-gray-500">
               AI is ready to use! Connected to Google's Gemini API.
+              {adminMode && " (Admin mode)"}
             </p>
           </div>
         </div>
