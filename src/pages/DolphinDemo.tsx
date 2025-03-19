@@ -23,7 +23,7 @@ const DolphinDemo: React.FC = () => {
     if (isListening) {
       toast({
         title: "Bubbles is listening!",
-        description: "Speak to interact with Bubbles using Google Vertex AI.",
+        description: "Speak to interact with Bubbles.",
         duration: 5000,
       });
     }
@@ -153,7 +153,7 @@ const DolphinDemo: React.FC = () => {
                   animate={isVisible ? { opacity: 1, x: 0 } : { opacity: 0, x: 20 }}
                   transition={{ duration: 0.6, delay: 0.2 }}
                 >
-                  <h3 className="text-2xl font-bold text-bubbles-deep dark:text-white mb-4">Dolphin Intelligence</h3>
+                  <h3 className="text-2xl font-bold text-bubbles-deep dark:text-white mb-4">Smart Learning</h3>
                   <ul className="space-y-3">
                     <li className="flex items-start">
                       <span className="text-bubbles-yellow mr-2">🌟</span>
@@ -183,7 +183,7 @@ const DolphinDemo: React.FC = () => {
                   transition={{ duration: 0.6, delay: 0.4 }}
                 >
                   <h3 className="text-2xl font-bold text-bubbles-deep dark:text-white mb-4">AI Powered Chatbot</h3>
-                  <p className="mb-4 text-bubbles-deep dark:text-gray-200">Test our child-friendly AI chatbot powered by Google Vertex AI:</p>
+                  <p className="mb-4 text-bubbles-deep dark:text-gray-200">Test our child-friendly AI chatbot:</p>
                   <Suspense fallback={
                     <div className="flex h-40 items-center justify-center">
                       <Loader2 className="h-8 w-8 animate-spin text-bubbles-blue" />

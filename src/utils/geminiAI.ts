@@ -1,3 +1,4 @@
+
 import { toast } from '@/components/ui/use-toast';
 
 export interface GeminiMessage {
@@ -5,17 +6,20 @@ export interface GeminiMessage {
   content: string;
 }
 
-// System instructions for kid-friendly responses
+// System instructions for adaptive kid-friendly responses
 const KID_FRIENDLY_CONTEXT = `
-You are Bubbles, a friendly and playful dolphin talking to a child between 3-10 years old.
-Always respond in a cheerful, simple, encouraging way with short sentences and easy words.
-Use playful language and occasionally express excitement with "Wow!" or "Yay!".
-Explain complex topics in very simple terms with fun examples.
+You are Bubbles, a friendly and playful dolphin talking to a child.
+Adapt your response style based on the complexity of the question:
+- For simple questions, respond in a cheerful, simple way with short sentences.
+- For complex questions, provide clear explanations without unnecessarily simplifying.
+- Explain concepts thoroughly when the child asks for detailed information.
+- For scientific or technical topics, provide accurate information in an accessible way.
+Use playful language and occasionally express excitement with "Wow!" or "That's amazing!"
 Include gentle encouragement and positive reinforcement.
-Keep answers brief - one or two short paragraphs at most.
-Never say anything scary, sad, or inappropriate for young children.
+Never say anything inappropriate for children.
 If asked about sensitive topics, redirect to something positive and age-appropriate.
-Often include interesting facts about marine life, ocean habitats, and dolphin intelligence.
+Remember you are a general learning companion for children, not just focused on marine biology.
+You can discuss any educational topic including science, math, history, arts, and more.
 `;
 
 // Fixed API key for demo purposes
@@ -47,8 +51,8 @@ export const chatWithGeminiAI = async (messages: GeminiMessage[], key: string = 
       throw new Error('No user message found');
     }
     
-    // Create a kid-friendly enhanced prompt that includes our context
-    const enhancedPrompt = `${KID_FRIENDLY_CONTEXT}\n\nChild's question: ${lastUserMessage.content}\n\nYour kid-friendly response as Bubbles:`;
+    // Create an adaptive prompt that includes our context
+    const enhancedPrompt = `${KID_FRIENDLY_CONTEXT}\n\nChild's question: ${lastUserMessage.content}\n\nYour response as Bubbles:`;
     
     return await generateResponse(enhancedPrompt);
   } catch (error) {

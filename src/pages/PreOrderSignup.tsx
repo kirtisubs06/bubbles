@@ -35,7 +35,7 @@ const PreOrderSignup: React.FC = () => {
             Pre-order Your <span className="text-bubbles-blue">Bubbles</span> Companion
           </h1>
           <p className="text-lg text-gray-600 dark:text-gray-300 mb-8 max-w-2xl mx-auto">
-            Be among the first to receive the revolutionary AI dolphin companion that will transform how your child learns and plays.
+            Be among the first to receive the revolutionary AI companion that will transform how your child learns and plays.
           </p>
         </motion.div>
 
@@ -88,16 +88,6 @@ const PreOrderSignup: React.FC = () => {
             </div>
             
             <div className="border-t border-gray-200 dark:border-gray-700 pt-6">
-              <div className="flex justify-between items-baseline mb-2">
-                <h3 className="text-lg font-bold text-bubbles-deep dark:text-white">Price</h3>
-                <div className="text-right">
-                  <span className="text-xl font-bold text-bubbles-blue">$69</span>
-                  <span className="text-gray-500 dark:text-gray-400 text-sm ml-1">one-time payment</span>
-                </div>
-              </div>
-              <p className="text-gray-600 dark:text-gray-400 text-sm mb-4">
-                Pre-order today and get a 6-month subscription to our premium content library included at no extra cost.
-              </p>
               <div className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400">
                 <PackageCheck className="h-4 w-4 text-bubbles-teal" />
                 <span>Expected delivery: Q4 2023</span>

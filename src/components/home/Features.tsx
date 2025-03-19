@@ -1,7 +1,7 @@
 
 import React from 'react';
 import AnimatedCard from '@/components/ui/AnimatedCard';
-import { Brain, Heart, BookOpen, Shield, ChartBar, Clock, Waves } from 'lucide-react';
+import { Brain, Heart, BookOpen, Shield, ChartBar, Fingerprint, Button, Zap, Lock, MessageSquare } from 'lucide-react';
 
 interface FeatureCardProps {
   icon: React.ReactNode;
@@ -31,7 +31,7 @@ const Features: React.FC = () => {
     {
       icon: <Brain className="h-6 w-6 text-white" />,
       title: "AI-Powered Learning",
-      description: "Adaptive conversations that grow with your child, fostering curiosity and critical thinking skills.",
+      description: "Adaptive conversations that grow with your child, fostering curiosity and critical thinking skills across all subjects.",
       accentColor: "bg-bubbles-blue"
     },
     {
@@ -43,7 +43,7 @@ const Features: React.FC = () => {
     {
       icon: <BookOpen className="h-6 w-6 text-white" />,
       title: "Educational Content",
-      description: "Curriculum-aligned topics covering marine biology, science, math, language, arts, and more in an engaging way.",
+      description: "Curriculum-aligned topics covering science, math, language, arts, history, and more in an engaging way.",
       accentColor: "bg-bubbles-skyblue"
     },
     {
@@ -59,10 +59,22 @@ const Features: React.FC = () => {
       accentColor: "bg-bubbles-blue"
     },
     {
-      icon: <Waves className="h-6 w-6 text-white" />,
-      title: "Dolphin Intelligence",
-      description: "Leverages the intelligence of dolphins - one of the smartest mammals with advanced social structures and problem-solving abilities.",
+      icon: <Button className="h-6 w-6 text-white" />,
+      title: "Press-to-Talk Privacy",
+      description: "The physical button ensures the toy only listens when your child wants it to, providing maximum privacy protection.",
       accentColor: "bg-bubbles-teal"
+    },
+    {
+      icon: <Lock className="h-6 w-6 text-white" />,
+      title: "Data Protection",
+      description: "End-to-end encryption and strict data handling policies keep your child's conversations private and secure.",
+      accentColor: "bg-bubbles-skyblue"
+    },
+    {
+      icon: <MessageSquare className="h-6 w-6 text-white" />,
+      title: "Conversational Learning",
+      description: "Natural dialogue system that makes learning feel like talking to a friend, not studying from a textbook.",
+      accentColor: "bg-bubbles-navy"
     }
   ];
 
@@ -86,7 +98,7 @@ const Features: React.FC = () => {
           </p>
         </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {features.map((feature, index) => (
             <FeatureCard
               key={index}
@@ -97,6 +109,51 @@ const Features: React.FC = () => {
               accentColor={feature.accentColor}
             />
           ))}
+        </div>
+
+        {/* Safety Section */}
+        <div className="mt-20 max-w-4xl mx-auto bg-white dark:bg-bubbles-deep/40 rounded-2xl shadow-medium p-8">
+          <h3 className="text-2xl md:text-3xl font-bold text-bubbles-deep dark:text-white mb-6">
+            Designed with Safety in Mind
+          </h3>
+          
+          <div className="space-y-6">
+            <div>
+              <h4 className="text-xl font-semibold text-bubbles-blue mb-2">Press-to-Talk Mechanism</h4>
+              <p className="text-gray-600 dark:text-gray-300">
+                Our companion features a physical button that must be pressed for the device to listen. Unlike always-on smart devices, 
+                Bubbles only activates when your child consciously decides to interact, ensuring no unexpected listening or recording.
+                This simple yet effective design ensures maximum privacy protection.
+              </p>
+            </div>
+            
+            <div>
+              <h4 className="text-xl font-semibold text-bubbles-teal mb-2">Parental Controls & Oversight</h4>
+              <p className="text-gray-600 dark:text-gray-300">
+                Parents have complete visibility into their child's interactions through the dashboard. 
+                You can review conversation history, set usage limits, and customize content filters
+                to ensure all interactions remain age-appropriate and aligned with your family values.
+              </p>
+            </div>
+            
+            <div>
+              <h4 className="text-xl font-semibold text-bubbles-skyblue mb-2">Data Security & Privacy</h4>
+              <p className="text-gray-600 dark:text-gray-300">
+                All conversations are protected with end-to-end encryption, and your child's data is never sold or shared with third parties.
+                We comply with COPPA (Children's Online Privacy Protection Act) and other privacy regulations,
+                making Bubbles one of the safest interactive toys on the market.
+              </p>
+            </div>
+            
+            <div>
+              <h4 className="text-xl font-semibold text-bubbles-navy mb-2">Content Moderation</h4>
+              <p className="text-gray-600 dark:text-gray-300">
+                Our AI is specifically trained to detect and avoid inappropriate topics, providing child-friendly responses
+                while encouraging curiosity and learning. The system automatically redirects sensitive questions to appropriate,
+                educational content without exposing children to unsuitable material.
+              </p>
+            </div>
+          </div>
         </div>
       </div>
     </section>
