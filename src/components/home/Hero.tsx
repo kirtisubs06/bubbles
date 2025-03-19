@@ -133,18 +133,30 @@ const Hero: React.FC = () => {
                   {/* Blue Smiley Face with Glowing Aura */}
                   <div className="w-full h-full relative flex items-center justify-center">
                     {/* Glowing Aura */}
-                    <div className="absolute w-full h-full rounded-full bg-[#D3E4FD] opacity-50 animate-pulse-soft blur-xl"></div>
-                    <div className="absolute w-[90%] h-[90%] rounded-full bg-[#33C3F0] opacity-40 animate-pulse-soft blur-lg"></div>
-                    <div className="absolute w-[80%] h-[80%] rounded-full bg-[#0EA5E9] opacity-30 animate-pulse-soft blur-md"></div>
+                    <div className="absolute w-full h-full rounded-full bg-[#D3E4FD] opacity-60 animate-pulse-soft blur-xl"></div>
+                    <div className="absolute w-[90%] h-[90%] rounded-full bg-[#33C3F0] opacity-50 animate-pulse-soft blur-lg"></div>
+                    <div className="absolute w-[80%] h-[80%] rounded-full bg-[#0EA5E9] opacity-40 animate-pulse-soft blur-md"></div>
                     
                     {/* Smiley Face */}
-                    <div className="relative w-3/4 h-3/4 rounded-full bg-[#0FA0CE] shadow-lg z-10 flex items-center justify-center">
-                      {/* Eyes */}
-                      <div className="absolute top-[30%] left-[30%] transform -translate-y-1/2 w-[10%] h-[10%] rounded-full bg-white"></div>
-                      <div className="absolute top-[30%] right-[30%] transform -translate-y-1/2 w-[10%] h-[10%] rounded-full bg-white"></div>
+                    <div className="relative w-3/4 h-3/4 rounded-full bg-gradient-to-b from-[#33C3F0] to-[#0FA0CE] shadow-lg z-10 flex items-center justify-center">
+                      {/* Eyes - more realistic with highlights */}
+                      <div className="absolute top-[30%] left-[30%] transform -translate-y-1/2 w-[12%] h-[12%] rounded-full bg-white flex items-center justify-center">
+                        <div className="w-1/2 h-1/2 rounded-full bg-black absolute"></div>
+                        <div className="w-1/4 h-1/4 rounded-full bg-white absolute top-1/4 left-1/4"></div>
+                      </div>
+                      <div className="absolute top-[30%] right-[30%] transform -translate-y-1/2 w-[12%] h-[12%] rounded-full bg-white flex items-center justify-center">
+                        <div className="w-1/2 h-1/2 rounded-full bg-black absolute"></div>
+                        <div className="w-1/4 h-1/4 rounded-full bg-white absolute top-1/4 left-1/4"></div>
+                      </div>
                       
-                      {/* Smile */}
-                      <div className="absolute bottom-[35%] w-[50%] h-[20%] border-b-[12px] border-white rounded-b-full"></div>
+                      {/* Warmer, more welcoming smile with softer curve */}
+                      <div className="absolute bottom-[32%] w-[55%] h-[20%] overflow-hidden">
+                        <div className="w-full h-full border-b-[14px] border-white rounded-b-[100px]"></div>
+                      </div>
+                      
+                      {/* Cute rosy cheeks */}
+                      <div className="absolute bottom-[40%] left-[22%] w-[10%] h-[8%] rounded-full bg-[#FEC6A1] opacity-60"></div>
+                      <div className="absolute bottom-[40%] right-[22%] w-[10%] h-[8%] rounded-full bg-[#FEC6A1] opacity-60"></div>
                     </div>
                   </div>
                 </div>
