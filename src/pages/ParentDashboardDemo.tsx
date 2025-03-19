@@ -1,10 +1,11 @@
-
 import React, { useState } from 'react';
+import { motion } from 'framer-motion';
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
 import Header from '@/components/layout/Header';
-import { PieChart, Pie, Cell, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
-import { motion } from 'framer-motion';
-import { Calendar, Clock, BookOpen, BrainCircuit, Award, ChevronRight, Activity, LineChart, User, Bell, Settings } from 'lucide-react';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+import { ArrowRight, BarChart2, Calendar, MessageCircle, Settings, Shield, Users, WavesIcon } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 const ParentDashboardDemo: React.FC = () => {
   const [activeTab, setActiveTab] = useState('overview');
@@ -45,7 +46,7 @@ const ParentDashboardDemo: React.FC = () => {
 
   // Suggested activities
   const suggestedActivities = [
-    { id: 1, title: 'Ocean Explorer', description: 'Learn about different sea creatures', icon: <Waves className="h-8 w-8 p-1.5 text-white" /> },
+    { id: 1, title: 'Ocean Explorer', description: 'Learn about different sea creatures', icon: <WavesIcon className="h-8 w-8 p-1.5 text-white" /> },
     { id: 2, title: 'Math Challenge', description: 'Practice counting with fun games', icon: <Activity className="h-8 w-8 p-1.5 text-white" /> },
     { id: 3, title: 'Reading Adventure', description: 'Interactive storytelling session', icon: <BookOpen className="h-8 w-8 p-1.5 text-white" /> },
   ];

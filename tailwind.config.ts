@@ -66,14 +66,19 @@ export default {
 				},
 				// Bubbles color palette
 				bubbles: {
-					blue: '#1EAEDB',
-					teal: '#33C3F0',
-					skyblue: '#0FA0CE',
-					navy: '#0D5D79',
-					deep: '#0F172A',
-					cream: '#D3E4FD',
+					blue: '#5AA9E6',        // Main blue color for the dolphin
+					teal: '#33C3F0',        // Secondary teal color
+					skyblue: '#8DCBE6',     // Light blue for accents
+					navy: '#0D5D79',        // Darker blue for contrast
+					deep: '#0F172A',        // Very dark blue for backgrounds in dark mode
+					cream: '#D3E4FD',       // Light blue-tinted cream for backgrounds
+					aqua: '#61E8E1',        // Aqua/turquoise for variety
+					coral: '#FF7E67',       // Coral accent color for warmth
+					sand: '#F9F7E8',        // Sandy beach color
+					seafoam: '#93E5AB',     // Seafoam green for marine theme
+					wave: '#BDE0FE',        // Light wave color
 				},
-				// TeddyTech color palette
+				// TeddyTech color palette (kept for backward compatibility)
 				teddy: {
 					'blue': '#A0D2EB',
 					'purple': '#B8B5FF',
@@ -135,6 +140,16 @@ export default {
 					from: { opacity: '1', transform: 'translateY(0)' },
 					to: { opacity: '0', transform: 'translateY(-20px)' },
 				},
+				'wave': {
+					'0%, 100%': { transform: 'translateY(0) rotate(0deg)' },
+					'25%': { transform: 'translateY(-5px) rotate(2deg)' },
+					'75%': { transform: 'translateY(5px) rotate(-2deg)' },
+				},
+				'splash': {
+					'0%': { transform: 'scale(0)', opacity: '1' },
+					'70%': { transform: 'scale(1.5)', opacity: '0.5' },
+					'100%': { transform: 'scale(2)', opacity: '0' },
+				},
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
@@ -147,6 +162,8 @@ export default {
 				'scale-in': 'scale-in 0.4s ease-out',
 				'page-in': 'page-transition-in 0.5s ease-out',
 				'page-out': 'page-transition-out 0.5s ease-out',
+				'wave': 'wave 3s ease-in-out infinite',
+				'splash': 'splash 2s ease-out',
 			},
 			backdropFilter: {
 				'none': 'none',

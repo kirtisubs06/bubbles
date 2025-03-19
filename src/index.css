@@ -7,12 +7,17 @@
   :root {
     --background: 0 0% 100%;
     --foreground: 222.2 47.4% 11.2%;
-    --bubbles-blue: 196 77% 49%;
+    --bubbles-blue: 203 71% 63%;
     --bubbles-teal: 195 87% 57%;
-    --bubbles-skyblue: 196 85% 43%;
+    --bubbles-skyblue: 201 65% 73%;
     --bubbles-navy: 197 80% 26%;
     --bubbles-deep: 222 53% 11%;
     --bubbles-cream: 214 93% 91%;
+    --bubbles-aqua: 177 70% 65%;
+    --bubbles-coral: 9 100% 70%;
+    --bubbles-sand: 48 50% 94%;
+    --bubbles-seafoam: 145 60% 74%;
+    --bubbles-wave: 209 95% 87%;
 
     /* Add these for shadcn/ui compatibility */
     --card: 0 0% 100%;
@@ -78,6 +83,14 @@
     @apply flex items-center justify-center px-4 py-2 bg-bubbles-blue text-white rounded-lg hover:bg-bubbles-blue/90 transition-colors;
   }
   
+  .btn-secondary {
+    @apply flex items-center justify-center px-4 py-2 bg-bubbles-coral text-white rounded-lg hover:bg-bubbles-coral/90 transition-colors;
+  }
+  
+  .btn-accent {
+    @apply flex items-center justify-center px-4 py-2 bg-bubbles-aqua text-bubbles-deep rounded-lg hover:bg-bubbles-aqua/90 transition-colors;
+  }
+  
   .btn-ghost {
     @apply flex items-center justify-center px-4 py-2 text-bubbles-deep dark:text-white border border-gray-300 dark:border-gray-700 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors;
   }
@@ -88,5 +101,17 @@
   
   .shadow-medium {
     @apply shadow-[0_8px_30px_rgba(0,0,0,0.08)];
+  }
+  
+  .card-gradient-blue {
+    @apply bg-gradient-to-br from-bubbles-blue/20 to-bubbles-skyblue/20;
+  }
+  
+  .card-gradient-teal {
+    @apply bg-gradient-to-br from-bubbles-teal/20 to-bubbles-aqua/20;
+  }
+  
+  .card-gradient-coral {
+    @apply bg-gradient-to-br from-bubbles-coral/20 to-bubbles-sand/20;
   }
 }

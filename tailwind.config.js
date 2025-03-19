@@ -1,4 +1,3 @@
-
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   darkMode: ["class"],
@@ -14,12 +13,17 @@ module.exports = {
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
         bubbles: {
-          blue: "#1EAEDB",      // Main blue color for primary elements
+          blue: "#5AA9E6",      // Main blue color for the dolphin
           teal: "#33C3F0",      // Secondary teal color
-          skyblue: "#0FA0CE",   // Accent color
+          skyblue: "#8DCBE6",   // Light blue for accents
           navy: "#0D5D79",      // Darker blue for contrast
           deep: "#0F172A",      // Very dark blue for backgrounds in dark mode
           cream: "#D3E4FD",     // Light blue-tinted cream for backgrounds
+          aqua: "#61E8E1",      // Aqua/turquoise for variety
+          coral: "#FF7E67",     // Coral accent color for warmth
+          sand: "#F9F7E8",      // Sandy beach color
+          seafoam: "#93E5AB",   // Seafoam green for marine theme
+          wave: "#BDE0FE",      // Light wave color
         },
         // Keep original teddy colors for backward compatibility
         teddy: {
@@ -42,6 +46,7 @@ module.exports = {
         "slide-up": "slideUp 0.5s ease-out",
         "float": "float 6s ease-in-out infinite",
         "pulse-soft": "pulseSoft 2s infinite",
+        "wave": "wave 3s ease-in-out infinite",
       },
       keyframes: {
         fadeIn: {
@@ -59,6 +64,11 @@ module.exports = {
         pulseSoft: {
           "0%, 100%": { opacity: "1" },
           "50%": { opacity: "0.6" },
+        },
+        wave: {
+          "0%, 100%": { transform: "translateY(0) rotate(0deg)" },
+          "25%": { transform: "translateY(-5px) rotate(2deg)" },
+          "75%": { transform: "translateY(5px) rotate(-2deg)" },
         },
       },
       boxShadow: {

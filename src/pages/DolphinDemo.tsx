@@ -5,7 +5,7 @@ import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
 import Header from '@/components/layout/Header';
 import { useIntersectionAnimation } from '@/lib/animations';
 import { toast } from '@/components/ui/use-toast';
-import { Loader2, Waves } from 'lucide-react';
+import { Loader2 } from 'lucide-react';
 import GeminiKeyForm from '@/components/teddy/GeminiKeyForm';
 
 // Lazy load the 3D components to improve initial page load
@@ -38,7 +38,7 @@ const DolphinDemo: React.FC = () => {
   }, []);
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-white to-bubbles-cream/20 dark:from-bubbles-deep dark:to-bubbles-deep/80">
+    <div className="min-h-screen bg-gradient-to-b from-white to-bubbles-wave/30 dark:from-bubbles-deep dark:to-bubbles-deep/80">
       <Header />
       <div className="pt-32 container mx-auto px-4">
         <motion.div 
@@ -67,13 +67,13 @@ const DolphinDemo: React.FC = () => {
           <TabsList className="w-full max-w-md mx-auto grid grid-cols-2 mb-8 h-auto rounded-full overflow-hidden shadow-md border border-bubbles-cream dark:border-bubbles-deep/30">
             <TabsTrigger 
               value="3d" 
-              className="text-base md:text-lg py-5 px-6 h-full rounded-l-full data-[state=active]:bg-bubbles-blue data-[state=active]:text-white dark:data-[state=active]:text-white data-[state=active]:shadow-sm transition-all duration-200 relative z-10 font-medium outline-none focus:outline-none data-[state=inactive]:bg-white dark:data-[state=inactive]:bg-bubbles-deep/50"
+              className="text-base md:text-lg py-5 px-6 h-full rounded-l-full data-[state=active]:bg-gradient-to-r data-[state=active]:from-bubbles-blue data-[state=active]:to-bubbles-teal data-[state=active]:text-white dark:data-[state=active]:text-white data-[state=active]:shadow-sm transition-all duration-200 relative z-10 font-medium outline-none focus:outline-none data-[state=inactive]:bg-white dark:data-[state=inactive]:bg-bubbles-deep/50"
             >
               3D Dolphin Demo
             </TabsTrigger>
             <TabsTrigger 
               value="features" 
-              className="text-base md:text-lg py-5 px-6 h-full rounded-r-full data-[state=active]:bg-bubbles-blue data-[state=active]:text-white dark:data-[state=active]:text-white data-[state=active]:shadow-sm transition-all duration-200 relative z-10 font-medium outline-none focus:outline-none data-[state=inactive]:bg-white dark:data-[state=inactive]:bg-bubbles-deep/50"
+              className="text-base md:text-lg py-5 px-6 h-full rounded-r-full data-[state=active]:bg-gradient-to-r data-[state=active]:from-bubbles-coral data-[state=active]:to-bubbles-coral data-[state=active]:text-white dark:data-[state=active]:text-white data-[state=active]:shadow-sm transition-all duration-200 relative z-10 font-medium outline-none focus:outline-none data-[state=inactive]:bg-white dark:data-[state=inactive]:bg-bubbles-deep/50"
             >
               Features & Interaction
             </TabsTrigger>
@@ -82,7 +82,7 @@ const DolphinDemo: React.FC = () => {
           <TabsContent value="3d" className="mt-6">
             <div className="bg-gradient-to-br from-bubbles-cream to-white dark:from-bubbles-blue/10 dark:to-bubbles-teal/20 p-6 md:p-10 rounded-3xl shadow-medium">
               <div 
-                className="h-[500px] md:h-[600px] w-full relative rounded-2xl overflow-hidden bg-gradient-to-b from-bubbles-blue/10 to-bubbles-teal/10"
+                className="h-[500px] md:h-[600px] w-full relative rounded-2xl overflow-hidden bg-gradient-to-b from-bubbles-skyblue/20 to-bubbles-aqua/20"
               >
                 <Suspense fallback={
                   <div className="flex h-full w-full items-center justify-center">
@@ -116,7 +116,7 @@ const DolphinDemo: React.FC = () => {
                 }
               }}> 
                 <motion.div 
-                  className="bg-gradient-to-br from-bubbles-cream to-white dark:from-bubbles-blue/20 dark:to-bubbles-teal/10 p-6 h-full rounded-2xl shadow-medium"
+                  className="bg-gradient-to-br from-bubbles-skyblue/20 to-bubbles-blue/10 p-6 h-full rounded-2xl shadow-medium"
                   initial={{ opacity: 0, x: -20 }}
                   animate={isVisible ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
                   transition={{ duration: 0.6 }}
@@ -128,15 +128,15 @@ const DolphinDemo: React.FC = () => {
                       <span className="text-bubbles-deep dark:text-gray-200">Natural conversations with voice recognition</span>
                     </li>
                     <li className="flex items-start">
-                      <span className="text-bubbles-blue mr-2">✨</span>
+                      <span className="text-bubbles-coral mr-2">✨</span>
                       <span className="text-bubbles-deep dark:text-gray-200">Age-appropriate content and answers</span>
                     </li>
                     <li className="flex items-start">
-                      <span className="text-bubbles-blue mr-2">✨</span>
+                      <span className="text-bubbles-aqua mr-2">✨</span>
                       <span className="text-bubbles-deep dark:text-gray-200">Stories, songs, and educational content</span>
                     </li>
                     <li className="flex items-start">
-                      <span className="text-bubbles-blue mr-2">✨</span>
+                      <span className="text-bubbles-teal mr-2">✨</span>
                       <span className="text-bubbles-deep dark:text-gray-200">Remembers past conversations</span>
                     </li>
                   </ul>
@@ -145,7 +145,7 @@ const DolphinDemo: React.FC = () => {
               
               <div>
                 <motion.div 
-                  className="bg-gradient-to-br from-bubbles-cream to-white dark:from-bubbles-blue/20 dark:to-bubbles-teal/10 p-6 h-full rounded-2xl shadow-medium"
+                  className="bg-gradient-to-br from-bubbles-coral/20 to-bubbles-sand/20 p-6 h-full rounded-2xl shadow-medium"
                   initial={{ opacity: 0, x: 20 }}
                   animate={isVisible ? { opacity: 1, x: 0 } : { opacity: 0, x: 20 }}
                   transition={{ duration: 0.6, delay: 0.2 }}
@@ -153,19 +153,19 @@ const DolphinDemo: React.FC = () => {
                   <h3 className="text-2xl font-bold text-bubbles-deep dark:text-white mb-4">Dolphin Intelligence</h3>
                   <ul className="space-y-3">
                     <li className="flex items-start">
-                      <span className="text-bubbles-teal mr-2">🌟</span>
+                      <span className="text-bubbles-coral mr-2">🌟</span>
                       <span className="text-bubbles-deep dark:text-gray-200">Adapts to your child's interests</span>
                     </li>
                     <li className="flex items-start">
-                      <span className="text-bubbles-teal mr-2">🌟</span>
+                      <span className="text-bubbles-seafoam mr-2">🌟</span>
                       <span className="text-bubbles-deep dark:text-gray-200">Grows with your child's development</span>
                     </li>
                     <li className="flex items-start">
-                      <span className="text-bubbles-teal mr-2">🌟</span>
+                      <span className="text-bubbles-blue mr-2">🌟</span>
                       <span className="text-bubbles-deep dark:text-gray-200">Encourages curiosity and critical thinking</span>
                     </li>
                     <li className="flex items-start">
-                      <span className="text-bubbles-teal mr-2">🌟</span>
+                      <span className="text-bubbles-aqua mr-2">🌟</span>
                       <span className="text-bubbles-deep dark:text-gray-200">Parent dashboard for monitoring</span>
                     </li>
                   </ul>
@@ -174,7 +174,7 @@ const DolphinDemo: React.FC = () => {
               
               <div className="md:col-span-2">
                 <motion.div 
-                  className="bg-gradient-to-br from-bubbles-cream to-white dark:from-bubbles-blue/20 dark:to-bubbles-teal/10 p-6 rounded-2xl shadow-medium"
+                  className="bg-gradient-to-br from-bubbles-aqua/20 to-bubbles-seafoam/20 p-6 rounded-2xl shadow-medium"
                   initial={{ opacity: 0, y: 20 }}
                   animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
                   transition={{ duration: 0.6, delay: 0.4 }}

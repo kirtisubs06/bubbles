@@ -8,7 +8,9 @@ let apiKey = 'AIzaSyBS94pYTBoL9CXS8cEI2GB7HIsxHUIPn58';
  * Set the API key for Gemini service
  */
 export const setApiKey = (key: string): void => {
-  apiKey = key;
+  if (key && key.trim() !== '') {
+    apiKey = key;
+  }
 };
 
 /**

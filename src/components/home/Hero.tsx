@@ -1,7 +1,7 @@
 
 import React, { useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { ArrowRight, Waves } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 
 const Hero: React.FC = () => {
   const navigate = useNavigate();
@@ -32,13 +32,14 @@ const Hero: React.FC = () => {
       {/* Background decoration */}
       <div className="absolute top-0 left-0 w-full h-full overflow-hidden z-0">
         <div className="absolute top-0 right-0 w-1/3 h-1/3 bg-bubbles-teal/10 rounded-full blur-3xl transform translate-x-1/4 -translate-y-1/4"></div>
-        <div className="absolute bottom-0 left-0 w-1/3 h-1/3 bg-bubbles-blue/10 rounded-full blur-3xl transform -translate-x-1/4 translate-y-1/4"></div>
+        <div className="absolute bottom-0 left-0 w-1/3 h-1/3 bg-bubbles-coral/10 rounded-full blur-3xl transform -translate-x-1/4 translate-y-1/4"></div>
+        <div className="absolute top-1/3 left-1/4 w-1/4 h-1/4 bg-bubbles-aqua/10 rounded-full blur-3xl"></div>
       </div>
       
       <div className="container mx-auto px-4 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           <div className="space-y-8 animate-fade-in">
-            <div className="inline-flex items-center rounded-full px-3 py-1 text-sm font-medium bg-bubbles-teal/10 text-bubbles-teal">
+            <div className="inline-flex items-center rounded-full px-3 py-1 text-sm font-medium bg-bubbles-aqua/20 text-bubbles-aqua">
               <span className="animate-pulse-soft">✨</span>
               <span className="ml-2">Introducing AI-Powered Learning</span>
             </div>
@@ -47,7 +48,7 @@ const Hero: React.FC = () => {
               Your Child's Smart 
               <span className="relative">
                 <span className="relative z-10 text-bubbles-blue"> Dolphin </span>
-                <span className="absolute bottom-2 left-0 w-full h-3 bg-bubbles-teal/30 rounded-lg -z-10"></span>
+                <span className="absolute bottom-2 left-0 w-full h-3 bg-bubbles-coral/30 rounded-lg -z-10"></span>
               </span>
               Companion
             </h1>
@@ -69,7 +70,7 @@ const Hero: React.FC = () => {
             <div className="flex items-center space-x-6 pt-4">
               <div className="flex -space-x-2">
                 {[1, 2, 3, 4].map((i) => (
-                  <div key={i} className="w-8 h-8 rounded-full bg-bubbles-teal/80 border-2 border-white flex items-center justify-center text-xs text-white font-bold">
+                  <div key={i} className="w-8 h-8 rounded-full bg-gradient-to-br from-bubbles-aqua to-bubbles-coral border-2 border-white flex items-center justify-center text-xs text-white font-bold">
                     {i}
                   </div>
                 ))}
@@ -81,62 +82,74 @@ const Hero: React.FC = () => {
           </div>
           
           <div ref={imageRef} className="relative transition-transform duration-200 ease-out">
-            <div className="absolute inset-0 bg-gradient-to-br from-bubbles-blue/20 to-bubbles-teal/20 rounded-3xl transform rotate-3 scale-105"></div>
+            <div className="absolute inset-0 bg-gradient-to-br from-bubbles-blue/20 to-bubbles-coral/20 rounded-3xl transform rotate-3 scale-105"></div>
             <div className="relative bg-white dark:bg-bubbles-deep/80 rounded-3xl shadow-medium overflow-hidden p-6 animate-float">
               <div className="aspect-square rounded-2xl bg-bubbles-cream dark:bg-gray-800 flex items-center justify-center">
-                <div className="w-3/4 h-3/4 relative">
-                  {/* Cute Dolphin Illustration based on reference image */}
+                <div className="w-4/5 h-4/5 relative">
+                  {/* New Cute Dolphin Illustration based on reference image */}
                   <svg viewBox="0 0 300 300" className="w-full h-full">
-                    {/* Dolphin Body */}
-                    <path d="M220,150 C220,180 200,210 150,220 C100,230 60,200 50,160 C40,120 60,80 100,70 C140,60 180,80 190,100 C200,120 220,120 220,150 Z" 
+                    {/* Body - Light Blue */}
+                    <path d="M110,110 C160,80 210,100 220,140 C230,180 200,220 150,230 C100,240 60,210 50,170 C40,130 60,140 110,110 Z" 
                       fill="#5AA9E6" />
                     
-                    {/* Dolphin Belly */}
-                    <path d="M190,150 C190,180 170,200 150,205 C130,210 100,200 90,180 C80,160 90,130 110,120 C130,110 150,120 160,130 C170,140 190,120 190,150 Z" 
+                    {/* White belly/underside */}
+                    <path d="M120,140 C160,120 190,130 200,160 C210,190 190,210 150,215 C110,220 100,190 90,170 C80,150 90,155 120,140 Z" 
                       fill="#FFFFFF" />
                     
-                    {/* Dolphin Tail */}
-                    <path d="M225,150 C260,140 280,170 270,180 C260,190 240,180 225,150 Z" 
+                    {/* Snout/Beak */}
+                    <path d="M60,130 C80,110 110,110 110,130 C110,150 80,150 60,130 Z" 
                       fill="#5AA9E6" />
                     
-                    {/* Dolphin Dorsal Fin */}
-                    <path d="M150,70 C170,45 180,55 175,70 C170,85 160,80 150,70 Z" 
-                      fill="#4A99D6" />
-                    
-                    {/* Left Flipper */}
-                    <path d="M120,140 C100,160 70,150 90,130 C110,110 130,130 120,140 Z" 
-                      fill="#4A99D6" />
-                    
-                    {/* Right Flipper */}
-                    <path d="M120,160 C100,180 70,170 90,150 C110,130 130,150 120,160 Z" 
-                      fill="#4A99D6" />
-                    
                     {/* Eye */}
-                    <circle cx="95" cy="110" r="8" fill="#222222" />
-                    <circle cx="92" cy="108" r="3" fill="#FFFFFF" />
+                    <ellipse cx="90" cy="120" rx="15" ry="18" fill="white" />
+                    <ellipse cx="90" cy="120" rx="10" ry="12" fill="black" />
+                    <ellipse cx="85" cy="115" rx="4" ry="4" fill="white" />
                     
-                    {/* Mouth/Smile */}
-                    <path d="M85,120 Q92,130 100,120" 
-                      fill="none" stroke="#333333" strokeWidth="2" strokeLinecap="round" />
+                    {/* Eyelashes */}
+                    <path d="M70,110 L75,105" stroke="black" strokeWidth="1.5" />
+                    <path d="M80,105 L82,100" stroke="black" strokeWidth="1.5" />
+                    <path d="M90,103 L92,98" stroke="black" strokeWidth="1.5" />
                     
-                    {/* Eyelashes - cute touch */}
-                    <path d="M85,105 L82,100" fill="none" stroke="#333333" strokeWidth="1" />
-                    <path d="M90,103 L88,98" fill="none" stroke="#333333" strokeWidth="1" />
-                    <path d="M95,103 L97,98" fill="none" stroke="#333333" strokeWidth="1" />
+                    {/* Smile */}
+                    <path d="M75,135 Q90,145 105,135" 
+                      fill="none" stroke="black" strokeWidth="2" strokeLinecap="round" />
                     
-                    {/* Water Splash */}
-                    <path d="M230,185 C240,180 245,175 250,185 C255,195 245,190 240,187 C235,195 230,190 230,185 Z" 
-                      fill="#A8DEFF" fillOpacity="0.7" />
-                    <circle cx="255" cy="188" r="3" fill="#A8DEFF" fillOpacity="0.7" />
-                    <circle cx="262" cy="182" r="2" fill="#A8DEFF" fillOpacity="0.7" />
-                    <circle cx="257" cy="175" r="2" fill="#A8DEFF" fillOpacity="0.7" />
+                    {/* Dorsal fin */}
+                    <path d="M150,100 C170,70 190,80 180,110 C170,130 140,125 150,100 Z" 
+                      fill="#4A99D6" />
+                    
+                    {/* Tail */}
+                    <path d="M225,170 C250,150 270,180 250,200 C230,220 210,195 225,170 Z" 
+                      fill="#4A99D6" />
+                    
+                    {/* Left flipper */}
+                    <path d="M130,170 C120,200 90,190 110,160 C130,130 140,150 130,170 Z" 
+                      fill="#4A99D6" />
+                    
+                    {/* Right flipper (partially hidden) */}
+                    <path d="M120,190 C110,210 95,205 105,185 C115,165 130,170 120,190 Z" 
+                      fill="#4A99D6" />
+                    
+                    {/* Highlight on head */}
+                    <path d="M80,100 C90,90 100,95 90,105 C80,115 70,110 80,100 Z" 
+                      fill="white" opacity="0.6" />
+                    
+                    {/* Blowhole */}
+                    <ellipse cx="130" cy="105" rx="5" ry="3" fill="#2E6BA4" />
+                    
+                    {/* Water splash */}
+                    <path d="M230,170 Q240,160 250,170 Q260,180 255,170 Q250,160 245,170" 
+                      fill="none" stroke="#A8DEFF" strokeWidth="3" strokeLinecap="round" />
+                    <circle cx="260" cy="165" r="3" fill="#A8DEFF" />
+                    <circle cx="255" cy="155" r="2" fill="#A8DEFF" />
+                    <circle cx="265" cy="160" r="1.5" fill="#A8DEFF" />
                   </svg>
                 </div>
               </div>
               
               <div className="mt-6 space-y-4">
                 <div className="flex items-start space-x-3">
-                  <div className="w-10 h-10 flex-shrink-0 rounded-full bg-bubbles-blue flex items-center justify-center">
+                  <div className="w-10 h-10 flex-shrink-0 rounded-full bg-gradient-to-br from-bubbles-coral to-bubbles-sand flex items-center justify-center">
                     <span className="text-white text-xs">👦</span>
                   </div>
                   <div className="flex-1 bg-gray-100 dark:bg-gray-700 rounded-2xl rounded-tl-none p-3">
@@ -145,18 +158,18 @@ const Hero: React.FC = () => {
                 </div>
                 
                 <div className="flex items-start space-x-3">
-                  <div className="flex-1 bg-bubbles-teal/20 rounded-2xl rounded-tr-none p-3">
+                  <div className="flex-1 bg-gradient-to-br from-bubbles-aqua/20 to-bubbles-skyblue/20 rounded-2xl rounded-tr-none p-3">
                     <p className="text-sm">Dolphins swim in pods because they're highly social animals! Pods help them hunt together, protect each other from predators, and they even develop special whistles to call their friends and family!</p>
                   </div>
-                  <div className="w-10 h-10 flex-shrink-0 rounded-full bg-bubbles-teal flex items-center justify-center">
+                  <div className="w-10 h-10 flex-shrink-0 rounded-full bg-gradient-to-br from-bubbles-blue to-bubbles-teal flex items-center justify-center">
                     <span className="text-white text-xs">🐬</span>
                   </div>
                 </div>
                 
                 <div className="flex items-center space-x-2">
-                  <div className="h-1 w-1 rounded-full bg-gray-300 dark:bg-gray-600 animate-pulse"></div>
-                  <div className="h-1 w-1 rounded-full bg-gray-300 dark:bg-gray-600 animate-pulse" style={{ animationDelay: '300ms' }}></div>
-                  <div className="h-1 w-1 rounded-full bg-gray-300 dark:bg-gray-600 animate-pulse" style={{ animationDelay: '600ms' }}></div>
+                  <div className="h-1 w-1 rounded-full bg-bubbles-coral animate-pulse"></div>
+                  <div className="h-1 w-1 rounded-full bg-bubbles-aqua animate-pulse" style={{ animationDelay: '300ms' }}></div>
+                  <div className="h-1 w-1 rounded-full bg-bubbles-blue animate-pulse" style={{ animationDelay: '600ms' }}></div>
                 </div>
               </div>
             </div>
