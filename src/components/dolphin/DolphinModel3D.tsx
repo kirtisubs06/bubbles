@@ -1,4 +1,3 @@
-
 import React, { useRef, useState, useEffect, Suspense } from 'react';
 import { Canvas, useFrame, useThree, useLoader } from '@react-three/fiber';
 import { OrbitControls, Environment, ContactShadows, Preload } from '@react-three/drei';
@@ -199,7 +198,6 @@ const DolphinModel = ({
 
   // Realistic dolphin colors based on the reference image
   const bodyColor = "#667e99"; // Grey-blue for the main body
-  const bellyColor = "#e8e8e8"; // Light off-white for the belly
   const finColor = "#5e7082";   // Darker grey-blue for fins
   const detailColor = "#424b54"; // Dark grey for details
 
@@ -214,25 +212,25 @@ const DolphinModel = ({
       rotation={[0, 0.3, 0]}
     >
       {/* Main body - more streamlined and skinnier */}
-      <mesh position={[0, 0, 0]} scale={[2.0, 0.55, 0.55]}>
+      <mesh position={[0, 0, 0]} scale={[2.0, 0.45, 0.45]}>
         <sphereGeometry args={[1, 32, 32]} />
         <meshStandardMaterial color={bodyColor} roughness={0.3} metalness={0.1} />
       </mesh>
 
       {/* Tapered rear body - slimmer */}
-      <mesh position={[1.5, 0, 0]} scale={[1, 0.4, 0.4]} rotation={[0, 0.2, 0]}>
+      <mesh position={[1.5, 0, 0]} scale={[1, 0.35, 0.35]} rotation={[0, 0.2, 0]}>
         <sphereGeometry args={[1, 32, 32]} />
         <meshStandardMaterial color={bodyColor} roughness={0.3} metalness={0.1} />
       </mesh>
 
       {/* Head - slimmer */}
-      <mesh position={[-1.2, 0, 0]} scale={[0.7, 0.5, 0.5]} rotation={[0, -0.2, 0]}>
+      <mesh position={[-1.2, 0, 0]} scale={[0.7, 0.45, 0.45]} rotation={[0, -0.2, 0]}>
         <sphereGeometry args={[1, 32, 32]} />
         <meshStandardMaterial color={bodyColor} roughness={0.3} metalness={0.1} />
       </mesh>
       
       {/* Snout - smaller and more defined */}
-      <mesh position={[-1.9, -0.05, 0]} rotation={[0, -0.1, 0]} scale={[0.5, 0.2, 0.2]}>
+      <mesh position={[-1.9, -0.05, 0]} rotation={[0, -0.1, 0]} scale={[0.4, 0.18, 0.18]}>
         <sphereGeometry args={[1, 32, 32]} />
         <meshStandardMaterial color={bodyColor} roughness={0.3} metalness={0.1} />
       </mesh>
@@ -253,7 +251,7 @@ const DolphinModel = ({
         <meshStandardMaterial color="black" />
       </mesh>
       
-      {/* Eye glints */}
+      {/* Eye glints - one for each eye */}
       <mesh position={[-1.62, 0.12, 0.35]} scale={[0.02, 0.02, 0.01]}>
         <sphereGeometry args={[1, 16, 16]} />
         <meshStandardMaterial color="white" emissive="white" emissiveIntensity={0.5} />
@@ -281,10 +279,10 @@ const DolphinModel = ({
         <meshStandardMaterial color={finColor} roughness={0.3} metalness={0.1} />
       </mesh>
       
-      {/* White belly - spans the entire underside */}
-      <mesh position={[0, -0.3, 0]} rotation={[Math.PI / 2, 0, 0]} scale={[2.8, 0.9, 0.25]}>
-        <sphereGeometry args={[1, 32, 32, 0, Math.PI * 2, 0, Math.PI / 2]} />
-        <meshStandardMaterial color={bellyColor} roughness={0.4} metalness={0.0} />
+      {/* Blowhole */}
+      <mesh position={[-0.7, 0.5, 0]} rotation={[Math.PI / 2, 0, 0]} scale={[0.1, 0.1, 0.05]}>
+        <cylinderGeometry args={[1, 1, 1, 16]} />
+        <meshStandardMaterial color={detailColor} roughness={0.2} metalness={0.0} />
       </mesh>
 
       {/* Tail flukes - wider and flatter like real dolphins */}
@@ -302,12 +300,6 @@ const DolphinModel = ({
             <meshStandardMaterial color={finColor} roughness={0.3} metalness={0.1} />
           </mesh>
         </group>
-      </mesh>
-      
-      {/* Blowhole */}
-      <mesh position={[-0.7, 0.5, 0]} rotation={[Math.PI / 2, 0, 0]} scale={[0.1, 0.1, 0.05]}>
-        <cylinderGeometry args={[1, 1, 1, 16]} />
-        <meshStandardMaterial color={detailColor} roughness={0.2} metalness={0.0} />
       </mesh>
       
       {/* Interaction button (hidden visually but provides interactivity) */}
