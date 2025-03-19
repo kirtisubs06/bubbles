@@ -26,7 +26,7 @@ const Features: React.FC = () => {
     {
       icon: <Brain className="h-10 w-10 text-teddy-blue" />,
       title: "Smart Conversations",
-      description: "TeddyAI understands and responds to your child's questions with age-appropriate content, creating natural, educational dialogues."
+      description: "Bubbles understands and responds to your child's questions with age-appropriate content, creating natural, educational dialogues."
     },
     {
       icon: <ShieldCheck className="h-10 w-10 text-teddy-mint" />,
@@ -36,7 +36,7 @@ const Features: React.FC = () => {
     {
       icon: <Lightbulb className="h-10 w-10 text-teddy-coral" />,
       title: "Adaptive Learning",
-      description: "TeddyAI learns your child's interests, preferences, and learning style to create personalized educational experiences."
+      description: "Bubbles learns your child's interests, preferences, and learning style to create personalized educational experiences."
     },
     {
       icon: <BookOpen className="h-10 w-10 text-teddy-purple" />,
@@ -83,7 +83,7 @@ const Features: React.FC = () => {
             >
               <div className="inline-flex items-center bg-teddy-purple/10 px-4 py-2 rounded-full mb-6">
                 <Sparkles className="h-4 w-4 text-teddy-purple mr-2" />
-                <span className="text-sm font-medium text-teddy-purple">Discover What Makes TeddyAI Special</span>
+                <span className="text-sm font-medium text-teddy-purple">Discover What Makes Bubbles Special</span>
               </div>
               
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-teddy-charcoal dark:text-white">
@@ -91,7 +91,7 @@ const Features: React.FC = () => {
               </h1>
               
               <p className="text-xl text-gray-600 dark:text-gray-300 mb-8 max-w-3xl mx-auto">
-                TeddyAI combines cutting-edge artificial intelligence with the timeless comfort of a teddy bear to create magical learning experiences for your child.
+                Bubbles combines cutting-edge artificial intelligence with the timeless appeal of a dolphin companion to create magical learning experiences for your child.
               </p>
             </motion.div>
           </div>
@@ -230,10 +230,10 @@ const Features: React.FC = () => {
                 transition={{ duration: 0.6 }}
               >
                 <h2 className="text-3xl md:text-4xl font-bold text-teddy-charcoal dark:text-white mb-6">
-                  Why Choose TeddyAI?
+                  Why Choose Bubbles?
                 </h2>
                 <p className="text-lg text-gray-600 dark:text-gray-300">
-                  See how TeddyAI compares to standard smart devices and traditional toys.
+                  See how Bubbles compares to standard smart devices and traditional toys.
                 </p>
               </motion.div>
             </div>
@@ -248,7 +248,7 @@ const Features: React.FC = () => {
                 <thead>
                   <tr className="border-b border-teddy-purple/10">
                     <th className="p-4 text-left text-teddy-charcoal dark:text-white">Feature</th>
-                    <th className="p-4 text-center text-teddy-coral font-bold">TeddyAI</th>
+                    <th className="p-4 text-center text-teddy-coral font-bold">Bubbles</th>
                     <th className="p-4 text-center text-teddy-charcoal dark:text-white">Smart Speakers</th>
                     <th className="p-4 text-center text-teddy-charcoal dark:text-white">Traditional Toys</th>
                   </tr>
@@ -310,10 +310,10 @@ const Features: React.FC = () => {
                   Ready to Transform Learning?
                 </h2>
                 <p className="text-lg mb-8 text-gray-600 dark:text-gray-300">
-                  Give your child the gift of interactive, engaging education with TeddyAI.
+                  Give your child the gift of interactive, engaging education with Bubbles.
                 </p>
                 <div className="flex flex-wrap justify-center gap-4">
-                  <a href="/teddy-demo" className="btn-primary py-3 px-8 text-base">
+                  <a href="/dolphin-demo" className="btn-primary py-3 px-8 text-base">
                     Try the Demo
                   </a>
                   <a href="/pricing" className="btn-secondary py-3 px-8 text-base">
