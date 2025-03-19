@@ -1,9 +1,8 @@
-
 import React from 'react';
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
 import Overview from '@/components/dashboard/Overview';
 import { motion } from 'framer-motion';
-import { BookOpen, Brain, Map, Lightbulb, MusicNote, Microscope, Globe } from 'lucide-react';
+import { BookOpen, Brain, Map, Lightbulb, Music, Microscope, Globe } from 'lucide-react';
 
 const Dashboard: React.FC = () => {
   return (
@@ -119,7 +118,7 @@ const Dashboard: React.FC = () => {
               </div>
               <div className="bg-white/60 dark:bg-white/10 p-4 rounded-lg flex items-center space-x-4">
                 <div className="bg-bubbles-teal/20 p-3 rounded-full">
-                  <MusicNote className="h-6 w-6 text-bubbles-teal" />
+                  <Music className="h-6 w-6 text-bubbles-teal" />
                 </div>
                 <div>
                   <h4 className="font-medium text-bubbles-deep dark:text-white">Arts & Music</h4>

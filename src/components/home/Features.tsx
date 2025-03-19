@@ -1,7 +1,7 @@
 
 import React from 'react';
 import AnimatedCard from '@/components/ui/AnimatedCard';
-import { Brain, Heart, BookOpen, Shield, ChartBar, Fingerprint, Button, Zap, Lock, MessageSquare } from 'lucide-react';
+import { Brain, Heart, BookOpen, Shield, ChartBar, Fingerprint, Play, Zap, Lock, MessageSquare } from 'lucide-react';
 
 interface FeatureCardProps {
   icon: React.ReactNode;
@@ -59,7 +59,7 @@ const Features: React.FC = () => {
       accentColor: "bg-bubbles-blue"
     },
     {
-      icon: <Button className="h-6 w-6 text-white" />,
+      icon: <Play className="h-6 w-6 text-white" />,
       title: "Press-to-Talk Privacy",
       description: "The physical button ensures the toy only listens when your child wants it to, providing maximum privacy protection.",
       accentColor: "bg-bubbles-teal"
