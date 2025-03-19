@@ -132,72 +132,40 @@ const Hero: React.FC = () => {
           <div ref={imageRef} className="relative transition-transform duration-200 ease-out">
             <div className="absolute inset-0 bg-gradient-to-br from-bubbles-blue/20 to-[#9b87f5]/20 rounded-3xl transform rotate-3 scale-105"></div>
             <div className="relative bg-white dark:bg-bubbles-deep/80 rounded-3xl shadow-bubbly overflow-hidden p-6 animate-float">
-              <div className="aspect-square rounded-2xl bg-bubbles-cream dark:bg-gray-800 flex items-center justify-center">
-                <div className="w-4/5 h-4/5 relative">
-                  {/* Improved More Realistic Dolphin SVG */}
-                  <svg viewBox="0 0 300 300" className="w-full h-full">
-                    {/* Waves background */}
-                    <path d="M20,220 Q70,200 120,220 T220,220 T300,220 V300 H0 V220 Z" 
-                      fill="#D8E6F1" opacity="0.6" className="animate-wave" />
-                    <path d="M0,240 Q50,220 100,240 T200,240 T300,240 V300 H0 V240 Z" 
-                      fill="#C3D9E9" opacity="0.4" className="animate-wave" style={{ animationDelay: '0.5s' }} />
-                    <path d="M0,260 Q50,250 100,260 T200,260 T300,260 V300 H0 V260 Z" 
-                      fill="#A7C5E3" opacity="0.3" className="animate-wave" style={{ animationDelay: '1s' }} />
-                      
-                    {/* Body - Navy Blue */}
-                    <path d="M110,110 C160,80 210,100 230,140 C250,180 220,220 160,230 C100,240 50,210 40,170 C30,130 60,140 110,110 Z" 
-                      fill="#335571" />
+              <div className="aspect-square rounded-2xl bg-pink-100 dark:bg-pink-200 flex items-center justify-center">
+                <div className="w-3/4 h-3/4 relative">
+                  {/* Updated Cartoon Dolphin SVG to match the provided image */}
+                  <svg viewBox="0 0 400 400" className="w-full h-full">
+                    {/* Main body - light blue */}
+                    <path d="M100,200 C100,140 150,100 200,100 C280,100 320,160 320,200 C320,240 280,300 200,300 C150,300 100,260 100,200 Z" 
+                      fill="#A8D0E6" stroke="#2E5984" strokeWidth="8" />
                     
-                    {/* Light blue belly/underside */}
-                    <path d="M120,140 C160,120 200,130 210,160 C220,190 200,210 150,220 C100,230 80,200 70,170 C60,140 80,160 120,140 Z" 
-                      fill="#A7C5E3" />
+                    {/* White belly */}
+                    <path d="M140,220 C140,180 170,160 200,160 C250,160 270,200 270,220 C270,250 230,260 200,260 C170,260 140,250 140,220 Z" 
+                      fill="#FFFFFF" />
                     
-                    {/* Snout/Beak - More realistic */}
-                    <path d="M50,120 C60,110 80,105 90,115 C100,125 90,140 65,140 C40,140 40,130 50,120 Z" 
-                      fill="#335571" />
+                    {/* Dorsal fin */}
+                    <path d="M200,100 C220,70 250,70 240,120 C230,160 190,130 200,100 Z" 
+                      fill="#7EB6D9" stroke="#2E5984" strokeWidth="8" />
                     
-                    {/* Eye - Realistic */}
-                    <ellipse cx="85" cy="115" rx="8" ry="10" fill="white" />
-                    <ellipse cx="85" cy="115" rx="5" ry="7" fill="black" />
-                    <ellipse cx="83" cy="113" rx="2" ry="2" fill="white" />
+                    {/* Tail */}
+                    <path d="M320,200 C340,180 360,200 340,220 C320,240 300,220 320,200 Z" 
+                      fill="#7EB6D9" stroke="#2E5984" strokeWidth="8" />
                     
-                    {/* Smile - Subtle dolphin curve */}
-                    <path d="M65,125 Q75,130 85,125" 
-                      fill="none" stroke="black" strokeWidth="1.5" strokeLinecap="round" />
+                    {/* Left flipper */}
+                    <path d="M150,220 C130,260 100,260 120,220 C140,180 170,200 150,220 Z" 
+                      fill="#7EB6D9" stroke="#2E5984" strokeWidth="8" />
                     
-                    {/* Dorsal fin - Taller, more curved */}
-                    <path d="M160,90 C180,60 195,70 185,100 C175,130 145,120 160,90 Z" 
-                      fill="#24405C" />
+                    {/* Head/snout extension */}
+                    <path d="M100,200 C80,180 70,190 80,200 C90,210 100,210 100,200 Z" 
+                      fill="#A8D0E6" stroke="#2E5984" strokeWidth="8" />
                     
-                    {/* Tail - More detailed */}
-                    <path d="M230,170 C250,160 265,175 255,195 C245,215 230,210 220,190 C215,180 225,175 230,170 Z" 
-                      fill="#24405C" />
+                    {/* Snout */}
+                    <path d="M80,200 C60,190 50,200 60,210 C70,220 90,210 80,200 Z" 
+                      fill="#FFFFFF" stroke="#2E5984" strokeWidth="8" />
                     
-                    {/* Left flipper - More elongated */}
-                    <path d="M130,170 C120,195 95,200 110,175 C125,150 140,145 130,170 Z" 
-                      fill="#24405C" />
-                    
-                    {/* Right flipper */}
-                    <path d="M150,190 C140,210 125,215 135,190 C145,165 160,170 150,190 Z" 
-                      fill="#24405C" />
-                    
-                    {/* Highlight on body */}
-                    <path d="M130,120 C150,110 170,115 160,130 C150,145 110,130 130,120 Z" 
-                      fill="white" opacity="0.4" />
-                    
-                    {/* Blowhole */}
-                    <ellipse cx="130" cy="100" rx="5" ry="2" fill="#1A2D3F" />
-                    
-                    {/* Water splash - More dynamic */}
-                    <path d="M230,170 Q245,155 260,165 Q270,175 260,170 Q250,165 240,170" 
-                      fill="none" stroke="#C3D9E9" strokeWidth="3" strokeLinecap="round" className="animate-pulse-soft" />
-                    <circle cx="260" cy="158" r="4" fill="#C3D9E9" className="animate-float" style={{ animationDelay: '0.2s' }} />
-                    <circle cx="252" cy="150" r="3" fill="#C3D9E9" className="animate-float" style={{ animationDelay: '0.5s' }} />
-                    <circle cx="265" cy="153" r="2" fill="#C3D9E9" className="animate-float" style={{ animationDelay: '0.8s' }} />
-                    
-                    {/* Additional body details */}
-                    <path d="M140,150 C170,145 190,155 195,170 C200,185 190,200 170,205" 
-                      fill="none" stroke="#24405C" strokeWidth="1.5" opacity="0.5" />
+                    {/* Eye - small black circle */}
+                    <circle cx="110" cy="180" r="8" fill="#2E5984" />
                   </svg>
                 </div>
               </div>

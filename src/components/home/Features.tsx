@@ -114,43 +114,48 @@ const Features: React.FC = () => {
         {/* Safety Section */}
         <div className="mt-20 max-w-4xl mx-auto bg-white dark:bg-bubbles-deep/40 rounded-2xl shadow-medium p-8">
           <h3 className="text-2xl md:text-3xl font-bold text-bubbles-deep dark:text-white mb-6">
-            Designed with Safety in Mind
+            Designed with Child Safety in Mind
           </h3>
           
           <div className="space-y-6">
             <div>
-              <h4 className="text-xl font-semibold text-bubbles-blue mb-2">Press-to-Talk Mechanism</h4>
+              <h4 className="text-xl font-semibold text-bubbles-blue mb-2">Press-to-Talk: A Physical Privacy Guarantee</h4>
               <p className="text-gray-600 dark:text-gray-300">
-                Our companion features a physical button that must be pressed for the device to listen. Unlike always-on smart devices, 
-                Bubbles only activates when your child consciously decides to interact, ensuring no unexpected listening or recording.
-                This simple yet effective design ensures maximum privacy protection.
+                Our companion toy features a physical button that must be pressed for it to listen. Unlike always-on smart devices that might 
+                constantly monitor your home, Bubbles only activates when your child consciously decides to interact by pressing the button. 
+                When the button is released, the microphone is physically disconnected from power, making it impossible for the device to listen 
+                or record. This hardware-based approach ensures maximum privacy protection that software-only solutions simply cannot match.
               </p>
             </div>
             
             <div>
-              <h4 className="text-xl font-semibold text-bubbles-teal mb-2">Parental Controls & Oversight</h4>
+              <h4 className="text-xl font-semibold text-bubbles-teal mb-2">Complete Parental Control & Oversight</h4>
               <p className="text-gray-600 dark:text-gray-300">
-                Parents have complete visibility into their child's interactions through the dashboard. 
-                You can review conversation history, set usage limits, and customize content filters
-                to ensure all interactions remain age-appropriate and aligned with your family values.
+                Parents have complete visibility into their child's interactions through the intuitive dashboard. 
+                You can review conversation history, set usage limits and time restrictions, and customize content filters
+                to ensure all interactions remain age-appropriate and aligned with your family values. The companion can never 
+                override parental settings, giving you peace of mind while your child learns and plays.
               </p>
             </div>
             
             <div>
-              <h4 className="text-xl font-semibold text-bubbles-skyblue mb-2">Data Security & Privacy</h4>
+              <h4 className="text-xl font-semibold text-bubbles-skyblue mb-2">Advanced Data Security & Privacy</h4>
               <p className="text-gray-600 dark:text-gray-300">
                 All conversations are protected with end-to-end encryption, and your child's data is never sold or shared with third parties.
-                We comply with COPPA (Children's Online Privacy Protection Act) and other privacy regulations,
-                making Bubbles one of the safest interactive toys on the market.
+                We comply with COPPA (Children's Online Privacy Protection Act), GDPR, and other privacy regulations worldwide,
+                making Bubbles one of the safest interactive toys on the market. Voice data is processed locally when possible, and all
+                cloud processing is anonymized and deleted after use unless you specifically choose to save it.
               </p>
             </div>
             
             <div>
-              <h4 className="text-xl font-semibold text-bubbles-navy mb-2">Content Moderation</h4>
+              <h4 className="text-xl font-semibold text-bubbles-navy mb-2">Child-Appropriate Content Moderation</h4>
               <p className="text-gray-600 dark:text-gray-300">
                 Our AI is specifically trained to detect and avoid inappropriate topics, providing child-friendly responses
                 while encouraging curiosity and learning. The system automatically redirects sensitive questions to appropriate,
-                educational content without exposing children to unsuitable material.
+                educational content without exposing children to unsuitable material. The AI maintains a friendly, educational tone
+                while adapting complexity based on the child's questions—explaining simply when needed, but capable of providing
+                detailed answers for more complex questions as appropriate for their development.
               </p>
             </div>
           </div>

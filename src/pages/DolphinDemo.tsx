@@ -6,7 +6,6 @@ import Header from '@/components/layout/Header';
 import { useIntersectionAnimation } from '@/lib/animations';
 import { toast } from '@/components/ui/use-toast';
 import { Loader2 } from 'lucide-react';
-import GeminiKeyForm from '@/components/teddy/GeminiKeyForm';
 
 // Lazy load the 3D components to improve initial page load
 const DolphinModel3D = React.lazy(() => import('@/components/dolphin/DolphinModel3D'));
@@ -57,10 +56,6 @@ const DolphinDemo: React.FC = () => {
             Interact with our 3D demo and experience how Bubbles creates magical learning moments for your child.
           </p>
         </motion.div>
-
-        <div className="max-w-4xl mx-auto mb-6">
-          <GeminiKeyForm />
-        </div>
 
         <Tabs 
           defaultValue="3d" 

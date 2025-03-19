@@ -1,7 +1,7 @@
 
 import React, { useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
-import { CheckCircle2, PackageCheck } from 'lucide-react';
+import { CheckCircle2 } from 'lucide-react';
 import Header from '@/components/layout/Header';
 
 const PreOrderSignup: React.FC = () => {
@@ -84,13 +84,6 @@ const PreOrderSignup: React.FC = () => {
                     <p className="text-gray-600 dark:text-gray-400">New content and features added regularly through over-the-air updates.</p>
                   </div>
                 </div>
-              </div>
-            </div>
-            
-            <div className="border-t border-gray-200 dark:border-gray-700 pt-6">
-              <div className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400">
-                <PackageCheck className="h-4 w-4 text-bubbles-teal" />
-                <span>Expected delivery: Q4 2023</span>
               </div>
             </div>
           </motion.div>

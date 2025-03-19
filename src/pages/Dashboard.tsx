@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
 import Overview from '@/components/dashboard/Overview';
@@ -39,7 +40,7 @@ const Dashboard: React.FC = () => {
                     <BookOpen className="h-5 w-5 text-bubbles-blue" />
                   </div>
                   <div>
-                    <div className="font-medium">Reading</div>
+                    <div className="font-medium">Literacy</div>
                     <div className="text-xs text-gray-500">42 interactions</div>
                   </div>
                 </div>
@@ -48,7 +49,7 @@ const Dashboard: React.FC = () => {
                     <Brain className="h-5 w-5 text-bubbles-teal" />
                   </div>
                   <div>
-                    <div className="font-medium">Critical Thinking</div>
+                    <div className="font-medium">Problem Solving</div>
                     <div className="text-xs text-gray-500">38 interactions</div>
                   </div>
                 </div>
@@ -57,7 +58,7 @@ const Dashboard: React.FC = () => {
                     <Map className="h-5 w-5 text-bubbles-skyblue" />
                   </div>
                   <div>
-                    <div className="font-medium">Geography</div>
+                    <div className="font-medium">Social Studies</div>
                     <div className="text-xs text-gray-500">27 interactions</div>
                   </div>
                 </div>
@@ -66,7 +67,7 @@ const Dashboard: React.FC = () => {
                     <Lightbulb className="h-5 w-5 text-bubbles-lime" />
                   </div>
                   <div>
-                    <div className="font-medium">Science</div>
+                    <div className="font-medium">STEM</div>
                     <div className="text-xs text-gray-500">31 interactions</div>
                   </div>
                 </div>
@@ -88,15 +89,15 @@ const Dashboard: React.FC = () => {
                   <div className="space-y-2">
                     <div className="flex items-center space-x-2">
                       <div className="h-4 w-4 rounded-full bg-bubbles-teal"></div>
-                      <div className="text-sm">Dinosaurs</div>
+                      <div className="text-sm">Space Exploration</div>
                     </div>
                     <div className="flex items-center space-x-2">
                       <div className="h-4 w-4 rounded-full bg-bubbles-blue"></div>
-                      <div className="text-sm">Space exploration</div>
+                      <div className="text-sm">Animated Stories</div>
                     </div>
                     <div className="flex items-center space-x-2">
                       <div className="h-4 w-4 rounded-full bg-bubbles-skyblue"></div>
-                      <div className="text-sm">Storytelling</div>
+                      <div className="text-sm">Math Games</div>
                     </div>
                   </div>
                 </div>
@@ -105,15 +106,15 @@ const Dashboard: React.FC = () => {
           </div>
           
           <div className="bg-gradient-to-br from-bubbles-cream to-white dark:from-bubbles-blue/20 dark:to-bubbles-teal/10 p-6 rounded-lg shadow-sm">
-            <h3 className="text-xl font-semibold mb-4">Educational Growth</h3>
+            <h3 className="text-xl font-semibold mb-4">Educational Growth Areas</h3>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               <div className="bg-white/60 dark:bg-white/10 p-4 rounded-lg flex items-center space-x-4">
                 <div className="bg-bubbles-yellow/20 p-3 rounded-full">
                   <Globe className="h-6 w-6 text-bubbles-yellow" />
                 </div>
                 <div>
-                  <h4 className="font-medium text-bubbles-deep dark:text-white">Global Knowledge</h4>
-                  <p className="text-sm text-gray-500">Learning about different countries and cultures</p>
+                  <h4 className="font-medium text-bubbles-deep dark:text-white">Cultural Awareness</h4>
+                  <p className="text-sm text-gray-500">Exploring different cultures and traditions from around the world</p>
                 </div>
               </div>
               <div className="bg-white/60 dark:bg-white/10 p-4 rounded-lg flex items-center space-x-4">
@@ -121,8 +122,8 @@ const Dashboard: React.FC = () => {
                   <Music className="h-6 w-6 text-bubbles-teal" />
                 </div>
                 <div>
-                  <h4 className="font-medium text-bubbles-deep dark:text-white">Arts & Music</h4>
-                  <p className="text-sm text-gray-500">Exploring creative expression through sound and art</p>
+                  <h4 className="font-medium text-bubbles-deep dark:text-white">Creative Expression</h4>
+                  <p className="text-sm text-gray-500">Developing appreciation for music, art, and storytelling</p>
                 </div>
               </div>
               <div className="bg-white/60 dark:bg-white/10 p-4 rounded-lg flex items-center space-x-4">
@@ -130,8 +131,8 @@ const Dashboard: React.FC = () => {
                   <Microscope className="h-6 w-6 text-bubbles-blue" />
                 </div>
                 <div>
-                  <h4 className="font-medium text-bubbles-deep dark:text-white">Scientific Inquiry</h4>
-                  <p className="text-sm text-gray-500">Asking questions and seeking evidence-based answers</p>
+                  <h4 className="font-medium text-bubbles-deep dark:text-white">Scientific Curiosity</h4>
+                  <p className="text-sm text-gray-500">Encouraging questions and exploration of how things work</p>
                 </div>
               </div>
             </div>
