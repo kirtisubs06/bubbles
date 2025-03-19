@@ -1,3 +1,4 @@
+
 import React, { useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ArrowRight, Sparkles, Waves, Heart } from 'lucide-react';
@@ -129,25 +130,63 @@ const Hero: React.FC = () => {
             <div className="relative bg-white dark:bg-bubbles-deep/80 rounded-3xl shadow-bubbly overflow-hidden p-6 animate-float">
               <div className="aspect-square rounded-2xl bg-blue-100 dark:bg-blue-200 flex items-center justify-center">
                 <div className="w-4/5 h-4/5 relative">
-                  <svg viewBox="0 0 400 300" className="w-full h-full">
-                    <path d="M300,150 C300,100 240,70 150,90 C80,110 30,130 30,150 C30,180 80,200 150,220 C240,240 300,200 300,150 Z" 
-                      fill="#5e7082" stroke="#424b54" strokeWidth="3" />
+                  <svg viewBox="0 0 600 400" className="w-full h-full">
+                    {/* Dolphin based on provided image */}
+                    <g transform="translate(100, 50) scale(1.2)">
+                      {/* Body - main blue part */}
+                      <path d="M140,150 
+                              C170,100 240,90 280,110 
+                              C320,130 340,180 320,220 
+                              C300,260 260,280 200,270 
+                              C130,260 110,200 140,150 Z" 
+                        fill="#50A7E0" stroke="#4295C7" strokeWidth="2" />
+                      
+                      {/* Belly - cream part */}
+                      <path d="M160,180
+                              C190,150 230,150 260,170
+                              C290,190 300,220 280,240
+                              C260,260 220,260 180,250
+                              C140,240 130,210 160,180 Z" 
+                        fill="#FFF2E2" stroke="none" />
+                      
+                      {/* Dorsal fin */}
+                      <path d="M230,110
+                              C250,70 270,60 270,90
+                              C270,110 250,120 230,110 Z" 
+                        fill="#50A7E0" stroke="#4295C7" strokeWidth="2" />
+                      
+                      {/* Side fin */}
+                      <path d="M220,210
+                              C200,230 190,250 170,250
+                              C150,250 160,220 180,210
+                              C190,205 210,200 220,210 Z" 
+                        fill="#50A7E0" stroke="#4295C7" strokeWidth="2" />
+                      
+                      {/* Tail */}
+                      <path d="M320,190
+                              C350,170 380,180 390,200
+                              C370,215 350,225 320,210 Z" 
+                        fill="#50A7E0" stroke="#4295C7" strokeWidth="2" />
+                      
+                      {/* Snout/Nose */}
+                      <path d="M140,150
+                              C120,140 100,150 90,170
+                              C85,180 105,190 125,180
+                              C135,175 140,160 140,150 Z" 
+                        fill="#50A7E0" stroke="#4295C7" strokeWidth="2" />
+                      
+                      {/* Eye */}
+                      <circle cx="130" cy="155" r="5" fill="#000000" />
+                      
+                      {/* Smile */}
+                      <path d="M110,170 Q120,175 130,170" 
+                        fill="none" stroke="#000000" strokeWidth="1.5" strokeLinecap="round" />
+                    </g>
                     
-                    <path d="M180,180 C200,200 220,200 200,160 C180,200 180,180 180,180 Z"
-                      fill="#5e7082" stroke="#424b54" strokeWidth="2" />
-                    
-                    <path d="M300,150 C350,100 380,120 360,150 C380,180 350,200 300,150 Z"
-                      fill="#5e7082" stroke="#424b54" strokeWidth="2" />
-                    
-                    <circle cx="80" cy="140" r="12" fill="#000000" />
-                    <circle cx="78" cy="138" r="4" fill="#ffffff" />
-                    
-                    <path d="M40,150 Q65,170 90,150" 
-                      fill="none" stroke="#424b54" strokeWidth="2" strokeLinecap="round" />
-                    
-                    <circle cx="320" cy="120" r="8" fill="none" stroke="#424b54" strokeWidth="1" opacity="0.6" />
-                    <circle cx="340" cy="140" r="5" fill="none" stroke="#424b54" strokeWidth="1" opacity="0.6" />
-                    <circle cx="330" cy="100" r="6" fill="none" stroke="#424b54" strokeWidth="1" opacity="0.6" />
+                    {/* Bubbles */}
+                    <circle cx="320" cy="120" r="8" fill="none" stroke="#4295C7" strokeWidth="1" opacity="0.6" />
+                    <circle cx="340" cy="140" r="5" fill="none" stroke="#4295C7" strokeWidth="1" opacity="0.6" />
+                    <circle cx="330" cy="100" r="6" fill="none" stroke="#4295C7" strokeWidth="1" opacity="0.6" />
                   </svg>
                 </div>
               </div>
