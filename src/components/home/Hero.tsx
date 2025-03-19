@@ -85,43 +85,52 @@ const Hero: React.FC = () => {
             <div className="relative bg-white dark:bg-bubbles-deep/80 rounded-3xl shadow-medium overflow-hidden p-6 animate-float">
               <div className="aspect-square rounded-2xl bg-bubbles-cream dark:bg-gray-800 flex items-center justify-center">
                 <div className="w-3/4 h-3/4 relative">
-                  {/* Improved Dolphin Illustration */}
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="relative w-4/5 h-4/5">
-                      {/* Dolphin Body */}
-                      <div className="absolute w-[80%] h-[60%] bg-bubbles-blue rounded-[50%] left-[10%] top-[20%]"></div>
-                      
-                      {/* Dolphin Head */}
-                      <div className="absolute w-[35%] h-[35%] bg-bubbles-blue rounded-[50%] left-[5%] top-[15%] transform -rotate-6"></div>
-                      
-                      {/* Dolphin Snout */}
-                      <div className="absolute w-[30%] h-[18%] bg-bubbles-blue left-[-5%] top-[20%] transform -rotate-12 rounded-l-full"></div>
-                      
-                      {/* Dolphin Tail */}
-                      <div className="absolute w-[25%] h-[35%] bg-bubbles-blue right-[5%] top-[20%] transform rotate-20 rounded-r-full"></div>
-                      <div className="absolute w-[35%] h-[15%] bg-bubbles-blue right-[0%] top-[15%] transform rotate-45 rounded-r-full"></div>
-                      
-                      {/* Dolphin Fin */}
-                      <div className="absolute w-[15%] h-[25%] bg-bubbles-blue left-[45%] top-[0%] transform rotate-10 rounded-t-full"></div>
-                      
-                      {/* Dolphin Flippers */}
-                      <div className="absolute w-[20%] h-[15%] bg-bubbles-blue left-[30%] bottom-[15%] transform rotate-45 rounded-full"></div>
-                      <div className="absolute w-[20%] h-[15%] bg-bubbles-blue right-[30%] bottom-[15%] transform -rotate-45 rounded-full"></div>
-                      
-                      {/* Dolphin Tail Fins */}
-                      <div className="absolute w-[30%] h-[20%] bg-bubbles-blue right-[-5%] top-[20%] transform rotate-[70deg] rounded-full"></div>
-                      <div className="absolute w-[30%] h-[20%] bg-bubbles-blue right-[-5%] top-[35%] transform rotate-[110deg] rounded-full"></div>
-                      
-                      {/* Dolphin White Belly */}
-                      <div className="absolute w-[60%] h-[40%] bg-white rounded-[50%] left-[20%] top-[30%]"></div>
-                      
-                      {/* Dolphin Eye */}
-                      <div className="absolute w-[8%] h-[8%] bg-black rounded-full left-[15%] top-[20%]"></div>
-                      
-                      {/* Dolphin Smile */}
-                      <div className="absolute w-[20%] h-[5%] border-b-4 border-gray-800 rounded-b-full left-[5%] top-[25%]"></div>
-                    </div>
-                  </div>
+                  {/* Cute Dolphin Illustration based on reference image */}
+                  <svg viewBox="0 0 300 300" className="w-full h-full">
+                    {/* Dolphin Body */}
+                    <path d="M220,150 C220,180 200,210 150,220 C100,230 60,200 50,160 C40,120 60,80 100,70 C140,60 180,80 190,100 C200,120 220,120 220,150 Z" 
+                      fill="#5AA9E6" />
+                    
+                    {/* Dolphin Belly */}
+                    <path d="M190,150 C190,180 170,200 150,205 C130,210 100,200 90,180 C80,160 90,130 110,120 C130,110 150,120 160,130 C170,140 190,120 190,150 Z" 
+                      fill="#FFFFFF" />
+                    
+                    {/* Dolphin Tail */}
+                    <path d="M225,150 C260,140 280,170 270,180 C260,190 240,180 225,150 Z" 
+                      fill="#5AA9E6" />
+                    
+                    {/* Dolphin Dorsal Fin */}
+                    <path d="M150,70 C170,45 180,55 175,70 C170,85 160,80 150,70 Z" 
+                      fill="#4A99D6" />
+                    
+                    {/* Left Flipper */}
+                    <path d="M120,140 C100,160 70,150 90,130 C110,110 130,130 120,140 Z" 
+                      fill="#4A99D6" />
+                    
+                    {/* Right Flipper */}
+                    <path d="M120,160 C100,180 70,170 90,150 C110,130 130,150 120,160 Z" 
+                      fill="#4A99D6" />
+                    
+                    {/* Eye */}
+                    <circle cx="95" cy="110" r="8" fill="#222222" />
+                    <circle cx="92" cy="108" r="3" fill="#FFFFFF" />
+                    
+                    {/* Mouth/Smile */}
+                    <path d="M85,120 Q92,130 100,120" 
+                      fill="none" stroke="#333333" strokeWidth="2" strokeLinecap="round" />
+                    
+                    {/* Eyelashes - cute touch */}
+                    <path d="M85,105 L82,100" fill="none" stroke="#333333" strokeWidth="1" />
+                    <path d="M90,103 L88,98" fill="none" stroke="#333333" strokeWidth="1" />
+                    <path d="M95,103 L97,98" fill="none" stroke="#333333" strokeWidth="1" />
+                    
+                    {/* Water Splash */}
+                    <path d="M230,185 C240,180 245,175 250,185 C255,195 245,190 240,187 C235,195 230,190 230,185 Z" 
+                      fill="#A8DEFF" fillOpacity="0.7" />
+                    <circle cx="255" cy="188" r="3" fill="#A8DEFF" fillOpacity="0.7" />
+                    <circle cx="262" cy="182" r="2" fill="#A8DEFF" fillOpacity="0.7" />
+                    <circle cx="257" cy="175" r="2" fill="#A8DEFF" fillOpacity="0.7" />
+                  </svg>
                 </div>
               </div>
               

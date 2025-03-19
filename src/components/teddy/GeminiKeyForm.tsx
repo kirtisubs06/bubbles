@@ -13,38 +13,40 @@ interface GeminiKeyFormProps {
 const GeminiKeyForm: React.FC<GeminiKeyFormProps> = ({ adminMode = false }) => {
   const { apiKey, setApiKey, isConfigured, validateApiKey, isAdminConfigured, isLoading } = useGeminiAI();
   const [inputKey, setInputKey] = useState(apiKey);
-  const [isEditing, setIsEditing] = useState(!isConfigured && adminMode);
+  const [isEditing, setIsEditing] = useState(false); // Default to not editing since we have a hardcoded key
   const [isValidating, setIsValidating] = useState(false);
 
   // Update inputKey when apiKey changes
   useEffect(() => {
     setInputKey(apiKey);
-    // Set editing mode based on whether key is configured
-    if (!adminMode) {
-      setIsEditing(!isConfigured);
-    }
-  }, [apiKey, isConfigured, adminMode]);
+  }, [apiKey]);
 
-  console.log("GeminiKeyForm render:", { 
-    isConfigured, 
-    isAdminConfigured, 
-    isLoading, 
-    adminMode,
-    isEditing, 
-    hasApiKey: Boolean(apiKey) 
-  });
-  
   // Don't show the form if the API key is already configured by admin and we're not in admin mode
   if (isAdminConfigured && !adminMode) {
-    console.log("Not showing GeminiKeyForm because API key is admin-configured");
-    return null;
+    return (
+      <div className="bg-gradient-to-br from-bubbles-cream/50 to-white/50 dark:from-bubbles-blue/20 dark:to-bubbles-teal/20 p-4 rounded-xl shadow-sm">
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-2">
+            <ServerIcon className="h-4 w-4 text-green-500" />
+            <div>
+              <h3 className="text-sm font-medium text-bubbles-deep dark:text-white">
+                Google Gemini AI (Pre-Configured)
+              </h3>
+              <p className="text-xs text-gray-500">
+                API key is already configured for this demo
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
   }
   
   // Show loading state while checking for API key
   if (isLoading) {
     return (
-      <div className="bg-gradient-to-br from-teddy-cream/50 to-white/50 dark:from-teddy-blue/20 dark:to-teddy-purple/20 p-4 rounded-xl shadow-sm">
-        <div className="flex items-center gap-2 text-teddy-charcoal dark:text-white">
+      <div className="bg-gradient-to-br from-bubbles-cream/50 to-white/50 dark:from-bubbles-blue/20 dark:to-bubbles-teal/20 p-4 rounded-xl shadow-sm">
+        <div className="flex items-center gap-2 text-bubbles-deep dark:text-white">
           <Loader2 className="h-4 w-4 animate-spin" />
           <span>Checking for API key configuration...</span>
         </div>
@@ -93,11 +95,11 @@ const GeminiKeyForm: React.FC<GeminiKeyFormProps> = ({ adminMode = false }) => {
   };
 
   return (
-    <div className="bg-gradient-to-br from-teddy-cream/50 to-white/50 dark:from-teddy-blue/20 dark:to-teddy-purple/20 p-4 rounded-xl shadow-sm">
+    <div className="bg-gradient-to-br from-bubbles-cream/50 to-white/50 dark:from-bubbles-blue/20 dark:to-bubbles-teal/20 p-4 rounded-xl shadow-sm">
       {isEditing ? (
         <form onSubmit={handleSubmit} className="space-y-3">
           <div>
-            <label htmlFor="apiKey" className="block text-sm font-medium text-teddy-charcoal dark:text-white mb-1">
+            <label htmlFor="apiKey" className="block text-sm font-medium text-bubbles-deep dark:text-white mb-1">
               {adminMode ? "Admin Google Gemini API Key" : "Google Gemini API Key"}
             </label>
             <Input
@@ -113,13 +115,13 @@ const GeminiKeyForm: React.FC<GeminiKeyFormProps> = ({ adminMode = false }) => {
               {adminMode 
                 ? "This key will be saved to the database and used for all users of the application."
                 : "Your API key will be saved securely for future use."}
-              Make sure it's a valid <a href="https://ai.google.dev/tutorials/setup" className="text-teddy-coral hover:underline" target="_blank" rel="noopener noreferrer">Google AI API key</a>.
+              Make sure it's a valid <a href="https://ai.google.dev/tutorials/setup" className="text-bubbles-blue hover:underline" target="_blank" rel="noopener noreferrer">Google AI API key</a>.
             </p>
           </div>
           <div className="flex space-x-2">
             <Button 
               type="submit" 
-              className="bg-teddy-coral hover:bg-teddy-coral/80 text-white"
+              className="bg-bubbles-blue hover:bg-bubbles-blue/80 text-white"
               disabled={isValidating || !inputKey?.trim()}
             >
               {isValidating ? (
@@ -151,13 +153,13 @@ const GeminiKeyForm: React.FC<GeminiKeyFormProps> = ({ adminMode = false }) => {
               <LockIcon className="h-4 w-4 text-green-500" />
             }
             <div>
-              <h3 className="text-sm font-medium text-teddy-charcoal dark:text-white">
-                {isAdminConfigured ? "Google Gemini AI (Configured in Database)" : "Google Gemini AI"}
+              <h3 className="text-sm font-medium text-bubbles-deep dark:text-white">
+                {isAdminConfigured ? "Google Gemini AI (Pre-Configured)" : "Google Gemini AI"}
               </h3>
               <p className="text-xs text-gray-500">
                 {isConfigured 
                   ? isAdminConfigured 
-                    ? "API key configured and stored in the database" 
+                    ? "API key is pre-configured for this demo" 
                     : "API key configured" 
                   : "API key needed for chat functionality"}
               </p>

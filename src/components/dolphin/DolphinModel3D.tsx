@@ -215,33 +215,13 @@ const DolphinModel = ({
     }
   };
 
-  // Create materials for the dolphin
-  const mainColor = "#1EAEDB"; // Light blue for the main dolphin body
+  // Updated colors to match the reference image
+  const mainColor = "#5AA9E6"; // Light blue for the main dolphin body
   const bellyColor = "#FFFFFF"; // White for the belly
-  const accentColor = "#33C3F0"; // Lighter blue for accents
-  const darkColor = "#0F172A"; // Dark color for the eyes
+  const accentColor = "#3D87C9"; // Darker blue for fins and details
+  const darkerAccent = "#2E6BA4"; // Even darker blue for shadows
+  const eyeColor = "#222222"; // Dark color for the eyes
   
-  // Dolphin materials
-  const dolphinMaterial = new THREE.MeshStandardMaterial({ 
-    color: mainColor,
-    roughness: 0.8,
-    metalness: 0.1
-  });
-  
-  // Belly material
-  const bellyMaterial = new THREE.MeshStandardMaterial({ 
-    color: bellyColor,
-    roughness: 0.7,
-    metalness: 0.1
-  });
-  
-  // Darker accent material for flippers and fins
-  const finMaterial = new THREE.MeshStandardMaterial({ 
-    color: accentColor,
-    roughness: 0.7,
-    metalness: 0.1
-  });
-
   return (
     <group 
       ref={group} 
@@ -252,82 +232,96 @@ const DolphinModel = ({
       scale={isListening ? 1.02 : 1}
       rotation={[0, 0.5, 0]}
     >
-      {/* Main body */}
-      <mesh position={[0, 0, 0]} scale={[1.5, 0.8, 0.8]}>
+      {/* Main body - smoother and more curved */}
+      <mesh position={[0, 0, 0]} scale={[1.5, 0.9, 0.9]}>
         <sphereGeometry args={[1, 32, 32]} />
-        <primitive object={dolphinMaterial} />
+        <meshStandardMaterial color={mainColor} roughness={0.2} metalness={0.3} />
       </mesh>
 
-      {/* Head / Front body - slightly tapered */}
-      <mesh position={[-1.2, 0, 0]} scale={[1, 0.7, 0.7]}>
-        <sphereGeometry args={[0.8, 32, 32]} />
-        <primitive object={dolphinMaterial} />
+      {/* Head - more rounded */}
+      <mesh position={[-1.5, 0.1, 0]} scale={[1.2, 0.8, 0.8]}>
+        <sphereGeometry args={[0.9, 32, 32]} />
+        <meshStandardMaterial color={mainColor} roughness={0.2} metalness={0.3} />
       </mesh>
       
-      {/* Snout / Beak - elongated */}
-      <mesh position={[-2, 0, 0]} scale={[0.6, 0.3, 0.3]}>
+      {/* Dolphin smile - detailed */}
+      <mesh position={[-2.2, -0.1, 0]} rotation={[0, 0, 0.2]}>
+        <torusGeometry args={[0.25, 0.03, 16, 16, Math.PI]} />
+        <meshStandardMaterial color="#777777" />
+      </mesh>
+      
+      {/* Snout/Beak - more accurate */}
+      <mesh position={[-2.4, 0, 0]} scale={[0.5, 0.2, 0.25]}>
+        <cylinderGeometry args={[0.3, 0.5, 1, 32]} />
+        <meshStandardMaterial color={mainColor} roughness={0.2} metalness={0.3} />
+      </mesh>
+      
+      {/* Tail connector */}
+      <mesh position={[1.6, 0, 0]} scale={[0.8, 0.5, 0.4]}>
+        <cylinderGeometry args={[0.5, 0.3, 1, 32]} />
+        <meshStandardMaterial color={mainColor} roughness={0.2} metalness={0.3} />
+      </mesh>
+      
+      {/* Improved tail flukes */}
+      <group position={[2.3, 0, 0]} rotation={[0, 0, Math.PI / 2]}>
+        <mesh scale={[0.1, 1.3, 0.7]}>
+          <cylinderGeometry args={[0.9, 0.1, 1, 32]} />
+          <meshStandardMaterial color={accentColor} roughness={0.3} metalness={0.2} />
+        </mesh>
+      </group>
+      
+      {/* Dorsal fin - larger and more prominent */}
+      <mesh position={[0.2, 0.9, 0]} rotation={[0, 0, -Math.PI / 8]} scale={[0.4, 0.9, 0.1]}>
         <cylinderGeometry args={[0.2, 0.5, 1, 32]} />
-        <primitive object={dolphinMaterial} />
-      </mesh>
-      
-      {/* Tail stock - connecting body to flukes */}
-      <mesh position={[1.5, 0, 0]} scale={[0.8, 0.4, 0.3]}>
-        <cylinderGeometry args={[0.5, 0.3, 1, 32]} rotation={[Math.PI / 2, 0, 0]} />
-        <primitive object={dolphinMaterial} />
-      </mesh>
-      
-      {/* Tail flukes - horizontal */}
-      <mesh position={[2.2, 0, 0]} rotation={[0, 0, Math.PI / 2]} scale={[0.3, 1.2, 0.1]}>
-        <cylinderGeometry args={[0.8, 0.1, 1, 32]} />
-        <primitive object={finMaterial} />
-      </mesh>
-      
-      {/* Dorsal fin - on top */}
-      <mesh position={[0.2, 0.8, 0]} rotation={[0, 0, -Math.PI / 6]} scale={[0.4, 0.8, 0.1]}>
-        <cylinderGeometry args={[0.2, 0.5, 1, 32]} />
-        <primitive object={finMaterial} />
+        <meshStandardMaterial color={accentColor} roughness={0.3} metalness={0.2} />
       </mesh>
       
       {/* Left pectoral fin */}
-      <mesh position={[-0.5, -0.1, 0.7]} rotation={[0, 0.3, -Math.PI / 6]} scale={[0.6, 0.2, 0.1]}>
+      <mesh position={[-0.5, -0.1, 0.8]} rotation={[0, 0.3, -Math.PI / 6]} scale={[0.7, 0.2, 0.1]}>
         <cylinderGeometry args={[0.2, 0.4, 1, 32]} />
-        <primitive object={finMaterial} />
+        <meshStandardMaterial color={accentColor} roughness={0.3} metalness={0.2} />
       </mesh>
       
       {/* Right pectoral fin */}
-      <mesh position={[-0.5, -0.1, -0.7]} rotation={[0, -0.3, -Math.PI / 6]} scale={[0.6, 0.2, 0.1]}>
+      <mesh position={[-0.5, -0.1, -0.8]} rotation={[0, -0.3, -Math.PI / 6]} scale={[0.7, 0.2, 0.1]}>
         <cylinderGeometry args={[0.2, 0.4, 1, 32]} />
-        <primitive object={finMaterial} />
+        <meshStandardMaterial color={accentColor} roughness={0.3} metalness={0.2} />
       </mesh>
       
-      {/* White belly */}
-      <mesh position={[0, -0.2, 0]} rotation={[Math.PI / 2, 0, 0]} scale={[1.3, 0.7, 0.4]}>
+      {/* White belly - more detailed */}
+      <mesh position={[0, -0.3, 0]} rotation={[Math.PI / 2, 0, 0]} scale={[1.4, 0.8, 0.5]}>
         <sphereGeometry args={[1, 32, 32, 0, Math.PI * 2, 0, Math.PI / 2]} />
-        <primitive object={bellyMaterial} />
+        <meshStandardMaterial color={bellyColor} roughness={0.2} metalness={0.1} />
       </mesh>
       
-      {/* Left eye */}
-      <mesh position={[-1.6, 0.2, 0.4]}>
-        <sphereGeometry args={[0.08, 16, 16]} />
-        <meshStandardMaterial color={darkColor} />
-      </mesh>
+      {/* Left eye - bigger, more expressive */}
+      <group position={[-1.8, 0.2, 0.4]}>
+        <mesh scale={[1, 1, 1]}>
+          <sphereGeometry args={[0.12, 32, 32]} />
+          <meshStandardMaterial color={eyeColor} />
+        </mesh>
+        <mesh position={[0.06, 0.06, 0]} scale={[0.4, 0.4, 0.4]}>
+          <sphereGeometry args={[0.1, 16, 16]} />
+          <meshStandardMaterial color="white" />
+        </mesh>
+      </group>
       
-      {/* Right eye */}
-      <mesh position={[-1.6, 0.2, -0.4]}>
-        <sphereGeometry args={[0.08, 16, 16]} />
-        <meshStandardMaterial color={darkColor} />
-      </mesh>
+      {/* Right eye - bigger, more expressive */}
+      <group position={[-1.8, 0.2, -0.4]}>
+        <mesh scale={[1, 1, 1]}>
+          <sphereGeometry args={[0.12, 32, 32]} />
+          <meshStandardMaterial color={eyeColor} />
+        </mesh>
+        <mesh position={[0.06, 0.06, 0]} scale={[0.4, 0.4, 0.4]}>
+          <sphereGeometry args={[0.1, 16, 16]} />
+          <meshStandardMaterial color="white" />
+        </mesh>
+      </group>
       
-      {/* Smile line */}
-      <mesh position={[-2.1, -0.1, 0]} rotation={[0, 0, -0.2]}>
-        <torusGeometry args={[0.2, 0.02, 16, 16, Math.PI]} />
-        <meshStandardMaterial color={darkColor} />
-      </mesh>
-      
-      {/* Subtle details for the blowhole */}
-      <mesh position={[-1, 0.5, 0]} scale={[0.1, 0.03, 0.1]}>
+      {/* Blowhole - more detailed */}
+      <mesh position={[-1.1, 0.6, 0]} scale={[0.15, 0.05, 0.15]}>
         <torusGeometry args={[1, 0.5, 16, 16]} />
-        <meshStandardMaterial color="#0F172A" />
+        <meshStandardMaterial color={darkerAccent} />
       </mesh>
       
       {/* Interaction button (hidden visually but provides interactivity) */}
@@ -344,7 +338,7 @@ const LoadingFallback = () => {
   return (
     <mesh position={[0, 0, 0]}>
       <sphereGeometry args={[1, 16, 16]} />
-      <meshStandardMaterial color="#1EAEDB" />
+      <meshStandardMaterial color="#5AA9E6" />
     </mesh>
   );
 };

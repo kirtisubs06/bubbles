@@ -20,6 +20,7 @@ import Features from "./pages/Features";
 import Pricing from "./pages/Pricing";
 import PreOrderSignup from "./pages/PreOrderSignup";
 import AdminSetup from "./pages/AdminSetup";
+import ParentDashboardDemo from "./pages/ParentDashboardDemo";
 
 const queryClient = new QueryClient();
 
@@ -39,6 +40,7 @@ const App = () => (
             <Route path="/features" element={<Features />} />
             <Route path="/pricing" element={<Pricing />} />
             <Route path="/admin-setup" element={<AdminSetup />} />
+            <Route path="/parent-dashboard-demo" element={<ParentDashboardDemo />} />
             
             <Route path="/dashboard" element={<DashboardLayout />}>
               <Route index element={<Dashboard />} />

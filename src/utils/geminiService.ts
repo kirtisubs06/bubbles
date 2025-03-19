@@ -1,112 +1,101 @@
 
-// Gemini AI service
-import { toast } from "@/components/ui/use-toast";
+const GEMINI_API_ENDPOINT = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent';
 
-interface GeminiResponse {
-  candidates?: Array<{
-    content: {
-      parts: Array<{
-        text: string;
-      }>;
-    };
-  }>;
-  error?: {
-    message: string;
-  };
-}
+// Default API key for demo purposes
+let apiKey = 'AIzaSyBS94pYTBoL9CXS8cEI2GB7HIsxHUIPn58';
 
-interface GeminiRequest {
-  contents: Array<{
-    parts: Array<{
-      text: string;
-    }>;
-  }>;
-}
+/**
+ * Set the API key for Gemini service
+ */
+export const setApiKey = (key: string): void => {
+  apiKey = key;
+};
 
-class GeminiService {
-  private apiKey: string | null = null;
-  // Default admin-configured API key (set during deployment)
-  private readonly defaultApiKey = import.meta.env.VITE_GEMINI_API_KEY || null;
-  
-  constructor() {
-    // Try to initialize with default key or stored key
-    this.apiKey = this.defaultApiKey || localStorage.getItem('gemini_api_key');
-    console.log("GeminiService initialized", { hasKey: Boolean(this.apiKey) });
+/**
+ * Get the current API key
+ */
+export const getApiKey = (): string => {
+  return apiKey;
+};
+
+/**
+ * Generate a response from Gemini AI
+ */
+export const generateResponse = async (prompt: string): Promise<string> => {
+  if (!apiKey) {
+    throw new Error('API key is required');
   }
-  
-  setApiKey(key: string) {
-    if (!key) return;
-    
-    this.apiKey = key;
-    // Still store in localStorage as fallback
-    localStorage.setItem('gemini_api_key', key);
-    console.log("API key set in GeminiService");
-  }
-  
-  getApiKey(): string | null {
-    return this.apiKey;
-  }
-  
-  clearApiKey() {
-    // Only clear localStorage key, not the default key
-    localStorage.removeItem('gemini_api_key');
-    this.apiKey = this.defaultApiKey;
-    console.log("API key cleared from localStorage");
-  }
-  
-  hasConfiguredKey(): boolean {
-    return Boolean(this.getApiKey());
-  }
-  
-  async generateResponse(prompt: string): Promise<string> {
-    const apiKey = this.getApiKey();
-    
-    if (!apiKey) {
-      throw new Error("API key not set. Please provide your Gemini API key.");
-    }
-    
-    try {
-      const reqBody: GeminiRequest = {
-        contents: [{
-          parts: [{
-            text: prompt
-          }]
-        }]
-      };
-      
-      const response = await fetch(
-        `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`,
-        {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
+
+  try {
+    const response = await fetch(`${GEMINI_API_ENDPOINT}?key=${apiKey}`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        contents: [
+          {
+            parts: [
+              {
+                text: prompt
+              }
+            ]
+          }
+        ],
+        generationConfig: {
+          temperature: 0.7,
+          topK: 40,
+          topP: 0.95,
+          maxOutputTokens: 1024,
+        },
+        safetySettings: [
+          {
+            category: "HARM_CATEGORY_HARASSMENT",
+            threshold: "BLOCK_MEDIUM_AND_ABOVE"
           },
-          body: JSON.stringify(reqBody),
-        }
-      );
-      
-      const data: GeminiResponse = await response.json();
-      
-      if (data.error) {
-        throw new Error(data.error.message);
-      }
-      
-      if (!data.candidates || data.candidates.length === 0) {
-        throw new Error("No response received from Gemini API");
-      }
-      
-      return data.candidates[0].content.parts[0].text;
-    } catch (error) {
-      console.error("Gemini API error:", error);
-      const errorMessage = error instanceof Error ? error.message : "Unknown error occurred";
-      toast({
-        title: "Gemini API Error",
-        description: errorMessage,
-        variant: "destructive"
-      });
-      throw error;
-    }
-  }
-}
+          {
+            category: "HARM_CATEGORY_HATE_SPEECH",
+            threshold: "BLOCK_MEDIUM_AND_ABOVE"
+          },
+          {
+            category: "HARM_CATEGORY_SEXUALLY_EXPLICIT",
+            threshold: "BLOCK_MEDIUM_AND_ABOVE"
+          },
+          {
+            category: "HARM_CATEGORY_DANGEROUS_CONTENT",
+            threshold: "BLOCK_MEDIUM_AND_ABOVE"
+          }
+        ]
+      })
+    });
 
-export default new GeminiService();
+    if (!response.ok) {
+      const errorData = await response.json();
+      console.error('Gemini API error:', errorData);
+      throw new Error(`Gemini API error: ${response.status}`);
+    }
+
+    const data = await response.json();
+    
+    if (!data.candidates || data.candidates.length === 0 || !data.candidates[0].content) {
+      console.error('Invalid response structure:', data);
+      throw new Error('Invalid response from Gemini API');
+    }
+    
+    // Extract text from the response
+    const textParts = data.candidates[0].content.parts
+      .filter((part: any) => part.text)
+      .map((part: any) => part.text);
+    
+    return textParts.join(' ');
+  } catch (error) {
+    console.error('Error generating response:', error);
+    throw error;
+  }
+};
+
+export default {
+  setApiKey,
+  getApiKey,
+  generateResponse
+};

@@ -1,8 +1,8 @@
 
 import React, { createContext, useContext, useState, ReactNode, useEffect } from 'react';
 import { toast } from '@/components/ui/use-toast';
-import geminiService from '@/utils/geminiService';
-import { supabase } from "@/integrations/supabase/client";
+import geminiService from '@/utils/geminiAI';
+import { supabase } from '@/integrations/supabase/client';
 
 interface GeminiAIContextType {
   apiKey: string;
@@ -15,64 +15,32 @@ interface GeminiAIContextType {
 
 const GeminiAIContext = createContext<GeminiAIContextType | undefined>(undefined);
 
+// Hardcoded API key for demo purposes - would normally use environment variables or Supabase
+const DEMO_API_KEY = 'AIzaSyBS94pYTBoL9CXS8cEI2GB7HIsxHUIPn58';
+
 export const GeminiAIProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
-  const [apiKey, setApiKeyState] = useState<string>('');
-  const [isAdminConfigured, setIsAdminConfigured] = useState<boolean>(false);
+  const [apiKey, setApiKeyState] = useState<string>(DEMO_API_KEY);
+  const [isAdminConfigured, setIsAdminConfigured] = useState<boolean>(true);
   const [isValidatingKey, setIsValidatingKey] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
 
-  // Fetch API key from Supabase on component mount
+  // Set the API key on component mount
   useEffect(() => {
-    async function fetchApiKey() {
+    async function initializeApiKey() {
       setIsLoading(true);
       try {
-        // First try to get from environment variable
-        const envApiKey = import.meta.env.VITE_GEMINI_API_KEY;
-        
-        if (envApiKey) {
-          setApiKeyState(envApiKey);
-          geminiService.setApiKey(envApiKey);
-          setIsAdminConfigured(true);
-          setIsLoading(false);
-          return;
-        }
-        
-        // Try to get from Supabase
-        try {
-          console.log("Fetching API key from Supabase...");
-          const { data, error } = await supabase.functions.invoke('gemini-key/get', {
-            method: 'GET'
-          });
-          
-          console.log("Supabase response:", { data, error });
-          
-          if (!error && data && data.key) {
-            console.log("API key retrieved from Supabase successfully");
-            setApiKeyState(data.key);
-            geminiService.setApiKey(data.key);
-            setIsAdminConfigured(true);
-          } else if (error) {
-            console.error("Error fetching from Supabase:", error);
-          } else {
-            console.log("No API key found in Supabase");
-          }
-        } catch (error) {
-          console.error('Error fetching API key from Supabase:', error);
-          
-          // Fall back to localStorage if needed
-          const localKey = localStorage.getItem('gemini_api_key');
-          if (localKey) {
-            console.log("Using API key from localStorage");
-            setApiKeyState(localKey);
-            geminiService.setApiKey(localKey);
-          }
-        }
+        // Use the hardcoded API key
+        setApiKeyState(DEMO_API_KEY);
+        geminiService.setApiKey(DEMO_API_KEY);
+        setIsAdminConfigured(true);
+      } catch (error) {
+        console.error('Error initializing API key:', error);
       } finally {
         setIsLoading(false);
       }
     }
     
-    fetchApiKey();
+    initializeApiKey();
   }, []);
 
   // Validates if the API key is usable by testing a simple request
