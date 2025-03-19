@@ -64,30 +64,30 @@ export default {
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
 				},
-				// Bubbles color palette
+				// Bubbles color palette - updated to focus on blue, yellow, green, white
 				bubbles: {
-					blue: '#5AA9E6',        // Main blue color for the dolphin
+					blue: '#5AA9E6',        // Main blue color
 					teal: '#33C3F0',        // Secondary teal color
 					skyblue: '#8DCBE6',     // Light blue for accents
 					navy: '#0D5D79',        // Darker blue for contrast
 					deep: '#0F172A',        // Very dark blue for backgrounds in dark mode
-					cream: '#D3E4FD',       // Light blue-tinted cream for backgrounds
+					cream: '#F9F7F0',       // Light cream color for backgrounds
 					aqua: '#61E8E1',        // Aqua/turquoise for variety
-					coral: '#FF7E67',       // Coral accent color for warmth
-					sand: '#F9F7E8',        // Sandy beach color
+					yellow: '#FFD166',      // Warm yellow (replacing coral)
+					sand: '#F3E9D2',        // Sandy beige color
 					seafoam: '#93E5AB',     // Seafoam green for marine theme
+					lime: '#88D498',        // Light lime green
 					wave: '#BDE0FE',        // Light wave color
 				},
-				// TeddyTech color palette (kept for backward compatibility)
+				// TeddyTech color palette - updated to remove coral/orange
 				teddy: {
 					'blue': '#A0D2EB',
 					'purple': '#B8B5FF',
 					'pink': '#FFABE1',
-					'peach': '#FEC89A',
+					'yellow': '#FFD166',    // Yellow instead of peach/coral
 					'mint': '#A2E1DB',
 					'cream': '#FFF8F0',
 					'charcoal': '#2A2D34',
-					'coral': '#FF8882',
 				}
 			},
 			fontFamily: {

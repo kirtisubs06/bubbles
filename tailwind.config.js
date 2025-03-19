@@ -1,4 +1,3 @@
-
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   darkMode: ["class"],
@@ -22,23 +21,22 @@ module.exports = {
           deep: "#0F172A",      // Very dark blue for backgrounds in dark mode
           cream: "#F9F7F0",     // Cream color (more beige than before)
           sand: "#F3E9D2",      // Sandy beige color
-          yellow: "#FFD166",    // Warm yellow
+          yellow: "#FFD166",    // Warm yellow (replacing coral/orange tones)
           lime: "#88D498",      // Light lime green
           seafoam: "#93E5AB",   // Seafoam green for marine theme
           aqua: "#61E8E1",      // Aqua/turquoise for variety
-          coral: "#FF7E67",     // Coral accent color for warmth
           wave: "#BDE0FE",      // Light wave color
         },
-        // Keep original teddy colors for backward compatibility
+        // Keep original teddy colors but replace coral with yellow
         teddy: {
-          coral: "#FF6B6B",
-          pink: "#FF8FAB",
           blue: "#80B3FF",
+          pink: "#FF8FAB",
           mint: "#88E0D0",
           purple: "#A78BFA",
           peach: "#FFB7A6",
           cream: "#FFF4E0",
-          charcoal: "#1F2937"
+          charcoal: "#1F2937",
+          yellow: "#FFD166"      // Replace coral with yellow
         }
       },
       fontFamily: {

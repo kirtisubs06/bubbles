@@ -19,7 +19,6 @@
     --bubbles-lime: 140 50% 68%;
     --bubbles-seafoam: 145 60% 74%;
     --bubbles-aqua: 177 70% 65%;
-    --bubbles-coral: 9 100% 70%;
     --bubbles-wave: 209 95% 87%;
 
     /* Add these for shadcn/ui compatibility */
@@ -122,7 +121,8 @@
     @apply bg-gradient-to-br from-bubbles-lime/20 to-bubbles-seafoam/20;
   }
   
-  .card-gradient-coral {
-    @apply bg-gradient-to-br from-bubbles-coral/20 to-bubbles-sand/20;
+  /* Replace coral with yellow in this gradient */
+  .card-gradient-warm {
+    @apply bg-gradient-to-br from-bubbles-yellow/20 to-bubbles-sand/20;
   }
 }
