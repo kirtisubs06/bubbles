@@ -133,20 +133,17 @@ const Hero: React.FC = () => {
                     <path d="M300,150 C300,100 240,70 150,90 C80,110 30,130 30,150 C30,180 80,200 150,220 C240,240 300,200 300,150 Z" 
                       fill="#5e7082" stroke="#424b54" strokeWidth="3" />
                     
-                    <path d="M300,150 C350,110 380,100 390,130 C380,170 350,190 300,150 Z"
+                    <path d="M180,180 C200,200 220,200 200,160 C180,200 180,180 180,180 Z"
                       fill="#5e7082" stroke="#424b54" strokeWidth="2" />
                     
-                    <circle cx="260" cy="140" r="12" fill="#000000" />
-                    <circle cx="258" cy="138" r="4" fill="#ffffff" />
+                    <path d="M300,150 C350,100 380,120 360,150 C380,180 350,200 300,150 Z"
+                      fill="#5e7082" stroke="#424b54" strokeWidth="2" />
                     
-                    <path d="M60,160 Q75,170 90,160" 
+                    <circle cx="80" cy="140" r="12" fill="#000000" />
+                    <circle cx="78" cy="138" r="4" fill="#ffffff" />
+                    
+                    <path d="M40,150 Q65,170 90,150" 
                       fill="none" stroke="#424b54" strokeWidth="2" strokeLinecap="round" />
-                    
-                    <path d="M200,90 C220,50 240,40 260,60 C240,80 220,85 200,90 Z" 
-                      fill="#5e7082" stroke="#424b54" strokeWidth="2" />
-                    
-                    <path d="M200,210 C220,250 240,260 260,240 C240,220 220,215 200,210 Z" 
-                      fill="#5e7082" stroke="#424b54" strokeWidth="2" />
                     
                     <circle cx="320" cy="120" r="8" fill="none" stroke="#424b54" strokeWidth="1" opacity="0.6" />
                     <circle cx="340" cy="140" r="5" fill="none" stroke="#424b54" strokeWidth="1" opacity="0.6" />
