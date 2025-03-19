@@ -4,8 +4,39 @@ import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
 import Header from '@/components/layout/Header';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { ArrowRight, BarChart2, Calendar, MessageCircle, Settings, Shield, Users, WavesIcon } from 'lucide-react';
+import { 
+  Activity,
+  ArrowRight, 
+  Award,
+  BarChart2, 
+  Bell,
+  BookOpen,
+  BrainCircuit,
+  Calendar, 
+  ChevronRight,
+  Clock,
+  LineChart,
+  MessageCircle, 
+  Settings, 
+  Shield, 
+  User,
+  Users, 
+  WavesIcon 
+} from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
+import { 
+  ResponsiveContainer, 
+  PieChart, 
+  Pie, 
+  Cell, 
+  Tooltip, 
+  Legend,
+  BarChart,
+  Bar,
+  CartesianGrid,
+  XAxis,
+  YAxis
+} from 'recharts';
 
 const ParentDashboardDemo: React.FC = () => {
   const [activeTab, setActiveTab] = useState('overview');
