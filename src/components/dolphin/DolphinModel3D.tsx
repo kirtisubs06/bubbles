@@ -1,3 +1,4 @@
+
 import React, { useRef, useState, useEffect, Suspense } from 'react';
 import { Canvas, useFrame, useThree, useLoader } from '@react-three/fiber';
 import { OrbitControls, Environment, ContactShadows, Preload } from '@react-three/drei';
@@ -211,52 +212,52 @@ const DolphinModel = ({
       scale={isListening ? 1.02 : 1}
       rotation={[0, 0.3, 0]}
     >
-      {/* Main body - more streamlined and skinnier */}
-      <mesh position={[0, 0, 0]} scale={[2.0, 0.45, 0.45]}>
+      {/* Main body - slightly less slim and curved */}
+      <mesh position={[0, 0.1, 0]} scale={[2.0, 0.5, 0.5]}>
         <sphereGeometry args={[1, 32, 32]} />
         <meshStandardMaterial color={bodyColor} roughness={0.3} metalness={0.1} />
       </mesh>
 
-      {/* Tapered rear body - slimmer */}
-      <mesh position={[1.5, 0, 0]} scale={[1, 0.35, 0.35]} rotation={[0, 0.2, 0]}>
+      {/* Tapered rear body - slightly less slim */}
+      <mesh position={[1.5, 0, 0]} scale={[1, 0.4, 0.4]} rotation={[0, 0.2, 0.1]}>
         <sphereGeometry args={[1, 32, 32]} />
         <meshStandardMaterial color={bodyColor} roughness={0.3} metalness={0.1} />
       </mesh>
 
-      {/* Head - slimmer */}
-      <mesh position={[-1.2, 0, 0]} scale={[0.7, 0.45, 0.45]} rotation={[0, -0.2, 0]}>
+      {/* Head - slightly less slim and more curved */}
+      <mesh position={[-1.2, 0.2, 0]} scale={[0.7, 0.5, 0.5]} rotation={[0.1, -0.2, 0]}>
         <sphereGeometry args={[1, 32, 32]} />
         <meshStandardMaterial color={bodyColor} roughness={0.3} metalness={0.1} />
       </mesh>
       
-      {/* Snout - smaller and more defined */}
-      <mesh position={[-1.9, -0.05, 0]} rotation={[0, -0.1, 0]} scale={[0.4, 0.18, 0.18]}>
+      {/* Snout - better proportioned */}
+      <mesh position={[-1.9, 0.15, 0]} rotation={[0, -0.1, 0]} scale={[0.4, 0.2, 0.2]}>
         <sphereGeometry args={[1, 32, 32]} />
         <meshStandardMaterial color={bodyColor} roughness={0.3} metalness={0.1} />
       </mesh>
       
       {/* Mouth line */}
-      <mesh position={[-2.2, -0.1, 0]} rotation={[0, 0, 0]} scale={[0.5, 0.01, 0.2]}>
+      <mesh position={[-2.2, 0.1, 0]} rotation={[0, 0, 0]} scale={[0.5, 0.01, 0.2]}>
         <boxGeometry args={[1, 1, 1]} />
         <meshStandardMaterial color={detailColor} roughness={0.3} metalness={0.0} />
       </mesh>
       
-      {/* Eyes - realistic placement with glint */}
-      <mesh position={[-1.6, 0.1, 0.35]} scale={[0.08, 0.08, 0.04]}>
+      {/* Eyes - matching size and shape on both sides */}
+      <mesh position={[-1.6, 0.3, 0.35]} scale={[0.08, 0.08, 0.08]}>
         <sphereGeometry args={[1, 32, 32]} />
         <meshStandardMaterial color="black" />
       </mesh>
-      <mesh position={[-1.6, 0.1, -0.35]} scale={[0.08, 0.08, 0.04]}>
+      <mesh position={[-1.6, 0.3, -0.35]} scale={[0.08, 0.08, 0.08]}>
         <sphereGeometry args={[1, 32, 32]} />
         <meshStandardMaterial color="black" />
       </mesh>
       
-      {/* Eye glints - one for each eye */}
-      <mesh position={[-1.62, 0.12, 0.35]} scale={[0.02, 0.02, 0.01]}>
+      {/* Eye glints - matching for both eyes */}
+      <mesh position={[-1.62, 0.32, 0.35]} scale={[0.02, 0.02, 0.02]}>
         <sphereGeometry args={[1, 16, 16]} />
         <meshStandardMaterial color="white" emissive="white" emissiveIntensity={0.5} />
       </mesh>
-      <mesh position={[-1.62, 0.12, -0.35]} scale={[0.02, 0.02, 0.01]}>
+      <mesh position={[-1.62, 0.32, -0.35]} scale={[0.02, 0.02, 0.02]}>
         <sphereGeometry args={[1, 16, 16]} />
         <meshStandardMaterial color="white" emissive="white" emissiveIntensity={0.5} />
       </mesh>
