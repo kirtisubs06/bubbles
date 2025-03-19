@@ -130,84 +130,23 @@ const Hero: React.FC = () => {
             <div className="relative bg-white dark:bg-bubbles-deep/80 rounded-3xl shadow-bubbly overflow-hidden p-6 animate-float">
               <div className="aspect-square rounded-2xl bg-blue-100 dark:bg-blue-200 flex items-center justify-center">
                 <div className="w-4/5 h-4/5 relative">
-                  {/* Exact Dolphin SVG matching the provided image */}
-                  <svg viewBox="0 0 600 350" className="w-full h-full">
-                    <g transform="translate(130, 70) scale(1.4)">
-                      {/* Main body - blue part */}
-                      <path 
-                        d="M50,120 
-                           C70,90 100,70 130,70
-                           C170,70 200,80 230,100
-                           C260,120 280,150 260,180
-                           C240,210 210,220 180,220
-                           C140,220 110,200 80,170
-                           C60,150 40,140 50,120 Z" 
-                        fill="#4AA9DB" 
-                        stroke="none" 
-                      />
+                  {/* Blue Smiley Face with Glowing Aura */}
+                  <div className="w-full h-full relative flex items-center justify-center">
+                    {/* Glowing Aura */}
+                    <div className="absolute w-full h-full rounded-full bg-[#D3E4FD] opacity-50 animate-pulse-soft blur-xl"></div>
+                    <div className="absolute w-[90%] h-[90%] rounded-full bg-[#33C3F0] opacity-40 animate-pulse-soft blur-lg"></div>
+                    <div className="absolute w-[80%] h-[80%] rounded-full bg-[#0EA5E9] opacity-30 animate-pulse-soft blur-md"></div>
+                    
+                    {/* Smiley Face */}
+                    <div className="relative w-3/4 h-3/4 rounded-full bg-[#0FA0CE] shadow-lg z-10 flex items-center justify-center">
+                      {/* Eyes */}
+                      <div className="absolute top-[30%] left-[30%] transform -translate-y-1/2 w-[10%] h-[10%] rounded-full bg-white"></div>
+                      <div className="absolute top-[30%] right-[30%] transform -translate-y-1/2 w-[10%] h-[10%] rounded-full bg-white"></div>
                       
-                      {/* Cream/beige belly */}
-                      <path 
-                        d="M80,140 
-                           C100,120 130,110 160,110
-                           C190,110 220,120 240,140
-                           C230,180 200,190 170,190
-                           C140,190 110,180 80,140 Z" 
-                        fill="#FFF2E2" 
-                        stroke="none" 
-                      />
-                      
-                      {/* Dorsal fin */}
-                      <path 
-                        d="M160,70 
-                           C180,40 200,50 190,70
-                           C180,90 160,70 160,70 Z" 
-                        fill="#4AA9DB" 
-                        stroke="none" 
-                      />
-                      
-                      {/* Side fin */}
-                      <path 
-                        d="M150,160 
-                           C130,180 110,180 100,170
-                           C90,160 100,150 110,140
-                           C130,130 160,140 150,160 Z" 
-                        fill="#4AA9DB" 
-                        stroke="none" 
-                      />
-                      
-                      {/* Tail fin */}
-                      <path 
-                        d="M260,150 
-                           C280,130 290,140 290,150
-                           C290,170 270,190 260,170 Z" 
-                        fill="#4AA9DB" 
-                        stroke="none" 
-                      />
-                      
-                      {/* Snout/beak */}
-                      <path 
-                        d="M50,120 
-                           C40,110 20,110 10,120
-                           C0,130 10,140 20,140
-                           C30,140 50,130 50,120 Z" 
-                        fill="#4AA9DB" 
-                        stroke="none" 
-                      />
-                      
-                      {/* Eye - simple black dot */}
-                      <circle cx="60" cy="115" r="4" fill="#000000" />
-                      
-                      {/* Smile - simple curved line */}
-                      <path 
-                        d="M30,125 Q40,130 45,125" 
-                        fill="none" 
-                        stroke="#000000" 
-                        strokeWidth="1" 
-                        strokeLinecap="round" 
-                      />
-                    </g>
-                  </svg>
+                      {/* Smile */}
+                      <div className="absolute bottom-[35%] w-[50%] h-[20%] border-b-[12px] border-white rounded-b-full"></div>
+                    </div>
+                  </div>
                 </div>
               </div>
               
