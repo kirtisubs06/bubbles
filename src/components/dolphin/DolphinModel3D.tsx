@@ -1,3 +1,4 @@
+
 import React, { useRef, useState, useEffect, Suspense } from 'react';
 import { Canvas, useFrame, useThree, useLoader } from '@react-three/fiber';
 import { OrbitControls, Environment, ContactShadows, Preload } from '@react-three/drei';
@@ -212,26 +213,26 @@ const DolphinModel = ({
       scale={isListening ? 1.02 : 1}
       rotation={[0, 0.3, 0]}
     >
-      {/* Main body - streamlined torpedo shape */}
-      <mesh position={[0, 0, 0]} scale={[1.8, 0.65, 0.65]}>
+      {/* Main body - more streamlined and skinnier */}
+      <mesh position={[0, 0, 0]} scale={[2.0, 0.55, 0.55]}>
         <sphereGeometry args={[1, 32, 32]} />
         <meshStandardMaterial color={bodyColor} roughness={0.3} metalness={0.1} />
       </mesh>
 
-      {/* Tapered rear body */}
-      <mesh position={[1.5, 0, 0]} scale={[1, 0.45, 0.45]} rotation={[0, 0.2, 0]}>
+      {/* Tapered rear body - slimmer */}
+      <mesh position={[1.5, 0, 0]} scale={[1, 0.4, 0.4]} rotation={[0, 0.2, 0]}>
         <sphereGeometry args={[1, 32, 32]} />
         <meshStandardMaterial color={bodyColor} roughness={0.3} metalness={0.1} />
       </mesh>
 
-      {/* Head - more torpedo shaped */}
-      <mesh position={[-1.2, 0, 0]} scale={[0.7, 0.6, 0.6]} rotation={[0, -0.2, 0]}>
+      {/* Head - slimmer */}
+      <mesh position={[-1.2, 0, 0]} scale={[0.7, 0.5, 0.5]} rotation={[0, -0.2, 0]}>
         <sphereGeometry args={[1, 32, 32]} />
         <meshStandardMaterial color={bodyColor} roughness={0.3} metalness={0.1} />
       </mesh>
       
-      {/* Snout - elongated with visible mouth line */}
-      <mesh position={[-1.9, -0.05, 0]} rotation={[0, -0.1, 0]} scale={[0.6, 0.25, 0.25]}>
+      {/* Snout - smaller and more defined */}
+      <mesh position={[-1.9, -0.05, 0]} rotation={[0, -0.1, 0]} scale={[0.5, 0.2, 0.2]}>
         <sphereGeometry args={[1, 32, 32]} />
         <meshStandardMaterial color={bodyColor} roughness={0.3} metalness={0.1} />
       </mesh>
@@ -262,26 +263,26 @@ const DolphinModel = ({
         <meshStandardMaterial color="white" emissive="white" emissiveIntensity={0.5} />
       </mesh>
       
-      {/* Dorsal fin - taller and more curved */}
-      <mesh position={[0.2, 0.7, 0]} rotation={[0, 0, 0.1]} scale={[0.5, 0.8, 0.08]}>
-        <cylinderGeometry args={[0.2, 1, 2, 16]} />
+      {/* Dorsal fin - taller and more triangular */}
+      <mesh position={[0.2, 0.7, 0]} rotation={[0, 0, 0.1]}>
+        <coneGeometry args={[0.35, 1.1, 16]} />
         <meshStandardMaterial color={finColor} roughness={0.3} metalness={0.1} />
       </mesh>
       
-      {/* Left pectoral fin - curved and realistic */}
-      <mesh position={[-0.7, -0.2, 0.65]} rotation={[0.3, 0.4, -Math.PI / 6]} scale={[0.5, 0.18, 0.08]}>
+      {/* Left pectoral fin - more defined and triangular */}
+      <mesh position={[-0.7, -0.2, 0.65]} rotation={[0.3, 0.4, -Math.PI / 6]} scale={[0.6, 0.15, 0.05]}>
         <sphereGeometry args={[1, 16, 8]} />
         <meshStandardMaterial color={finColor} roughness={0.3} metalness={0.1} />
       </mesh>
       
       {/* Right pectoral fin */}
-      <mesh position={[-0.7, -0.2, -0.65]} rotation={[-0.3, -0.4, -Math.PI / 6]} scale={[0.5, 0.18, 0.08]}>
+      <mesh position={[-0.7, -0.2, -0.65]} rotation={[-0.3, -0.4, -Math.PI / 6]} scale={[0.6, 0.15, 0.05]}>
         <sphereGeometry args={[1, 16, 8]} />
         <meshStandardMaterial color={finColor} roughness={0.3} metalness={0.1} />
       </mesh>
       
-      {/* White belly - more natural shape */}
-      <mesh position={[0, -0.3, 0]} rotation={[Math.PI / 2, 0, 0]} scale={[2, 0.9, 0.35]}>
+      {/* White belly - spans the entire underside */}
+      <mesh position={[0, -0.3, 0]} rotation={[Math.PI / 2, 0, 0]} scale={[2.8, 0.9, 0.25]}>
         <sphereGeometry args={[1, 32, 32, 0, Math.PI * 2, 0, Math.PI / 2]} />
         <meshStandardMaterial color={bellyColor} roughness={0.4} metalness={0.0} />
       </mesh>
@@ -289,14 +290,14 @@ const DolphinModel = ({
       {/* Tail flukes - wider and flatter like real dolphins */}
       <mesh position={[2.5, 0, 0]} rotation={[Math.PI / 2, 0, 0]}>
         <group rotation={[0, 0, 0]}>
-          {/* Left fluke */}
-          <mesh position={[0, 0.5, 0]} rotation={[0, 0, -Math.PI / 8]} scale={[0.5, 0.8, 0.1]}>
+          {/* Left fluke - more triangular */}
+          <mesh position={[0, 0.5, 0]} rotation={[0, 0, -Math.PI / 8]} scale={[0.6, 0.9, 0.08]}>
             <sphereGeometry args={[1, 16, 8]} />
             <meshStandardMaterial color={finColor} roughness={0.3} metalness={0.1} />
           </mesh>
           
-          {/* Right fluke */}
-          <mesh position={[0, -0.5, 0]} rotation={[0, 0, Math.PI / 8]} scale={[0.5, 0.8, 0.1]}>
+          {/* Right fluke - more triangular */}
+          <mesh position={[0, -0.5, 0]} rotation={[0, 0, Math.PI / 8]} scale={[0.6, 0.9, 0.08]}>
             <sphereGeometry args={[1, 16, 8]} />
             <meshStandardMaterial color={finColor} roughness={0.3} metalness={0.1} />
           </mesh>

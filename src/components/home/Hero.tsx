@@ -131,38 +131,38 @@ const Hero: React.FC = () => {
               <div className="aspect-square rounded-2xl bg-blue-100 dark:bg-blue-200 flex items-center justify-center">
                 <div className="w-4/5 h-4/5 relative">
                   <svg viewBox="0 0 600 400" className="w-full h-full">
-                    {/* Realistic dolphin body - gray with white belly */}
-                    <path d="M150,200 C150,150 220,120 320,130 C420,140 480,180 500,260 C520,340 460,380 360,370 C260,360 150,330 150,200 Z" 
+                    {/* More realistic dolphin body - sleeker, less round */}
+                    <path d="M150,200 C150,160 220,125 320,135 C420,145 480,170 500,260 C520,340 460,370 360,360 C260,350 150,320 150,200 Z" 
                       fill="#667e99" stroke="#424b54" strokeWidth="3" />
                     
-                    {/* White belly */}
-                    <path d="M150,200 C150,200 200,250 320,260 C420,265 460,240 480,210 C460,280 420,320 320,320 C220,320 165,290 150,200 Z" 
+                    {/* White belly - moved to the bottom */}
+                    <path d="M150,200 C150,230 200,250 320,260 C420,265 460,250 480,240 C460,300 420,320 320,320 C200,320 160,280 150,200 Z" 
                       fill="#e8e8e8" />
                     
-                    {/* Dorsal fin */}
-                    <path d="M320,130 C340,80 380,120 350,150 C320,180 300,150 320,130 Z" 
+                    {/* Dorsal fin - more triangular */}
+                    <path d="M320,135 C320,80 380,100 350,150 C340,160 305,145 320,135 Z" 
                       fill="#5e7082" stroke="#424b54" strokeWidth="2" />
                     
-                    {/* Tail */}
-                    <path d="M490,260 C530,240 570,280 520,310 C470,340 445,290 490,260 Z" 
+                    {/* Tail - more defined and triangular */}
+                    <path d="M490,260 C530,230 570,270 520,310 C470,340 450,280 490,260 Z" 
                       fill="#5e7082" stroke="#424b54" strokeWidth="2" />
                     
-                    {/* Left flipper */}
-                    <path d="M250,260 C200,290 170,260 210,230 C250,200 270,230 250,260 Z" 
+                    {/* Left flipper - more triangular */}
+                    <path d="M250,260 C210,290 180,260 215,230 C250,215 270,230 250,260 Z" 
                       fill="#5e7082" stroke="#424b54" strokeWidth="2" />
                     
-                    {/* Right flipper */}
-                    <path d="M280,260 C330,290 360,260 320,230 C280,200 260,230 280,260 Z" 
+                    {/* Right flipper - more triangular */}
+                    <path d="M280,260 C320,290 350,260 315,230 C280,215 260,230 280,260 Z" 
                       fill="#5e7082" stroke="#424b54" strokeWidth="2" />
                     
-                    {/* Snout with mouth line */}
+                    {/* Snout with mouth line - more triangular */}
                     <path d="M150,200 C120,190 90,190 110,210 C130,230 150,210 150,200 Z" 
                       fill="#667e99" stroke="#424b54" strokeWidth="2" />
                     <path d="M110,205 C120,205 140,205 150,200" 
                       fill="none" stroke="#424b54" strokeWidth="1" />
                     
-                    {/* Flukes */}
-                    <path d="M520,280 C550,250 580,260 560,290 C540,320 500,300 520,280 Z" 
+                    {/* Tail flukes - more triangular */}
+                    <path d="M520,280 C550,240 580,250 560,290 C540,320 500,300 520,280 Z" 
                       fill="#5e7082" stroke="#424b54" strokeWidth="2" />
                     
                     {/* Eye */}
