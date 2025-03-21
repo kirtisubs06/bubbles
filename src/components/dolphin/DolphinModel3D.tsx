@@ -1,3 +1,4 @@
+
 import React, { useRef, useState, useEffect, Suspense } from 'react';
 import { Canvas, useFrame, useThree, useLoader } from '@react-three/fiber';
 import { OrbitControls, Environment, ContactShadows, Preload } from '@react-three/drei';
@@ -145,20 +146,20 @@ const DolphinModel = ({
       // Update conversation history with assistant response
       setGeminiMessages(prev => [...prev, { role: 'assistant', content: response }]);
       
-      // Use the browser's speech synthesis API
+      // Use the browser's speech synthesis API with a female voice
       const utterance = new SpeechSynthesisUtterance(response);
       utterance.lang = 'en-US';
       utterance.rate = 1.0;
-      utterance.pitch = 1.1; // Slightly higher pitch for a child-friendly voice
+      utterance.pitch = 1.2; // Higher pitch for a friendly female voice
       
-      // Try to find a suitable voice
+      // Try to find a suitable female voice
       const voices = speechSynthesis.getVoices();
-      const preferredVoice = voices.find(
-        voice => voice.name.includes('Female') || voice.name.includes('Google') || voice.lang === 'en-US'
+      const femaleVoice = voices.find(
+        voice => voice.name.includes('Female') || voice.name.includes('woman') || (voice.name.includes('Google') && !voice.name.includes('Male'))
       );
       
-      if (preferredVoice) {
-        utterance.voice = preferredVoice;
+      if (femaleVoice) {
+        utterance.voice = femaleVoice;
       }
       
       utterance.onend = () => {
@@ -333,34 +334,39 @@ const DolphinModel3D: React.FC<DolphinModel3DProps> = ({ setIsListening, isListe
   return (
     <div ref={ref} className="w-full h-full">
       {isInView && (
-        <Canvas camera={{ position: [0, 0, 6], fov: 45 }}>
-          <ambientLight intensity={0.7} />
-          <pointLight position={[10, 10, 10]} intensity={0.8} />
-          <spotLight position={[0, 5, 5]} intensity={0.6} />
-          <directionalLight position={[5, 5, 5]} intensity={0.5} />
-          
-          <Suspense fallback={<LoadingFallback />}>
-            <DolphinModel setIsListening={setIsListening} isListening={isListening} />
-          </Suspense>
-          
-          <ContactShadows
-            position={[0, -2.3, 0]}
-            opacity={0.5}
-            scale={10}
-            blur={1.5}
-            far={4}
-          />
-          <Environment preset="sunset" />
-          <OrbitControls 
-            enablePan={false} 
-            minDistance={4} 
-            maxDistance={10}
-            minPolarAngle={Math.PI/6}
-            maxPolarAngle={Math.PI/1.5}
-            rotateSpeed={0.5}
-          />
-          <Preload all />
-        </Canvas>
+        <>
+          <Canvas camera={{ position: [0, 0, 6], fov: 45 }}>
+            <ambientLight intensity={0.7} />
+            <pointLight position={[10, 10, 10]} intensity={0.8} />
+            <spotLight position={[0, 5, 5]} intensity={0.6} />
+            <directionalLight position={[5, 5, 5]} intensity={0.5} />
+            
+            <Suspense fallback={<LoadingFallback />}>
+              <DolphinModel setIsListening={setIsListening} isListening={isListening} />
+            </Suspense>
+            
+            <ContactShadows
+              position={[0, -2.3, 0]}
+              opacity={0.5}
+              scale={10}
+              blur={1.5}
+              far={4}
+            />
+            <Environment preset="sunset" />
+            <OrbitControls 
+              enablePan={false} 
+              minDistance={4} 
+              maxDistance={10}
+              minPolarAngle={Math.PI/6}
+              maxPolarAngle={Math.PI/1.5}
+              rotateSpeed={0.5}
+            />
+            <Preload all />
+          </Canvas>
+          <div className="text-xs text-gray-400 text-center mt-2">
+            3D Model inspired by: <a href="https://www.cadnav.com/3d-models/model-40660.html" target="_blank" rel="noopener noreferrer" className="hover:underline">www.cadnav.com</a>
+          </div>
+        </>
       )}
     </div>
   );

@@ -21,6 +21,7 @@ import Pricing from "./pages/Pricing";
 import PreOrderSignup from "./pages/PreOrderSignup";
 import AdminSetup from "./pages/AdminSetup";
 import ParentDashboardDemo from "./pages/ParentDashboardDemo";
+import OurVision from "./pages/OurVision";
 
 const queryClient = new QueryClient();
 
@@ -41,6 +42,7 @@ const App = () => (
             <Route path="/pricing" element={<Pricing />} />
             <Route path="/admin-setup" element={<AdminSetup />} />
             <Route path="/parent-dashboard-demo" element={<ParentDashboardDemo />} />
+            <Route path="/our-vision" element={<OurVision />} />
             
             <Route path="/dashboard" element={<DashboardLayout />}>
               <Route index element={<Dashboard />} />

@@ -88,14 +88,24 @@ const Features: React.FC = () => {
         <div className="text-center max-w-3xl mx-auto mb-16 animate-fade-in">
           <div className="inline-flex items-center rounded-full px-3 py-1 text-sm font-medium bg-bubbles-teal/10 text-bubbles-teal mb-4">
             <span className="mr-2">✨</span>
-            <span>Key Features</span>
+            <span>About Bubbles</span>
           </div>
           <h2 className="text-3xl md:text-4xl font-bold mb-6">
-            Smart Features for Growing Minds
+            Meet Your Child's Learning Companion
           </h2>
-          <p className="text-lg text-gray-600 dark:text-gray-300">
-            Bubbles combines advanced AI technology with childhood development expertise to create a learning companion that evolves with your child.
+          <p className="text-lg text-gray-600 dark:text-gray-300 mb-8">
+            Bubbles is a plush dolphin toy designed for children aged 3-10. With a simple press of a button, your child can talk and interact with Bubbles, creating a magical learning experience that adapts to their unique interests and needs.
           </p>
+          
+          <div className="bg-white dark:bg-bubbles-deep/40 rounded-2xl shadow-medium p-6 mb-16">
+            <h3 className="text-xl font-semibold mb-4 text-bubbles-deep dark:text-white">How Bubbles Works</h3>
+            <p className="text-gray-600 dark:text-gray-300 mb-4">
+              Bubbles features a physical button that your child presses to start a conversation. This design ensures privacy, as Bubbles only listens when the button is pressed. The friendly female voice responds with age-appropriate content, engaging your child in educational dialogues that promote social interaction and accelerate learning.
+            </p>
+            <p className="text-gray-600 dark:text-gray-300">
+              Parents receive valuable insights about their child's interests through our dashboard, along with recommendations for nurturing those interests. You'll always have complete control over your child's interactions with Bubbles, making it both a fun and safe learning tool.
+            </p>
+          </div>
         </div>
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">

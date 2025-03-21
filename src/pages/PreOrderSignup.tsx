@@ -1,25 +1,29 @@
 
 import React, { useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
-import { CheckCircle2 } from 'lucide-react';
+import { CheckCircle2, Send } from 'lucide-react';
+import { Button } from '@/components/ui/button';
 import Header from '@/components/layout/Header';
 
 const PreOrderSignup: React.FC = () => {
   const iframeRef = useRef<HTMLIFrameElement>(null);
+  const feedbackIframeRef = useRef<HTMLIFrameElement>(null);
+  const [showFeedback, setShowFeedback] = React.useState(false);
   
   useEffect(() => {
     // Dynamically adjust iframe height when form loads
     const handleMessage = (event: MessageEvent) => {
-      if (event.data.type === 'JotformResize') {
-        if (iframeRef.current) {
-          iframeRef.current.style.height = `${event.data.height + 100}px`;
-        }
+      if (event.data.type === 'form-height' && iframeRef.current) {
+        iframeRef.current.style.height = `${event.data.height + 50}px`;
+      }
+      if (event.data.type === 'form-height' && feedbackIframeRef.current && showFeedback) {
+        feedbackIframeRef.current.style.height = `${event.data.height + 50}px`;
       }
     };
     
     window.addEventListener('message', handleMessage);
     return () => window.removeEventListener('message', handleMessage);
-  }, []);
+  }, [showFeedback]);
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-white to-bubbles-cream/20 dark:from-bubbles-deep dark:to-bubbles-deep/80">
@@ -94,29 +98,66 @@ const PreOrderSignup: React.FC = () => {
             transition={{ duration: 0.6, delay: 0.4 }}
             className="bg-white dark:bg-bubbles-deep/40 rounded-2xl shadow-medium overflow-hidden"
           >
-            {/* Updated Jotform Embed */}
+            {/* New Typeform Embed */}
             <iframe
               ref={iframeRef}
-              id="JotFormIFrame-250751107337048"
+              id="typeform-embed"
               title="Pre-order Bubbles AI Dolphin"
               onLoad={() => {
                 if (iframeRef.current) {
                   iframeRef.current.style.height = "600px";
                 }
               }}
-              allowTransparency={true}
-              allowFullScreen={true}
-              allow="geolocation; microphone; camera"
-              src="https://form.jotform.com/250751107337048"
-              frameBorder="0"
               style={{ 
                 width: "100%", 
-                minHeight: "600px", 
+                height: "600px", 
                 border: "none" 
               }}
+              src="https://form.typeform.com/to/coYt6wWP"
+              allow="camera; microphone; autoplay; encrypted-media; fullscreen; geolocation"
             />
+            
+            <div className="p-4 flex justify-center">
+              <Button 
+                onClick={() => setShowFeedback(!showFeedback)}
+                className="flex items-center gap-2 bg-bubbles-blue hover:bg-bubbles-blue/90"
+              >
+                <Send className="h-4 w-4" />
+                {showFeedback ? "Hide Feedback Form" : "Submit Feedback"}
+              </Button>
+            </div>
           </motion.div>
         </div>
+        
+        {showFeedback && (
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            className="mt-16 max-w-4xl mx-auto bg-white dark:bg-bubbles-deep/40 rounded-2xl shadow-medium overflow-hidden"
+          >
+            <h2 className="text-2xl font-bold text-bubbles-deep dark:text-white p-6 text-center border-b border-gray-100 dark:border-gray-800">
+              We Value Your Feedback
+            </h2>
+            <iframe
+              ref={feedbackIframeRef}
+              id="feedback-typeform-embed"
+              title="Bubbles Feedback Form"
+              onLoad={() => {
+                if (feedbackIframeRef.current) {
+                  feedbackIframeRef.current.style.height = "600px";
+                }
+              }}
+              style={{ 
+                width: "100%", 
+                height: "600px", 
+                border: "none" 
+              }}
+              src="https://form.typeform.com/to/OvTc8lyw"
+              allow="camera; microphone; autoplay; encrypted-media; fullscreen; geolocation"
+            />
+          </motion.div>
+        )}
       </div>
       
       {/* Decorative elements for fun, kid-friendly appearance */}

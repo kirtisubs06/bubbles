@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { cn } from '@/lib/utils';
-import { Menu, X, Sparkles, Package, Waves, Activity } from 'lucide-react';
+import { Menu, X, Sparkles, Package, Waves, Activity, BarChart4, Eye } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 const Header: React.FC = () => {
@@ -69,16 +69,25 @@ const Header: React.FC = () => {
             />
           </Link>
           <Link to="/parent-dashboard-demo" className={cn("nav-link group", isActive('/parent-dashboard-demo') && "active")}>
-            <span>Parent Dashboard</span>
-            <Activity className="ml-1 h-3 w-3 text-bubbles-teal inline-block" />
+            <span>Sample Parent Dashboard</span>
+            <BarChart4 className="ml-1 h-3 w-3 text-bubbles-teal inline-block" />
             <motion.span 
               className="absolute -bottom-1 left-0 w-0 h-0.5 bg-bubbles-blue group-hover:w-full transition-all duration-300"
               initial={false}
               animate={isActive('/parent-dashboard-demo') ? { width: "100%" } : { width: "0%" }}
             />
           </Link>
+          <Link to="/our-vision" className={cn("nav-link group", isActive('/our-vision') && "active")}>
+            <span>Our Vision</span>
+            <Eye className="ml-1 h-3 w-3 text-bubbles-skyblue inline-block" />
+            <motion.span 
+              className="absolute -bottom-1 left-0 w-0 h-0.5 bg-bubbles-blue group-hover:w-full transition-all duration-300"
+              initial={false}
+              animate={isActive('/our-vision') ? { width: "100%" } : { width: "0%" }}
+            />
+          </Link>
           <Link to="/pre-order" className={cn("nav-link group", isActive('/pre-order') && "active")}>
-            <span>Pre-order</span>
+            <span>Pre-order Signup</span>
             <Package className="ml-1 h-3 w-3 text-bubbles-teal inline-block" />
             <motion.span 
               className="absolute -bottom-1 left-0 w-0 h-0.5 bg-bubbles-blue group-hover:w-full transition-all duration-300"
@@ -138,11 +147,15 @@ const Header: React.FC = () => {
               <Waves className="ml-1 h-4 w-4 text-bubbles-teal" />
             </Link>
             <Link to="/parent-dashboard-demo" className={cn("nav-link flex items-center", isActive('/parent-dashboard-demo') && "active")}>
-              Parent Dashboard
-              <Activity className="ml-1 h-4 w-4 text-bubbles-teal" />
+              Sample Parent Dashboard
+              <BarChart4 className="ml-1 h-4 w-4 text-bubbles-teal" />
+            </Link>
+            <Link to="/our-vision" className={cn("nav-link flex items-center", isActive('/our-vision') && "active")}>
+              Our Vision
+              <Eye className="ml-1 h-4 w-4 text-bubbles-skyblue" />
             </Link>
             <Link to="/pre-order" className={cn("nav-link flex items-center", isActive('/pre-order') && "active")}>
-              Pre-order
+              Pre-order Signup
               <Package className="ml-1 h-4 w-4 text-bubbles-teal" />
             </Link>
             <Link to="/features" className={cn("nav-link flex items-center", isActive('/features') && "active")}>
