@@ -1,3 +1,4 @@
+
 import React, { useRef, useState, useEffect, Suspense } from 'react';
 import { Canvas, useFrame, useThree, useLoader } from '@react-three/fiber';
 import { OrbitControls, Environment, ContactShadows, Preload } from '@react-three/drei';
@@ -196,11 +197,10 @@ const DolphinModel = ({
     }
   };
 
-  // Colors based on the reference image - slightly adjusted for better match
-  const bodyColor = "#4f9be5"; // Light blue for the main body
+  // Colors matching the reference image perfectly
+  const bodyColor = "#5b9de3"; // Light blue for the main body
   const bellyColor = "#ffffff";  // White for the belly/underside
   const eyeColor = "#000000";   // Black for the eye
-  const finColor = "#4f9be5";   // Same blue for fins
 
   return (
     <group 
@@ -212,89 +212,89 @@ const DolphinModel = ({
       scale={isListening ? 1.05 : 1}
       rotation={[0, 0, 0]}
     >
-      {/* Main body - smoother, more curved shape */}
-      <mesh position={[0, 0, 0]} scale={[1.3, 0.6, 0.65]}>
+      {/* Main body - smoother, blob-like shape as in reference */}
+      <mesh position={[0, 0, 0]} scale={[1.5, 0.7, 0.8]}>
         <sphereGeometry args={[1, 32, 32]} />
-        <meshStandardMaterial color={bodyColor} roughness={0.1} metalness={0.1} />
+        <meshStandardMaterial color={bodyColor} roughness={0.2} metalness={0.1} />
       </mesh>
 
-      {/* Belly - white underside that extends across the entire bottom */}
-      <mesh position={[0, -0.35, 0]} rotation={[Math.PI / 2, 0, 0]} scale={[1.3, 0.65, 0.4]}>
+      {/* White belly/underside that spans entire bottom as in reference */}
+      <mesh position={[0, -0.3, 0]} rotation={[Math.PI / 2, 0, 0]} scale={[1.8, 0.8, 0.5]}>
         <sphereGeometry args={[1, 32, 32, 0, Math.PI * 2, 0, Math.PI / 2]} />
-        <meshStandardMaterial color={bellyColor} roughness={0.1} metalness={0.1} />
+        <meshStandardMaterial color={bellyColor} roughness={0.2} metalness={0.1} />
       </mesh>
 
-      {/* Head - more rounded shape matching image */}
-      <mesh position={[-1.05, 0, 0]} scale={[0.7, 0.55, 0.55]}>
+      {/* Head section with more rounded shape like in reference */}
+      <mesh position={[-1.2, 0, 0]} scale={[0.85, 0.65, 0.7]}>
         <sphereGeometry args={[1, 32, 32]} />
-        <meshStandardMaterial color={bodyColor} roughness={0.1} metalness={0.1} />
+        <meshStandardMaterial color={bodyColor} roughness={0.2} metalness={0.1} />
       </mesh>
       
-      {/* Snout - matching reference image */}
-      <mesh position={[-1.6, -0.05, 0]} rotation={[0, 0, 0]} scale={[0.4, 0.25, 0.4]}>
+      {/* Snout - more pronounced as in reference */}
+      <mesh position={[-1.8, -0.05, 0]} rotation={[0, 0, 0]} scale={[0.4, 0.3, 0.4]}>
         <sphereGeometry args={[1, 32, 32]} />
-        <meshStandardMaterial color={bodyColor} roughness={0.1} metalness={0.1} />
+        <meshStandardMaterial color={bodyColor} roughness={0.2} metalness={0.1} />
       </mesh>
       
-      {/* Left eye (from viewing perspective) */}
-      <mesh position={[-1.3, 0.1, 0.35]} scale={[0.12, 0.12, 0.12]}>
+      {/* Left eye - positioned as in reference image */}
+      <mesh position={[-1.4, 0, 0.4]} scale={[0.13, 0.13, 0.13]}>
         <sphereGeometry args={[1, 16, 16]} />
         <meshStandardMaterial color={eyeColor} />
       </mesh>
 
-      {/* Right eye (from viewing perspective) - for symmetry */}
-      <mesh position={[-1.3, 0.1, -0.35]} scale={[0.12, 0.12, 0.12]}>
+      {/* Right eye - exact mirror of left eye for perfect symmetry */}
+      <mesh position={[-1.4, 0, -0.4]} scale={[0.13, 0.13, 0.13]}>
         <sphereGeometry args={[1, 16, 16]} />
         <meshStandardMaterial color={eyeColor} />
       </mesh>
       
       {/* Left fin - positioned like in the reference image */}
-      <mesh position={[-0.2, 0, 0.6]} rotation={[0, 0.1, -0.2]} scale={[0.5, 0.15, 0.6]}>
+      <mesh position={[-0.2, -0.1, 0.6]} rotation={[0, 0.1, -0.5]} scale={[0.6, 0.15, 0.6]}>
         <sphereGeometry args={[1, 16, 16]} />
-        <meshStandardMaterial color={finColor} roughness={0.1} metalness={0.1} />
+        <meshStandardMaterial color={bodyColor} roughness={0.2} metalness={0.1} />
       </mesh>
       
-      {/* Right fin - symmetric */}
-      <mesh position={[-0.2, 0, -0.6]} rotation={[0, -0.1, 0.2]} scale={[0.5, 0.15, 0.6]}>
+      {/* Right fin - exact mirror of left fin for perfect symmetry */}
+      <mesh position={[-0.2, -0.1, -0.6]} rotation={[0, -0.1, 0.5]} scale={[0.6, 0.15, 0.6]}>
         <sphereGeometry args={[1, 16, 16]} />
-        <meshStandardMaterial color={finColor} roughness={0.1} metalness={0.1} />
+        <meshStandardMaterial color={bodyColor} roughness={0.2} metalness={0.1} />
       </mesh>
       
-      {/* Tail */}
-      <mesh position={[1.4, 0, 0]} rotation={[0, 0, 0]} scale={[0.4, 0.4, 0.3]}>
-        <sphereGeometry args={[1, 16, 16]} />
-        <meshStandardMaterial color={bodyColor} roughness={0.1} metalness={0.1} />
+      {/* Tail connection - smooth transition to tail like in reference */}
+      <mesh position={[1.3, 0, 0]} scale={[0.8, 0.5, 0.4]}>
+        <sphereGeometry args={[1, 32, 32]} />
+        <meshStandardMaterial color={bodyColor} roughness={0.2} metalness={0.1} />
       </mesh>
       
-      {/* Integrated tail fin with better transition from body */}
-      <group position={[1.7, 0, 0]}>
-        {/* Improved connection to body */}
-        <mesh position={[-0.2, 0, 0]} scale={[0.3, 0.35, 0.25]}>
-          <sphereGeometry args={[1, 16, 16]} />
-          <meshStandardMaterial color={bodyColor} roughness={0.1} metalness={0.1} />
+      {/* Tail fin - matching reference image with proper shape and angle */}
+      <group position={[2.1, 0, 0]}>
+        {/* Tail fin base/connection */}
+        <mesh position={[-0.3, 0, 0]} scale={[0.3, 0.4, 0.25]}>
+          <sphereGeometry args={[1, 32, 32]} />
+          <meshStandardMaterial color={bodyColor} roughness={0.2} metalness={0.1} />
         </mesh>
         
-        {/* Upper tail fin */}
-        <mesh position={[0.1, 0.5, 0]} rotation={[0, 0, Math.PI / 4]} scale={[0.25, 0.8, 0.1]}>
-          <sphereGeometry args={[1, 16, 16]} />
-          <meshStandardMaterial color={bodyColor} roughness={0.1} metalness={0.1} />
+        {/* Upper tail fin lobe */}
+        <mesh position={[0.15, 0.4, 0]} rotation={[0, 0, Math.PI / 6]} scale={[0.3, 0.7, 0.15]}>
+          <sphereGeometry args={[1, 32, 32]} />
+          <meshStandardMaterial color={bodyColor} roughness={0.2} metalness={0.1} />
         </mesh>
         
-        {/* Lower tail fin */}
-        <mesh position={[0.1, -0.5, 0]} rotation={[0, 0, -Math.PI / 4]} scale={[0.25, 0.8, 0.1]}>
-          <sphereGeometry args={[1, 16, 16]} />
-          <meshStandardMaterial color={bodyColor} roughness={0.1} metalness={0.1} />
+        {/* Lower tail fin lobe */}
+        <mesh position={[0.15, -0.4, 0]} rotation={[0, 0, -Math.PI / 6]} scale={[0.3, 0.7, 0.15]}>
+          <sphereGeometry args={[1, 32, 32]} />
+          <meshStandardMaterial color={bodyColor} roughness={0.2} metalness={0.1} />
         </mesh>
       </group>
       
-      {/* White belly extension to ensure it covers the full underside */}
-      <mesh position={[-0.6, -0.35, 0]} rotation={[Math.PI / 2, 0, 0]} scale={[1.9, 0.65, 0.4]}>
-        <sphereGeometry args={[0.7, 32, 32, 0, Math.PI * 2, 0, Math.PI / 2]} />
-        <meshStandardMaterial color={bellyColor} roughness={0.1} metalness={0.1} />
+      {/* Extended white belly to ensure complete coverage as in reference */}
+      <mesh position={[-0.5, -0.35, 0]} rotation={[Math.PI / 2, 0, 0]} scale={[2.2, 0.8, 0.4]}>
+        <sphereGeometry args={[0.75, 32, 32, 0, Math.PI * 2, 0, Math.PI / 2]} />
+        <meshStandardMaterial color={bellyColor} roughness={0.2} metalness={0.1} />
       </mesh>
       
       {/* Interactive hitbox (invisible) for better interaction */}
-      <mesh position={[0, 0, 0]} visible={false} scale={[2, 1, 1.5]}>
+      <mesh position={[0, 0, 0]} visible={false} scale={[2.5, 1.2, 1.5]}>
         <boxGeometry args={[1, 1, 1]} />
         <meshBasicMaterial transparent opacity={0} />
       </mesh>
@@ -307,7 +307,7 @@ const LoadingFallback = () => {
   return (
     <mesh position={[0, 0, 0]}>
       <sphereGeometry args={[1, 16, 16]} />
-      <meshStandardMaterial color="#4f9be5" />
+      <meshStandardMaterial color="#5b9de3" />
     </mesh>
   );
 };
