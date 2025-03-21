@@ -196,9 +196,10 @@ const DolphinModel = ({
     }
   };
 
-  // Light blue color for the entire dolphin body
-  const bodyColor = "#5b9de3"; 
-  const eyeColor = "#000000";   // Black for the eyes
+  // Color definitions based on the reference image
+  const bodyBlueColor = "#5b9de3";   // Light blue for the main body
+  const bellyWhiteColor = "#ffffff"; // White for the belly
+  const eyeColor = "#000000";        // Black for the eyes
 
   return (
     <group 
@@ -210,78 +211,90 @@ const DolphinModel = ({
       scale={isListening ? 1.05 : 1}
       rotation={[0, 0, 0]}
     >
-      {/* Main body - elongated */}
-      <mesh position={[0, 0, 0]} scale={[1.8, 0.7, 0.8]}>
+      {/* Main body - elongated to match reference image */}
+      <mesh position={[0, 0, 0]} scale={[2.2, 0.8, 0.9]}>
         <sphereGeometry args={[1, 32, 32]} />
-        <meshStandardMaterial color={bodyColor} roughness={0.2} metalness={0.1} />
+        <meshStandardMaterial color={bodyBlueColor} roughness={0.3} metalness={0.1} />
+      </mesh>
+
+      {/* White belly - matching reference image */}
+      <mesh position={[0, -0.35, 0]} scale={[2.1, 0.4, 0.85]}>
+        <sphereGeometry args={[1, 32, 32]} />
+        <meshStandardMaterial color={bellyWhiteColor} roughness={0.3} metalness={0.1} />
       </mesh>
 
       {/* Head section with rounded shape */}
-      <mesh position={[-1.4, 0, 0]} scale={[0.85, 0.65, 0.7]}>
+      <mesh position={[-1.8, 0, 0]} scale={[0.85, 0.65, 0.7]}>
         <sphereGeometry args={[1, 32, 32]} />
-        <meshStandardMaterial color={bodyColor} roughness={0.2} metalness={0.1} />
+        <meshStandardMaterial color={bodyBlueColor} roughness={0.3} metalness={0.1} />
       </mesh>
       
-      {/* Snout */}
-      <mesh position={[-2.0, -0.05, 0]} rotation={[0, 0, 0]} scale={[0.4, 0.3, 0.4]}>
+      {/* Snout - slightly more pronounced to match reference */}
+      <mesh position={[-2.4, -0.05, 0]} rotation={[0, 0, 0]} scale={[0.4, 0.3, 0.4]}>
         <sphereGeometry args={[1, 32, 32]} />
-        <meshStandardMaterial color={bodyColor} roughness={0.2} metalness={0.1} />
+        <meshStandardMaterial color={bodyBlueColor} roughness={0.3} metalness={0.1} />
+      </mesh>
+
+      {/* White portion of the snout to match reference */}
+      <mesh position={[-2.4, -0.2, 0]} rotation={[0, 0, 0]} scale={[0.4, 0.2, 0.4]}>
+        <sphereGeometry args={[1, 32, 32]} />
+        <meshStandardMaterial color={bellyWhiteColor} roughness={0.3} metalness={0.1} />
       </mesh>
       
       {/* Left eye */}
-      <mesh position={[-1.6, 0.1, 0.4]} scale={[0.13, 0.13, 0.13]}>
+      <mesh position={[-2.0, 0.1, 0.4]} scale={[0.13, 0.13, 0.13]}>
         <sphereGeometry args={[1, 16, 16]} />
         <meshStandardMaterial color={eyeColor} />
       </mesh>
 
-      {/* Right eye */}
-      <mesh position={[-1.6, 0.1, -0.4]} scale={[0.13, 0.13, 0.13]}>
+      {/* Right eye - perfectly symmetrical with left eye */}
+      <mesh position={[-2.0, 0.1, -0.4]} scale={[0.13, 0.13, 0.13]}>
         <sphereGeometry args={[1, 16, 16]} />
         <meshStandardMaterial color={eyeColor} />
       </mesh>
       
       {/* Left pectoral fin */}
-      <mesh position={[-0.4, -0.1, 0.6]} rotation={[0, 0, -0.5]} scale={[0.6, 0.15, 0.4]}>
+      <mesh position={[-0.4, -0.1, 0.8]} rotation={[0, 0, -0.3]} scale={[0.7, 0.2, 0.5]}>
         <sphereGeometry args={[1, 16, 16]} />
-        <meshStandardMaterial color={bodyColor} roughness={0.2} metalness={0.1} />
+        <meshStandardMaterial color={bodyBlueColor} roughness={0.3} metalness={0.1} />
       </mesh>
       
       {/* Right pectoral fin - perfectly symmetrical with left fin */}
-      <mesh position={[-0.4, -0.1, -0.6]} rotation={[0, 0, 0.5]} scale={[0.6, 0.15, 0.4]}>
+      <mesh position={[-0.4, -0.1, -0.8]} rotation={[0, 0, -0.3]} scale={[0.7, 0.2, 0.5]}>
         <sphereGeometry args={[1, 16, 16]} />
-        <meshStandardMaterial color={bodyColor} roughness={0.2} metalness={0.1} />
+        <meshStandardMaterial color={bodyBlueColor} roughness={0.3} metalness={0.1} />
       </mesh>
       
-      {/* Dorsal fin - added as requested */}
-      <mesh position={[0.2, 0.7, 0]} rotation={[0, 0, 0.2]} scale={[0.7, 0.5, 0.15]}>
+      {/* Dorsal fin - prominent as in reference image */}
+      <mesh position={[0.3, 0.7, 0]} rotation={[0, 0, 0.2]} scale={[0.7, 0.6, 0.15]}>
         <sphereGeometry args={[1, 16, 16]} />
-        <meshStandardMaterial color={bodyColor} roughness={0.2} metalness={0.1} />
+        <meshStandardMaterial color={bodyBlueColor} roughness={0.3} metalness={0.1} />
       </mesh>
       
       {/* Tail connection - smooth transition to tail */}
-      <mesh position={[1.5, 0, 0]} scale={[0.9, 0.5, 0.4]}>
+      <mesh position={[1.8, 0, 0]} scale={[0.9, 0.5, 0.4]}>
         <sphereGeometry args={[1, 32, 32]} />
-        <meshStandardMaterial color={bodyColor} roughness={0.2} metalness={0.1} />
+        <meshStandardMaterial color={bodyBlueColor} roughness={0.3} metalness={0.1} />
       </mesh>
       
-      {/* Tail fin - rotated 90 degrees as requested */}
-      <group position={[2.3, 0, 0]} rotation={[0, 0, Math.PI / 2]}>
+      {/* Tail fin - horizontal orientation as in reference */}
+      <group position={[2.6, 0, 0]}>
         {/* Tail fin base/connection */}
-        <mesh position={[0, 0, 0]} scale={[0.3, 0.4, 0.25]}>
+        <mesh position={[0, 0, 0]} scale={[0.3, 0.3, 0.25]}>
           <sphereGeometry args={[1, 32, 32]} />
-          <meshStandardMaterial color={bodyColor} roughness={0.2} metalness={0.1} />
+          <meshStandardMaterial color={bodyBlueColor} roughness={0.3} metalness={0.1} />
         </mesh>
         
         {/* Left tail fin lobe */}
-        <mesh position={[0, 0, 0.4]} rotation={[0, 0, Math.PI / 6]} scale={[0.3, 0.7, 0.15]}>
+        <mesh position={[0, 0, 0.4]} rotation={[0, 0, 0]} scale={[0.3, 0.15, 0.7]}>
           <sphereGeometry args={[1, 32, 32]} />
-          <meshStandardMaterial color={bodyColor} roughness={0.2} metalness={0.1} />
+          <meshStandardMaterial color={bodyBlueColor} roughness={0.3} metalness={0.1} />
         </mesh>
         
         {/* Right tail fin lobe */}
-        <mesh position={[0, 0, -0.4]} rotation={[0, 0, -Math.PI / 6]} scale={[0.3, 0.7, 0.15]}>
+        <mesh position={[0, 0, -0.4]} rotation={[0, 0, 0]} scale={[0.3, 0.15, 0.7]}>
           <sphereGeometry args={[1, 32, 32]} />
-          <meshStandardMaterial color={bodyColor} roughness={0.2} metalness={0.1} />
+          <meshStandardMaterial color={bodyBlueColor} roughness={0.3} metalness={0.1} />
         </mesh>
       </group>
       
