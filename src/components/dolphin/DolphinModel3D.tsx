@@ -1,4 +1,3 @@
-
 import React, { useRef, useState, useEffect, Suspense } from 'react';
 import { Canvas, useFrame, useThree, useLoader } from '@react-three/fiber';
 import { OrbitControls, Environment, ContactShadows, Preload } from '@react-three/drei';
@@ -197,7 +196,7 @@ const DolphinModel = ({
     }
   };
 
-  // Colors based on the reference image
+  // Colors based on the reference image - slightly adjusted for better match
   const bodyColor = "#4f9be5"; // Light blue for the main body
   const bellyColor = "#ffffff";  // White for the belly/underside
   const eyeColor = "#000000";   // Black for the eye
@@ -219,7 +218,7 @@ const DolphinModel = ({
         <meshStandardMaterial color={bodyColor} roughness={0.1} metalness={0.1} />
       </mesh>
 
-      {/* Belly - white underside */}
+      {/* Belly - white underside that extends across the entire bottom */}
       <mesh position={[0, -0.35, 0]} rotation={[Math.PI / 2, 0, 0]} scale={[1.3, 0.65, 0.4]}>
         <sphereGeometry args={[1, 32, 32, 0, Math.PI * 2, 0, Math.PI / 2]} />
         <meshStandardMaterial color={bellyColor} roughness={0.1} metalness={0.1} />
@@ -267,19 +266,31 @@ const DolphinModel = ({
         <meshStandardMaterial color={bodyColor} roughness={0.1} metalness={0.1} />
       </mesh>
       
-      {/* Tail fin - matching the reference image */}
-      <mesh position={[1.7, 0.3, 0]} rotation={[Math.PI / 2, 0, 0]}>
-        <group rotation={[0, 0, 0]}>
-          <mesh position={[0, 0.5, 0]} rotation={[0, 0, -Math.PI / 6]} scale={[0.2, 0.9, 0.05]}>
-            <sphereGeometry args={[1, 16, 8]} />
-            <meshStandardMaterial color={bodyColor} roughness={0.1} metalness={0.1} />
-          </mesh>
-          
-          <mesh position={[0, -0.5, 0]} rotation={[0, 0, Math.PI / 6]} scale={[0.2, 0.9, 0.05]}>
-            <sphereGeometry args={[1, 16, 8]} />
-            <meshStandardMaterial color={bodyColor} roughness={0.1} metalness={0.1} />
-          </mesh>
-        </group>
+      {/* Integrated tail fin with better transition from body */}
+      <group position={[1.7, 0, 0]}>
+        {/* Improved connection to body */}
+        <mesh position={[-0.2, 0, 0]} scale={[0.3, 0.35, 0.25]}>
+          <sphereGeometry args={[1, 16, 16]} />
+          <meshStandardMaterial color={bodyColor} roughness={0.1} metalness={0.1} />
+        </mesh>
+        
+        {/* Upper tail fin */}
+        <mesh position={[0.1, 0.5, 0]} rotation={[0, 0, Math.PI / 4]} scale={[0.25, 0.8, 0.1]}>
+          <sphereGeometry args={[1, 16, 16]} />
+          <meshStandardMaterial color={bodyColor} roughness={0.1} metalness={0.1} />
+        </mesh>
+        
+        {/* Lower tail fin */}
+        <mesh position={[0.1, -0.5, 0]} rotation={[0, 0, -Math.PI / 4]} scale={[0.25, 0.8, 0.1]}>
+          <sphereGeometry args={[1, 16, 16]} />
+          <meshStandardMaterial color={bodyColor} roughness={0.1} metalness={0.1} />
+        </mesh>
+      </group>
+      
+      {/* White belly extension to ensure it covers the full underside */}
+      <mesh position={[-0.6, -0.35, 0]} rotation={[Math.PI / 2, 0, 0]} scale={[1.9, 0.65, 0.4]}>
+        <sphereGeometry args={[0.7, 32, 32, 0, Math.PI * 2, 0, Math.PI / 2]} />
+        <meshStandardMaterial color={bellyColor} roughness={0.1} metalness={0.1} />
       </mesh>
       
       {/* Interactive hitbox (invisible) for better interaction */}
