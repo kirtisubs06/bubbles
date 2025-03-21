@@ -116,17 +116,18 @@ const PreOrderSignup: React.FC = () => {
               src="https://form.typeform.com/to/coYt6wWP"
               allow="camera; microphone; autoplay; encrypted-media; fullscreen; geolocation"
             />
-            
-            <div className="p-4 flex justify-center">
-              <Button 
-                onClick={() => setShowFeedback(!showFeedback)}
-                className="flex items-center gap-2 bg-bubbles-blue hover:bg-bubbles-blue/90"
-              >
-                <Send className="h-4 w-4" />
-                {showFeedback ? "Hide Feedback Form" : "Submit Feedback"}
-              </Button>
-            </div>
           </motion.div>
+        </div>
+        
+        {/* Submit feedback button moved below both widgets */}
+        <div className="mt-8 text-center">
+          <Button 
+            onClick={() => setShowFeedback(!showFeedback)}
+            className="flex items-center gap-2 bg-bubbles-blue hover:bg-bubbles-blue/90"
+          >
+            <Send className="h-4 w-4" />
+            {showFeedback ? "Hide Feedback Form" : "Submit Feedback"}
+          </Button>
         </div>
         
         {showFeedback && (
@@ -134,7 +135,7 @@ const PreOrderSignup: React.FC = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="mt-16 max-w-4xl mx-auto bg-white dark:bg-bubbles-deep/40 rounded-2xl shadow-medium overflow-hidden"
+            className="mt-8 max-w-4xl mx-auto bg-white dark:bg-bubbles-deep/40 rounded-2xl shadow-medium overflow-hidden"
           >
             <h2 className="text-2xl font-bold text-bubbles-deep dark:text-white p-6 text-center border-b border-gray-100 dark:border-gray-800">
               We Value Your Feedback
