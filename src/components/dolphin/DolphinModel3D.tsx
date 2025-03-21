@@ -27,7 +27,6 @@ const DolphinModel = ({
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const { apiKey, isConfigured } = useGeminiAI();
   
-  // Create audio element for playback
   useEffect(() => {
     audioRef.current = new Audio();
     return () => {
@@ -37,15 +36,11 @@ const DolphinModel = ({
     };
   }, []);
   
-  // Animation for subtle swimming motion
   useFrame((state) => {
     if (group.current) {
-      // Subtle swimming animation
       group.current.position.y = Math.sin(state.clock.getElapsedTime() * 0.5) * 0.05;
-      // Gentle rocking motion
       group.current.rotation.z = Math.sin(state.clock.getElapsedTime() * 0.3) * 0.05;
       
-      // Additional slight rotation for lifelike movement
       if (!isListening) {
         group.current.rotation.y = Math.sin(state.clock.getElapsedTime() * 0.2) * 0.02;
       }
@@ -53,7 +48,6 @@ const DolphinModel = ({
   });
 
   useEffect(() => {
-    // Move camera slightly when listening
     if (isListening) {
       camera.position.z = 5;
     } else {
@@ -61,13 +55,11 @@ const DolphinModel = ({
     }
   }, [isListening, camera]);
 
-  // Start voice recording and processing
   const startVoiceRecording = async () => {
     try {
       setIsRecording(true);
       setIsListening(true);
       
-      // Use browser's built-in SpeechRecognition API
       const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
       
       if (!SpeechRecognition) {
@@ -105,7 +97,6 @@ const DolphinModel = ({
       
       recognition.start();
       
-      // Set a timeout to stop recognition after 7 seconds if no result
       setTimeout(() => {
         if (isRecording) {
           recognition.stop();
@@ -123,8 +114,7 @@ const DolphinModel = ({
       setIsRecording(false);
     }
   };
-  
-  // Process message with Gemini AI and speak response
+
   const processMessage = async (message: string) => {
     try {
       toast({
@@ -132,33 +122,41 @@ const DolphinModel = ({
         duration: 3000,
       });
       
-      // Add user message to conversation history
       const updatedMessages: GeminiMessage[] = [
         ...geminiMessages,
         { role: 'user', content: message }
       ];
       setGeminiMessages(updatedMessages);
       
-      // Get response from Gemini AI
       const response = await chatWithGeminiAI(updatedMessages, apiKey);
       
-      // Update conversation history with assistant response
       setGeminiMessages(prev => [...prev, { role: 'assistant', content: response }]);
       
-      // Use the browser's speech synthesis API with a female voice
       const utterance = new SpeechSynthesisUtterance(response);
       utterance.lang = 'en-US';
       utterance.rate = 1.0;
-      utterance.pitch = 1.2; // Higher pitch for a friendly female voice
+      utterance.pitch = 1.2;
       
-      // Try to find a suitable female voice
-      const voices = speechSynthesis.getVoices();
-      const femaleVoice = voices.find(
-        voice => voice.name.includes('Female') || voice.name.includes('woman') || (voice.name.includes('Google') && !voice.name.includes('Male'))
+      const voices = window.speechSynthesis.getVoices();
+      
+      const americanFemaleVoice = voices.find(
+        voice => 
+          voice.lang.includes('en-US') && 
+          (voice.name.includes('Female') || 
+           voice.name.includes('Girl') || 
+           voice.name.includes('Samantha') || 
+           voice.name.includes('Google US English Female'))
       );
       
-      if (femaleVoice) {
-        utterance.voice = femaleVoice;
+      if (americanFemaleVoice) {
+        utterance.voice = americanFemaleVoice;
+        console.log(`Using voice: ${americanFemaleVoice.name}`);
+      } else {
+        const usVoice = voices.find(voice => voice.lang.includes('en-US'));
+        if (usVoice) {
+          utterance.voice = usVoice;
+          console.log(`Fallback to US voice: ${usVoice.name}`);
+        }
       }
       
       utterance.onend = () => {
@@ -184,22 +182,19 @@ const DolphinModel = ({
 
   const handleClick = () => {
     if (isListening) {
-      // If already listening, stop
       if (audioRef.current) {
         audioRef.current.pause();
       }
       setIsListening(false);
-      speechSynthesis.cancel(); // Stop any ongoing speech
+      speechSynthesis.cancel();
     } else {
-      // Start listening
       startVoiceRecording();
     }
   };
 
-  // Color definitions based on the reference image
-  const bodyBlueColor = "#5b9de3";   // Light blue for the main body
-  const bellyWhiteColor = "#ffffff"; // White for the belly
-  const eyeColor = "#000000";        // Black for the eyes
+  const bodyBlueColor = "#5b9de3";
+  const bellyWhiteColor = "#ffffff";
+  const eyeColor = "#000000";
 
   return (
     <group 
@@ -211,94 +206,78 @@ const DolphinModel = ({
       scale={isListening ? 1.05 : 1}
       rotation={[0, 0, 0]}
     >
-      {/* Main body - elongated to match reference image */}
       <mesh position={[0, 0, 0]} scale={[2.2, 0.8, 0.9]}>
         <sphereGeometry args={[1, 32, 32]} />
         <meshStandardMaterial color={bodyBlueColor} roughness={0.3} metalness={0.1} />
       </mesh>
 
-      {/* White belly - matching reference image */}
       <mesh position={[0, -0.35, 0]} scale={[2.1, 0.4, 0.85]}>
         <sphereGeometry args={[1, 32, 32]} />
         <meshStandardMaterial color={bellyWhiteColor} roughness={0.3} metalness={0.1} />
       </mesh>
 
-      {/* Head section with rounded shape */}
       <mesh position={[-1.8, 0, 0]} scale={[0.85, 0.65, 0.7]}>
         <sphereGeometry args={[1, 32, 32]} />
         <meshStandardMaterial color={bodyBlueColor} roughness={0.3} metalness={0.1} />
       </mesh>
       
-      {/* Snout - slightly more pronounced to match reference */}
       <mesh position={[-2.4, -0.05, 0]} rotation={[0, 0, 0]} scale={[0.4, 0.3, 0.4]}>
         <sphereGeometry args={[1, 32, 32]} />
         <meshStandardMaterial color={bodyBlueColor} roughness={0.3} metalness={0.1} />
       </mesh>
 
-      {/* White portion of the snout to match reference */}
       <mesh position={[-2.4, -0.2, 0]} rotation={[0, 0, 0]} scale={[0.4, 0.2, 0.4]}>
         <sphereGeometry args={[1, 32, 32]} />
         <meshStandardMaterial color={bellyWhiteColor} roughness={0.3} metalness={0.1} />
       </mesh>
       
-      {/* Left eye */}
       <mesh position={[-2.0, 0.1, 0.4]} scale={[0.13, 0.13, 0.13]}>
         <sphereGeometry args={[1, 16, 16]} />
         <meshStandardMaterial color={eyeColor} />
       </mesh>
 
-      {/* Right eye - perfectly symmetrical with left eye */}
       <mesh position={[-2.0, 0.1, -0.4]} scale={[0.13, 0.13, 0.13]}>
         <sphereGeometry args={[1, 16, 16]} />
         <meshStandardMaterial color={eyeColor} />
       </mesh>
       
-      {/* Left pectoral fin */}
       <mesh position={[-0.4, -0.1, 0.8]} rotation={[0, 0, -0.3]} scale={[0.7, 0.2, 0.5]}>
         <sphereGeometry args={[1, 16, 16]} />
         <meshStandardMaterial color={bodyBlueColor} roughness={0.3} metalness={0.1} />
       </mesh>
       
-      {/* Right pectoral fin - perfectly symmetrical with left fin */}
       <mesh position={[-0.4, -0.1, -0.8]} rotation={[0, 0, -0.3]} scale={[0.7, 0.2, 0.5]}>
         <sphereGeometry args={[1, 16, 16]} />
         <meshStandardMaterial color={bodyBlueColor} roughness={0.3} metalness={0.1} />
       </mesh>
       
-      {/* Dorsal fin - prominent as in reference image */}
       <mesh position={[0.3, 0.7, 0]} rotation={[0, 0, 0.2]} scale={[0.7, 0.6, 0.15]}>
         <sphereGeometry args={[1, 16, 16]} />
         <meshStandardMaterial color={bodyBlueColor} roughness={0.3} metalness={0.1} />
       </mesh>
       
-      {/* Tail connection - smooth transition to tail */}
       <mesh position={[1.8, 0, 0]} scale={[0.9, 0.5, 0.4]}>
         <sphereGeometry args={[1, 32, 32]} />
         <meshStandardMaterial color={bodyBlueColor} roughness={0.3} metalness={0.1} />
       </mesh>
       
-      {/* Tail fin - horizontal orientation as in reference */}
       <group position={[2.6, 0, 0]}>
-        {/* Tail fin base/connection */}
         <mesh position={[0, 0, 0]} scale={[0.3, 0.3, 0.25]}>
           <sphereGeometry args={[1, 32, 32]} />
           <meshStandardMaterial color={bodyBlueColor} roughness={0.3} metalness={0.1} />
         </mesh>
         
-        {/* Left tail fin lobe */}
         <mesh position={[0, 0, 0.4]} rotation={[0, 0, 0]} scale={[0.3, 0.15, 0.7]}>
           <sphereGeometry args={[1, 32, 32]} />
           <meshStandardMaterial color={bodyBlueColor} roughness={0.3} metalness={0.1} />
         </mesh>
         
-        {/* Right tail fin lobe */}
         <mesh position={[0, 0, -0.4]} rotation={[0, 0, 0]} scale={[0.3, 0.15, 0.7]}>
           <sphereGeometry args={[1, 32, 32]} />
           <meshStandardMaterial color={bodyBlueColor} roughness={0.3} metalness={0.1} />
         </mesh>
       </group>
       
-      {/* Interactive hitbox (invisible) for better interaction */}
       <mesh position={[0, 0, 0]} visible={false} scale={[2.5, 1.2, 1.5]}>
         <boxGeometry args={[1, 1, 1]} />
         <meshBasicMaterial transparent opacity={0} />
@@ -307,7 +286,6 @@ const DolphinModel = ({
   );
 };
 
-// Create a fallback component for loading state
 const LoadingFallback = () => {
   return (
     <mesh position={[0, 0, 0]}>
