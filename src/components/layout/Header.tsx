@@ -8,10 +8,10 @@ import { Home, ShoppingBag, Settings, Layers } from 'lucide-react';
 const Header: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
 
-  const linkClasses = "relative group flex items-center gap-1 px-4 py-2 rounded-full transition-all duration-300";
+  const linkClasses = "relative group flex items-center gap-1.5 px-4 py-2.5 rounded-xl font-kidsfont transition-all duration-300";
   const linkActiveClasses = "text-white bg-gradient-to-r from-bubbles-teal to-bubbles-skyblue shadow-bubbly";
-  const linkDefaultClasses = "text-bubbles-blue hover:text-white hover:bg-gradient-to-r hover:from-bubbles-teal/80 hover:to-bubbles-skyblue/80 dark:text-gray-300 dark:hover:text-white";
-  const linkBackgroundClasses = "absolute inset-0 bg-gradient-to-r from-bubbles-teal/10 to-bubbles-skyblue/10 dark:from-bubbles-teal/20 dark:to-bubbles-skyblue/20 rounded-full scale-0 group-hover:scale-100 transition-transform duration-300";
+  const linkDefaultClasses = "text-bubbles-blue hover:text-white hover:bg-gradient-to-r hover:from-bubbles-purple hover:to-bubbles-teal dark:text-gray-300 dark:hover:text-white";
+  const linkBackgroundClasses = "absolute inset-0 bg-gradient-to-r from-bubbles-teal/10 to-bubbles-skyblue/10 dark:from-bubbles-teal/20 dark:to-bubbles-skyblue/20 rounded-xl scale-0 group-hover:scale-100 transition-transform duration-300";
 
   return (
     <header className="fixed w-full top-0 z-50 bg-white/80 dark:bg-bubbles-deep/80 backdrop-blur-sm border-b border-gray-200 dark:border-gray-800">
@@ -33,28 +33,28 @@ const Header: React.FC = () => {
           </Link>
 
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center gap-3">
+          <nav className="hidden md:flex items-center gap-4">
             <Link to="/" className={`${linkClasses} ${linkDefaultClasses}`}>
               <span className={linkBackgroundClasses}></span>
-              <Home size={18} className="animate-bounce" />
-              <span>Home</span>
+              <Home size={20} />
+              <span className="text-base">Home</span>
             </Link>
             <Link to="/shop" className={`${linkClasses} ${linkDefaultClasses}`}>
               <span className={linkBackgroundClasses}></span>
-              <ShoppingBag size={18} className="animate-pulse" />
-              <span>Shop</span>
+              <ShoppingBag size={20} />
+              <span className="text-base">Shop</span>
             </Link>
             <Link to="/customize" className={`${linkClasses} ${linkDefaultClasses}`}>
               <span className={linkBackgroundClasses}></span>
-              <Settings size={18} className="animate-spin-slow" />
-              <span>Customize</span>
+              <Settings size={20} />
+              <span className="text-base">Customize</span>
             </Link>
             <Link to="/features" className={`${linkClasses} ${linkDefaultClasses}`}>
               <span className={linkBackgroundClasses}></span>
-              <Layers size={18} className="animate-pulse" />
-              <span>Features</span>
+              <Layers size={20} />
+              <span className="text-base">Features</span>
             </Link>
-            <Button variant="fun" asChild className="animate-float">
+            <Button variant="fun" asChild className="font-kidsfont shadow-bubbly">
               <Link to="/pre-order">Join Waitlist</Link>
             </Button>
           </nav>
