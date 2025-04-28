@@ -13,11 +13,18 @@ const Header: React.FC = () => {
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16">
           <Link to="/" className="flex items-center gap-2">
-            <img 
-              src="/lovable-uploads/724300ba-d5f7-4b73-859a-1498a8a6ec55.png"
-              alt="Bubbles Logo"
-              className="h-12"
-            />
+            <div className="flex items-center">
+              <img 
+                src="/lovable-uploads/4a112ccb-3c0c-4dea-8462-f0fd5ad90188.png"
+                alt="Bubbles Dolphin Logo"
+                className="h-10 w-auto"
+              />
+              <img 
+                src="/lovable-uploads/19fb3034-f7de-4558-ad00-3211567fa8ac.png"
+                alt="Bubbles Text Logo"
+                className="h-8 w-auto ml-2"
+              />
+            </div>
           </Link>
 
           {/* Desktop Navigation */}
