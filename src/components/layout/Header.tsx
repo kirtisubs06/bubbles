@@ -8,6 +8,11 @@ import { Home, ShoppingBag, Settings, Layers } from 'lucide-react';
 const Header: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
 
+  const linkClasses = "relative group flex items-center gap-1 px-4 py-2 rounded-full transition-all duration-300";
+  const linkActiveClasses = "text-bubbles-blue dark:text-white";
+  const linkDefaultClasses = "text-gray-600 hover:text-bubbles-blue dark:text-gray-300 dark:hover:text-white";
+  const linkBackgroundClasses = "absolute inset-0 bg-bubbles-teal/10 dark:bg-bubbles-teal/20 rounded-full scale-0 group-hover:scale-100 transition-transform duration-300";
+
   return (
     <header className="fixed w-full top-0 z-50 bg-white/80 dark:bg-bubbles-deep/80 backdrop-blur-sm border-b border-gray-200 dark:border-gray-800">
       <div className="container mx-auto px-4">
@@ -28,24 +33,28 @@ const Header: React.FC = () => {
           </Link>
 
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center gap-6">
-            <Link to="/" className="text-gray-600 hover:text-bubbles-blue dark:text-gray-300 dark:hover:text-white transition-colors flex items-center gap-1">
+          <nav className="hidden md:flex items-center gap-2">
+            <Link to="/" className={`${linkClasses} ${linkDefaultClasses}`}>
+              <span className={linkBackgroundClasses}></span>
               <Home size={18} />
               <span>Home</span>
             </Link>
-            <Link to="/shop" className="text-gray-600 hover:text-bubbles-blue dark:text-gray-300 dark:hover:text-white transition-colors flex items-center gap-1">
+            <Link to="/shop" className={`${linkClasses} ${linkDefaultClasses}`}>
+              <span className={linkBackgroundClasses}></span>
               <ShoppingBag size={18} />
               <span>Shop</span>
             </Link>
-            <Link to="/customize" className="text-gray-600 hover:text-bubbles-blue dark:text-gray-300 dark:hover:text-white transition-colors flex items-center gap-1">
+            <Link to="/customize" className={`${linkClasses} ${linkDefaultClasses}`}>
+              <span className={linkBackgroundClasses}></span>
               <Settings size={18} />
               <span>Customize</span>
             </Link>
-            <Link to="/features" className="text-gray-600 hover:text-bubbles-blue dark:text-gray-300 dark:hover:text-white transition-colors flex items-center gap-1">
+            <Link to="/features" className={`${linkClasses} ${linkDefaultClasses}`}>
+              <span className={linkBackgroundClasses}></span>
               <Layers size={18} />
               <span>Features</span>
             </Link>
-            <Button variant="blue" asChild>
+            <Button variant="fun" asChild>
               <Link to="/order">Buy Now</Link>
             </Button>
           </nav>
