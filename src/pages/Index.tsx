@@ -1,3 +1,4 @@
+
 import React from 'react';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
@@ -66,7 +67,7 @@ const Index: React.FC = () => {
                 <div className="absolute inset-0 bg-gradient-to-r from-bubbles-aqua/20 via-bubbles-skyblue/30 to-bubbles-teal/20 rounded-full blur-3xl transform rotate-12 scale-110 animate-pulse-soft"></div>
                 <div className="absolute inset-0 bg-gradient-to-br from-[#33C3F0]/30 via-[#1EAEDB]/20 to-[#D3E4FD]/30 rounded-full blur-2xl animate-float"></div>
                 <img 
-                  src="/dolphin-plush.png" 
+                  src="/lovable-uploads/724300ba-d5f7-4b73-859a-1498a8a6ec55.png" 
                   alt="Bubbles AI Dolphin Plush" 
                   className="w-full max-w-[500px] mx-auto relative z-10 drop-shadow-[0_0_15px_rgba(51,195,240,0.3)] animate-float"
                 />
@@ -142,7 +143,7 @@ const Index: React.FC = () => {
                   </div>
                   <div className="flex-1">
                     <img 
-                      src="/dolphin-plush.png" 
+                      src="/lovable-uploads/724300ba-d5f7-4b73-859a-1498a8a6ec55.png" 
                       alt="Bubbles AI Dolphin" 
                       className="w-full max-w-[300px] mx-auto"
                     />
@@ -160,3 +161,4 @@ const Index: React.FC = () => {
 };
 
 export default Index;
+
