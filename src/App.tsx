@@ -15,13 +15,8 @@ import Settings from "./components/dashboard/Settings";
 import ParentalControls from "./components/dashboard/ParentalControls";
 import Notifications from "./components/dashboard/Notifications";
 import NotFound from "./pages/NotFound";
-import DolphinDemo from "./pages/DolphinDemo";
 import Features from "./pages/Features";
-import Pricing from "./pages/Pricing";
-import PreOrderSignup from "./pages/PreOrderSignup";
 import AdminSetup from "./pages/AdminSetup";
-import ParentDashboardDemo from "./pages/ParentDashboardDemo";
-import OurVision from "./pages/OurVision";
 
 const queryClient = new QueryClient();
 
@@ -35,14 +30,8 @@ const App = () => (
           <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/login" element={<Login />} />
-            <Route path="/dolphin-demo" element={<DolphinDemo />} />
-            <Route path="/teddy-demo" element={<DolphinDemo />} /> {/* Redirect old URL */}
-            <Route path="/pre-order" element={<PreOrderSignup />} />
             <Route path="/features" element={<Features />} />
-            <Route path="/pricing" element={<Pricing />} />
             <Route path="/admin-setup" element={<AdminSetup />} />
-            <Route path="/parent-dashboard-demo" element={<ParentDashboardDemo />} />
-            <Route path="/our-vision" element={<OurVision />} />
             
             <Route path="/dashboard" element={<DashboardLayout />}>
               <Route index element={<Dashboard />} />
@@ -53,7 +42,6 @@ const App = () => (
               <Route path="notifications" element={<Notifications />} />
             </Route>
             
-            {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>

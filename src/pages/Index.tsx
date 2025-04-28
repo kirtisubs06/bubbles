@@ -1,4 +1,3 @@
-
 import React from 'react';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
@@ -49,17 +48,17 @@ const Index: React.FC = () => {
                     variant="blue" 
                     size="xl"
                     className="group"
-                    onClick={() => navigate('/pre-order')}
+                    onClick={() => navigate('/order')}
                   >
                     <ShoppingCart className="mr-2 h-5 w-5" />
-                    Pre-order Now
+                    Order Now
                   </Button>
                   <Button
                     variant="outline"
                     size="xl"
-                    onClick={() => navigate('/dolphin-demo')}
+                    onClick={() => navigate('/features')}
                   >
-                    Try Demo
+                    Learn More
                   </Button>
                 </div>
               </div>
@@ -132,10 +131,10 @@ const Index: React.FC = () => {
                       variant="blue" 
                       size="lg" 
                       className="w-full"
-                      onClick={() => navigate('/pre-order')}
+                      onClick={() => navigate('/order')}
                     >
                       <ShoppingCart className="mr-2 h-5 w-5" />
-                      Pre-order Now
+                      Order Now
                     </Button>
                   </div>
                   <div className="flex-1">
