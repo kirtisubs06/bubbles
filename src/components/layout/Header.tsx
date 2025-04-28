@@ -7,7 +7,7 @@ import { Menu, X, Home, ShoppingBag, Settings, Layers } from 'lucide-react';
 const Header: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
 
-  const linkClasses = "relative group px-3 py-2 rounded-xl font-sans text-base transition-all duration-300 tracking-normal";
+  const linkClasses = "relative group px-2.5 py-2 rounded-xl font-['Quicksand'] text-base font-medium transition-all duration-300 tracking-normal";
   const linkActiveClasses = "text-white bg-gradient-to-r from-bubbles-teal to-bubbles-skyblue shadow-bubbly";
   const linkDefaultClasses = "text-bubbles-blue hover:text-white hover:bg-gradient-to-r hover:from-bubbles-purple hover:to-bubbles-teal dark:text-gray-300 dark:hover:text-white";
   const linkBackgroundClasses = "absolute inset-0 bg-gradient-to-r from-bubbles-teal/10 to-bubbles-skyblue/10 dark:from-bubbles-teal/20 dark:to-bubbles-skyblue/20 rounded-xl scale-0 group-hover:scale-100 transition-transform duration-300";
@@ -31,7 +31,7 @@ const Header: React.FC = () => {
             </div>
           </Link>
 
-          <nav className="hidden md:flex items-center gap-4">
+          <nav className="hidden md:flex items-center gap-2">
             <Link to="/" className={`${linkClasses} ${linkDefaultClasses}`}>
               <span className={linkBackgroundClasses}></span>
               <span>home</span>
@@ -48,7 +48,7 @@ const Header: React.FC = () => {
               <span className={linkBackgroundClasses}></span>
               <span>features</span>
             </Link>
-            <Button variant="fun" asChild className="font-sans ml-2 shadow-bubbly">
+            <Button variant="fun" asChild className="font-['Quicksand'] ml-2 shadow-bubbly font-medium">
               <Link to="/pre-order">join waitlist</Link>
             </Button>
           </nav>
