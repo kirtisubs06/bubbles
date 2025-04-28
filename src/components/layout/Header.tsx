@@ -1,14 +1,13 @@
-
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
-import { Home, ShoppingBag, Settings, Layers } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 
 const Header: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
 
-  const linkClasses = "relative group flex items-center gap-1.5 px-4 py-2.5 rounded-xl font-kidsfont transition-all duration-300";
+  const linkClasses = "relative group px-4 py-2.5 rounded-xl font-heading text-lg transition-all duration-300 tracking-wide";
   const linkActiveClasses = "text-white bg-gradient-to-r from-bubbles-teal to-bubbles-skyblue shadow-bubbly";
   const linkDefaultClasses = "text-bubbles-blue hover:text-white hover:bg-gradient-to-r hover:from-bubbles-purple hover:to-bubbles-teal dark:text-gray-300 dark:hover:text-white";
   const linkBackgroundClasses = "absolute inset-0 bg-gradient-to-r from-bubbles-teal/10 to-bubbles-skyblue/10 dark:from-bubbles-teal/20 dark:to-bubbles-skyblue/20 rounded-xl scale-0 group-hover:scale-100 transition-transform duration-300";
@@ -33,29 +32,25 @@ const Header: React.FC = () => {
           </Link>
 
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center gap-4">
+          <nav className="hidden md:flex items-center gap-6">
             <Link to="/" className={`${linkClasses} ${linkDefaultClasses}`}>
               <span className={linkBackgroundClasses}></span>
-              <Home size={20} />
-              <span className="text-base">Home</span>
+              <span className="lowercase">home</span>
             </Link>
             <Link to="/shop" className={`${linkClasses} ${linkDefaultClasses}`}>
               <span className={linkBackgroundClasses}></span>
-              <ShoppingBag size={20} />
-              <span className="text-base">Shop</span>
+              <span className="lowercase">shop</span>
             </Link>
             <Link to="/customize" className={`${linkClasses} ${linkDefaultClasses}`}>
               <span className={linkBackgroundClasses}></span>
-              <Settings size={20} />
-              <span className="text-base">Customize</span>
+              <span className="lowercase">customize</span>
             </Link>
             <Link to="/features" className={`${linkClasses} ${linkDefaultClasses}`}>
               <span className={linkBackgroundClasses}></span>
-              <Layers size={20} />
-              <span className="text-base">Features</span>
+              <span className="lowercase">features</span>
             </Link>
-            <Button variant="fun" asChild className="font-kidsfont shadow-bubbly">
-              <Link to="/pre-order">Join Waitlist</Link>
+            <Button variant="fun" asChild className="font-heading lowercase shadow-bubbly">
+              <Link to="/pre-order">join waitlist</Link>
             </Button>
           </nav>
 
