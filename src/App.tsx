@@ -17,6 +17,9 @@ import Notifications from "./components/dashboard/Notifications";
 import NotFound from "./pages/NotFound";
 import Features from "./pages/Features";
 import AdminSetup from "./pages/AdminSetup";
+import Shop from "./pages/Shop";
+import Customize from "./pages/Customize";
+import PreOrderSignup from "./pages/PreOrderSignup";
 
 const queryClient = new QueryClient();
 
@@ -32,9 +35,9 @@ const App = () => (
             <Route path="/login" element={<Login />} />
             <Route path="/features" element={<Features />} />
             <Route path="/admin-setup" element={<AdminSetup />} />
-            <Route path="/shop" element={<Index />} /> {/* Temporarily using Index page for Shop */}
-            <Route path="/customize" element={<Index />} /> {/* Temporarily using Index page for Customize */}
-            <Route path="/order" element={<Index />} /> {/* Temporarily using Index page for Order */}
+            <Route path="/shop" element={<Shop />} />
+            <Route path="/customize" element={<Customize />} />
+            <Route path="/order" element={<PreOrderSignup />} />
             
             <Route path="/dashboard" element={<DashboardLayout />}>
               <Route index element={<Dashboard />} />

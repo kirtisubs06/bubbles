@@ -1,10 +1,9 @@
-
 import React from 'react';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
 import { Button } from '@/components/ui/button';
 import AnimatedCard from '@/components/ui/AnimatedCard';
-import { ShoppingCart, Package, Heart, MessageCircle, Star, CreditCard } from 'lucide-react';
+import { ShoppingCart, Package, Heart, MessageCircle, Star, Sparkles } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 
 const Index: React.FC = () => {
@@ -34,13 +33,24 @@ const Index: React.FC = () => {
       
       <main className="flex-grow pt-16">
         {/* Hero Section */}
-        <section className="relative py-20 overflow-hidden bg-gradient-to-b from-bubbles-cream to-white dark:from-bubbles-deep dark:to-bubbles-navy/50">
+        <section className="relative py-20 overflow-hidden bg-gradient-to-b from-bubbles-cream via-white to-bubbles-skyblue/20 dark:from-bubbles-deep dark:via-bubbles-deep/50 dark:to-bubbles-navy/50">
+          <div className="absolute inset-0 overflow-hidden">
+            <div className="absolute top-0 right-0 w-1/2 h-1/2 bg-gradient-to-br from-[#33C3F0]/30 via-[#1EAEDB]/20 to-[#D3E4FD]/30 rounded-full blur-3xl transform translate-x-1/4 -translate-y-1/4 animate-pulse-soft"></div>
+            <div className="absolute bottom-0 left-0 w-1/2 h-1/2 bg-gradient-to-tr from-bubbles-teal/30 via-bubbles-skyblue/20 to-bubbles-aqua/30 rounded-full blur-3xl transform -translate-x-1/4 translate-y-1/4 animate-pulse-soft" style={{ animationDelay: '1s' }}></div>
+          </div>
+          
           <div className="container mx-auto px-4">
             <div className="flex flex-col lg:flex-row items-center gap-12">
-              <div className="flex-1 text-center lg:text-left">
-                <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
+              <div className="flex-1 text-center lg:text-left relative z-10">
+                <div className="inline-flex items-center rounded-full px-3 py-1 text-sm font-medium bg-gradient-to-r from-bubbles-teal/20 to-bubbles-skyblue/20 backdrop-blur-sm mb-6">
+                  <Sparkles className="h-4 w-4 mr-2 text-bubbles-teal animate-pulse" />
+                  <span className="text-bubbles-deep dark:text-white">Meet Your New Friend</span>
+                </div>
+                
+                <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight bg-gradient-to-r from-bubbles-blue via-bubbles-teal to-bubbles-skyblue bg-clip-text text-transparent">
                   Meet Bubbles: Your Child's AI Dolphin Friend
                 </h1>
+                
                 <p className="text-xl mb-8 text-gray-600 dark:text-gray-300">
                   A revolutionary plush companion that combines cutting-edge AI with playful learning
                 </p>
@@ -63,15 +73,16 @@ const Index: React.FC = () => {
                   </Button>
                 </div>
               </div>
+
               <div className="flex-1 relative">
-                <div className="absolute inset-0 bg-gradient-to-r from-bubbles-aqua/20 via-bubbles-skyblue/30 to-bubbles-teal/20 rounded-full blur-3xl transform rotate-12 scale-110 animate-pulse-soft"></div>
-                <div className="absolute inset-0 bg-gradient-to-br from-[#33C3F0]/30 via-[#1EAEDB]/20 to-[#D3E4FD]/30 rounded-full blur-2xl animate-float"></div>
+                <div className="absolute inset-0 bg-gradient-to-r from-[#33C3F0]/40 via-[#1EAEDB]/30 to-transparent rounded-full blur-3xl transform rotate-12 scale-110 animate-pulse-soft"></div>
+                <div className="absolute inset-0 bg-gradient-to-br from-bubbles-aqua/40 via-bubbles-skyblue/30 to-bubbles-teal/40 rounded-full blur-2xl animate-float"></div>
                 <img 
-                  src="/lovable-uploads/724300ba-d5f7-4b73-859a-1498a8a6ec55.png" 
+                  src="/lovable-uploads/b973dc7a-8667-49c0-a426-eb96c8118d6d.png"
                   alt="Bubbles AI Dolphin Plush" 
-                  className="w-full max-w-[500px] mx-auto relative z-10 drop-shadow-[0_0_15px_rgba(51,195,240,0.3)] animate-float"
+                  className="w-full max-w-[500px] mx-auto relative z-10 drop-shadow-[0_0_25px_rgba(51,195,240,0.5)] animate-float"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-bubbles-skyblue/10 to-transparent rounded-full blur-xl transform -rotate-12 scale-95 animate-pulse-soft" style={{ animationDelay: '1s' }}></div>
+                <div className="absolute inset-0 bg-gradient-to-t from-bubbles-skyblue/20 to-transparent rounded-full blur-xl transform -rotate-12 scale-95 animate-pulse-soft" style={{ animationDelay: '1s' }}></div>
               </div>
             </div>
           </div>
@@ -99,11 +110,11 @@ const Index: React.FC = () => {
           </div>
         </section>
 
-        {/* Product Details */}
-        <section className="py-20 bg-bubbles-cream/50 dark:bg-bubbles-deep/30">
+        {/* Product Details Section with Updated Styling */}
+        <section className="py-20 bg-gradient-to-b from-bubbles-cream/50 to-white dark:from-bubbles-deep/30 dark:to-bubbles-deep/50">
           <div className="container mx-auto px-4">
             <div className="max-w-4xl mx-auto">
-              <div className="bg-white dark:bg-bubbles-deep/50 rounded-xl p-8 shadow-bubbly">
+              <div className="bg-white/80 dark:bg-bubbles-deep/50 backdrop-blur-sm rounded-xl p-8 shadow-[0_0_50px_rgba(51,195,240,0.15)] hover:shadow-[0_0_50px_rgba(51,195,240,0.25)] transition-all duration-500">
                 <div className="flex flex-col md:flex-row gap-8 items-center">
                   <div className="flex-1">
                     <h3 className="text-2xl font-bold mb-4">Bubbles AI Dolphin Companion</h3>
@@ -143,9 +154,9 @@ const Index: React.FC = () => {
                   </div>
                   <div className="flex-1">
                     <img 
-                      src="/lovable-uploads/724300ba-d5f7-4b73-859a-1498a8a6ec55.png" 
+                      src="/lovable-uploads/b973dc7a-8667-49c0-a426-eb96c8118d6d.png"
                       alt="Bubbles AI Dolphin" 
-                      className="w-full max-w-[300px] mx-auto"
+                      className="w-full max-w-[300px] mx-auto drop-shadow-[0_0_15px_rgba(51,195,240,0.3)] hover:drop-shadow-[0_0_25px_rgba(51,195,240,0.5)] transition-all duration-500"
                     />
                   </div>
                 </div>
@@ -161,4 +172,3 @@ const Index: React.FC = () => {
 };
 
 export default Index;
-
