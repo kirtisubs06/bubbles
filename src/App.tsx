@@ -32,6 +32,9 @@ const App = () => (
             <Route path="/login" element={<Login />} />
             <Route path="/features" element={<Features />} />
             <Route path="/admin-setup" element={<AdminSetup />} />
+            <Route path="/shop" element={<Index />} /> {/* Temporarily using Index page for Shop */}
+            <Route path="/customize" element={<Index />} /> {/* Temporarily using Index page for Customize */}
+            <Route path="/order" element={<Index />} /> {/* Temporarily using Index page for Order */}
             
             <Route path="/dashboard" element={<DashboardLayout />}>
               <Route index element={<Dashboard />} />

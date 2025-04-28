@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
-import { Menu } from 'lucide-react';
+import { Home, ShoppingBag, Settings, Layers } from 'lucide-react';
 
 const Header: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -22,11 +22,21 @@ const Header: React.FC = () => {
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center gap-6">
-            <Link to="/features" className="text-gray-600 hover:text-bubbles-blue dark:text-gray-300 dark:hover:text-white transition-colors">
-              Features
+            <Link to="/" className="text-gray-600 hover:text-bubbles-blue dark:text-gray-300 dark:hover:text-white transition-colors flex items-center gap-1">
+              <Home size={18} />
+              <span>Home</span>
             </Link>
-            <Link to="/login" className="text-gray-600 hover:text-bubbles-blue dark:text-gray-300 dark:hover:text-white transition-colors">
-              Login
+            <Link to="/shop" className="text-gray-600 hover:text-bubbles-blue dark:text-gray-300 dark:hover:text-white transition-colors flex items-center gap-1">
+              <ShoppingBag size={18} />
+              <span>Shop</span>
+            </Link>
+            <Link to="/customize" className="text-gray-600 hover:text-bubbles-blue dark:text-gray-300 dark:hover:text-white transition-colors flex items-center gap-1">
+              <Settings size={18} />
+              <span>Customize</span>
+            </Link>
+            <Link to="/features" className="text-gray-600 hover:text-bubbles-blue dark:text-gray-300 dark:hover:text-white transition-colors flex items-center gap-1">
+              <Layers size={18} />
+              <span>Features</span>
             </Link>
             <Button variant="blue" asChild>
               <Link to="/order">Buy Now</Link>
@@ -37,24 +47,44 @@ const Header: React.FC = () => {
           <Sheet open={isOpen} onOpenChange={setIsOpen}>
             <SheetTrigger asChild className="md:hidden">
               <Button variant="ghost" size="icon">
-                <Menu className="h-6 w-6" />
+                <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16m-7 6h7" />
+                </svg>
               </Button>
             </SheetTrigger>
             <SheetContent side="right">
               <div className="flex flex-col gap-4 mt-8">
                 <Link 
-                  to="/features" 
-                  className="text-lg font-medium hover:text-bubbles-blue transition-colors"
+                  to="/" 
+                  className="text-lg font-medium hover:text-bubbles-blue transition-colors flex items-center gap-2"
                   onClick={() => setIsOpen(false)}
                 >
-                  Features
+                  <Home size={18} />
+                  <span>Home</span>
                 </Link>
                 <Link 
-                  to="/login" 
-                  className="text-lg font-medium hover:text-bubbles-blue transition-colors"
+                  to="/shop" 
+                  className="text-lg font-medium hover:text-bubbles-blue transition-colors flex items-center gap-2"
                   onClick={() => setIsOpen(false)}
                 >
-                  Login
+                  <ShoppingBag size={18} />
+                  <span>Shop</span>
+                </Link>
+                <Link 
+                  to="/customize" 
+                  className="text-lg font-medium hover:text-bubbles-blue transition-colors flex items-center gap-2"
+                  onClick={() => setIsOpen(false)}
+                >
+                  <Settings size={18} />
+                  <span>Customize</span>
+                </Link>
+                <Link 
+                  to="/features" 
+                  className="text-lg font-medium hover:text-bubbles-blue transition-colors flex items-center gap-2"
+                  onClick={() => setIsOpen(false)}
+                >
+                  <Layers size={18} />
+                  <span>Features</span>
                 </Link>
                 <Button variant="blue" asChild onClick={() => setIsOpen(false)}>
                   <Link to="/order">Buy Now</Link>

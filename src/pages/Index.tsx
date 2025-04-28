@@ -1,3 +1,4 @@
+
 import React from 'react';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
@@ -31,7 +32,7 @@ const Index: React.FC = () => {
     <div className="min-h-screen flex flex-col">
       <Header />
       
-      <main className="flex-grow">
+      <main className="flex-grow pt-16">
         {/* Hero Section */}
         <section className="relative py-20 overflow-hidden bg-gradient-to-b from-bubbles-cream to-white dark:from-bubbles-deep dark:to-bubbles-navy/50">
           <div className="container mx-auto px-4">
@@ -104,7 +105,7 @@ const Index: React.FC = () => {
                   <div className="flex-1">
                     <h3 className="text-2xl font-bold mb-4">Bubbles AI Dolphin Companion</h3>
                     <div className="space-y-4 mb-6">
-                      <p className="text-2xl font-bold text-bubbles-blue">$69.99</p>
+                      <p className="text-2xl font-bold text-bubbles-blue">$49.99</p>
                       <div className="flex items-center gap-2 text-bubbles-teal">
                         <Star className="fill-current" />
                         <Star className="fill-current" />
