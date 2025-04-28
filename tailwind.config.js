@@ -53,6 +53,7 @@ module.exports = {
         "wave": "wave 3s ease-in-out infinite",
         "bounce": "bounce 2s ease-in-out infinite",
         "wobble": "wobble 3s ease-in-out infinite",
+        "spin-slow": "spin 3s linear infinite",
       },
       keyframes: {
         fadeIn: {

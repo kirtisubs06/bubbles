@@ -9,9 +9,9 @@ const Header: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   const linkClasses = "relative group flex items-center gap-1 px-4 py-2 rounded-full transition-all duration-300";
-  const linkActiveClasses = "text-bubbles-blue dark:text-white";
-  const linkDefaultClasses = "text-gray-600 hover:text-bubbles-blue dark:text-gray-300 dark:hover:text-white";
-  const linkBackgroundClasses = "absolute inset-0 bg-bubbles-teal/10 dark:bg-bubbles-teal/20 rounded-full scale-0 group-hover:scale-100 transition-transform duration-300";
+  const linkActiveClasses = "text-white bg-gradient-to-r from-bubbles-teal to-bubbles-skyblue shadow-bubbly";
+  const linkDefaultClasses = "text-bubbles-blue hover:text-white hover:bg-gradient-to-r hover:from-bubbles-teal/80 hover:to-bubbles-skyblue/80 dark:text-gray-300 dark:hover:text-white";
+  const linkBackgroundClasses = "absolute inset-0 bg-gradient-to-r from-bubbles-teal/10 to-bubbles-skyblue/10 dark:from-bubbles-teal/20 dark:to-bubbles-skyblue/20 rounded-full scale-0 group-hover:scale-100 transition-transform duration-300";
 
   return (
     <header className="fixed w-full top-0 z-50 bg-white/80 dark:bg-bubbles-deep/80 backdrop-blur-sm border-b border-gray-200 dark:border-gray-800">
@@ -33,33 +33,33 @@ const Header: React.FC = () => {
           </Link>
 
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center gap-2">
+          <nav className="hidden md:flex items-center gap-3">
             <Link to="/" className={`${linkClasses} ${linkDefaultClasses}`}>
               <span className={linkBackgroundClasses}></span>
-              <Home size={18} />
+              <Home size={18} className="animate-bounce" />
               <span>Home</span>
             </Link>
             <Link to="/shop" className={`${linkClasses} ${linkDefaultClasses}`}>
               <span className={linkBackgroundClasses}></span>
-              <ShoppingBag size={18} />
+              <ShoppingBag size={18} className="animate-pulse" />
               <span>Shop</span>
             </Link>
             <Link to="/customize" className={`${linkClasses} ${linkDefaultClasses}`}>
               <span className={linkBackgroundClasses}></span>
-              <Settings size={18} />
+              <Settings size={18} className="animate-spin-slow" />
               <span>Customize</span>
             </Link>
             <Link to="/features" className={`${linkClasses} ${linkDefaultClasses}`}>
               <span className={linkBackgroundClasses}></span>
-              <Layers size={18} />
+              <Layers size={18} className="animate-pulse" />
               <span>Features</span>
             </Link>
-            <Button variant="fun" asChild>
-              <Link to="/order">Buy Now</Link>
+            <Button variant="fun" asChild className="animate-float">
+              <Link to="/pre-order">Join Waitlist</Link>
             </Button>
           </nav>
 
-          {/* Mobile Menu Trigger */}
+          {/* Mobile Menu */}
           <Sheet open={isOpen} onOpenChange={setIsOpen}>
             <SheetTrigger asChild className="md:hidden">
               <Button variant="ghost" size="icon">
@@ -103,7 +103,7 @@ const Header: React.FC = () => {
                   <span>Features</span>
                 </Link>
                 <Button variant="blue" asChild onClick={() => setIsOpen(false)}>
-                  <Link to="/order">Buy Now</Link>
+                  <Link to="/pre-order">Join Waitlist</Link>
                 </Button>
               </div>
             </SheetContent>
