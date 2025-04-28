@@ -1,9 +1,10 @@
+
 import React from 'react';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
 import { Button } from '@/components/ui/button';
 import AnimatedCard from '@/components/ui/AnimatedCard';
-import { ShoppingCart, Package, Heart, MessageCircle, Star, Sparkles, Music, Mic } from 'lucide-react';
+import { ShoppingCart, Package, Heart, MessageCircle, Star, Sparkles, Music, Mic, CreditCard } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 
 const Index: React.FC = () => {
