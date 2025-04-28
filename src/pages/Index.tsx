@@ -1,4 +1,3 @@
-
 import React from 'react';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
@@ -13,7 +12,7 @@ const Index: React.FC = () => {
   const features = [
     {
       icon: <MessageCircle className="h-8 w-8 text-bubbles-blue" />,
-      title: "Interactive AI Companion",
+      title: "Interactive Companion",
       description: "Your child's personal learning friend with natural conversation abilities"
     },
     {
@@ -49,28 +48,28 @@ const Index: React.FC = () => {
                 </div>
                 
                 <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight bg-gradient-to-r from-bubbles-blue via-bubbles-teal to-bubbles-skyblue bg-clip-text text-transparent">
-                  Meet Bubbles: Your Child's AI Dolphin Friend
+                  Your Child's Smart Dolphin Companion
                 </h1>
                 
                 <p className="text-xl mb-8 text-gray-600 dark:text-gray-300">
-                  A revolutionary plush companion that combines cutting-edge AI with playful learning
+                  Meet the interactive dolphin friend that grows with your child, sparking curiosity, fostering imagination, and creating magical learning moments!
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
                   <Button 
                     variant="blue" 
                     size="xl"
                     className="group"
-                    onClick={() => navigate('/order')}
+                    onClick={() => navigate('/shop')}
                   >
                     <ShoppingCart className="mr-2 h-5 w-5" />
-                    Order Now
+                    Shop Now
                   </Button>
                   <Button
                     variant="outline"
                     size="xl"
-                    onClick={() => navigate('/features')}
+                    onClick={() => navigate('/customize')}
                   >
-                    Learn More
+                    Customize a Toy
                   </Button>
                 </div>
               </div>
