@@ -1,4 +1,3 @@
-
 import React from 'react';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
@@ -63,12 +62,15 @@ const Index: React.FC = () => {
                   </Button>
                 </div>
               </div>
-              <div className="flex-1">
+              <div className="flex-1 relative">
+                <div className="absolute inset-0 bg-gradient-to-r from-bubbles-aqua/20 via-bubbles-skyblue/30 to-bubbles-teal/20 rounded-full blur-3xl transform rotate-12 scale-110 animate-pulse-soft"></div>
+                <div className="absolute inset-0 bg-gradient-to-br from-[#33C3F0]/30 via-[#1EAEDB]/20 to-[#D3E4FD]/30 rounded-full blur-2xl animate-float"></div>
                 <img 
                   src="/dolphin-plush.png" 
                   alt="Bubbles AI Dolphin Plush" 
-                  className="w-full max-w-[500px] mx-auto animate-float"
+                  className="w-full max-w-[500px] mx-auto relative z-10 drop-shadow-[0_0_15px_rgba(51,195,240,0.3)] animate-float"
                 />
+                <div className="absolute inset-0 bg-gradient-to-t from-bubbles-skyblue/10 to-transparent rounded-full blur-xl transform -rotate-12 scale-95 animate-pulse-soft" style={{ animationDelay: '1s' }}></div>
               </div>
             </div>
           </div>
