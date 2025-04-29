@@ -1,17 +1,20 @@
 
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import { Menu, X, Home, ShoppingBag, Settings, Layers } from 'lucide-react';
 
 const Header: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const location = useLocation();
 
   const linkClasses = "relative group px-2.5 py-2 rounded-xl font-heading text-base font-medium transition-all duration-300 tracking-normal capitalize";
   const linkActiveClasses = "text-white bg-gradient-to-r from-bubbles-teal to-bubbles-skyblue shadow-bubbly";
   const linkDefaultClasses = "text-bubbles-blue hover:text-white hover:bg-gradient-to-r hover:from-bubbles-purple hover:to-bubbles-teal dark:text-gray-300 dark:hover:text-white";
   const linkBackgroundClasses = "absolute inset-0 bg-gradient-to-r from-bubbles-teal/10 to-bubbles-skyblue/10 dark:from-bubbles-teal/20 dark:to-bubbles-skyblue/20 rounded-xl scale-0 group-hover:scale-100 transition-transform duration-300";
+
+  const isActive = (path: string) => location.pathname === path;
 
   return (
     <header className="fixed w-full top-0 z-50 bg-white/80 dark:bg-bubbles-deep/80 backdrop-blur-sm border-b border-gray-200 dark:border-gray-800">
@@ -33,19 +36,31 @@ const Header: React.FC = () => {
           </Link>
 
           <nav className="hidden md:flex items-center gap-2">
-            <Link to="/" className={`${linkClasses} ${linkDefaultClasses}`}>
+            <Link 
+              to="/" 
+              className={`${linkClasses} ${isActive('/') ? linkActiveClasses : linkDefaultClasses}`}
+            >
               <span className={linkBackgroundClasses}></span>
               <span>Home</span>
             </Link>
-            <Link to="/shop" className={`${linkClasses} ${linkDefaultClasses}`}>
+            <Link 
+              to="/shop" 
+              className={`${linkClasses} ${isActive('/shop') ? linkActiveClasses : linkDefaultClasses}`}
+            >
               <span className={linkBackgroundClasses}></span>
               <span>Shop</span>
             </Link>
-            <Link to="/customize" className={`${linkClasses} ${linkDefaultClasses}`}>
+            <Link 
+              to="/customize" 
+              className={`${linkClasses} ${isActive('/customize') ? linkActiveClasses : linkDefaultClasses}`}
+            >
               <span className={linkBackgroundClasses}></span>
               <span>Customize</span>
             </Link>
-            <Link to="/features" className={`${linkClasses} ${linkDefaultClasses}`}>
+            <Link 
+              to="/features" 
+              className={`${linkClasses} ${isActive('/features') ? linkActiveClasses : linkDefaultClasses}`}
+            >
               <span className={linkBackgroundClasses}></span>
               <span>Features</span>
             </Link>
@@ -96,7 +111,7 @@ const Header: React.FC = () => {
                   <Layers size={18} />
                   <span>Features</span>
                 </Link>
-                <Button variant="blue" asChild onClick={() => setIsOpen(false)}>
+                <Button variant="navy" asChild onClick={() => setIsOpen(false)}>
                   <Link to="/pre-order">Join Waitlist</Link>
                 </Button>
               </div>

@@ -18,6 +18,7 @@ import NotFound from "./pages/NotFound";
 import Features from "./pages/Features";
 import AdminSetup from "./pages/AdminSetup";
 import Shop from "./pages/Shop";
+import ProductDetail from "./pages/ProductDetail";
 import Customize from "./pages/Customize";
 import PreOrderSignup from "./pages/PreOrderSignup";
 
@@ -36,8 +37,9 @@ const App = () => (
             <Route path="/features" element={<Features />} />
             <Route path="/admin-setup" element={<AdminSetup />} />
             <Route path="/shop" element={<Shop />} />
+            <Route path="/product/:productId" element={<ProductDetail />} />
             <Route path="/customize" element={<Customize />} />
-            <Route path="/order" element={<PreOrderSignup />} />
+            <Route path="/pre-order" element={<PreOrderSignup />} />
             
             <Route path="/dashboard" element={<DashboardLayout />}>
               <Route index element={<Dashboard />} />
