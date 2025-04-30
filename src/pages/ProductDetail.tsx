@@ -28,58 +28,26 @@ const ProductDetail: React.FC = () => {
   const navigate = useNavigate();
   const { toast } = useToast();
   
-  const [selectedAnimal, setSelectedAnimal] = useState<string>("default");
+  const [selectedAnimal, setSelectedAnimal] = useState<string>("dolphin");
   const [selectedVoice, setSelectedVoice] = useState<string>("female-us");
   
   // Product information based on productId
   const getProductDetails = () => {
-    switch(productId) {
-      case 'conversational-dolphin':
-        return {
-          title: "Bubbles Smart Conversational Plush",
-          description: "An interactive companion that engages children in playful conversations and educational games, fostering curiosity and imagination.",
-          price: "$49.99",
-          ageGroup: "6-10 years",
-          defaultAnimal: "dolphin",
-          defaultAnimalName: "Bubbles",
-          defaultImage: "/lovable-uploads/b973dc7a-8667-49c0-a426-eb96c8118d6d.png",
-        };
-      case 'musical-penguin':
-        return {
-          title: "Melody Smart Musical Plush",
-          description: "A musical companion designed to introduce children to the world of music through interactive melodies and engaging musical games.",
-          price: "$49.99",
-          ageGroup: "3-6 years",
-          defaultAnimal: "penguin",
-          defaultAnimalName: "Melody",
-          defaultImage: "https://images.unsplash.com/photo-1441057206919-63d19fac2369",
-        };
-      case 'speech-therapy-bear':
-        return {
-          title: "Echo Smart Speech Therapy Plush",
-          description: "A supportive companion that helps children develop speech and communication skills through engaging conversations and patient phonic help.",
-          price: "$49.99",
-          ageGroup: "5-8 years",
-          defaultAnimal: "bear",
-          defaultAnimalName: "Echo",
-          defaultImage: "https://images.unsplash.com/photo-1501286353178-1ec871214838",
-        };
-      default:
-        return {
-          title: "Smart Plush Companion",
-          description: "An interactive plush companion for your child.",
-          price: "$49.99",
-          ageGroup: "3-10 years",
-          defaultAnimal: "dolphin",
-          defaultAnimalName: "Bubbles",
-          defaultImage: "/lovable-uploads/b973dc7a-8667-49c0-a426-eb96c8118d6d.png",
-        };
-    }
+    // We only have one product now
+    return {
+      title: "Bubbles Smart Conversational Plush",
+      description: "An interactive companion that engages children in playful conversations and educational games, fostering curiosity and imagination.",
+      price: "$49.99",
+      ageGroup: "6-10 years",
+      defaultAnimal: "dolphin",
+      defaultAnimalName: "Bubbles",
+      defaultImage: "/lovable-uploads/b973dc7a-8667-49c0-a426-eb96c8118d6d.png",
+    };
   };
   
   const productDetails = getProductDetails();
   
-  // Customization options
+  // Customization options - expanded to 10 animals
   const animalOptions: AnimalOption[] = [
     { 
       id: "dolphin", 
@@ -90,7 +58,7 @@ const ProductDetail: React.FC = () => {
     { 
       id: "penguin", 
       name: "Penguin", 
-      displayName: "Melody the Penguin",
+      displayName: "Chilly the Penguin",
       image: "https://images.unsplash.com/photo-1441057206919-63d19fac2369"
     },
     { 
@@ -106,19 +74,51 @@ const ProductDetail: React.FC = () => {
       image: "https://images.unsplash.com/photo-1582562124811-c09040d0a901"
     },
     { 
-      id: "kitten", 
-      name: "Kitten", 
-      displayName: "Mittens the Kitten",
-      image: "https://images.unsplash.com/photo-1535268647677-300dbf3d78d1"
+      id: "rabbit", 
+      name: "Rabbit", 
+      displayName: "Hops the Rabbit",
+      image: "https://images.unsplash.com/photo-1535241749838-299277b6305f"
+    },
+    { 
+      id: "fox", 
+      name: "Fox", 
+      displayName: "Rusty the Fox",
+      image: "https://images.unsplash.com/photo-1516934024742-b461fba47600"
+    },
+    { 
+      id: "elephant", 
+      name: "Elephant", 
+      displayName: "Peanut the Elephant",
+      image: "https://images.unsplash.com/photo-1557050543-4162f1e05e22"
+    },
+    { 
+      id: "giraffe", 
+      name: "Giraffe", 
+      displayName: "Stretch the Giraffe",
+      image: "https://images.unsplash.com/photo-1547721064-da6cfb341d50"
+    },
+    { 
+      id: "monkey", 
+      name: "Monkey", 
+      displayName: "Bananas the Monkey",
+      image: "https://images.unsplash.com/photo-1540573133985-87b6da6d54a9"
+    },
+    { 
+      id: "owl", 
+      name: "Owl", 
+      displayName: "Wisdom the Owl",
+      image: "https://images.unsplash.com/photo-1543549790-8b5f4a028cfb"
     }
   ];
   
+  // Expanded to 6 voice options
   const voiceOptions: VoiceOption[] = [
     { id: "female-us", name: "Sarah", gender: "Female", accent: "American" },
     { id: "female-uk", name: "Emma", gender: "Female", accent: "British" },
     { id: "male-us", name: "Michael", gender: "Male", accent: "American" },
     { id: "male-uk", name: "James", gender: "Male", accent: "British" },
-    { id: "female-au", name: "Olivia", gender: "Female", accent: "Australian" }
+    { id: "female-au", name: "Olivia", gender: "Female", accent: "Australian" },
+    { id: "male-au", name: "Noah", gender: "Male", accent: "Australian" }
   ];
   
   const getCurrentAnimal = () => {
@@ -176,7 +176,7 @@ const ProductDetail: React.FC = () => {
                     defaultValue={productDetails.defaultAnimal} 
                     value={selectedAnimal} 
                     onValueChange={setSelectedAnimal}
-                    className="grid grid-cols-2 md:grid-cols-3 gap-4"
+                    className="grid grid-cols-2 md:grid-cols-5 gap-4"
                   >
                     {animalOptions.map((animal) => (
                       <div key={animal.id} className="relative">
