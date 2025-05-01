@@ -8,12 +8,24 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
 import { ShoppingCart } from 'lucide-react';
 import { useToast } from "@/components/ui/use-toast";
+import { 
+  Dolphin, 
+  Cat, 
+  Bear, 
+  Rabbit, 
+  Bird, 
+  Dog,
+  Fish,
+  Turtle,
+  SquirrelIcon,
+  Horse
+} from 'lucide-react';
 
 type AnimalOption = {
   id: string;
   name: string;
   displayName: string;
-  image: string;
+  icon: React.ReactNode;
 };
 
 type VoiceOption = {
@@ -47,67 +59,67 @@ const ProductDetail: React.FC = () => {
   
   const productDetails = getProductDetails();
   
-  // Customization options - expanded to 10 animals
+  // Customization options with animal icons
   const animalOptions: AnimalOption[] = [
     { 
       id: "dolphin", 
       name: "Dolphin", 
       displayName: "Bubbles the Dolphin",
-      image: "/lovable-uploads/b973dc7a-8667-49c0-a426-eb96c8118d6d.png"
+      icon: <Dolphin className="h-8 w-8 text-bubbles-blue" />
     },
     { 
       id: "penguin", 
       name: "Penguin", 
       displayName: "Chilly the Penguin",
-      image: "https://images.unsplash.com/photo-1441057206919-63d19fac2369"
+      icon: <Bird className="h-8 w-8 text-bubbles-navy" />
     },
     { 
       id: "bear", 
       name: "Bear", 
       displayName: "Echo the Bear",
-      image: "https://images.unsplash.com/photo-1501286353178-1ec871214838"
+      icon: <Bear className="h-8 w-8 text-bubbles-sand" />
     },
     { 
       id: "cat", 
       name: "Cat", 
       displayName: "Whiskers the Cat",
-      image: "https://images.unsplash.com/photo-1582562124811-c09040d0a901"
+      icon: <Cat className="h-8 w-8 text-bubbles-teal" />
     },
     { 
       id: "rabbit", 
       name: "Rabbit", 
       displayName: "Hops the Rabbit",
-      image: "https://images.unsplash.com/photo-1535241749838-299277b6305f"
+      icon: <Rabbit className="h-8 w-8 text-bubbles-skyblue" />
     },
     { 
       id: "fox", 
       name: "Fox", 
       displayName: "Rusty the Fox",
-      image: "https://images.unsplash.com/photo-1516934024742-b461fba47600"
+      icon: <Dog className="h-8 w-8 text-bubbles-lightblue" />
     },
     { 
       id: "elephant", 
       name: "Elephant", 
       displayName: "Peanut the Elephant",
-      image: "https://images.unsplash.com/photo-1557050543-4162f1e05e22"
+      icon: <Horse className="h-8 w-8 text-bubbles-purple" />
     },
     { 
       id: "giraffe", 
       name: "Giraffe", 
       displayName: "Stretch the Giraffe",
-      image: "https://images.unsplash.com/photo-1547721064-da6cfb341d50"
+      icon: <Horse className="h-8 w-8 text-bubbles-aqua" />
     },
     { 
       id: "monkey", 
       name: "Monkey", 
       displayName: "Bananas the Monkey",
-      image: "https://images.unsplash.com/photo-1540573133985-87b6da6d54a9"
+      icon: <SquirrelIcon className="h-8 w-8 text-bubbles-lime" />
     },
     { 
       id: "owl", 
       name: "Owl", 
       displayName: "Wisdom the Owl",
-      image: "https://images.unsplash.com/photo-1543549790-8b5f4a028cfb"
+      icon: <Bird className="h-8 w-8 text-teddy-purple" />
     }
   ];
   
@@ -152,11 +164,13 @@ const ProductDetail: React.FC = () => {
               <div className="lg:w-1/2">
                 <div className="relative">
                   <div className="absolute inset-0 bg-gradient-to-r from-bubbles-blue/20 via-bubbles-teal/20 to-bubbles-skyblue/20 rounded-full blur-3xl"></div>
-                  <img 
-                    src={currentAnimal.image}
-                    alt={currentAnimal.displayName}
-                    className="w-full max-w-[400px] mx-auto rounded-lg object-contain relative z-10"
-                  />
+                  <div className="w-full max-w-[400px] mx-auto relative z-10 flex justify-center items-center">
+                    <div className="w-64 h-64 bg-gradient-to-br from-bubbles-cream to-white dark:from-bubbles-deep/80 dark:to-bubbles-navy/50 rounded-full flex items-center justify-center shadow-bubbly">
+                      <div className="w-40 h-40 flex items-center justify-center">
+                        {currentAnimal.icon}
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
               
@@ -176,7 +190,7 @@ const ProductDetail: React.FC = () => {
                     defaultValue={productDetails.defaultAnimal} 
                     value={selectedAnimal} 
                     onValueChange={setSelectedAnimal}
-                    className="grid grid-cols-2 md:grid-cols-5 gap-4"
+                    className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4"
                   >
                     {animalOptions.map((animal) => (
                       <div key={animal.id} className="relative">
@@ -187,15 +201,13 @@ const ProductDetail: React.FC = () => {
                         />
                         <Label
                           htmlFor={`animal-${animal.id}`}
-                          className="flex flex-col items-center justify-between rounded-xl border-2 border-muted bg-popover p-4 hover:bg-accent hover:text-accent-foreground peer-data-[state=checked]:border-bubbles-blue [&:has([data-state=checked])]:border-primary cursor-pointer h-full"
+                          className="flex flex-col items-center justify-center rounded-xl border-2 border-muted bg-background p-4 hover:bg-accent hover:text-accent-foreground peer-data-[state=checked]:border-bubbles-blue [&:has([data-state=checked])]:border-primary cursor-pointer h-full transition-all duration-300 hover:shadow-md"
                         >
-                          <span className="text-sm font-medium mb-2">{animal.name}</span>
-                          <img 
-                            src={animal.image} 
-                            alt={animal.name} 
-                            className="w-16 h-16 object-cover rounded-full mb-2" 
-                          />
-                          <span className="text-xs">{animal.displayName}</span>
+                          <div className="w-16 h-16 flex items-center justify-center bg-gradient-to-br from-bubbles-cream/60 to-white/90 dark:from-bubbles-deep/60 dark:to-bubbles-navy/40 rounded-full mb-3 shadow-inner">
+                            {animal.icon}
+                          </div>
+                          <span className="text-sm font-medium">{animal.name}</span>
+                          <span className="text-xs mt-1 text-gray-500">{animal.displayName}</span>
                         </Label>
                       </div>
                     ))}
@@ -205,24 +217,29 @@ const ProductDetail: React.FC = () => {
                 {/* Voice Selection */}
                 <div className="mb-8">
                   <h3 className="text-xl font-semibold mb-4 font-heading">Select your voice</h3>
-                  <RadioGroup 
-                    defaultValue="female-us"
-                    value={selectedVoice}
-                    onValueChange={setSelectedVoice}
-                    className="grid gap-4"
-                  >
-                    {voiceOptions.map((voice) => (
-                      <div className="flex items-center space-x-2" key={voice.id}>
-                        <RadioGroupItem value={voice.id} id={`voice-${voice.id}`} />
-                        <Label htmlFor={`voice-${voice.id}`} className="flex-grow cursor-pointer">
-                          <span className="font-medium">{voice.name}</span>
-                          <span className="text-sm text-gray-500 block">
-                            {voice.gender} • {voice.accent} Accent
-                          </span>
-                        </Label>
-                      </div>
-                    ))}
-                  </RadioGroup>
+                  <div className="bg-background dark:bg-bubbles-deep/30 rounded-xl border border-muted p-4">
+                    <RadioGroup 
+                      defaultValue="female-us"
+                      value={selectedVoice}
+                      onValueChange={setSelectedVoice}
+                      className="grid gap-4 grid-cols-1 sm:grid-cols-2"
+                    >
+                      {voiceOptions.map((voice) => (
+                        <div 
+                          className="flex items-center space-x-3 p-3 rounded-lg hover:bg-bubbles-cream/20 dark:hover:bg-bubbles-deep/40 transition-colors" 
+                          key={voice.id}
+                        >
+                          <RadioGroupItem value={voice.id} id={`voice-${voice.id}`} />
+                          <Label htmlFor={`voice-${voice.id}`} className="flex-grow cursor-pointer">
+                            <span className="font-medium">{voice.name}</span>
+                            <span className="text-sm text-gray-500 block">
+                              {voice.gender} • {voice.accent} Accent
+                            </span>
+                          </Label>
+                        </div>
+                      ))}
+                    </RadioGroup>
+                  </div>
                 </div>
                 
                 {/* Add to Cart Button */}
