@@ -9,16 +9,16 @@ import { Label } from "@/components/ui/label";
 import { ShoppingCart } from 'lucide-react';
 import { useToast } from "@/components/ui/use-toast";
 import { 
-  Dolphin, 
+  Fish, 
   Cat, 
-  Bear, 
+  Dog,
   Rabbit, 
   Bird, 
-  Dog,
-  Fish,
+  Squirrel,
   Turtle,
-  SquirrelIcon,
-  Horse
+  Lion,
+  Whale,
+  Fox
 } from 'lucide-react';
 
 type AnimalOption = {
@@ -65,7 +65,7 @@ const ProductDetail: React.FC = () => {
       id: "dolphin", 
       name: "Dolphin", 
       displayName: "Bubbles the Dolphin",
-      icon: <Dolphin className="h-8 w-8 text-bubbles-blue" />
+      icon: <Whale className="h-8 w-8 text-bubbles-blue" />
     },
     { 
       id: "penguin", 
@@ -77,7 +77,7 @@ const ProductDetail: React.FC = () => {
       id: "bear", 
       name: "Bear", 
       displayName: "Echo the Bear",
-      icon: <Bear className="h-8 w-8 text-bubbles-sand" />
+      icon: <Dog className="h-8 w-8 text-bubbles-sand" />
     },
     { 
       id: "cat", 
@@ -95,25 +95,25 @@ const ProductDetail: React.FC = () => {
       id: "fox", 
       name: "Fox", 
       displayName: "Rusty the Fox",
-      icon: <Dog className="h-8 w-8 text-bubbles-lightblue" />
+      icon: <Fox className="h-8 w-8 text-bubbles-lightblue" />
     },
     { 
       id: "elephant", 
       name: "Elephant", 
       displayName: "Peanut the Elephant",
-      icon: <Horse className="h-8 w-8 text-bubbles-purple" />
+      icon: <Lion className="h-8 w-8 text-bubbles-purple" />
     },
     { 
       id: "giraffe", 
       name: "Giraffe", 
       displayName: "Stretch the Giraffe",
-      icon: <Horse className="h-8 w-8 text-bubbles-aqua" />
+      icon: <Turtle className="h-8 w-8 text-bubbles-aqua" />
     },
     { 
       id: "monkey", 
       name: "Monkey", 
       displayName: "Bananas the Monkey",
-      icon: <SquirrelIcon className="h-8 w-8 text-bubbles-lime" />
+      icon: <Squirrel className="h-8 w-8 text-bubbles-lime" />
     },
     { 
       id: "owl", 
